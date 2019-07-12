@@ -11,8 +11,85 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.diary.www">
+	
+	<logger name="admin">
 		<level value="info" />
+	</logger>
+	
+	<logger name="board">
+		<level value="info" />
+	</logger>
+	
+	<logger name="diary">
+		<level value="info" />
+	</logger>
+	
+	<logger name="ledger">
+		<level value="info" />
+	</logger>
+	
+	<logger name="main">
+		<level value="info" />
+	</logger>
+	
+	<logger name="member">
+		<level value="info" />
+	</logger>
+	
+	<logger name="memo">
+		<level value="info" />
+	</logger>
+	
+	<logger name="notice">
+		<level value="info" />
+	</logger>
+	
+	<logger name="qna">
+		<level value="info" />
+	</logger>
+	
+	<logger name="schedule">
+		<level value="info" />
+	</logger>
+	
+	<logger name="vote">
+		<level value="info" />
+	</logger>
+	
+	<!-- 마이바티스 Loggers -->
+	<logger name="jdbc.connection" additivity = "false">
+		<level value="WARN"/>
+		<appender-ref ref="console"/>
+	</logger>
+	
+	<logger name="jdbc.audit" additivity = "false">
+		<level value="WARN"/>
+		<appender-ref ref="console"/>
+	</logger>
+	
+	<logger name="jdbc.sqlonly" additivity = "false">
+		<level value="WARN"/>
+		<appender-ref ref="console"/>
+	</logger>
+	
+	<logger name="jdbc.sqltiming" additivity = "false">
+		<level value="INFO"/>
+		<appender-ref ref="console"/>
+	</logger>
+	
+	<logger name="jdbc.resultset" additivity = "false">
+		<level value="WARN"/>
+		<appender-ref ref="console"/>
+	</logger>
+	
+	<logger name="jdbc.resultsettable" additivity = "false">
+		<level value="INFO"/>
+		<appender-ref ref="console"/>
+	</logger>
+	
+	<logger name="jdbc.mybatis" additivity = "false">
+		<level value="WARN"/>
+		<appender-ref ref="console"/>
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

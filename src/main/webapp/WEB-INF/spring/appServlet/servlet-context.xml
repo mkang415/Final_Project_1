@@ -10,18 +10,46 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- 어노테이션 기반으로 컴포넌트를 등록할 수 있게 한다 -->
+	<!-- (@Controller, @Service) -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- GET으로 요청된 정적인 자원에 대한 매핑 -->
 	<resources mapping="/resources/**" location="/resources/" />
-
+	<resources mapping="/img/**" location="/resources/img" />
+	<resources mapping="/css/**" location="/resources/css" />
+	<resources mapping="/js/**" location="/resources/js" />
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.diary.www" />
+	<!-- 자바 스프링 빈 기반의 ViewResolver -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="0"/>
+	</beans:bean>
+	
+	<!-- DownloadView클래스를 down이라는 이름의 빈으로 등록 -->
+	<!-- <beans:bean id="down" class="file.view.DownloadView"/> -->
+	
+	<!-- JSON응답을 위한 jsonView 스프링 빈 등록 -->
+	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<beans:property name="contentType" value="application/json;charset=utf-8"/>
+	</beans:bean>
+	
+	<!-- MultipartResolver -->
+	<!-- 파일업로드 처리 클래스 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxInMemorySize" value="1048576"/> <!-- 1mb -->
+		<beans:property name="maxUploadSize" value="10485760"/>	<!-- 10mb -->
+	</beans:bean>
+	
+	<!-- 컴포넌트를 스캔(검색후 등록)할 패키지를 지정 -->
+	<!-- 여러 패키지를 등록할 때에는 , 로 구분하다. -->
+	<context:component-scan base-package="admin, board, diary, ledger, main, member, memo, notice, qna, schedule, vote" />
 	
 	
 	
