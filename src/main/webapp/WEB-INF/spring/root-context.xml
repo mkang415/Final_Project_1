@@ -2,7 +2,25 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+	<!-- Mail 인증 관련 -->
+
+<bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="mailSender">
+	<property value="smtp.gmail.com" name="host"/>
+	<property value="587" name="port"/>
+	<property value="figh202@gmail.com" name="username"/>
+	<property value="wgs03021" name="password"/>
+
+<property name="javaMailProperties">
+	<props>
+		<prop key="mail.transport.protocol">smtp</prop>
+		<prop key="mail.smtp.auth">true</prop>
+		<prop key="mail.smtp.starttls.enable">true</prop>
+		<prop key="mail.debug">true</prop>
+	</props>
+
+</property>
+
+</bean>
 	<!-- DB 접속 정보 -->
 	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>

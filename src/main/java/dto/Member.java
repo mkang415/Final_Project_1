@@ -9,6 +9,10 @@ public class Member {
 	private String nickname;
 	private int memberClass;
 	private Date joindate;
+	private String auth_key;
+	private int auth_status;
+	
+	
 	@Override
 	public String toString() {
 		return "Member [member_idx=" + member_idx + ", email=" + email + ", pw=" + pw + ", nickname=" + nickname
@@ -50,5 +54,19 @@ public class Member {
 	public void setJoindate(Date joindate) {
 		this.joindate = joindate;
 	}
+
+	public String getAuth_key() {
+		return auth_key;
+	}
+	public void setAuth_key(String auth_key) {
+		this.auth_key = auth_key;
+	}
+	public int getAuth_status() {
+		return auth_status;
+	}
+	public void setAuth_status(int auth_status) {
+		this.auth_status = auth_status;
+	}
+	
 	
 }
