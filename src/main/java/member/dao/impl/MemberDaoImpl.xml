@@ -12,4 +12,53 @@
 		select * from Member
 		where memberclass = 0
 	</select>
+
+
+    	<select id="selectCntLogin"
+  		parameterType="dto.Member"
+  		resultType="int">
+  		
+  		SELECT COUNT(*) FROM member
+  		WHERE email = #{email } AND pw = #{pw }
+  	
+  		</select>
+    
+       <select id="selectMemberbyMemberId"
+    		parameterType="String"
+    		resultType="dto.Member">
+		SELECT  email,
+				pw,
+				nickname
+			FROM 
+			member
+			WHERE email = #{email }	  
+    		
+    	</select>
+    	
+    	  	<insert id="insert" 
+  		parameterType="dto.Member">
+  		INSERT INTO member(member_idx, email, pw, nickname)
+  		VALUES(member_seq.nextval, #{email },#{pw },#{nickname } )
+  		</insert>		
+    	
+	<update id="updateAuthkey"
+			parameterType="dto.Member">
+			
+			UPDATE member
+			SET auth_key = #{auth_key }
+			WHERE email = #{email }
+	
+	</update>
+	
+	<update id="updateAuth_status"
+			parameterType="dto.Member">
+			UPDATE member
+			SET auth_status = 1
+			WHERE auth_key = #{auth_key }		
+			
+			
+	</update>
+
+
+
 </mapper>
