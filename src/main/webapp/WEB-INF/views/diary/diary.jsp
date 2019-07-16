@@ -34,17 +34,18 @@
 
 <c:forEach items="${diaryList }" var="list">
 <div class="diary">
-<h4>${list.diary_idx }</h4>
-<h4>작성일 ${list.writtendate }</h4>
+<h4>작성일 <fmt:formatDate value="${list.writtendate }" pattern="yyyy-MM-dd"/></h4>
 
-<div class="title">${list.title }</div>
+<div class="title"><h2>${list.title }</h2></div>
 <div class="content">${list.content }</div>
 </div>
 <hr>
 </c:forEach>
 </div>
 
-
+<div id="pagingbox" align="center">
+	<c:import url="/WEB-INF/views/layout/diaryPaging.jsp" />
+</div>
 
 </body>
 </html>
