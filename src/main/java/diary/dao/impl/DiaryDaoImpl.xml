@@ -7,8 +7,19 @@
 
 <mapper namespace="diary.dao.face.DiaryDao">
 
-	<select id="test"
-	 resultType="dto.Diary">
-		select * from diary
+	<select id="getMemberIdxById"
+	 parameterType="String"
+	 resultType="int">
+		SELECT member_idx FROM member
+		WHERE email=#{id}
 	</select>
+
+	<select id="getDiaryList"
+	 parameterType="int"
+	 resultType="dto.Diary">
+		SELECT diary_idx, title, content, member_idx, writtendate FROM diary
+		WHERE member_idx=#{member_idx}
+	</select>
+
+	
 </mapper>

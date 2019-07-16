@@ -1,9 +1,13 @@
 package diary.dao.face;
 
+import java.util.List;
+
 import dto.Diary;
 
 public interface DiaryDao {
 
-	Diary test();
+	public int getMemberIdxById(String id);
+	
+	public List<Diary> getDiaryList(int member_idx);
 
 }
