@@ -7,9 +7,27 @@
     
 <mapper namespace="admin.dao.face.AdminDao">
 
-	<select id="test"
-	 resultType="dto.Board">
-		select * from board 
-		where board_idx = 1
+	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM BOARD ORDER BY
+		BOARD_IDX
 	</select>
+	
+	<select id="selectAll"
+	 parameterType="util.AdminBoardPaging"
+	 resultType="hashmap">
+	 SELECT * FROM (
+	 SELECT rownum rnum, B.* FROM (
+	 SELECT * FROM board
+	 ORDER BY board_idx DESC
+	 ) B
+	 ORDER BY rnum
+	 )
+	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<delete id="delete"
+	 parameterType="dto.Board">
+	 DELETE FROM board
+	 WHERE board_idx in ("+names+");
+	</delete>
 </mapper>
