@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member getMemberInfo(HttpSession session) {
-		String userid = (String)session.getAttribute("loginid");
+		String userid = (String)session.getAttribute("loginEmail");
 		
 		Member member= new Member();
 		

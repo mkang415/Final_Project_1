@@ -28,6 +28,7 @@ public class MemberController {
 	
 	}
 
+
 	@RequestMapping(value = "/interceptor/noLogin", method = RequestMethod.GET)
 	public void loginFail() {
 		logger.info("로그인실패");
@@ -47,10 +48,15 @@ public class MemberController {
 			
 			//세션 정보저장
 			session.setAttribute("login", true);
-			session.setAttribute("loginid", member.getEmail());
+			session.setAttribute("loginEmail", member.getEmail());
 			Member loginMember = memberService.getMemberInfo(session);
 			session.setAttribute("nick", loginMember.getNickname());
-			
+			session.setAttribute("member_idx", loginMember.getMember_idx());
+					
+			logger.info(loginMember.getEmail());
+			logger.info(loginMember.getNickname());
+			logger.info("member_idx: "+loginMember.getMember_idx());
+
 			//리다이렉트 URL 지정
 			redirectUrl = "/main";
 			
