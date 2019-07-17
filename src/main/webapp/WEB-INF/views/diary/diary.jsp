@@ -21,6 +21,7 @@
 	width: 50em;
 	margin-left: 20%;
 	margin-right: 20%;
+	margin-bottom: 100px;
 }
 
 </style>
@@ -31,6 +32,8 @@
 <h1 style="text-align:center">Diary</h1>
 <hr>
 <div class="wrapper">
+
+<button type="button" onClick="location.href='/diary/write'">글쓰기</button>
 
 <c:forEach items="${diaryList }" var="list">
 <div class="diary">

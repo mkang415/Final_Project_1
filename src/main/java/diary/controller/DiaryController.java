@@ -39,4 +39,15 @@ public class DiaryController {
 		
 		return "/diary/diary";
 	}
+	
+	@RequestMapping(value="/diary/write", method=RequestMethod.GET)
+	public void write() {
+		
+	}
+	
+	@RequestMapping(value="/diary/write", method=RequestMethod.POST)
+	public String writeSubmit() {
+		
+		return "/diary/diary";
+	}	
 }
