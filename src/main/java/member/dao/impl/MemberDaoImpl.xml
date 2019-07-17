@@ -28,7 +28,8 @@
     		resultType="dto.Member">
 		SELECT  email,
 				pw,
-				nickname
+				nickname,
+				member_idx
 			FROM 
 			member
 			WHERE email = #{email }	  
