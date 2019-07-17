@@ -8,11 +8,13 @@ public class Diary {
 	private String content;
 	private int member_idx;
 	private Date writtendate;
+	
 	@Override
 	public String toString() {
-		return "Diary [diary_idx=" + diary_idx + ", title=" + title + ", content=" + content + ", member_idx="
-				+ member_idx + ", writtendate=" + writtendate + "]";
+		return "Diary [diary_idx=" + diary_idx + ", title=" + title + ", content=" + content
+				+ ", member_idx=" + member_idx + ", writtendate=" + writtendate + "]";
 	}
+	
 	public int getDiary_idx() {
 		return diary_idx;
 	}

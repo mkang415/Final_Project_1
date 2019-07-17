@@ -7,8 +7,29 @@
 
 <mapper namespace="diary.dao.face.DiaryDao">
 
-	<select id="test"
-	 resultType="dto.Diary">
-		select * from diary
+	<select id="getMemberIdxById"
+	 parameterType="String"
+	 resultType="int">
+		SELECT member_idx FROM member
+		WHERE email=#{id}
 	</select>
+
+	<select id="getDiaryList"
+	 parameterType="map"
+	 resultType="dto.Diary">
+	 
+	 	SELECT * FROM (
+			SELECT ROWNUM rnum, D.* FROM (
+				SELECT diary_idx, title, content, member_idx, writtendate FROM diary
+				WHERE member_idx=#{member_idx}
+				ORDER BY diary_idx DESC
+			)D 
+		) WHERE RNUM BETWEEN #{paging.startNo} AND #{paging.endNo}
+		
+	</select>
+
+	<select id="selectCntAll" resultType="int">
+		SELECT COUNT(*) FROM diary
+	</select>
+	
 </mapper>
