@@ -6,8 +6,47 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="board.dao.face.BoardDao">
-	<select id="test"
+	<!-- <select id="test"
 	 resultType="dto.BoardReply">
 		select * from board_reply
+	</select> -->
+	
+	<!-- 전체 자유게시판 글 개수 -->
+	<select id="freeCntAll"
+	 resultType="int">
+		select count(*) from board 
+		where divide = 1
 	</select>
+	
+	<!-- 자유게시판 리스트 가져오기 -->
+	<select id="getFreeList"
+	 parameterType="util.BoardPaging"
+	 resultType="hashmap">
+		select * from (
+			select rownum rnum, B.* from (
+				select board_idx, recommend, title, member.nickname, hit, writtendate
+				from board, member
+				where board.member_idx = member.member_idx
+				and divide = 1 order by board_idx desc
+			) B order by rnum
+		) board
+		where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<!-- 자유게시판 게시글 인덱스로 가져오기 -->
+	<select id="freeView"
+	 parameterType="int"
+	 resultType="dto.Board">
+	 	select board_idx, recommend, title, content, member.nickname, hit, writtendate
+		from board, member
+		where board.member_idx = member.member_idx
+		and board_idx = #{brdidx}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="hitPlus"
+	 parameterType="int">
+	 	update board set hit = hit+1
+	 	where board_idx = #{brdidx}
+	 </update>
 </mapper>
