@@ -16,4 +16,6 @@ public interface BoardDao {
 
 	void hitPlus(int brdidx);
 
+	void write(Board board);
+
 }

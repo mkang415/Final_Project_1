@@ -4,8 +4,8 @@
  * http://www.idangero.us/swiper/
  **/
 .swiper-container {
-    width: 100px;
-    height: 500px;
+    width: 100%;
+    height: 100%;
     background: #000;
     margin: 0 auto;
     position: relative;

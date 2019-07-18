@@ -43,5 +43,13 @@ table {
 	<td colspan="3">${freeView.getContent()}
 </tr>
 </table>
+<c:if test="${login }">
+<button type="button" onclick="location.href='/board/write?divide=1'">글쓰기</button>
+	<c:if test="${checkId }">
+		<button type="button" onclick="location.href='/board/update?brdidx=${freeView.getBoard_idx()}'">글수정</button>
+		<button type="button" onclick="location.href='/board/delete?brdidx=${freeView.getBoard_idx()}'">글삭제</button>
+	</c:if>
+</c:if>
+<button onclick="location.href='/board/freelist'">목록</button>
 </body>
 </html>

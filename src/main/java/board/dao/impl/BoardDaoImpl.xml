@@ -37,7 +37,7 @@
 	<select id="freeView"
 	 parameterType="int"
 	 resultType="dto.Board">
-	 	select board_idx, recommend, title, content, member.nickname, hit, writtendate
+	 	select board_idx, recommend, title, content, member.nickname, member.member_idx, hit, writtendate
 		from board, member
 		where board.member_idx = member.member_idx
 		and board_idx = #{brdidx}
@@ -49,4 +49,16 @@
 	 	update board set hit = hit+1
 	 	where board_idx = #{brdidx}
 	 </update>
+	 
+	 <!-- 작성 글 데이터 DB에 저장 -->
+	 <insert id="write"
+	  parameterType="dto.Board">
+	  
+	  	<selectKey keyProperty="board_idx" order="BEFORE" resultType="int">
+	  		SELECT board_seq.nextval FROM dual
+	  	</selectKey>
+	  
+	 	insert into board(board_idx, title, content, member_idx, divide) 
+	 	values (#{board_idx}, #{title}, #{content}, #{member_idx}, #{divide})
+	 </insert>
 </mapper>

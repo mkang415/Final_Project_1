@@ -52,5 +52,12 @@ table, th, tr {
 </table>
 
 <c:import url="/WEB-INF/views/layout/freePaging.jsp"></c:import>
+
+<c:if test="${login }">
+${nick }<br>
+<button type="button" onclick="location.href='/board/write?divide=1'">글쓰기</button>
+</c:if>
+<button type="button" onclick="location.href='/main'">메인</button>
+
 </body>
 </html>
