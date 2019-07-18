@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import admin.dao.face.AdminDao;
 import admin.service.face.AdminService;
-import dto.Board;
 import util.AdminBoardPaging;
 
 @Service
@@ -32,11 +31,8 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.selectAll(ABP);
 	}
 
-	@Override
-	public void delete(String names) {
-		adminDao.delete(names);
-		
-	}
+
+	
 
 	
 }

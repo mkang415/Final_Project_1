@@ -17,7 +17,10 @@
 	 resultType="hashmap">
 	 SELECT * FROM (
 	 SELECT rownum rnum, B.* FROM (
-	 SELECT * FROM board
+	select board_idx, title, content, member.nickname, hit, recommend, writtendate
+from board, member
+where board.member_idx = member.member_idx
+
 	 ORDER BY board_idx DESC
 	 ) B
 	 ORDER BY rnum
@@ -25,9 +28,9 @@
 	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
 	</select>
 	
-	<delete id="delete"
-	 parameterType="dto.Board">
-	 DELETE FROM board
-	 WHERE board_idx in ("+names+");
-	</delete>
+<!-- 	<delect id="delete"> -->
+<!-- 		delete board -->
+<!-- 		WHERE BOARD_IDX = #{board_idx} -->
+<!-- 	</delect> -->
+
 </mapper>
