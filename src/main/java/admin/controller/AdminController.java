@@ -36,15 +36,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/delete", method = RequestMethod.POST)
-	public String boardDelete(
-			String names,
-			Model model) {
+	public void boardDelete(
+			@RequestParam(value = "chbox[]" ) List<String> chArr) {
 		
-		if(!"".equals(names) && names != null) {
-			adminService.delete(names);
-		}
-		
-		return "redirect: /admin/delete";
+
 	}
 		
 }
