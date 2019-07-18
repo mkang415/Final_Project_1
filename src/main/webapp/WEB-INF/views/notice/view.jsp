@@ -24,16 +24,6 @@ $(document).ready(function() {
 		$(location).attr("href", "/notice/list");
 	});
 	
-	//수정버튼 동작
-	$("#btnUpdate").click(function() {
-		$(location).attr("href", "/notice/update?notice_idx=${board.board_no }");
-	});
-
-	//삭제버튼 동작
-	$("#btnDelete").click(function() {
-		$(location).attr("href", "/notice/delete?notice_idx=${board.board_no }");
-	});
-
 });
 
 </script>
@@ -120,7 +110,7 @@ border-radius: 1px;
 
 <h3 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;자유게시판</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공지사항</h3>
 
 
 <div class="clearfix"></div>
@@ -132,7 +122,7 @@ border-radius: 1px;
 
 <h1 class="pull-left">${notice.title }</h1><br><br><br><br>
 <h5 class="pull-left">작성일 : <fmt:formatDate value="${notice.writtendate }" pattern="yyyy-MM-dd" /></h5>
-<h5 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 작성자 : ${nick }  </h5>
+<h5 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 작성자 : ${notice.member_idx}  </h5>
 <h5 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 조회수 : ${notice.hit }  </h5>
 <div class="text-right">	
 	<button id="btnList">목록</button>
@@ -148,7 +138,7 @@ ${notice.content }
 </div>
 
 <div>
-<a href="/file/download?fileno=${noticeFile.fileno }">${noticeFile.origin_name }</a>
+<a href="/file/download?fileno=${boardFile.fileno }">${boardFile.origin_name }</a>
 </div>
 
 

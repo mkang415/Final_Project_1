@@ -101,7 +101,7 @@
 			<h3 class="join_title">
 				<label for="pw">패스워드</label>
 			</h3>
-			<span class="intext"> <input type="text" id="pw"
+			<span class="intext"> <input type="password" id="pw"
 				name="pw" class="inputtext" maxlength="40" /></span>
 			</div>
 </div>

@@ -19,7 +19,7 @@
 $(document).ready(function() {
 	//글쓰기 버튼 누르면 이동
 	$("#btnWrite").click(function() {
-		location.href="/board/write";
+		location.href="/notice/write";
 	});
 
 });
@@ -102,7 +102,7 @@ border-radius: 1px;
 	<tr>
 		<td>${i.notice_idx }</td>
 		<td><a href="/notice/view?notice_idx=${i.notice_idx }">${i.title }</a></td>
-		<td>${i.writer_email }</td>
+		<td>${i.notice_idx }</td>
 		<td>${i.hit }</td>
 	<td><fmt:formatDate value="${i.writtendate }" pattern="yyyy-MM-dd" /></td>
 

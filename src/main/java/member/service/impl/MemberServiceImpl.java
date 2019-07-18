@@ -25,7 +25,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public boolean login(Member member) {
-		//·Î±×ÀÎ Á¤º¸¸¦ CountÇÑ °á°ú°¡ 0º¸´Ù Å©¸é ·Î±×ÀÎ ¼º°ø
+		//ë¡œê·¸ì¸ ì •ë³´ë¥¼ Countí•œ ê²°ê³¼ê°€ 0ë³´ë‹¤ í¬ë©´ ë¡œê·¸ì¸ ì„±ê³µ
 		if( memberDao.selectCntLogin(member) > 0) {
 			return true;
 			
@@ -50,21 +50,21 @@ public class MemberServiceImpl implements MemberService{
 	public void insertMember(Member member) throws Exception {
 		memberDao.insert(member);
 		
-		// ÀÓÀÇÀÇ authkey »ı¼º
+		// ì„ì˜ì˜ authkey ìƒì„±
 		String authkey = new TempKey().getKey(50, false);
 
 		member.setAuth_key(authkey);
 		memberDao.updateAuthkey(member);
 
-		// mail ÀÛ¼º °ü·Ã 
+		// mail ì‘ì„± ê´€ë ¨ 
 		MailUtils sendMail = new MailUtils(mailSender);
 		
-		sendMail.setSubject("È¸¿ø°¡ÀÔ ÀÌ¸ŞÀÏ ÀÎÁõ");
-		sendMail.setText(new StringBuffer().append("<h1>[ÀÌ¸ŞÀÏ ÀÎÁõ]</h1>")
-				.append("<p>¾Æ·¡ ¸µÅ©¸¦ Å¬¸¯ÇÏ½Ã¸é ÀÌ¸ŞÀÏ ÀÎÁõÀÌ ¿Ï·áµË´Ï´Ù.</p>")
+		sendMail.setSubject("íšŒì›ê°€ì… ì´ë©”ì¼ ì¸ì¦");
+		sendMail.setText(new StringBuffer().append("<h1>[ì´ë©”ì¼ ì¸ì¦]</h1>")
+				.append("<p>ì•„ë˜ ë§í¬ë¥¼ í´ë¦­í•˜ì‹œë©´ ì´ë©”ì¼ ì¸ì¦ì´ ì™„ë£Œë©ë‹ˆë‹¤.</p>")
 				.append("<a href='http://localhost:8088/member/joinConfirm?auth_key='")
 				.append(authkey)
-				.append(">ÀÌ¸ŞÀÏ ÀÎÁõ È®ÀÎ</a>")
+				.append(">ì´ë©”ì¼ ì¸ì¦ í™•ì¸</a>")
 				.toString());
 		sendMail.setFrom("figh202@gmail.com", "jaehyun");
 		sendMail.setTo(member.getEmail());

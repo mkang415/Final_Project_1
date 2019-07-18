@@ -23,166 +23,111 @@ import member.service.face.MemberService;
 import notice.service.face.NoticeService;
 import util.NoticePaging;
 
-
-
 @Controller
 public class NoticeController {
-	public static Logger logger = LoggerFactory.getLogger(NoticeController.class);
 	
+	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
 	@Autowired NoticeService noticeService;
 	@Autowired MemberService memberService;
-
+	
+	
 	
 	@RequestMapping(value = "/notice/list", method = RequestMethod.GET)
-	public void list( Model model, 
-					  HttpServletRequest req
-					) {
+	public void list(Model model,
+					 HttpServletRequest req
+					 ) {
 		
-		logger.info("∞‘Ω√∆« ∏ÆΩ∫∆Æ");
+		logger.info("Í≥µÏßÄÏÇ¨Ìï≠ Î¶¨Ïä§Ìä∏");
+	
+		NoticePaging paging = noticeService.getCurpage(req);
 		
-		NoticePaging page = noticeService.getCurPage(req);
+		req.setAttribute("paging",paging);
 		
-		//MODEL∑Œ Paging ∞¥√º ≥÷±‚
-		req.setAttribute("paging", page);
+		List<Notice> list = noticeService.list(paging);
 		
-		List<Notice> list =	noticeService.list(page);
-
 		model.addAttribute("list",list);
 		
+		
 	}
 	
-
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
-	public void view(HttpServletRequest req,
+	public void view(int notice_idx,
 					 Model model) {
 	
-		logger.info("∞‘Ω√∆« ªÛºº∫∏±‚");
+		logger.info("Í≥µÏßÄÏÇ¨Ìï≠ ÏÉÅÏÑ∏Î≥¥Í∏∞");
 
-		Notice notice = noticeService.getNoticeno(req);
+		Notice notice = noticeService.getBoardno(notice_idx);
 		
-		notice = noticeService.view(notice);
-		NoticeFile noticeFile = noticeService.viewFile(notice);
+		notice  = noticeService.view(notice);
+//		FileTest boardFile = boardService.viewFile(board);
 		
 		model.addAttribute("notice",notice);
-		model.addAttribute("noticeFile",noticeFile);
+//		model.addAttribute("boardFile",boardFile);
 			
 		
 	}
 	
-	@RequestMapping(value="/notice/write", method=RequestMethod.GET)
-		public void write( 
-						  HttpSession session,
-						  Model model) {
-		
-		logger.info("±€æ≤±‚ ∆˚");
-		
-		Member member = memberService.getMemberInfo(session);
-		
-		model.addAttribute("member",member);
-		
-		
-	}
 
-	@RequestMapping(value="/notice/write", method=RequestMethod.POST)
-		public String writeProc(Notice notice
-							,Member member
-							,HttpSession session
-							,@RequestParam(value="file")MultipartFile fileupload //∫Øºˆ ¿Ã∏ß ¥Ÿ∏¶ ∂ß ¿¸¥ﬁ∆ƒ∂ÛπÃ≈Õ∂˚
-								) 			
-		
-	{
+	@RequestMapping(value="/notice/write", method=RequestMethod.GET)
+	public void write( 
+					  HttpSession session,
+					  Model model) {
 	
-		
-		logger.info("±€æ≤±‚ √≥∏Æ");
-		
-		logger.info("notice: "+notice); 
-		
-		noticeService.writeNotice(notice, session,fileupload); //formø°º≠ πﬁæ∆ø¬ ∏≈∞≥∫Øºˆ∏¶ ±◊¥Î∑Œ æµºˆ ¿÷¥Ÿ.
-		
-		return "redirect:"+"/notice/list"; //write.jsp ø°º≠ ¥Ÿ∏• URL ∞Ê∑Œ∑Œ ∞• ∂ß
+		logger.info("Í∏ÄÏì∞Í∏∞ ÌéòÏù¥ÏßÄ");
+	
+		Member member = memberService.getMemberInfo(session);
+	
+		model.addAttribute("member",member);
+	
 	
 }
+
+@RequestMapping(value="/board/write", method=RequestMethod.POST)
+	public String writeProc(Notice notice
+						,Member member
+						,HttpSession session
+						,@RequestParam(value="file")MultipartFile fileupload
+							) 			
 	
-	@RequestMapping(value="/file/download", method=RequestMethod.GET)
-	public ModelAndView download(
-			int fileno, //∆ƒ¿œ π¯»£ ¿¸¥ﬁ ∆ƒ∂ÛπÃ≈Õ
-			
-			ModelAndView mav
-			) {
+{
+
+	
+	logger.info("Í∏ÄÏì∞Í∏∞ Ï≤òÎ¶¨");
+	
+	logger.info("Board: "+notice); 
+	
+	noticeService.writeBoard(notice, session,fileupload);
+	
+	return "redirect:"+"/board/list"; //write.jsp ÏôÄ url Îã§Î•º Îïå
+
+}
+
+@RequestMapping(value="/file/download", method=RequestMethod.GET)
+public ModelAndView download(
+		int fileno, 
 		
-		logger.info("∆ƒ¿œπ¯»£: "+fileno);
-		
-		//∆ƒ¿œπ¯»£ø° «ÿ¥Á«œ¥¬ ∆ƒ¿œ ¡§∫∏ ∞°¡Æø¿±‚
+		ModelAndView mav
+		) {
+	
+		logger.info("ÌååÏùºÎ≤àÌò∏: "+fileno);
+	
+	
 		NoticeFile file = noticeService.getFile(fileno);
 
-		logger.info("¡∂»∏µ» ∆ƒ¿œ¡§∫∏: "+file);
+		logger.info("Îã§Ïö¥Î∞õÏùÑ ÌååÏùºÏ†ïÎ≥¥: "+file);
+	
 		
-		//∆ƒ¿œ¡§∫∏ model∑Œ ∞™ ≥—±‚±‚
 		mav.addObject("downFile", file);
-		
-		//viewName ¡ˆ¡§
+	
+		//viewname ÏßÄÏ†ï
 		mav.setViewName("down");
 
 		return mav;
-	}
+}	
+
 
 	
 
-	@RequestMapping(value="/notice/update", method=RequestMethod.GET)
-	public void update(HttpServletRequest req,
-						Model model,
-						HttpSession session) {
-	
-
-		Notice notice = noticeService.getNoticeno(req);
-
-		Member member = memberService.getMemberInfo(session);
-		
-		notice = noticeService.view(notice);
-		
-		model.addAttribute("notice",notice); //ºˆ¡§«“ ¡¶∏Ò∞˙ ∫ªπÆ ∫∏ø©¡÷±‚
-		model.addAttribute("member",member); // æ∆¿Ãµ ¥–≥◊¿” ∫∏ø©¡÷±‚
-
-		logger.info("±€ ºˆ¡§ ∆˚");
-
-	
-	
-}
-
-	
-
-	@RequestMapping(value="/notice/update", method=RequestMethod.POST)
-	public String updateProc(int notice_no,
-						   Notice notice ) {
-
-		logger.info("±€ ºˆ¡§ √≥∏Æ");
-		logger.info("∆ƒ∂ÛπÃ≈Õ notice_no¥¬: "+notice_no);
-		// ∆ƒ∂ÛπÃ≈Õ∑Œ πﬁ¿∫ notice_no ∞¥√ºø° ¿˙¿Â«œ±‚
-		notice.setNotice_idx(notice_no);
-		
-		
-		noticeService.updateNotice(notice);
-		
-		return "redirect:"+"/notice/list"; // ¥Ÿ∏• URL ∞Ê∑Œ∑Œ ∞• ∂ß
-
-		
-
-   }
-		
-	@RequestMapping(value="/notice/delete", method=RequestMethod.GET)
-	public String delete( int notice_no,   //GET ∏ﬁº“µÂ ¿œ∂ß∏∏ ∫Í∂ÛøÏ¿˙ø°º≠ ?∆ƒ∂ÛπÃ≈Õ ∞™¿Ã πﬁæ∆¡¸ 
-						Notice notice) {
-		
-			logger.info("±€ ªË¡¶ √≥∏Æ");
-			
-			notice.setNotice_idx(notice_no);
-			
-			noticeService.deleteNotice(notice);
-			
-			return "redirect:"+"/notice/list"; //¥Ÿ∏• URL ∞Ê∑Œ∑Œ ∞• ∂ß
-			
-   }
-	
 
 
 }
