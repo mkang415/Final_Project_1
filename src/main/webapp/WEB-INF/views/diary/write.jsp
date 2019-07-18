@@ -6,22 +6,29 @@
 <meta charset="UTF-8">
 <title>#DiaryWrite</title>
 
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-
-<!-- include summernote css/js -->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
 
 <style type="text/css">
 
 .wrapper {
-	align:center;
+	margin-left: 20%;
+	margin-right: 20%;
 }
 
+#title {
+	margin-bottom: 10px;
+	border: white;
+	width: 100%;
+	font-size: 2em;
+}
 
+#summernote {
+	width: 100%;
+	height: 30em;
+	margin-bottom: 10px;
+}
 
 </style>
 
@@ -31,18 +38,55 @@
 <h1 style="text-align:center">Diary Write</h1>
 <hr>
 <div class="wrapper">
+
+
 <form action="/diary/write" method="post">
-	<textarea id="title" name="title"></textarea>
-	<textarea id="summernote" name="content"></textarea>
-	
+	<div>
+	<input type="text" id="title" name="title" placeholder="Title"></input>
+	<textarea id="summernote" name="content" placeholder="Contents"></textarea>
+	</div>
+
+	<div id="btnBox" align="center">
 	<button>작성</button> <button type="button" onClick="history.go(-1)">취소</button>
+	</div>
+	
 </form>
 
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
-  $('#summernote').summernote();
+	$('#summernote').summernote({
+		height: 500,
+		placeholder: "Content",
+		
+		callbacks: {
+			onImageUpload: function(files, editor, welEditable) {
+
+				for (var i = files.length - 1; i >= 0; i--) {
+					sendFile(files[i], this);
+				}
+			}
+		}
+
+	});
+	
+	function sendFile(file, el) {
+		var form_data = new FormData();
+      	form_data.append('file', file);
+      	$.ajax({
+        	data: form_data,
+        	type: "POST",
+        	url: '/diary/write/fileUpload',
+        	cache: false,
+        	contentType: false,
+        	enctype: 'multipart/form-data',
+        	processData: false,
+        	success: function(img_name) {
+          		$(el).summernote('editor.insertImage', img_name);
+        	}
+      	});
+    }
 });
 </script>
 </body>
