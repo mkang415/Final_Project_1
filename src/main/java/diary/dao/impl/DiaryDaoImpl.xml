@@ -28,8 +28,19 @@
 		
 	</select>
 
-	<select id="selectCntAll" resultType="int">
-		SELECT COUNT(*) FROM diary
+	<select id="selectCntAll" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM diary WHERE member_idx = #{member_idx}
 	</select>
+	
+	<insert id="insertDiary"
+	parameterType="map">
+		INSERT INTO DIARY(diary_idx, title, content, member_idx, writtendate)
+		VALUES(diary_seq.nextval, #{diary.title}, #{diary.content}, #{member_idx}, sysdate)
+	</insert>
+	
+	<insert id="insertFileForSummernote" parameterType="dto.DiaryFile">
+		INSERT INTO diaryfile(file_idx, diary_idx, originname, storename, filesize)
+		VALUES(diaryfile_seq.nextval, #{diary_idx}, #{originname}, #{storename}, #{filesize})
+	</insert>
 	
 </mapper>

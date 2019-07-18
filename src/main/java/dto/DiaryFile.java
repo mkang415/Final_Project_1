@@ -5,7 +5,7 @@ public class DiaryFile {
 	private int diary_idx;
 	private String originname;
 	private String storename;
-	private int filesize;
+	private long filesize;
 	@Override
 	public String toString() {
 		return "DiaryFile [file_idx=" + file_idx + ", diary_idx=" + diary_idx + ", originname=" + originname
@@ -35,10 +35,10 @@ public class DiaryFile {
 	public void setStorename(String storename) {
 		this.storename = storename;
 	}
-	public int getFilesize() {
+	public long getFilesize() {
 		return filesize;
 	}
-	public void setFilesize(int filesize) {
+	public void setFilesize(long filesize) {
 		this.filesize = filesize;
 	}
 	
