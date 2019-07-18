@@ -7,10 +7,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import board.dao.face.BoardDao;
 import board.service.face.BoardService;
 import dto.Board;
+import dto.Image;
 import util.BoardPaging;
 
 @Service
@@ -65,4 +67,29 @@ public class BoardServiceImpl implements BoardService{
 		
 		return boardDao.freeView(brdidx);
 	}
+
+	//	작성자와 로그인 유저 비교
+	@Override
+	public Boolean checkId(HttpSession session, Board freeView) {
+		
+		String id = (String)session.getAttribute("loginEmail");
+		if (id != null && !"".equals(id)) {
+			int memIdx = (int)session.getAttribute("member_idx");
+			if(memIdx == freeView.getMember_idx()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	//	작성글 데이터 dao로 전달
+	@Override
+	public void write(Board board, HttpSession session) {
+		
+		board.setMember_idx((int) session.getAttribute("member_idx"));
+		
+		boardDao.write(board);
+		
+	}
+
 }
