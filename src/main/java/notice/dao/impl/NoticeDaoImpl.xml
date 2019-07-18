@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 마이바티스 3 Mapper DOCTYPE -->
+<!--  마이바티스 3 Mapper DOCTYPE -->
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="notice.dao.face.NoticeDao">
-   <select id="selectAll"
+        <mapper namespace="notice.dao.face.NoticeDao">
+
+		<!-- select 문 -->
+       <select id="selectAll"
     		parameterType="util.NoticePaging"
             resultType="dto.Notice">
  
     		SELECT * FROM (
                 SELECT rownum rnum, B.* FROM (
-				SELECT notice_idx,title, content, writer_email, writer_nick,member_idx, hit, writtendate FROM Notice
+				SELECT notice_idx, title, content, member_idx, hit, writtendate FROM notice
 				ORDER BY notice_idx DESC
 		 	)B
 			ORDER BY rnum
-		) Notice
+		) notice
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
     
     </select>   
@@ -25,30 +27,11 @@
     		resultType="int">
     		
     		SELECT COUNT(*)
-    		FROM Notice
+    		FROM notice
     		
     </select>
     
-    
-        <update id="updateHit"
-    		parameterType="dto.Notice">
-    		UPDATE Notice
-    		SET hit = hit+1
-    		WHERE notice_idx = #{notice_idx }
-    
-    	</update>
-    	
-    	    <update id="update"
-    		parameterType="dto.Notice">
-    		UPDATE Notice
-    		SET title = #{title },
-    			content = #{content }
-    		WHERE notice_idx= #{notice_idx }
-    		
-    
-    		</update>
-    
-       <select id="selectNoticeByNoticeno"
+        <select id="selectNoticeByNoticeno"
     		parameterType="dto.Notice"
     		resultType="dto.Notice">
         		SELECT  
@@ -56,96 +39,32 @@
         		notice_idx, 
         		title, 
         		content, 
-        		writer_email, 
-        		writer_nick, 
+        		member_idx, 
         		hit, 
         		writtendate 
-        		FROM Notice
+        		FROM notice
 				WHERE notice_idx = #{notice_idx }
-    	</select>
-    	
-    	
-    	   <select id="selectMemberbyMemberEmail"
-    		parameterType="String"
-    		resultType="dto.Member">
-		SELECT  
-		member_idx
-	 	,email
-	 	,pw
-	 	,nickname
-		,memberClass
-		,joindate
-		,auth_key
-	 	auth_status
-			FROM 
-			member
-			WHERE email = #{email }	  
-    		
     </select>
-
-     
-    <select id="selectFilebyNoticeno"
-    		parameterType="dto.Notice"
-    		resultType="dto.NoticeFile">
-    			SELECT fileno, 
-    			origin_name, 
-    			stored_name, 
-    			notice_idx
-    			
-    			FROM 
-    			NoticeFile
-    			
-    			WHERE 
-    			notice_idx = #{notice_idx }
-	
-    </select>
+    <!--  -->  
     
-<!--     <select id="getFilebyFileNo" -->
-<!--     		parameterType="int" -->
-<!--     		resultType="web.dto.FileTest"> -->
-    		
-<!--     			SELECT fileno,  -->
-<!--     			origin_name,  -->
-<!--     			stored_name,  -->
-<!--     			boardno  -->
-    			
-<!--     			FROM  -->
-<!--     			fileprac -->
-    			
-<!--     			WHERE  -->
-<!--     			fileno = #{fileno } -->
-    		
-<!--     </select> -->
+    <!-- update -->
+        <update id="updateHit"
+    		parameterType="dto.Notice">
+    		UPDATE notice
+    		SET hit = hit+1
+    		WHERE notice_idx = #{notice_idx }
+    
+   		 </update>
+    
      
-<!-- 	<insert id="insertBoard" -->
-<!-- 			parameterType="web.dto.Board"> -->
-			
-<!-- 			<selectKey order="BEFORE" resultType="int" keyProperty="board_no" > -->
-<!-- 				SELECT  board_seq.nextval -->
-<!-- 				FROM  -->
-<!-- 				dual   -->
-<!-- 			</selectKey> -->
-			
-<!-- 	INSERT INTO board ( board_no, title, content, writer_id, writer_nick, hit )  -->
-<!-- 	VALUES ( #{board_no }, #{title }, #{content }, #{writer_id } ,#{writer_nick }, 1 ) -->
-
-<!-- 	</insert>    -->
-	
-<!-- 	<delete id="delete" -->
-<!-- 			parameterType="web.dto.Board"> -->
-<!-- 	DELETE board  -->
-<!-- 	WHERE board_no = #{board_no } -->
-			
-			
-<!-- 	</delete> -->
-	
-<!-- 	<insert id="insertFile" -->
-<!-- 			parameterType="web.dto.FileTest"> -->
-	
-<!-- 		INSERT INTO fileprac(fileno, origin_name, stored_name, boardno ) -->
-<!-- 		VALUES (filetest_seq.nextval, #{origin_name }, #{stored_name }, #{boardno }  ) -->
-
-<!-- 	</insert> -->
-	 
-    	
-</mapper>
+     
+     
+     
+     <!--  -->
+        
+        
+        
+        
+        
+        </mapper>
+    

@@ -24,14 +24,14 @@ public class MemberController {
 		
 	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
 	public void login() {
-		logger.info("·Î±×ÀÎÈ­¸é");
+		logger.info("ë¡œê·¸ì¸í™”ë©´");
 	
 	}
 
 
 	@RequestMapping(value = "/interceptor/noLogin", method = RequestMethod.GET)
 	public void loginFail() {
-		logger.info("·Î±×ÀÎ½ÇÆĞ");
+		logger.info("ë¡œê·¸ì¸ì‹¤íŒ¨");
 	
 	}
 
@@ -39,14 +39,14 @@ public class MemberController {
 	public String loginProc(Member member,
 						  HttpSession session) {
 		
-		logger.info("·Î±×ÀÎÃ³¸®");
+		logger.info("ë¡œê·¸ì¸ì²˜ë¦¬");
 		
 	
 		String redirectUrl = null;
 		if(memberService.login(member)) {
-			//·Î±×ÀÎ ¼º°ø
+			//ë¡œê·¸ì¸ ì„±ê³µ
 			
-			//¼¼¼Ç Á¤º¸ÀúÀå
+			//ì„¸ì…˜ ì •ë³´ì €ì¥
 			session.setAttribute("login", true);
 			session.setAttribute("loginEmail", member.getEmail());
 			Member loginMember = memberService.getMemberInfo(session);
@@ -57,13 +57,13 @@ public class MemberController {
 			logger.info(loginMember.getNickname());
 			logger.info("member_idx: "+loginMember.getMember_idx());
 
-			//¸®´ÙÀÌ·ºÆ® URL ÁöÁ¤
+			//ë¦¬ë‹¤ì´ë ‰íŠ¸ URL ì§€ì •
 			redirectUrl = "/main";
 			
 		} else {
-			//·Î±×ÀÎ ½ÇÆĞ
+			//ë¡œê·¸ì¸ ì‹¤íŒ¨
 			
-			//¸®´ÙÀÌ·ºÆ® URL ÁöÁ¤
+			//ë¦¬ë‹¤ì´ë ‰íŠ¸ URL ì§€ì •
 			redirectUrl = "/member/nologin";
 		}
 		
@@ -74,7 +74,7 @@ public class MemberController {
 	@RequestMapping(value = "/member/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		
-		logger.info("·Î±×¾Æ¿ô");
+		logger.info("ë¡œê·¸ì•„ì›ƒ");
 		
 		session.invalidate();
 		
@@ -88,27 +88,27 @@ public class MemberController {
 
 	@RequestMapping(value="/member/join", method=RequestMethod.GET)
 	public void join() {
-		logger.info("È¸¿ø°¡ÀÔ Æû");
+		logger.info("íšŒì›ê°€ì… í¼");
 		
 	}
 	
 	@RequestMapping(value="/member/join", method=RequestMethod.POST)
-	public String joinProc( Member member, //jsp¿¡¼­ ¿Ã·Áº¸³½ ÆÄ¶ó¹ÌÅÍµé
+	public String joinProc( Member member, //jspì—ì„œ ì˜¬ë ¤ë³´ë‚¸ íŒŒë¼ë¯¸í„°ë“¤
 						Model model) throws Exception {
 		
-				logger.info("È¸¿ø°¡ÀÔÃ³¸® Æû");
+				logger.info("íšŒì›ê°€ì…ì²˜ë¦¬ í¼");
 				
 					
 				memberService.insertMember(member);
 				
-				return "member/joinProc"; //controller ¾øÀÌ ¹Ù·Î jsp ·Î ³Ñ¾î°¨
-										  //view·Î ¹Ù·Î ³Ñ¾î°¨	
+				return "member/joinProc"; //controller ì—†ì´ ë°”ë¡œ jsp ë¡œ ë„˜ì–´ê°
+										  //viewë¡œ ë°”ë¡œ ë„˜ì–´ê°	
 	}
 	
 	@RequestMapping(value="/member/joinConfirm", method=RequestMethod.GET)
 	public void emailConfirm(Member member, Model model) throws Exception {
 		logger.info(member.getEmail() + ": auth confirmed");
-		memberService.updateAuth_status(member); //±ÇÇÑ ¾÷µ¥ÀÌÆ®
+		memberService.updateAuth_status(member); //ê¶Œí•œ ì—…ë°ì´íŠ¸
 		
 		model.addAttribute("auth_check", 1);
 		

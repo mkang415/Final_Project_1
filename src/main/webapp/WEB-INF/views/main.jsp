@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,7 +100,13 @@
 <!--     					    <li><a href="#">멤버쉽</a></li> -->
 <!--     					</ul> -->
     					 <ul>
+    					 <c:if test="${empty login }">
     						<li class="white"><a href="/member/login">로그인</a></li>
+       					</c:if>
+       					
+       					<c:if test="${login }">
+       						<li class="white"><a href="/member/logout">로그아웃</a></li>    						
+    					</c:if>
     						<li class="purple"><a href="/member/join">회원가입</a></li>
     					</ul>			
     					
@@ -118,8 +126,24 @@
                             </div>
                         </div>
         			</div>
-        		<div class="swiper-slide co2">Slide 2</div>
-        		<div class="swiper-slide co3">Slide 3</div>	
+
+        		<div class="swiper-slide co2">
+        		      <div class="container">
+                           <div class="row">
+                                <h3>가계부도 됨</h3>
+                                <p>가계부 </p>
+                            </div>
+                        </div>	
+        			</div>
+  
+        		<div class="swiper-slide co3">
+        		        		      <div class="container">
+                           <div class="row">
+                                <h3>여행일정</h3>
+                                <p>여행일정공유</p>
+                            </div>
+                        </div>	
+        			</div>	
     		</div>
     		
     		   	<div class="swiper-pagination"></div>
