@@ -58,6 +58,8 @@
 $(document).ready(function() {
 	$('#summernote').summernote({
 		height: 500,
+		minHeight: null,
+		maxHeight: null,
 		placeholder: "Content",
 		
 		callbacks: {
@@ -77,13 +79,17 @@ $(document).ready(function() {
       	$.ajax({
         	data: form_data,
         	type: "POST",
-        	url: '/diary/write/fileUpload',
+        	url: '/diary/write/fileTemp',
         	cache: false,
         	contentType: false,
         	enctype: 'multipart/form-data',
         	processData: false,
-        	success: function(img_name) {
-          		$(el).summernote('editor.insertImage', img_name);
+        	success: function(data) {
+        		console.log(data);
+//                 var image = $('<img>').attr('src', data);
+//                 $('#summernote').summernote("insertNode", image[0]);
+          		$(el).summernote('editor.insertImage', data);
+          		$("#imageBoard > ul").append('<li><img src="'+data+'" width="480" height="auto"/></li>');
         	}
       	});
     }
