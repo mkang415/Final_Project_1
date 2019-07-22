@@ -138,7 +138,7 @@ ${notice.content }
 </div>
 
 <div>
-<a href="/file/download?fileno=${boardFile.fileno }">${boardFile.origin_name }</a>
+<a href="/file/download?fileno=${noticeFile.fileno }">${noticeFile.origin_name }</a>
 </div>
 
 

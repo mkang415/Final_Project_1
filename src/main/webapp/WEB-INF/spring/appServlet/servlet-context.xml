@@ -23,15 +23,17 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="1"/> <!-- 우선순위 -->
+		
 	</beans:bean>
 	
-	<!-- 자바 스프링 빈 기반의 ViewResolver -->
+	<!-- 자바 스프링 빈 기반의 ViewResolver filedown 할때-->
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0"/>
 	</beans:bean>
 	
 	<!-- DownloadView클래스를 down이라는 이름의 빈으로 등록 -->
-	<!-- <beans:bean id="down" class="file.view.DownloadView"/> -->
+		<beans:bean id="down" class="notice.view.DownloadView" />
 	
 	<!-- JSON응답을 위한 jsonView 스프링 빈 등록 -->
 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">

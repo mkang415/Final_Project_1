@@ -31,5 +31,8 @@ public interface NoticeService {
 
 	public NoticeFile getFile(int fileno);
 
+	public NoticeFile viewFile(Notice notice);
+
+
 
 }
