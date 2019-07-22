@@ -28,9 +28,64 @@ where board.member_idx = member.member_idx
 	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
 	</select>
 	
-<!-- 	<delect id="delete"> -->
-<!-- 		delete board -->
-<!-- 		WHERE BOARD_IDX = #{board_idx} -->
-<!-- 	</delect> -->
+	<select id="select"
+	 parameterType="int"
+	 resultType="dto.Board">
+		select board_idx, title, content, member.nickname, member.email, hit, recommend, writtendate
+		from board, member
+		where board.member_idx = member.member_idx
+		and board_idx = #{board_idx}
+	</select>
+	
+	<select id="selectCntAll2" resultType="int">
+		SELECT count(*) FROM MEMBER ORDER BY
+		MEMBER_IDX
+	</select>
+	
+	<select id="selectAll2"
+	 parameterType="util.AdminMemberPaging"
+	 resultType="hashmap">
+	 SELECT * FROM (
+	 SELECT rownum rnum, B.* FROM (
+	select member_idx, email, pw, nickname, memberClass, joindate, auth_key, auth_status
+from member
+
+	 ORDER BY member_idx DESC
+	 ) B
+	 ORDER BY rnum
+	 )
+	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<select id="select2"
+	 parameterType="int"
+	 resultType="dto.Member">
+		SELECT * FROM Member
+		WHERE member_idx = #{member_idx}
+	</select>
+	
+	<select id="selectCntAll3" 
+	 parameterType="int"
+	 resultType="int">
+		SELECT count(*) FROM BOARD
+		WHERE member_idx = #{member_idx}
+		ORDER BY BOARD_IDX
+	</select>
+
+	<select id="selectAll3"
+	 parameterType="util.AdminMemberInfoPaging"
+	 resultType="hashmap">
+		SELECT * FROM (
+		 SELECT rownum rnum, B.* FROM (
+		select board_idx, title, content, member.nickname, hit, recommend, writtendate
+	from board, member
+	where board.member_idx = member.member_idx
+	and member_idx = #{member_idx}
+	 ORDER BY board_idx DESC
+	 ) B
+	 ORDER BY rnum
+	 )
+	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
 
 </mapper>
