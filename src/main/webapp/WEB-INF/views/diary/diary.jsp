@@ -24,10 +24,6 @@
 	margin-bottom: 100px;
 }
 
-.selector img{
-width: 100%;
-height: 100%;
-}
 
 </style>
 
