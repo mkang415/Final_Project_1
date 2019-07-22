@@ -77,19 +77,25 @@ public class DiaryServiceImpl implements DiaryService{
 		
 		diaryDao.insertDiary(map);
 		
+		if(0<diaryDao.selectCntDiaryFile()) {
+			int diary_idx = diaryDao.selectMaxDiaryIdx();
+			
+			diaryDao.updateDiaryFileIdx(diary_idx);
+		}
+		
 	}
 
 	@Override
 	public String fileUploadForSummernote(int member_idx, int diary_idx, MultipartFile file, ServletContext context) {
 
 		//파일이 저장될 경로
-		String storedPath = context.getRealPath("upload/diaryFiles");
+		String storedPath = context.getRealPath("resources/diaryFiles");
 		
 		//UUID
 		String uId = UUID.randomUUID().toString().split("-")[4];
 		
 		//저장될 파일의 이름 (원본이름 + UUID)
-		String name = file.getOriginalFilename()+"_"+uId;
+		String name = uId+"_"+file.getOriginalFilename();
 
 		
 		//저장될 파일 객체
@@ -107,8 +113,6 @@ public class DiaryServiceImpl implements DiaryService{
 		}
 		
 		
-		
-		
 		//DB에 저장 (업로드 정보 기록)
 		DiaryFile diaryFile = new DiaryFile();
 		diaryFile.setDiary_idx(diary_idx);
@@ -121,6 +125,34 @@ public class DiaryServiceImpl implements DiaryService{
 		return diaryFile.getStorename();
 		
 	}
+
+	@Override
+	public void delete(int diary_idx) {
+
+		diaryDao.deleteDiaryFile(diary_idx);
+		diaryDao.deleteDiary(diary_idx);
+		
+	}
+
+	@Override
+	public void modify(int diary_idx, Diary diary) {
+		
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("diary_idx", diary_idx);
+		map.put("diary", diary);
+		
+		diaryDao.updateDiary(map);
+		diaryDao.updateDiaryFileIdx(diary_idx);
+		
+	}
+
+	@Override
+	public Diary getDiary(int diary_idx) {
+		
+		return diaryDao.getDiary(diary_idx);
+	}
+
 
 
 
