@@ -66,6 +66,40 @@
 .slider .swiper-slide h3{font-size:60px; color: #fff; margin-top: 200px; opacity: 1;}
 .slider .swiper-slide p{font-size: 24px; color: #bbb; margin-bottom: 200px; font-weight: 100;}
 
+#event .row {padding: 24px;}
+.event {padding: 24px; background: #fff;}
+.event h2 {font-size: 24px; font-weight: 700;}
+.event .event_left {width: 100%; margin-right: 0;}
+.event .event_right{display: none;}
+
+#opening {margin: 0;}
+
+#new .row{padding: 0 24px;}
+.new {padding: 24px; background-color: #fff; margin-top: 24px;}
+.new h2 {font-size: 24px; font-weight: 700; height: 27px; margin-bottom: 20px; padding-bottom: }
+.new .new_right {padding: 24px;}
+
+
+
+/* help */
+.help {overflow: hidden;}
+.help article {float: left; width: 32%; margin-right: 2%;}
+.help article > div {border: 1px solid #dbdbdb; height: 350px;}
+.help article.help_box3 {margin-right: 0;}
+.help article.help_box3 > div {border: 0;}
+.help article h3 {font-size: 30px; font-weight: 500; margin-bottom: 20px;}
+
+/* 공지사항 */
+.notice {position: relative; padding: 17px; }
+.notice ul {overflow: hidden;}
+.notice ul li {float: left; text-align: center; margin-right: -1px;}
+.notice ul li a {border: 1px solid #dbdbdb; font-size: 15px; color: #666; display: block; width: 80px; padding: 10px 20px; background: #f5f5f5; }
+.notice ul li.active a {background: #fff;}
+.notice ul li ul {overflow: hidden; width: 90%; box-sizing: border-box; position: absolute; left: 17px; top: 70px; margin-right: 17px;  }
+.notice ul li ul li {width: 100%; box-sizing: border-box; text-align: left; padding: 17px; border-bottom: 1px solid #dbdbdb;}
+.notice ul li ul li dt em {color: #666;}
+.notice ul li ul li dd {color: #333; padding-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+
 
 /* 미디어쿼리 */
 @media (max-width: 1290px){

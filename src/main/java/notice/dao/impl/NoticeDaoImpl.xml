@@ -45,6 +45,39 @@
         		FROM notice
 				WHERE notice_idx = #{notice_idx }
     </select>
+    
+        <select id="selectFilebynotice_idx"
+    		parameterType="dto.Notice"
+    		resultType="dto.NoticeFile">
+    			SELECT fileno, 
+    			origin_name, 
+    			stored_name, 
+    			notice_idx 
+    			
+    			FROM 
+    			NoticeFile
+    			
+    			WHERE 
+    			notice_idx = #{notice_idx }
+	
+    </select>
+    
+    <select id="getFilebyFileNo"
+    		parameterType="int"
+    		resultType="dto.NoticeFile">
+    		
+    			SELECT fileno, 
+    			origin_name, 
+    			stored_name, 
+    			notice_idx 
+    			
+    			FROM 
+    			NoticeFile
+    			
+    			WHERE 
+    			fileno = #{fileno }
+    		
+    </select>
     <!--  -->  
     
     <!-- update -->
@@ -55,15 +88,38 @@
     		WHERE notice_idx = #{notice_idx }
     
    		 </update>
-    
-     
-     
-     
-     
+   
      <!--  -->
+     
+     <!-- insert -->
+     
+     <insert id="insertBoard"
+     		 parameterType="dto.Notice">
+     
+     	<selectKey order="BEFORE" resultType="int" keyProperty="notice_idx" >
+				SELECT notice_seq.nextval
+				FROM 
+				dual  
+		</selectKey>
+			
+	INSERT INTO notice ( notice_idx, title, content, member_idx  ) 
+	VALUES ( #{notice_idx }, #{title }, #{content }, #{member_idx } )
+     
+     
+     </insert>
+     
+     
+     <insert id="insertFile"
+     		parameterType="dto.NoticeFile">
+     		
+     	INSERT INTO NoticeFile(fileno, origin_name, stored_name, notice_idx )
+		VALUES (NoticeFile_seq.nextval, #{origin_name }, #{stored_name }, #{notice_idx }  )
+     
+     
+     </insert>   
         
         
-        
+     <!--       -->   
         
         
         </mapper>

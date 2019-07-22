@@ -155,6 +155,84 @@
    	
     </section>
     <!-- //banner -->
+     <section id="help">
+        <div class="container">
+            <div class="row">
+                <div class="help clearfix">
+                    <article class="help_box1">
+                        <h3><em>공지사항</em></h3>
+                        <div class="notice">
+                            <ul>
+                                <li class="active"><a href="#">공지사항</a>
+                                    <ul>
+                                        <li>
+                                            <dl>
+                                                <dt><strong class="bar"></strong> <em>2019.07.22</em></dt>
+                                                <dd></dd>
+                                            </dl>            
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><strong class="bar"></strong> <em>2019.07.22</em></dt>
+                                                <dd></dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><strong class="bar"></strong> <em>2019.07.22</em></dt>
+                                                <dd></dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><strong class="bar"></strong> <em>2019.07.22</em></dt>
+                                                <dd></dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">자유게시판</a>
+                                    <ul>
+                                        <li>
+                                            <dl>
+                                                <dt><strong class="bar"></strong> <em></em></dt>
+                                                <dd></dd>
+                                            </dl>            
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><strong class="bar"></strong> <em></em></dt>
+                                                <dd></dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><strong class="bar"></strong> <em></em></dt>
+                                                <dd> </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt><strong class="bar"></strong> <em></em></dt>
+                                                <dd></dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                    </div>
+                  </div>
+                </div>
+             </section>
+    
+    
+    
+    
+   
+    
+    
     
     
      
