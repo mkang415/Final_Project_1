@@ -24,7 +24,7 @@
 	</repositories>
 	
 	<dependencies>
-	
+
 	<!-- Mail -->
 	<dependency>
 		<groupId>org.springframework</groupId>

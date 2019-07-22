@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+
 <!-- summernote -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
@@ -56,8 +58,24 @@
 <!-- <form>데이터 전송(Submit) 버튼 -->
 <tr>
 	<td></td>
-	<td><input type="submit" value="작성"/>
-		<input type="reset" value="취소"/></td>
+	<td>
+		<input type="submit" value="작성"/>
+		<c:choose>
+			<c:when test="${selBoard==1 }">
+				<button type="button" onclick="location.href='/board/freelist'">취소</button>
+			</c:when>
+			<c:when test="${selBoard==2 }">
+				<button type="button" onclick="location.href='/board/epillist'">취소</button>
+			</c:when>
+			<c:when test="${selBoard==3 }">
+				<button type="button" onclick="location.href='/board/photolist'">취소</button>
+			</c:when>
+		</c:choose>
+		
+			
+
+		
+	</td>
 </tr>
 </table>
 
@@ -66,14 +84,40 @@
 
 <script>
 	$('#summernote').summernote({
-		
 		height: 300,
 	  	minHeight: null,
 	  	maxHeight: null,
 	  	focus: true,
-	  	lang: 'ko-KR' // default: 'en-US'
+	  	lang: 'ko-KR', // default: 'en-US'
+	  	
+	  	callbacks: {
+	  		onImageUpload: function(files, editor, welEditable) {
+	  			for (var i = files.length - 1; i >= 0; i--) {
+	         	     sendFile(files[i], this);
+	            }
+          	}
+	  	}
+
 	});
 	
+	function sendFile(file, el) {
+	      var form_data = new FormData();
+	      form_data.append('file', file);
+	      $.ajax({
+	        data: form_data,
+	        type: "POST",
+	        url: '/upload/image',
+	        cache: false,
+	        contentType: false,
+	        enctype: 'multipart/form-data',
+	        processData: false,
+	        success: function(url) {
+	          $(el).summernote('editor.insertImage', url);
+	          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+	        }
+	      });
+	    }
+
 </script>
 
 </body>

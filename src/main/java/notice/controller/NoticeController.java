@@ -80,27 +80,6 @@ public class NoticeController {
 		model.addAttribute("member",member);
 
 
-//@RequestMapping(value="/board/write", method=RequestMethod.POST)
-//	public String writeProc(Notice notice
-//						,Member member
-//						,HttpSession session
-//						,@RequestParam(value="file")MultipartFile fileupload
-//							) 			
-//	
-//{
-//
-//	
-//	logger.info("글쓰기 처리");
-//	
-//	logger.info("Board: "+notice); 
-//	
-//	noticeService.writeBoard(notice, session,fileupload);
-//	
-//	return "redirect:"+"/board/list"; //write.jsp 와 url 다를 때
-//
-//}
-
-
 	}
 
 	@RequestMapping(value="/notice/write", method=RequestMethod.POST)
@@ -146,10 +125,5 @@ public class NoticeController {
 
 		return mav;
 	}	
-
-
-
-
-
 
 }

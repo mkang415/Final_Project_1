@@ -37,7 +37,7 @@
 	<select id="freeView"
 	 parameterType="int"
 	 resultType="dto.Board">
-	 	select board_idx, recommend, title, content, member.nickname, member.member_idx, hit, writtendate
+	 	select board_idx, recommend, title, content, member.nickname, member.member_idx, hit, divide, writtendate
 		from board, member
 		where board.member_idx = member.member_idx
 		and board_idx = #{brdidx}
@@ -61,4 +61,32 @@
 	 	insert into board(board_idx, title, content, member_idx, divide) 
 	 	values (#{board_idx}, #{title}, #{content}, #{member_idx}, #{divide})
 	 </insert>
+	 
+	 <insert id="imgSave"
+	  parameterType="dto.Image">
+	  	insert into image(image_idx, originname, storename)
+	  	values (image_seq.nextval, #{originname}, #{storename})
+	  </insert>
+	 
+	 <!-- 수정할 게시글 DB에서 불러오기 -->
+	 <select id="getUpdate"
+	  parameterType="int"
+	  resultType="dto.Board">
+	 	select * from board
+	 	where board_idx=#{board_idx}
+	 </select>
+	 
+	 <!-- 수정한 게시글 DB 갱신 -->
+	 <update id="setUpdate"
+	  parameterType="dto.Board">
+	  	update board set title = #{title}, content=#{content}
+	  	where board_idx = #{board_idx}
+	  </update>
+	  
+	  <!-- 게시글 삭제 -->
+	  <delete id="delete"
+	   parameterType="int">
+	  	delete board
+	  	where board_idx= #{board_idx}
+	  </delete>
 </mapper>

@@ -3,6 +3,7 @@ package board.service.face;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -22,5 +23,13 @@ public interface BoardService {
 	Boolean checkId(HttpSession session, Board freeView);
 
 	void write(Board board, HttpSession session);
+
+	String imgSave(MultipartFile fileupload, ServletContext context);
+
+	Board getUpdate(int brdidx);
+
+	void setUpdate(Board board);
+
+	void delete(int brdidx);
 
 }
