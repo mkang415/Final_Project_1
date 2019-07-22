@@ -82,12 +82,11 @@
 			<td>${i.WRITTENDATE }</td>
 		</tr>
 	</c:forEach>
-<c:import url="/WEB-INF/views/layout/adminmemberinfopaging.jsp"></c:import>
 
 </table>
 
 
-
+<c:import url="/WEB-INF/views/layout/adminmemberinfopaging.jsp"></c:import>
 <div id="btnBox">
 <a href="/admin/member"><button>목록</button></a>
 </div>
