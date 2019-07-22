@@ -13,14 +13,14 @@
 <style type="text/css">
 
 .wrapper {
-/* 	background: black; */
+	background: #E3CEF6;
 }
 
 .diary {
 	background: white;
-	width: 50em;
-	margin-left: 20%;
-	margin-right: 20%;
+	width: 40%;
+	margin-left: 30%;
+	margin-right: 30%;
 	margin-bottom: 100px;
 }
 
