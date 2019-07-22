@@ -1,9 +1,15 @@
 package schedule.service.face;
 
-import dto.Schedule;
+import java.util.List;
 
-public interface ScheduleService {
+import dto.CalendarDto;
 
-	Schedule test();
+public interface CalendarService {
+
+	public List<CalendarDto> getCalendarList(CalendarDto caldto);
+
+	public boolean calWrite(CalendarDto dto);
+	
+	public CalendarDto calDetail(int calendar_idx);
 
 }
