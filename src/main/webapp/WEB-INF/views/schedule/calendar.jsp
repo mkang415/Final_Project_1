@@ -17,7 +17,7 @@ CalendarUtil util = new CalendarUtil();
 %>
 
 
-<h2>▷ 일정을 관리하세욥 ◁</h2>
+<h2 style="text-align:center">▷ 일정을 관리하세욥 ◁</h2>
 <br>
 
 <%
@@ -78,7 +78,7 @@ List<CalendarDto> list
 </tr>
 
 
-<tr height="100">
+<tr height="50">
 	<td align="center">일</td>
 	<td align="center">월</td>
 	<td align="center">화</td>
