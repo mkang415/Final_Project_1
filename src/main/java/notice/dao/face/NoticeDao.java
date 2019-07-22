@@ -21,4 +21,8 @@ public interface NoticeDao {
 
 	public void insertFile(NoticeFile filetest);
 
+	public NoticeFile getFilebyFileNo(int fileno);
+
+	public NoticeFile selectFilebynotice_idx(Notice notice);
+
 }

@@ -17,6 +17,7 @@ import dto.Member;
 import dto.Notice;
 import dto.NoticeFile;
 import member.dao.face.MemberDao;
+import member.service.face.MemberService;
 import notice.dao.face.NoticeDao;
 import notice.service.face.NoticeService;
 import util.NoticePaging;
@@ -28,6 +29,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Autowired NoticeDao noticeDao;
 	@Autowired MemberDao memberDao;
 	@Autowired ServletContext context;
+	@Autowired MemberService memberService;
 
 	
 	
@@ -87,15 +89,14 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public void writeBoard(Notice notice, HttpSession session, MultipartFile fileupload) {
 
-		String email = (String)session.getAttribute("loginemail");
+		Member member = (memberService.getMemberInfo(session));
 		
-		Member member= new Member();
+		//외래키인 member_idx 입력
+		notice.setMember_idx(member.getMember_idx());
 		
-		member = memberDao.selectMemberbyMemberId(email);
+		System.out.println("notice : "+notice);
 		
-//		notice.setNotice_idx(notice_idx);
-//		board.setWriter_nick(member.getNick());		
-	
+		//글쓰기
 		noticeDao.insertBoard(notice);
 
 		
@@ -150,8 +151,19 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public NoticeFile getFile(int fileno) {
-		// TODO Auto-generated method stub
-		return null;
+		NoticeFile noticeFile = noticeDao.getFilebyFileNo(fileno);
+		return noticeFile;	
+	}
+
+
+
+	
+	@Override
+	public NoticeFile viewFile(Notice notice) {
+		NoticeFile noticeFile = noticeDao.selectFilebynotice_idx(notice);
+		
+		return noticeFile;
+
 	}
 
 	
