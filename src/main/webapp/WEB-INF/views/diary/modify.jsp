@@ -35,15 +35,16 @@
 </head>
 <body>
 
-<h1 style="text-align:center">Diary Write</h1>
+<h1 style="text-align:center">Diary Modify</h1>
 <hr>
 <div class="wrapper">
 
 
-<form action="/diary/write" method="post">
+<form action="/diary/modify" method="post">
 	<div>
-	<input type="text" id="title" name="title" placeholder="Title"></input>
-	<textarea id="summernote" name="content" placeholder="Contents"></textarea>
+	<input type="text" id="title" name="title" placeholder="Title" value="${modifyDiary.title }"></input>
+	<textarea id="summernote" name="content" placeholder="Contents">${modifyDiary.content }</textarea>
+	<input type="hidden" name="diary_idx" value="${modifyDiary.diary_idx }"></input>
 	</div>
 
 	<div id="btnBox" align="center">
