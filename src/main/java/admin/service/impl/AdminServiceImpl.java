@@ -2,6 +2,7 @@ package admin.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,7 +92,12 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<HashMap<String, Object>> select(AdminMemberInfoPaging AMIP, int member_idx) {
 		
-		return adminDao.selectAll3(AMIP, member_idx);
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("AMIP", AMIP);
+		map.put("member_idx", member_idx);
+		
+		return adminDao.selectAll3(map);
 		
 		//회원 상세정보 리스트 (해당 회원이 쓴 글)
 	}

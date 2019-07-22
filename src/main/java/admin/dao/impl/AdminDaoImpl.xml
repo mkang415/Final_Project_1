@@ -73,19 +73,19 @@ from member
 	</select>
 
 	<select id="selectAll3"
-	 parameterType="util.AdminMemberInfoPaging"
+	 parameterType="map"
 	 resultType="hashmap">
 		SELECT * FROM (
 		 SELECT rownum rnum, B.* FROM (
 		select board_idx, title, content, member.nickname, hit, recommend, writtendate
 	from board, member
 	where board.member_idx = member.member_idx
-	and member_idx = #{member_idx}
+	and MEMBER.member_idx = #{member_idx}
 	 ORDER BY board_idx DESC
 	 ) B
 	 ORDER BY rnum
 	 )
-	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	 WHERE rnum BETWEEN #{AMIP.startNo} AND #{AMIP.endNo}
 	</select>
 
 </mapper>
