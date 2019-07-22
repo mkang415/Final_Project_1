@@ -25,62 +25,60 @@ import util.NoticePaging;
 
 @Controller
 public class NoticeController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
 	@Autowired NoticeService noticeService;
 	@Autowired MemberService memberService;
-	
-	
-	
+
+
+
 	@RequestMapping(value = "/notice/list", method = RequestMethod.GET)
 	public void list(Model model,
-					 HttpServletRequest req
-					 ) {
-		
+			HttpServletRequest req
+			) {
+
 		logger.info("공지사항 리스트");
-	
+
 		NoticePaging paging = noticeService.getCurpage(req);
-		
+
 		req.setAttribute("paging",paging);
-		
+
 		List<Notice> list = noticeService.list(paging);
-		
+
 		model.addAttribute("list",list);
-		
-		
+
+
 	}
-	
+
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
 	public void view(int notice_idx,
-					 Model model) {
-	
+			Model model) {
+
 		logger.info("공지사항 상세보기");
 
 		Notice notice = noticeService.getBoardno(notice_idx);
-		
+
 		notice  = noticeService.view(notice);
-//		FileTest boardFile = boardService.viewFile(board);
-		
+		NoticeFile noticeFile = noticeService.viewFile(notice);
+
 		model.addAttribute("notice",notice);
-//		model.addAttribute("boardFile",boardFile);
-			
-		
+		model.addAttribute("noticeFile",noticeFile);
+
+
 	}
-	
+
 
 	@RequestMapping(value="/notice/write", method=RequestMethod.GET)
 	public void write( 
-					  HttpSession session,
-					  Model model) {
-	
+			HttpSession session,
+			Model model) {
+
 		logger.info("글쓰기 페이지");
-	
+
 		Member member = memberService.getMemberInfo(session);
-	
+
 		model.addAttribute("member",member);
-	
-	
-}
+
 
 //@RequestMapping(value="/board/write", method=RequestMethod.POST)
 //	public String writeProc(Notice notice
@@ -102,31 +100,55 @@ public class NoticeController {
 //
 //}
 
-@RequestMapping(value="/file/download", method=RequestMethod.GET)
-public ModelAndView download(
-		int fileno, 
-		
-		ModelAndView mav
-		) {
-	
+
+	}
+
+	@RequestMapping(value="/notice/write", method=RequestMethod.POST)
+	public String writeProc(Notice notice
+			,Member member
+			,HttpSession session
+			,@RequestParam(value="file")MultipartFile fileupload
+			) 			
+
+	{
+
+
+		logger.info("글쓰기 처리");
+
+		logger.info("Board: "+notice); 
+
+		noticeService.writeBoard(notice, session,fileupload);
+
+		return "redirect:"+"/notice/list"; //write.jsp 와 url 다를 때
+
+	}
+
+	@RequestMapping(value="/file/download", method=RequestMethod.GET)
+	public ModelAndView download(
+			int fileno, 
+
+			ModelAndView mav
+			) {
+
+
 		logger.info("파일번호: "+fileno);
-	
-	
+
+
 		NoticeFile file = noticeService.getFile(fileno);
 
 		logger.info("다운받을 파일정보: "+file);
-	
-		
+
+
 		mav.addObject("downFile", file);
-	
+
 		//viewname 지정
 		mav.setViewName("down");
 
 		return mav;
-}	
+	}	
 
 
-	
+
 
 
 

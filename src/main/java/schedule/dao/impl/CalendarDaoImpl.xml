@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DOCTYPE -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="schedule.dao.face.CalendarDao">
+	
+	<select id="getCalendarList"
+	 resultType="dto.CalendarDto">
+		select calendar_idx,  member_idx, title, content, rdate, wdate
+		from (select row_number() over(partition by substr(rdate, 1, 8) order by rdate asc) rn,
+				calendar_idx,  member_idx, title, content, rdate, wdate 
+				from calendar 
+				where member_idx=#{member_idx} and substr(rdate, 1, 8)= #{rdate}) 
+		where rn between 1 and 5 
+	</select>
+	
+	
+	<insert id="calwrite"
+	parameterType="dto.CalendarDto">
+		INSERT into calendar(calendar_idx,  member_idx, title, content, rdate, wdate)
+		VALUES (calendar_seq.nextval, #{member_idx}, #{title}, #{content}, #{rdate}, sysdate)
+	</insert>
+	
+	
+	
+	<select id="calDetail"
+	resultType="dto.CalendarDto"
+	parameterType="java.lang.Integer">
+		select calendar_idx,  member_idx, title, content, rdate, wdate
+		from calendar where calendar_idx = #{calendar_idx}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

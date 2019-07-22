@@ -42,6 +42,12 @@
 <div class="title"><h2>${list.title }</h2></div>
 <div class="content">${list.content }</div>
 </div>
+
+<div align="center">
+	<button type="button" onClick="location.href='/diary/delete?diary_idx=${list.diary_idx}'">삭제</button> 
+	<button type="button" onClick="location.href='/diary/modify?diary_idx=${list.diary_idx}'">수정</button>
+</div>
+
 <hr>
 </c:forEach>
 </div>
