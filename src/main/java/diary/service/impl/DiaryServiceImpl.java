@@ -77,6 +77,12 @@ public class DiaryServiceImpl implements DiaryService{
 		
 		diaryDao.insertDiary(map);
 		
+		if(0<diaryDao.selectCntDiaryFile()) {
+			int diary_idx = diaryDao.selectMaxDiaryIdx();
+			
+			diaryDao.updateDiaryFileIdx(diary_idx);
+		}
+		
 	}
 
 	@Override
@@ -119,6 +125,34 @@ public class DiaryServiceImpl implements DiaryService{
 		return diaryFile.getStorename();
 		
 	}
+
+	@Override
+	public void delete(int diary_idx) {
+
+		diaryDao.deleteDiaryFile(diary_idx);
+		diaryDao.deleteDiary(diary_idx);
+		
+	}
+
+	@Override
+	public void modify(int diary_idx, Diary diary) {
+		
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("diary_idx", diary_idx);
+		map.put("diary", diary);
+		
+		diaryDao.updateDiary(map);
+		diaryDao.updateDiaryFileIdx(diary_idx);
+		
+	}
+
+	@Override
+	public Diary getDiary(int diary_idx) {
+		
+		return diaryDao.getDiary(diary_idx);
+	}
+
 
 
 

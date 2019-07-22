@@ -43,4 +43,33 @@
 		VALUES(diaryfile_seq.nextval, #{diary_idx}, #{originname}, #{storename}, #{filesize})
 	</insert>
 	
+	<select id="selectCntDiaryFile" resultType="int">
+		SELECT COUNT(*) FROM DIARYFILE WHERE DIARY_IDX=0
+	</select>
+	
+	<select id="selectMaxDiaryIdx" resultType="int">
+		SELECT MAX(DIARY_IDX) FROM DIARY
+	</select>
+	
+	<update id="updateDiaryFileIdx" parameterType="int">
+		UPDATE DIARYFILE SET diary_idx=#{diary_idx} WHERE diary_idx=0
+	</update>
+	
+	<delete id="deleteDiaryFile" parameterType="int">
+		DELETE DIARYFILE WHERE DIARY_IDX=#{diary_idx}
+	</delete>
+	
+	<delete id="deleteDiary" parameterType="int">
+		DELETE DIARY WHERE DIARY_IDX=#{diary_idx}
+	</delete>
+	
+	<select id="getDiary" parameterType="int" resultType="dto.Diary">
+		SELECT * FROM DIARY WHERE diary_idx=#{diary_idx}
+	</select>
+	
+	<update id="updateDiary" parameterType="map">
+		UPDATE DIARY
+		SET title = #{diary.title}, content = #{diary.content} WHERE diary_idx = #{diary_idx}
+	</update>
+	
 </mapper>

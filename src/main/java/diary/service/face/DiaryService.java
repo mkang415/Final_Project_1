@@ -16,10 +16,15 @@ public interface DiaryService {
 	
 	public List<Diary> getDiaries(int member_idx, DiaryPaging paging);
 	
+	public Diary getDiary(int diary_idx);
+	
 	public int getMemberIdx(String id);
 	
 	public void insertDiary(int member_idx, Diary diary);
 	
 	public String fileUploadForSummernote(int member_idx, int diary_idx, MultipartFile file, ServletContext context);
-
+	
+	public void delete(int diary_idx);
+	
+	public void modify(int diary_idx, Diary diary);
 }

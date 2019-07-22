@@ -54,7 +54,7 @@ public class DiaryController {
 	}
 	
 	@RequestMapping(value="/diary/write", method=RequestMethod.GET)
-	public void write() {
+	public void write(Model model) {
 		
 	}
 	
@@ -128,5 +128,30 @@ public class DiaryController {
             return ResponseEntity.badRequest().build();
         }
     }
+    
+    @RequestMapping(value="/diary/delete", method=RequestMethod.GET) 
+    public String delete(@Parameter int diary_idx) {
+    	diaryService.delete(diary_idx);
+    	
+    	return "redirect:/diary";
+    }
 
+    
+    @RequestMapping(value="/diary/modify", method=RequestMethod.GET)
+    public void modify(@Parameter int diary_idx, Model model) {
+    	
+    	Diary modifyDiary = diaryService.getDiary(diary_idx);
+    	
+    	model.addAttribute("modifyDiary", modifyDiary);
+    	
+    }
+
+    @RequestMapping(value="/diary/modify", method=RequestMethod.POST)
+    public String modifySubmit(@Parameter int diary_idx, Diary diary) {
+    	
+    	diaryService.modify(diary_idx, diary);
+    	
+    	return "redirect:/diary";
+    	
+    }
 }
