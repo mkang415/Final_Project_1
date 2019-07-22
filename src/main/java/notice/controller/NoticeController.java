@@ -82,48 +82,48 @@ public class NoticeController {
 	
 }
 
-@RequestMapping(value="/board/write", method=RequestMethod.POST)
-	public String writeProc(Notice notice
-						,Member member
-						,HttpSession session
-						,@RequestParam(value="file")MultipartFile fileupload
-							) 			
-	
-{
-
-	
-	logger.info("글쓰기 처리");
-	
-	logger.info("Board: "+notice); 
-	
-	noticeService.writeBoard(notice, session,fileupload);
-	
-	return "redirect:"+"/board/list"; //write.jsp 와 url 다를 때
-
-}
-
-@RequestMapping(value="/file/download", method=RequestMethod.GET)
-public ModelAndView download(
-		int fileno, 
-		
-		ModelAndView mav
-		) {
-	
-		logger.info("파일번호: "+fileno);
-	
-	
-		NoticeFile file = noticeService.getFile(fileno);
-
-		logger.info("다운받을 파일정보: "+file);
-	
-		
-		mav.addObject("downFile", file);
-	
-		//viewname 지정
-		mav.setViewName("down");
-
-		return mav;
-}	
+//@RequestMapping(value="/board/write", method=RequestMethod.POST)
+//	public String writeProc(Notice notice
+//						,Member member
+//						,HttpSession session
+//						,@RequestParam(value="file")MultipartFile fileupload
+//							) 			
+//	
+//{
+//
+//	
+//	logger.info("글쓰기 처리");
+//	
+//	logger.info("Board: "+notice); 
+//	
+//	noticeService.writeBoard(notice, session,fileupload);
+//	
+//	return "redirect:"+"/board/list"; //write.jsp 와 url 다를 때
+//
+//}
+//
+//@RequestMapping(value="/file/download", method=RequestMethod.GET)
+//public ModelAndView download(
+//		int fileno, 
+//		
+//		ModelAndView mav
+//		) {
+//	
+//		logger.info("파일번호: "+fileno);
+//	
+//	
+//		NoticeFile file = noticeService.getFile(fileno);
+//
+//		logger.info("다운받을 파일정보: "+file);
+//	
+//		
+//		mav.addObject("downFile", file);
+//	
+//		//viewname 지정
+//		mav.setViewName("down");
+//
+//		return mav;
+//}	
 
 
 	

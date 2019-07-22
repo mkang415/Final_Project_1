@@ -1,8 +1,12 @@
 package board.service.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +93,58 @@ public class BoardServiceImpl implements BoardService{
 		board.setMember_idx((int) session.getAttribute("member_idx"));
 		
 		boardDao.write(board);
+		
+	}
+
+	//	업로드한 이미지 저장 후 저장경로 반환
+	@Override
+	public String imgSave(MultipartFile file, ServletContext context) {
+
+			//	파일이 저장될 경로
+			String storedPath = context.getRealPath("resources/boardimg");
+			System.out.println(storedPath);
+			
+			//	UUID
+			String uId = UUID.randomUUID().toString().split("-")[4];
+			
+			//	저장될 파일의 이름 (원본이름 + UUID)
+			String name = uId+"_"+file.getOriginalFilename();
+			
+			//	저장될 파일 객체
+			File dest = new File(storedPath, name);
+			
+			//	파일 저장
+			try {
+				file.transferTo(dest);	//	실제 저장
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			Image image = new Image();
+			image.setOriginname(file.getOriginalFilename());
+			image.setStorename(name);
+			boardDao.imgSave(image);
+			
+			return "\\resources\\boardimg\\"+image.getStorename();
+	}
+
+	//	수정할 게시글 불러오기
+	@Override
+	public Board getUpdate(int brdidx) {
+		
+		return boardDao.getUpdate(brdidx);
+	}
+
+	@Override
+	public void setUpdate(Board board) {
+		boardDao.setUpdate(board);
+	}
+
+	@Override
+	public void delete(int brdidx) {
+		boardDao.delete(brdidx);
 		
 	}
 

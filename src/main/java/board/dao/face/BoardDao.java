@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import dto.Board;
+import dto.Image;
 import util.BoardPaging;
 
 public interface BoardDao {
@@ -17,5 +18,13 @@ public interface BoardDao {
 	void hitPlus(int brdidx);
 
 	void write(Board board);
+
+	void imgSave(Image image);
+
+	Board getUpdate(int board_idx);
+
+	void setUpdate(Board board);
+
+	void delete(int board_idx);
 
 }

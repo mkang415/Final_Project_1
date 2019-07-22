@@ -48,7 +48,7 @@
 	
 	<!-- 컴포넌트를 스캔(검색후 등록)할 패키지를 지정 -->
 	<!-- 여러 패키지를 등록할 때에는 , 로 구분하다. -->
-	<context:component-scan base-package="admin, board, diary, ledger, main, member, memo, notice, qna, schedule, vote" />
+	<context:component-scan base-package="admin, board, diary, ledger, main, member, memo, notice, qna, schedule, vote, reply" />
 	
 	
 	

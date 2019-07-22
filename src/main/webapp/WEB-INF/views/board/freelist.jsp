@@ -58,6 +58,5 @@ ${nick }<br>
 <button type="button" onclick="location.href='/board/write?divide=1'">글쓰기</button>
 </c:if>
 <button type="button" onclick="location.href='/main'">메인</button>
-
 </body>
 </html>
