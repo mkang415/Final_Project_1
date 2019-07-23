@@ -116,13 +116,13 @@ public class DiaryController {
     		
     		int diary_idx = 0; // 임시 파일들이 저장될 인덱스 번호
         	
-    		String path = context.getRealPath("resources/diaryFiles");
+    		String path = context.getRealPath("resources/diary/diaryFiles");
     		    		
     		//첨부파일 저장
     		String res = diaryService.fileUploadForSummernote(member_idx, diary_idx, file, context);
     		
 
-            return ResponseEntity.ok().body("/resources/diaryFiles/"+res);
+            return ResponseEntity.ok().body("/resources/diary/diaryFiles/"+res);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
