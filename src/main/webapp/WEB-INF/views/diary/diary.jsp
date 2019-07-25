@@ -22,7 +22,8 @@ window.onload = function() {
 	
 	for(var i=0; i<content.length; i++) {
 		content[i].value=i;
-// 		console.log(content[i].height());
+		console.log(content[i].value);
+		console.log(content[i].style.height);
 		content[i].style.height = '20em';
 		collapseDiv[i].style.display = 'block';
 		
