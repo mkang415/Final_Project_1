@@ -6,9 +6,9 @@
 <div class="text-center">
    <ul class="pagination pagination-sm">
       <!-- 처음으로 가기 -->
-      <c:if test="${AMIP.startPage ne 1 }">
+      <c:if test="${AMIP.curPage ne 1 }">
       <li>
-         <a href="/admin/memberinfo"><span>&larr;처음</span></a>
+         <a href="/admin/memberinfo?curPage=1&member_idx=${member.member_idx }"><span>&larr;처음</span></a>
       </li>
       </c:if>
 
@@ -25,7 +25,7 @@
 
       <c:if test="${AMIP.curPage ne 1 }">
       <li>
-         <a href="/admin/memberinfo?curPage=${AMIP.curPage-1 }"><span>&laquo;</span></a>
+         <a href="/admin/memberinfo?curPage=${AMIP.curPage-1 }&member_idx=${member.member_idx }"><span>&laquo;</span></a>
        </li>
        </c:if>
 
@@ -41,13 +41,13 @@
          <!-- 현재 보고 있는 페이지번호만 강조해주기 -->
          <c:if test="${AMIP.curPage eq i}">
          <li class="active">
-            <a href="/admin/memberinfo?curPage=${i }">${i }</a>
+            <a href="/admin/memberinfo?curPage=${i }&member_idx=${member.member_idx }">${i }</a>
          </li>
          </c:if>
       
          <c:if test="${AMIP.curPage ne i}">
          <li>
-            <a href="/admin/memberinfo?curPage=${i }">${i }</a>
+            <a href="/admin/memberinfo?curPage=${i }&member_idx=${member.member_idx }">${i }</a>
          </li>
          </c:if>
          
@@ -65,7 +65,7 @@
 
       <c:if test="${AMIP.curPage ne AMIP.totalPage }">
       <li>
-         <a href="/admin/memberinfo?curPage=${AMIP.curPage+1 }">
+         <a href="/admin/memberinfo?curPage=${AMIP.curPage+1 }&member_idx=${member.member_idx }">
          <span>&raquo;</span>
       </a>
       </li>
