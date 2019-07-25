@@ -8,10 +8,13 @@ public class NoticeReply {
 	private int member_idx;
 	private String reply;
 	private Date writtendate;
+	private String writer;
+	private int step;
+	
 	@Override
 	public String toString() {
 		return "NoticeReply [reply_idx=" + reply_idx + ", notice_idx=" + notice_idx + ", member_idx=" + member_idx
-				+ ", reply=" + reply + ", writtendate=" + writtendate + "]";
+				+ ", reply=" + reply + ", writtendate=" + writtendate + ", writer=" + writer + ", step=" + step + "]";
 	}
 	public int getReply_idx() {
 		return reply_idx;
@@ -43,5 +46,21 @@ public class NoticeReply {
 	public void setWrittendate(Date writtendate) {
 		this.writtendate = writtendate;
 	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public int getStep() {
+		return step;
+	}
+	public void setStep(int step) {
+		this.step = step;
+	}
+	
+	
+	
+	
 	
 }

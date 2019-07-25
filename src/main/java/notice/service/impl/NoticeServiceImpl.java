@@ -16,10 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 import dto.Member;
 import dto.Notice;
 import dto.NoticeFile;
+import dto.NoticeReply;
+import freemarker.core.Comment;
 import member.dao.face.MemberDao;
 import member.service.face.MemberService;
 import notice.dao.face.NoticeDao;
 import notice.service.face.NoticeService;
+import reply.dao.face.ReplyDao;
 import util.NoticePaging;
 
 @Service
@@ -30,6 +33,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Autowired MemberDao memberDao;
 	@Autowired ServletContext context;
 	@Autowired MemberService memberService;
+	@Autowired ReplyDao replyDao;
 
 	
 	
@@ -93,6 +97,9 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		//외래키인 member_idx 입력
 		notice.setMember_idx(member.getMember_idx());
+		//닉네임 입력
+		notice.setWriter(member.getNickname());
+		
 		
 		System.out.println("notice : "+notice);
 		
@@ -164,6 +171,39 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		return noticeFile;
 
+	}
+
+
+
+	@Override
+	public List<NoticeReply> getCommentList(Notice notice) {
+		List<NoticeReply> commentList = replyDao.selectComment(notice);
+		
+		return commentList;
+	
+	}
+
+
+
+	
+	@Override
+	public void insertComment(NoticeReply comment) {
+
+		replyDao.insertNoticeReply(comment);
+		
+	}
+
+
+
+	@Override
+	public boolean deleteComment(NoticeReply noticeReply) {
+		replyDao.deleteComment(noticeReply); 
+		
+		if( replyDao.countComment(noticeReply) > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	

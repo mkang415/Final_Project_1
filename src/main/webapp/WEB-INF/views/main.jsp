@@ -21,7 +21,7 @@
     <link rel="stylesheet" href=/resources/assets/css/swiper.css>
     
     <!-- 파비콘 -->
-    <link rel="shortcut icon" href="/resources/assets/icons/favicon.ico">
+<!--     <link rel="shortcut icon" href="/resources/assets/icons/favicon.ico"> -->
     <link rel="apple-touch-icon-precomposed" href="/resources/assets/icons/favicon_72.png" />
     <link rel="apple-touch-icon-precomposed" sizes="96x96" href="/resources/assets/icons/favicon_96.png" />
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/resources/assets/icons/favicon_144.png" />
