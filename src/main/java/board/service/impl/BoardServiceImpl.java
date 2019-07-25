@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import board.dao.face.BoardDao;
+import board.dao.face.RecommendDao;
 import board.service.face.BoardService;
 import dto.Board;
 import dto.Image;
@@ -23,6 +24,7 @@ import util.BoardPaging;
 public class BoardServiceImpl implements BoardService{
 
 	@Autowired BoardDao boardDao;
+	@Autowired RecommendDao recommendDao;
 
 	//	자유게시판 페이징 처리
 	@Override
@@ -137,15 +139,38 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.getUpdate(brdidx);
 	}
 
+	//	게시글 수정
 	@Override
 	public void setUpdate(Board board) {
 		boardDao.setUpdate(board);
 	}
 
+	//	게시글 삭제
 	@Override
 	public void delete(int brdidx) {
 		boardDao.delete(brdidx);
 		
+	}
+
+	//	추천
+	@Override
+	public boolean recommend(Board board) {
+		if(recommendDao.selectCountRecommend(board)>0) {
+			recommendDao.deleteRecommend(board);
+			return false;
+		} else {
+			recommendDao.insertRecommend(board);
+			return true;
+		}
+	}
+
+	//	추천 수 가져오기
+	@Override
+	public int getRecommend(Board board) {
+		int recommend = recommendDao.selectTotalRecommend(board);
+		board.setRecommend(recommend);
+		boardDao.setRecommend(board);
+		return recommend;
 	}
 
 }

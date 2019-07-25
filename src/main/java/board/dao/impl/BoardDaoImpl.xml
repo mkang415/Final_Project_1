@@ -6,10 +6,6 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="board.dao.face.BoardDao">
-	<!-- <select id="test"
-	 resultType="dto.BoardReply">
-		select * from board_reply
-	</select> -->
 	
 	<!-- 전체 자유게시판 글 개수 -->
 	<select id="freeCntAll"
@@ -89,4 +85,11 @@
 	  	delete board
 	  	where board_idx= #{board_idx}
 	  </delete>
+	  
+	  <!-- 추천 수 저장 -->
+	  <update id="setRecommend"
+	   parameterType="dto.Board">
+	  	update board set recommend = #{recommend}
+	  	where board_idx = #{board_idx}
+	  </update>
 </mapper>

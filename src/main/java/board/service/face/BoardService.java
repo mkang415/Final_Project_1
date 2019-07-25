@@ -32,4 +32,8 @@ public interface BoardService {
 
 	void delete(int brdidx);
 
+	boolean recommend(Board board);
+
+	int getRecommend(Board board);
+
 }

@@ -1,5 +1,7 @@
 package board.controller;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import board.service.face.BoardService;
 import dto.Board;
+import reply.service.face.ReplyService;
 import util.BoardPaging;
 
 @Controller
@@ -28,8 +31,8 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Autowired ServletContext context;
-	
 	@Autowired BoardService boardService;
+	@Autowired ReplyService replyService;
 	
 	//	자유 게시판 게시글 리스트
 	@RequestMapping(value = "/board/freelist", method = RequestMethod.GET)
@@ -38,9 +41,13 @@ public class BoardController {
 			int curPage,
 			Model model) {
 		logger.info("자유 게시판");
+		//	게시판 리스트 페이징
 		BoardPaging boardPaging = boardService.getFreePage(curPage);
+		
+		//	게시판 리스트 저장
 		List<HashMap<String, Object>> freeBoardList = boardService.getFreeList(boardPaging);
 		
+		//	페이징 및 리스트 전달
 		model.addAttribute("paging", boardPaging);
 		model.addAttribute("freeList", freeBoardList);	
 	}
@@ -54,6 +61,7 @@ public class BoardController {
 		
 		logger.info("게시글 : "+brdidx);
 		
+		//	게시글 번호로 게시글 검색 후 저장
 		Board freeView = boardService.freeview(brdidx, session);
 		
 		//	게시글 데이터 전달.
@@ -66,8 +74,11 @@ public class BoardController {
 		//	작성자인지 확인하여 전달.
 		model.addAttribute("checkId", checkId);
 		
-		//	댓글 리스트 전달
+		//	게시글에 달린 댓글 리스트 저장
+		List<HashMap<String, Object>> replyList = replyService.getReplyList(brdidx);
 		
+		//	댓글 리스트 전달
+		model.addAttribute("replyList", replyList);
 	}
 	
 	//	글쓰기 폼 띄우기
@@ -118,7 +129,6 @@ public class BoardController {
     }
 	
 	// 작성한 글 수정
-	
 	@RequestMapping(value = "board/update", method = RequestMethod.GET)
 	public void boardUpdate(
 			int brdidx,
@@ -130,7 +140,6 @@ public class BoardController {
 	}
 
 	//	수정한 내용 저장
-	
 	@RequestMapping(value = "board/update", method = RequestMethod.POST)
 	public String boardUpdateProc(Board board) {
 		
@@ -152,7 +161,6 @@ public class BoardController {
 	}
 	
 	//	작성 글 삭제
-	
 	@RequestMapping(value = "/board/delete", method = RequestMethod.GET)
 	public String boardDelete(
 			int brdidx,
@@ -170,5 +178,25 @@ public class BoardController {
 		}
 		return "redirect: main";
 		
+	}
+	
+	//	게시글 추천
+	@RequestMapping(value="/board/recommend"
+			, method=RequestMethod.GET)
+	public void boardRecommend(Board board,
+			Writer writer,
+			HttpSession session) {
+		
+		// 추천 여부 판단
+		boolean result = boardService.recommend(board);
+		
+		// 추천수
+		int recommend = boardService.getRecommend(board);
+		
+		try {
+			writer.write("{\"result\":"+result+", \"recommend\":"+recommend+"}");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

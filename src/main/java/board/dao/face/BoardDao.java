@@ -27,4 +27,6 @@ public interface BoardDao {
 
 	void delete(int board_idx);
 
+	void setRecommend(Board board);
+
 }

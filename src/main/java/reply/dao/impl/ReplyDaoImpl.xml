@@ -6,7 +6,28 @@
 
 <mapper namespace="reply.dao.face.ReplyDao">
 
+	<!-- 댓글 리스트 가져오기 -->
+	<select id="getReplyList"
+ 	 parameterType="int"
+ 	 resultType="hashmap">
+		select reply_idx, board_idx, member.nickname, reply, writtendate 
+		from board_reply, member
+		where board_reply.member_idx = member.member_idx
+		and board_idx = #{board_idx}
+		order by reply_idx desc
+	</select>
 
-
-
+	<!-- 댓글 삽입 -->
+	<select id="insert"
+	 parameterType="dto.BoardReply">
+		insert into board_reply(reply_idx, board_idx, member_idx, reply)
+		values (board_reply_seq.nextval, #{board_idx}, #{member_idx}, #{reply})
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete"
+	 parameterType="int">
+		delete board_reply
+		where reply_idx = #{reply_idx}
+	</delete>
 </mapper>
