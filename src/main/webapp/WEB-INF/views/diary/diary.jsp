@@ -18,16 +18,21 @@
 window.onload = function() {
 	
 	var content = document.getElementsByClassName('content');
-	var collapseDiv = document.getElementsByClassName('collapseDiv');
+	var openDiv = document.getElementsByClassName('openDiv');
 	
 	for(var i=0; i<content.length; i++) {
-		content[i].value=i;
-		console.log(content[i].value);
-		console.log(content[i].style.height);
-		content[i].style.height = '20em';
-		collapseDiv[i].style.display = 'block';
-		
 
+		content[i].value=i;
+		openDiv[i].value=i;
+		console.log(openDiv[i].value)
+// 		console.log(content[i].value);
+// 		console.log(content[i].scrollHeight);
+		
+		if(content[i].scrollHeight>500) {
+			content[i].style.height = '20em';
+			openDiv[i].style.display = 'block';
+			
+		}
 		
 	}
 	
@@ -35,12 +40,17 @@ window.onload = function() {
 
 
 
-function clickCollapseBtn(value) {
+function clickOpenBtn(value) {
 	
 	var content = document.getElementsByClassName('content');
+	var openDiv = document.getElementsByClassName('openDiv');
 	
 	for(i=0; i<content.length; i++) {
-		content[i].style.height = '50em';
+		if(value==i) {
+		openDiv[i].style.display = 'none';
+		content[i].style.height = 'auto';
+			
+		}
 	}
 }
 
@@ -164,7 +174,7 @@ img {
 	height: 100%;
 }
 
-.collapseDiv {
+.openDiv {
 	display: none;
 	height: 2em;
 	width: 90%;
@@ -175,7 +185,7 @@ img {
 
 }
 
-.collapseBtn {
+.openBtn {
 	border-radius : 20%;
 	position: absolute;
 	width: 10%;
@@ -201,9 +211,12 @@ img {
 <div class="title"><h2>${list.title }</h2></div>
 <div class="content">${list.content }</div>
 
-<div class="collapseDiv">
-<button type="button" class="collapseBtn" onClick="clickCollapseBtn(content.value);">show all</button>
+<div class="openDiv">
+<button type="button" class="openBtn" onClick="clickOpenBtn(this.parentNode.value)">show all</button>
 </div>
+<!-- <div class="collapseDiv"> -->
+<!-- <button type="button" class="collapseBtn" onClick="clickCollapseBtn(this.parentNode.value)">show all</button> -->
+<!-- </div> -->
 
 </div>
 
