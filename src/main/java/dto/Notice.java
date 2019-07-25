@@ -8,13 +8,14 @@ public class Notice {
 	private String title;
 	private String content;
 	private int member_idx;
+	private String writer;
 	private int hit;
 	private Date writtendate;
 	
 	@Override
 	public String toString() {
 		return "Notice [notice_idx=" + notice_idx + ", title=" + title + ", content=" + content + ", member_idx="
-				+ member_idx + ", hit=" + hit + ", writtendate=" + writtendate + "]";
+				+ member_idx + ", writer=" + writer + ", hit=" + hit + ", writtendate=" + writtendate + "]";
 	}
 
 	public int getNotice_idx() {
@@ -64,6 +65,15 @@ public class Notice {
 	public void setWrittendate(Date writtendate) {
 		this.writtendate = writtendate;
 	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	
 	
 	
 	

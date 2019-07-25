@@ -1,5 +1,7 @@
 package notice.controller;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dto.Member;
 import dto.Notice;
 import dto.NoticeFile;
+import dto.NoticeReply;
 import member.service.face.MemberService;
 import notice.service.face.NoticeService;
 import util.NoticePaging;
@@ -56,6 +59,7 @@ public class NoticeController {
 
 		logger.info("공지사항 상세보기");
 
+		//공지사항 리스트 전달
 		Notice notice = noticeService.getBoardno(notice_idx);
 
 		notice  = noticeService.view(notice);
@@ -63,6 +67,14 @@ public class NoticeController {
 
 		model.addAttribute("notice",notice);
 		model.addAttribute("noticeFile",noticeFile);
+		
+		//댓글 리스트 전달
+		NoticeReply comment = new NoticeReply();
+		List<NoticeReply> commentList = noticeService.getCommentList(notice);
+		model.addAttribute("commentList", commentList);
+		
+	
+
 
 
 	}
@@ -125,5 +137,44 @@ public class NoticeController {
 
 		return mav;
 	}	
+	
+	@RequestMapping(value="/noticeReply/insert", method=RequestMethod.POST)
+	public String noticeReplyInsert( 
+			NoticeReply noticeReply) {
+
+		NoticeReply comment = noticeReply;
+		
+		noticeService.insertComment(comment);
+		
+		
+		return "redirect:"+"/notice/view?notice_idx="+comment.getNotice_idx();
+		
+
+	}
+
+	@RequestMapping(value="/noticeReply/delete", method=RequestMethod.POST)
+	public void noticeReplyDelete( 
+			NoticeReply noticeReply,
+			Writer out
+			) {
+
+			
+		boolean success = noticeService.deleteComment(noticeReply);;
+		
+		try {
+			out.append("{\"success\":"+success+"}");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+	
+		
+
+	}
+
+	
+	
 
 }

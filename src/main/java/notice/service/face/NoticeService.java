@@ -8,9 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import dto.Board;
 import dto.Notice;
 import dto.NoticeFile;
+import dto.NoticeReply;
 import util.NoticePaging;
 
 public interface NoticeService {
@@ -32,6 +32,14 @@ public interface NoticeService {
 	public NoticeFile getFile(int fileno);
 
 	public NoticeFile viewFile(Notice notice);
+
+	public List<NoticeReply> getCommentList(Notice notice);
+
+
+
+	public void insertComment(NoticeReply comment);
+
+	public boolean deleteComment(NoticeReply noticeReply);
 
 
 
