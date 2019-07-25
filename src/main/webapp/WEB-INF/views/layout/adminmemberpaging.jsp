@@ -6,7 +6,7 @@
 <div class="text-center">
    <ul class="pagination pagination-sm">
       <!-- 처음으로 가기 -->
-      <c:if test="${AMP.startPage ne 1 }">
+      <c:if test="${AMP.curPage ne 1 }">
       <li>
          <a href="/admin/member"><span>&larr;처음</span></a>
       </li>

@@ -22,22 +22,28 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public AdminBoardPaging getCurpage(int curPage) {
-		
+
 		int totalCount = adminDao.selectCntAll();
 		
 		AdminBoardPaging ABP = new AdminBoardPaging(totalCount, curPage);
 		
 		return ABP;
-		
-		// 게시판 페이징
 	}
 
 	@Override
 	public List<HashMap<String, Object>> select(AdminBoardPaging ABP) {
-	
 		return adminDao.selectAll(ABP);
-		
-		// 게시판 리스트
+	}
+
+	
+	@Override
+	public int getTotal(AdminBoardPaging search) {
+		return adminDao.countSearch(search);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getSearchPagingList(AdminBoardPaging search) {
+		return adminDao.selectPageSearch(search);
 	}
 
 
@@ -47,6 +53,13 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.select(board_idx);
 		
 		// 게시판 상세보기
+	}
+	
+	@Override
+	public void boardListDelete(String names) {
+		adminDao.deleteBoardList(names);
+		
+		// 게시판 리스트 다중삭제
 	}
 
 	@Override
@@ -101,6 +114,13 @@ public class AdminServiceImpl implements AdminService{
 		
 		//회원 상세정보 리스트 (해당 회원이 쓴 글)
 	}
+
+	
+	
+
+	
+
+	
 
 
 	

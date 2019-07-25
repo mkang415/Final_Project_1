@@ -3,8 +3,6 @@ package admin.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +26,21 @@ public class AdminController {
 	@Autowired AdminService adminService;
 	
 	@RequestMapping(value = "/admin/list", method = RequestMethod.GET)
-	public void boardList(
-			@RequestParam(defaultValue = "1")
-			int curPage ,
+	public String boardList(
+			@RequestParam(defaultValue = "1") int curPage ,
+			AdminBoardPaging search,
 			Model model) {
 		
-		AdminBoardPaging ABP = adminService.getCurpage(curPage);
-		model.addAttribute("ABP", ABP);
+		int totalCount = adminService.getTotal(search); //검색어 적용 게시글 수
 		
-		List<HashMap<String, Object>> list = adminService.select(ABP);
+		AdminBoardPaging ABP = new AdminBoardPaging(totalCount, curPage);
+		ABP.setSearch(search.getSearch()); //검색어 추가
+		model.addAttribute("ABP", ABP);
+																		
+		List<HashMap<String, Object>> list = adminService.getSearchPagingList(ABP); //검색어 적용 게시글 조회
 		model.addAttribute("list", list);
 		
+		return "admin/list";
 		// 게시글 관리 페이지
 	}
 	
@@ -52,6 +54,19 @@ public class AdminController {
 		
 		// 게시글 상세보기
 	}
+	
+	@RequestMapping(value="/admin/deletelist", method=RequestMethod.POST)
+	public String deleteList(String names) {
+			
+			if(!"".equals(names)&&names != null) {
+					adminService.boardListDelete(names);
+			}
+		
+			return "redirect:/admin/list";
+			
+			// 게시글 다중삭제
+	}
+	
 	
 
 	

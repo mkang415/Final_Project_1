@@ -58,19 +58,19 @@
 	</c:forEach>
 	</table>
 
-<c:import url="/WEB-INF/views/layout/adminmemberpaging.jsp"></c:import>
+<br>
+
+
 <div id="btnBox">
+
 <a href="/main"><button>메인</button></a>
-<br>
-<br>
 
-
-
+&nbsp;&nbsp;&nbsp;&nbsp;
 
 </div>
 
 
-
+<c:import url="/WEB-INF/views/layout/adminmemberpaging.jsp"></c:import>
 
 </body>
 </html>

@@ -12,14 +12,23 @@ import util.AdminMemberPaging;
 public interface AdminDao {
 
 	int selectCntAll();
-	// 게시글 목록
-
+	
 	List<HashMap<String, Object>> selectAll(AdminBoardPaging ABP);
-	// 게시글 리스트 페이징
 
 	Board select(int board_idx);
 	// 게시글 상세보기
+	
+	void deleteBoardList(String names);
+	// 게시글 리스트에서 게시글 삭제하기
+	
+	int countSearch(AdminBoardPaging search);
+	// 검색어 적용한 게시글 수
 
+	List<HashMap<String, Object>> selectPageSearch(AdminBoardPaging search);
+	// 검색어 적용한 게시글 목록 조회
+
+	
+	
 	int selectCntAll2();
 	// 회원 목록
 
@@ -28,12 +37,19 @@ public interface AdminDao {
 
 	Member select2(int member_idx);
 	// 회원정보 상세보기
+	
+	
 
 	int selectCntAll3(int member_idx);
 	// 회원정보 상세보기 목록
 	
 	List<HashMap<String, Object>> selectAll3(Map<String, Object> map);
 	// 회원정보 상세보기 리스트 페이징
+
+	
+	
+	
+	
 	
 
 }
