@@ -8,17 +8,18 @@
 <mapper namespace="schedule.dao.face.CalendarDao">
 	
 	<select id="getCalendarList"
-	 resultType="dto.CalendarDto">
+	 resultType="dto.CalendarDto"
+	 parameterType="dto.CalendarDto">
 		select calendar_idx,  member_idx, title, content, rdate, wdate
 		from (select row_number() over(partition by substr(rdate, 1, 8) order by rdate asc) rn,
 				calendar_idx,  member_idx, title, content, rdate, wdate 
 				from calendar 
-				where member_idx=#{member_idx} and substr(rdate, 1, 8)= #{rdate}) 
+				where member_idx=#{member_idx} and substr(rdate, 1, 6)= #{rdate}) 
 		where rn between 1 and 5 
 	</select>
 	
 	
-	<insert id="calwrite"
+	<insert id="calWrite"
 	parameterType="dto.CalendarDto">
 		INSERT into calendar(calendar_idx,  member_idx, title, content, rdate, wdate)
 		VALUES (calendar_seq.nextval, #{member_idx}, #{title}, #{content}, #{rdate}, sysdate)
@@ -33,7 +34,12 @@
 		from calendar where calendar_idx = #{calendar_idx}
 	</select>
 	
+
 	
+	<delete id="calDel"
+	parameterType="java.lang.Integer">
+	DELETE FROM calendar WHERE calendar_idx=#{calendar_idx}
+	</delete>
 	
 	
 	
@@ -49,3 +55,4 @@
 	
 	
 </mapper>
+

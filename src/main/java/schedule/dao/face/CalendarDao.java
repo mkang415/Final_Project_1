@@ -7,17 +7,21 @@ import dto.CalendarDto;
 public interface CalendarDao {
 
 	//일정
-	List<CalendarDto> getCalendarList(CalendarDto caldto);
+	public List<CalendarDto> getCalendarList(CalendarDto dto);
 	
-	boolean addCalendar(CalendarDto cal);
+	public boolean addCalendar(CalendarDto caldto);
 
 	//일정 추가
-	boolean calWrite(CalendarDto dto);
+	public boolean calWrite(CalendarDto dto);
 	
 	//일정보기
-	CalendarDto calDetail(int calendar_idx);
+	public CalendarDto calDetail(int calendar_idx);
 
-	
+	//일정 삭제
+	public boolean calDelete(int calendar_idx);
+
+
+//	public CalendarDto selectCalendar_idx(CalendarDto viewcal);
 
 
 }

@@ -4,15 +4,13 @@ import java.util.Date;
 
 public class CalendarDto {
 	private int calendar_idx; //
-	private String member_idx; //회원인덱스?
+	private int member_idx; //회원인덱스?
 	private String title;	//제목
 	private String content;	//내용
 	private String rdate; //일정날짜
 	private Date wdate; //작성일날짜
 	
-	public CalendarDto() {
-		
-	}
+	public CalendarDto() {}
 	
 	
 
@@ -35,12 +33,12 @@ public class CalendarDto {
 	}
 
 
-	public String getMember_idx() {
+	public int getMember_idx() {
 		return member_idx;
 	}
 
 
-	public void setMember_idx(String member_idx) {
+	public void setMember_idx(int member_idx) {
 		this.member_idx = member_idx;
 	}
 
@@ -95,7 +93,7 @@ public class CalendarDto {
 
 
 
-	public CalendarDto(int calendar_idx, String member_idx, String title,
+	public CalendarDto(int calendar_idx, int member_idx, String title,
 			String content, String rdate, Date wdate) {
 		super();
 		this.calendar_idx = calendar_idx;
@@ -106,7 +104,7 @@ public class CalendarDto {
 		this.wdate = wdate;
 	}
 	
-	public CalendarDto(int calendar_idx, String member_idx, String title, String content, String rdate) {
+	public CalendarDto(int calendar_idx, int member_idx, String title, String content, String rdate) {
 		super();
 		this.calendar_idx = calendar_idx;
 		this.member_idx = member_idx;
@@ -115,11 +113,7 @@ public class CalendarDto {
 		this.rdate = rdate;
 	}
 
-	public CalendarDto(String member_idx, String rdate) {
-		super();
-		this.member_idx = member_idx;
-		this.rdate = rdate;
-	}
+
 
 
 
