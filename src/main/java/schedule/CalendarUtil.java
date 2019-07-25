@@ -1,5 +1,6 @@
 package schedule;
 
+import java.util.Calendar;
 import java.util.List;
 
 import dto.CalendarDto;
@@ -15,12 +16,12 @@ public class CalendarUtil {
 		return msg == null || msg.trim().equals("")?true:false;
 	}
 	
-	// 날짜를 클릭하면 그날 일정이 모두 보이는 callist.jsp로 이동
-	public String callist(int year, int month, int day) {
+	// 날짜를 클릭하면 그날 일정이 모두 보이는 caldetail로 이동
+	public String caldetail(int year, int month, int day) {
 		String s = "";
-		s += String.format("<a href='%s?year=%d&month=?d&day=%d'>",
-				"/schedule/callist", year, month, day);
-		s += String.format("%2d", day);
+		s += String.format("<a href='%s?year=%d&month=%d&day=%d'>",
+				"/schedule/caldetail", year, month, day);
+		s += String.format("%2d", day); //2자리
 		s += "</a>";
 		
 		return s;
@@ -30,10 +31,10 @@ public class CalendarUtil {
 	public String showPen(int year, int month, int day) {
 		String s = "";
 		
-		String url="calwrite";
+		String url="/schedule/calwrite";
 		String image = "<img src='/resources/img/pen.gif'>";
 		s = String.format("<a href='%s?year=%d&month=%d&day=%d'>%s</a>", 
-				"/schedule/calwrite", year, month, day, image);
+				url, year, month, day, image);
 		
 		return s;
 		
@@ -42,6 +43,14 @@ public class CalendarUtil {
 	// 01, 02, 03 ~ 09 (두글자숫자)
 	public String two(String msg) {
 		return msg.trim().length()<2?"0"+msg:msg.trim();
+	}
+	
+	//오늘날짜
+	public Calendar toCalendar(int year, int month, int day) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month-1, day);
+		return cal;
+		
 	}
 	
 	// 각 날짜 별로 테이블 생성
@@ -56,11 +65,11 @@ public class CalendarUtil {
 		for(CalendarDto dto : list) {
 			if(dto.getRdate().substring(0,8).equals(dates)) {
 				
-				s += "<tr bgcolor='green'>";
+				s += "<tr bgcolor='yellow'>";
 				s += "<td>";
 				
-				s += "<a href='caldetail?calendar_idx=" + dto.getCalendar_idx() + "'>";
-				s += "<font style='font-size:6; color:black'>";
+				s += "<a href='caldetail?seq=" + dto.getCalendar_idx() + "'>";
+				s += "<font style='font-size:8; color:black'>";
 				s += dot3(dto.getTitle());
 				s += "</font>";
 				s += "</a>";
@@ -78,8 +87,8 @@ public class CalendarUtil {
 	// 일정제목이 길면 ...처리
 	public String dot3(String msg) {
 		String s = "";
-		if(msg.length() >= 7) {
-			s = msg.substring(0,7); //임의로 7글자 까지
+		if(msg.length() >= 10) {
+			s = msg.substring(0,10); //임의로 7글자 까지
 			s += "...";
 		} else {
 			s = msg.trim();
@@ -88,7 +97,7 @@ public class CalendarUtil {
 	}
 	
 	
-	
+
 
 }
 

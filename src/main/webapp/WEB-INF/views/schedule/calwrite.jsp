@@ -16,8 +16,9 @@
 <script type="text/javascript"
  src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<h3>일정 쓰기</h3>
+<h3 style="text-align:center">▷ 일정 쓰기 ◁</h3>
 
+ 
 <% 
  String year = request.getParameter("year"); 
 String month = request.getParameter("month"); 
@@ -30,45 +31,69 @@ Calendar cal = Calendar.getInstance();
 int tyear = cal.get(Calendar.YEAR); 
 int tmonth = cal.get(Calendar.MONTH) + 1; 
 int tday = cal.get(Calendar.DATE); 
-int thour = cal.get(Calendar.HOUR_OF_DAY);
-int tmin = cal.get(Calendar.MINUTE);
  %>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+		$("#btnWrite").click(function(){
+			$("form").submit();
+		});
+		
+		
+		$("#title").focus();
+		$("#cancel").click(function(){
+			history.back(-1);
+		});
+});
+	
+
+</script>
+
+<style>
+
+.writetb {
+ text-align : center;
+}
+
+</style>
 
 <div align="center">
 
 <form action="/schedule/calwrite" method="post">
 
-<table border="1" >
-<col width="200"><col width="500">
+<table border="1" class="writetb" >
+<col width="200px"><col width="100px">
+
+<tr height="30"  valign="top">
+	<td><label>아이디</label>	${member_idx }</td>
+	<td>	<input type="hidden" name="id" value="${member_idx }">
+	</td>
+</tr>
+
 
 <tr>
-	<td>아이디</td>
-	<td>
-		${member_idx }
-		<input type="hidden" name="id" value="${member_idx }">
+	<td><label for="title">제목</label></td>
+	<td><input type="text" size="100%" name="title">
 	</td>
 </tr>
 
 <tr>
-	<td>제목</td>
+	<td><label>일정날짜</label></td>
 	<td>
-		<input type="text" size="60" name="title">
-	</td>
-</tr>
-
-<tr>
-	<td>일정</td>
-	<td>
-		<select name="year">
+<!-- 10년 전부터 5년 후 까지 보여주기 -->
+		<select name="year"> 
+		
 		<%	
-			for(int i = tyear - 5; i < tyear + 6; i++){
+			for(int i = tyear - 10; i < tyear + 6; i++){
 				%>	
 				<option <%=year.equals(i+"")?"selected='selected'":"" %>
 					value="<%=i %>"><%=i %></option>				
 				<%
 			}		
 		%>
-		</select>년	
+		
+		</select>년
 			
 		<select name="month">
 		<%	
@@ -96,16 +121,20 @@ int tmin = cal.get(Calendar.MINUTE);
 	</td>
 </tr>
 
+
+
 <tr>
-	<td>내용</td>
-	<td>
-		<textarea rows="20" cols="60" name="content"></textarea>
+	<td><label for="content">내용</label></td>
+	<td><textarea rows="20" cols="100%" name="content"></textarea>
 	</td>
 </tr>
 
 </table>
 <br><br>
-<input type="submit" value="일정쓰기">
+<button class="btn btn-primary" id="btnWrite">작성</button>
+<input type="reset" id="cancel"
+		class="btn btn-danger" value="취소"/>
+		
 </form>
 
 </div>
