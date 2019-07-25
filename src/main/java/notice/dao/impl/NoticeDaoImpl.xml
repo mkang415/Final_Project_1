@@ -7,19 +7,24 @@
 
         <mapper namespace="notice.dao.face.NoticeDao">
 
+	<resultMap type="dto.Notice" id="Notice">
+    	<result column="nickname" property="writer"/>
+    </resultMap>
+	
 		<!-- select 문 -->
        <select id="selectAll"
     		parameterType="util.NoticePaging"
-            resultType="dto.Notice">
- 
-    		SELECT * FROM (
+            resultMap="Notice">
+      		SELECT * FROM (
                 SELECT rownum rnum, B.* FROM (
-				SELECT notice_idx, title, content, member_idx, hit, writtendate FROM notice
+				SELECT notice_idx, title, content,member.nickname, hit, writtendate 
+				FROM notice, member 
+				WHERE notice.member_idx = member.member_idx
 				ORDER BY notice_idx DESC
-		 	)B
-			ORDER BY rnum
-		) notice
-		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+		 	) B
+          ORDER BY rnum  
+		)
+       WHERE rnum BETWEEN #{startNo } AND #{endNo } 
     
     </select>   
     
@@ -31,19 +36,24 @@
     		
     </select>
     
+    	
+    
         <select id="selectNoticeByNoticeno"
     		parameterType="dto.Notice"
-    		resultType="dto.Notice">
+    		resultMap="Notice">
         		SELECT  
         		
         		notice_idx, 
         		title, 
-        		content, 
-        		member_idx, 
+        		content,  
         		hit, 
-        		writtendate 
-        		FROM notice
-				WHERE notice_idx = #{notice_idx }
+        		writtendate,
+        		member.nickname
+        		 
+        		FROM notice,member
+				WHERE notice.member_idx = member.member_idx 
+				AND
+				notice_idx = #{notice_idx }
     </select>
     
         <select id="selectFilebynotice_idx"

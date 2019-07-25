@@ -6,6 +6,7 @@
 
 <mapper namespace="reply.dao.face.ReplyDao">
 
+<<<<<<< HEAD
 	<!-- 댓글 리스트 가져오기 -->
 	<select id="getReplyList"
  	 parameterType="int"
@@ -30,4 +31,71 @@
 		delete board_reply
 		where reply_idx = #{reply_idx}
 	</delete>
+=======
+	<resultMap type="dto.NoticeReply" id="NoticeReply">
+    	<result column="nickname" property="writer"/>
+    </resultMap>
+	
+<!-- 공지사항 댓글쿼리 시작 -->
+<select id="selectComment"
+		parameterType="dto.Notice"
+		resultMap="NoticeReply">
+			    SELECT * FROM (
+				SELECT rownum rnum, B.* FROM (
+				SELECT
+                        reply_idx,
+						reply,
+						notice_idx,
+						writtendate,
+						member.nickname,
+						step
+						
+					FROM notice_reply, member
+					WHERE notice_reply.member_idx = member.member_idx 
+					AND notice_idx = #{notice_idx }					
+					ORDER BY step DESC
+					) B
+				) ORDER BY rnum
+
+</select>
+
+<select id="countComment"
+		parameterType="dto.NoticeReply"
+		resultType="int">
+		
+		SELECT COUNT(*) FROM notice_reply
+		WHERE reply_idx = #{reply_idx }
+
+
+
+</select>
+
+
+
+
+<insert id="insertNoticeReply"
+		parameterType="dto.NoticeReply">
+INSERT INTO notice_reply(reply_idx, notice_idx, member_idx, reply, step )
+VALUES(notice_reply_seq.nextval,#{notice_idx },#{member_idx }, #{reply },(SELECT MAX(step)+1 FROM notice_reply ) )
+
+
+</insert>
+
+
+<delete id="deleteComment"
+		parameterType="dto.NoticeReply">
+	DELETE notice_reply
+	WHERE reply_idx = #{reply_idx } 
+
+</delete>
+
+
+
+
+
+
+<!--  공지사항 댓글쿼리 끝  -->
+
+
+>>>>>>> 6cdb5c7ff30cdd1964c9b3ae14556164ae477e13
 </mapper>

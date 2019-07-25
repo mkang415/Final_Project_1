@@ -12,7 +12,7 @@
 <style type="text/css">
 
 #btnBox {
-	position: fixed;
+	position: absolute;
 	right: 400px;
 	height: 100px;
 	margin: auto;
@@ -52,10 +52,10 @@
 
 
 
-<br><br><br>
+<br>
 
 <h1 style="text-align: center; ">작성글 목록</h1>
-
+<br>
 <table class="table table-striped" border="1" style="text-align: center;
  	width: 60%; margin-left: auto; margin-right: auto;">
 
@@ -89,6 +89,10 @@
 <c:import url="/WEB-INF/views/layout/adminmemberinfopaging.jsp"></c:import>
 <div id="btnBox">
 <a href="/admin/member"><button>목록</button></a>
+<br>
+<br>
+
+
 </div>
 
 
@@ -97,8 +101,9 @@
 
 
 
-
-
+<br>
+<br>
+<br>
 
 
 

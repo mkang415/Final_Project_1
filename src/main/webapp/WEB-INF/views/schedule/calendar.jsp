@@ -2,6 +2,7 @@
 <%@page import = "java.util.List" %>
 <%@page import="java.util.Calendar"%>
 <%@page import = "schedule.CalendarUtil" %>
+<%@page import = "schedule.controller.CalendarController" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,18 +13,16 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     
     
-    <%!
+<%!
 CalendarUtil util = new CalendarUtil();
 %>
 
 
-<h2 style="text-align:center">▷ 일정을 관리하세욥 ◁</h2>
-<br>
-
 <%
 
 Calendar cal = (Calendar)request.getAttribute("jcal");
-List<CalendarDto> flist = (List<CalendarDto>)request.getAttribute("flist");
+List<CalendarDto> list = (List<CalendarDto>)request.getAttribute("list");
+
 
 int year = cal.get(Calendar.YEAR);
 int month = cal.get(Calendar.MONTH) + 1;
@@ -60,6 +59,11 @@ List<CalendarDto> list
 컨트롤러에서 작성
 */
 %>
+
+<h2 style="text-align:center">▷ 일정을 관리하세욥 ◁</h2>
+<br>
+
+
 
 <div align="center">
 
@@ -101,8 +105,8 @@ for(int i = 1; i < dayOfWeek; i++){
 int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 for(int i = 1;i <= lastDay; i++){
 	%>
-	<td><%=util.callist(year, month, i) %>&nbsp;<%=util.showPen(year, month, i) %>
-		<%=util.makeTable(year, month, i, flist) %>		
+	<td><%=util.caldetail(year, month, i) %>&nbsp;<%=util.showPen(year, month, i) %>
+		<%=util.makeTable(year, month, i, list) %>		
 	</td>	
 	<%
 	if((i + dayOfWeek - 1) % 7 == 0 && i != lastDay){

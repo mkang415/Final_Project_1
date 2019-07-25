@@ -1,25 +1,11 @@
-<%@page import="dto.CalendarDto" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<h2>일정상세보기</h2>
 
 
-<%
-CalendarDto dto = (CalendarDto)request.getAttribute("dto");
-%>
-
-<script type="text/javascript">
-$(document).ready(function() {
-		$("#cancel").click(function(){
-			history.back(-1);
-		});
-		
-		$("#delete").remove();
-});
-</script>
 
 <table border="1">
 <col width="200"><col width="500">
@@ -48,6 +34,8 @@ $(document).ready(function() {
 
 </table>
 
-<input type="reset" id="cancel"
-		class="btn btn-danger" value="뒤로가기"/>
-<input type="button" id="delete" class="btn btn-danger" value="삭제"/>
+<!-- 버튼영역 -->
+<div class="text-center">
+<a href="/schedule/calendar"><button class="btn btn-default">목록</button></a>
+<a href="/schedult/delete?calendar_idx=${viewcal.calendar_idx}"><button class="btn btn-danger">삭제</button></a>
+</div>

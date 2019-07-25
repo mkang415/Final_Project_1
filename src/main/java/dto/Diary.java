@@ -8,6 +8,7 @@ public class Diary {
 	private String content;
 	private int member_idx;
 	private Date writtendate;
+	private int rnum;
 	
 	@Override
 	public String toString() {

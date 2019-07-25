@@ -89,7 +89,7 @@ public class DiaryServiceImpl implements DiaryService{
 	public String fileUploadForSummernote(int member_idx, int diary_idx, MultipartFile file, ServletContext context) {
 
 		//파일이 저장될 경로
-		String storedPath = context.getRealPath("resources/diaryFiles");
+		String storedPath = context.getRealPath("resources/diary/diaryFiles");
 		
 		//UUID
 		String uId = UUID.randomUUID().toString().split("-")[4];

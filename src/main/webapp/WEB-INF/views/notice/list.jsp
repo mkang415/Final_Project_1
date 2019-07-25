@@ -102,7 +102,7 @@ border-radius: 1px;
 	<tr>
 		<td>${i.notice_idx }</td>
 		<td><a href="/notice/view?notice_idx=${i.notice_idx }">${i.title }</a></td>
-		<td>${i.notice_idx }</td>
+		<td>${i.writer }</td>
 		<td>${i.hit }</td>
 	<td><fmt:formatDate value="${i.writtendate }" pattern="yyyy-MM-dd" /></td>
 
