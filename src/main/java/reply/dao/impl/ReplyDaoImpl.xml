@@ -6,7 +6,7 @@
 
 <mapper namespace="reply.dao.face.ReplyDao">
 
-<<<<<<< HEAD
+
 	<!-- 댓글 리스트 가져오기 -->
 	<select id="getReplyList"
  	 parameterType="int"
@@ -31,7 +31,7 @@
 		delete board_reply
 		where reply_idx = #{reply_idx}
 	</delete>
-=======
+
 	<resultMap type="dto.NoticeReply" id="NoticeReply">
     	<result column="nickname" property="writer"/>
     </resultMap>
@@ -96,6 +96,4 @@ VALUES(notice_reply_seq.nextval,#{notice_idx },#{member_idx }, #{reply },(SELECT
 
 <!--  공지사항 댓글쿼리 끝  -->
 
-
->>>>>>> 6cdb5c7ff30cdd1964c9b3ae14556164ae477e13
 </mapper>
