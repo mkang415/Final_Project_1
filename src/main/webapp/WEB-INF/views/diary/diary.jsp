@@ -12,6 +12,39 @@
 <title>#Diary</title>
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
+<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+
+window.onload = function() {
+	
+	var content = document.getElementsByClassName('content');
+	var collapseDiv = document.getElementsByClassName('collapseDiv');
+	
+	for(var i=0; i<content.length; i++) {
+		content[i].value=i;
+// 		console.log(content[i].height());
+		content[i].style.height = '20em';
+		collapseDiv[i].style.display = 'block';
+		
+
+		
+	}
+	
+}
+
+
+
+function clickCollapseBtn(value) {
+	
+	var content = document.getElementsByClassName('content');
+	
+	for(i=0; i<content.length; i++) {
+		content[i].style.height = '50em';
+	}
+}
+
+</script>
+
 
 <style type="text/css">
 
@@ -27,7 +60,7 @@ body, html {
 	padding-top: 50px;
 	border: 0;
 /* 	background: #E3CEF6; */
-	background-image: url('resources/diary/img/bg.jpg');
+ 	background-image: url('resources/diary/img/bg.jpg');
 	min-height: 100%;
 }
 
@@ -48,10 +81,12 @@ body, html {
 }
 
 .content {
+	height: none;
 	min-height: 3em;
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-bottom: 50px;
+	overflow: hidden;
 }
 
 .title {
@@ -128,6 +163,25 @@ img {
 	height: 100%;
 }
 
+.collapseDiv {
+	display: none;
+	height: 2em;
+	width: 90%;
+	bottom: 1.8em;
+	position: absolute;
+	box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.8);
+	align: center;
+
+}
+
+.collapseBtn {
+	border-radius : 20%;
+	position: absolute;
+	width: 10%;
+	bottom: 0;
+	left: 45%;
+}
+
 </style>
 
 </head>
@@ -145,6 +199,11 @@ img {
 
 <div class="title"><h2>${list.title }</h2></div>
 <div class="content">${list.content }</div>
+
+<div class="collapseDiv">
+<button type="button" class="collapseBtn" onClick="clickCollapseBtn(content.value);">show all</button>
+</div>
+
 </div>
 
 <div align="center">
@@ -159,7 +218,6 @@ img {
 </div>
 
 </div>
-
 
 </body>
 </html>
