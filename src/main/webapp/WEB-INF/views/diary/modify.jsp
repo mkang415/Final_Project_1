@@ -90,7 +90,7 @@ $(document).ready(function() {
 //                 var image = $('<img>').attr('src', data);
 //                 $('#summernote').summernote("insertNode", image[0]);
           		$(el).summernote('editor.insertImage', data);
-          		$("#imageBoard > ul").append('<li><img src="'+data+'" width="480" height="auto"/></li>');
+          		$("#imageBoard > ul").append('<li><img src="'+data+'" width="480px" height="auto"/></li>');
         	}
       	});
     }
