@@ -14,42 +14,33 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<style type="text/css">
+<% Boolean result = (Boolean)request.getAttribute("result"); %>
 
-table, th, td {
-	border: 1px solid #ccc;
-	border-collapse: collapse;
-}
-
-table {
-	width: 80%
-}
-</style>
 <script type="text/javascript">
 $(document).ready(function() {
-	// 추천버튼 초기화
-	if(${recommend == true}) {
+	
+	//	추천버튼 초기화
+	if(${result==true}) {
 		$("#btnRecommend")
 			.toggleClass("btn-danger")
 			.text("추천 취소");
-	} else {
-		$("#btnRecommend")
+	}else{
+		$("btnRecommend")
 			.toggleClass("btn-primary")
 			.text("추천");
 	}
 	
-	// 추천 수행
-	$("#btnRecommend").click(function() {
-		
+	//	추천 수행
+	$("#btnRecommend").click(function(){
 		$.ajax({
-			type: "get"
-			, url: "/board/recommend"
-			, dataType: "json"
-			, data: {
-				member_idx: '${sessionScope.member_idx }'
-				, board_idx: '${freeView.getBoard_idx() }'
-			}
-			, success: function(data) {
+			type: "get",
+			url: "/board/recommend",
+			dataType: "json",
+			data: {
+				member_idx: '${sessionScope.member_idx}',
+				board_idx: '${freeView.getBoard_idx()}'
+			},
+			success: function(data) {
 				console.log(data);
 				if(data.result) {
 					$("#btnRecommend")
@@ -63,18 +54,34 @@ $(document).ready(function() {
 						.toggleClass("btn-primary");
 				}
 				$("#recommend").text(data.recommend);
-			}
-			, error: function(e) {
+			},
+			error: function(e) {
 				console.log(e.responseText);
 			}
 		});
-	});	
+	});
 });
-
 </script>
+
+<style type="text/css">
+
+table, th, td {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+}
+
+table {
+	width: 80%
+}
+</style>
+
 </head>
 <body>
-<h1>자유 게시판 게시글</h1>
+<c:choose>
+	<c:when test="${freeView.getDivide() eq 1}">자유 게시판</c:when>
+	<c:when test="${freeView.getDivide() eq 2}">후기 게시판</c:when>
+	<c:when test="${freeView.getDivide() eq 3}">사진 게시판</c:when>
+</c:choose>
 <hr>
 <div>
 <table class="table table-striped table hover table-condensed">

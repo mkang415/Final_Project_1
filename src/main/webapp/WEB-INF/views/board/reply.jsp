@@ -133,19 +133,5 @@ function getCommentList(){
 </div>
 
  
-<script>
- 
-/**
- * 초기 페이지 로딩시 댓글 불러오기
- */
-
- 
-/**
- * 댓글 불러오기(Ajax)
- */
-
- 
-</script>
- 
 </body>
 </html>

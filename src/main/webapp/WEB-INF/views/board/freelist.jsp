@@ -27,6 +27,14 @@ table, th, tr {
 	border-right: 1px solid #eee;
 }
 </style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#btnSearch").click(function() {
+		location.href="/board/freelist?search="+$("#search").val();
+	});
+});
+</script>
 </head>
 <body>
 <h1>게시판 리스트</h1>
@@ -43,20 +51,26 @@ table, th, tr {
 <c:forEach items="${freeList}" var = "i">
 	<tr>
 		<td>${i.RECOMMEND}</td>
-		<td><a href="/board/freeview?brdidx=${i.BOARD_IDX}">${i.TITLE}</a></td>
+		<td><a href="/board/view?brdidx=${i.BOARD_IDX}">${i.TITLE}</a></td>
 		<td>${i.NICKNAME}</td>
 		<td>${i.HIT}</td>
 		<td><fmt:formatDate value="${i.WRITTENDATE}" pattern="yyyy-MM-dd" /></td>
 	</tr>
 </c:forEach>
 </table>
-
 <c:import url="/WEB-INF/views/layout/freePaging.jsp"></c:import>
 
+<div>
 <c:if test="${login }">
 ${nick }<br>
 <button type="button" onclick="location.href='/board/write?divide=1'">글쓰기</button>
 </c:if>
 <button type="button" onclick="location.href='/main'">메인</button>
+</div>
+
+<div class="form-inline text-center">
+	<input class="form-control" type="text" id="search" />
+	<button id="btnSearch" class="btn">검색</button>
+</div> 
 </body>
 </html>
