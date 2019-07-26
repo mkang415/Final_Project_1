@@ -31,4 +31,7 @@ public interface DiaryDao {
 	public Diary getDiary(int diary_idx);
 	
 	public void updateDiary(Map<String, Object> map);
+	
+	public void insertDiaryFileTemp(Diary diary);
+	
 }

@@ -27,4 +27,8 @@ public interface DiaryService {
 	public void delete(int diary_idx);
 	
 	public void modify(int diary_idx, Diary diary);
+	
+	public int diaryChk(int member_idx);
+	
+	public void insertDiaryFileTemp(Diary diary);
 }
