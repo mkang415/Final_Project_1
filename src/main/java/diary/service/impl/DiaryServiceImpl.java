@@ -153,6 +153,19 @@ public class DiaryServiceImpl implements DiaryService{
 		return diaryDao.getDiary(diary_idx);
 	}
 
+	@Override
+	public int diaryChk(int member_idx) {
+
+		return diaryDao.selectCntAll(member_idx);
+		
+	}
+
+	@Override
+	public void insertDiaryFileTemp(Diary diary) {
+
+		diaryDao.insertDiaryFileTemp(diary);
+	}
+
 
 
 

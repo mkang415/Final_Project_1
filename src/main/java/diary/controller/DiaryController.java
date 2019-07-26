@@ -43,6 +43,18 @@ public class DiaryController {
 		
 		int member_idx = diaryService.getMemberIdx(id);
 		
+		if(diaryService.diaryChk(member_idx)==0) {
+			
+			Diary diary = new Diary();
+			
+			diary.setMember_idx(member_idx);
+			diary.setTitle("fileDBtemp");
+			diary.setContent("fileDBtemp");
+			
+			diaryService.insertDiary(member_idx, diary);
+			
+		}
+		
 		DiaryPaging paging = diaryService.getCurPage(member_idx, param);
 		
 		List<Diary> diaryList = diaryService.getDiaries(member_idx, paging);

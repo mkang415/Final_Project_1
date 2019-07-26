@@ -19,11 +19,13 @@ window.onload = function() {
 	
 	var content = document.getElementsByClassName('content');
 	var openDiv = document.getElementsByClassName('openDiv');
+	var collapseDiv = document.getElementsByClassName('collapseDiv');
 	
 	for(var i=0; i<content.length; i++) {
 
 		content[i].value=i;
 		openDiv[i].value=i;
+		collapseDiv[i].value=i;
 		console.log(openDiv[i].value)
 // 		console.log(content[i].value);
 // 		console.log(content[i].scrollHeight);
@@ -44,14 +46,33 @@ function clickOpenBtn(value) {
 	
 	var content = document.getElementsByClassName('content');
 	var openDiv = document.getElementsByClassName('openDiv');
+	var collapseDiv = document.getElementsByClassName('collapseDiv');
 	
 	for(i=0; i<content.length; i++) {
 		if(value==i) {
 		openDiv[i].style.display = 'none';
+		collapseDiv[i].style.display = 'block';
 		content[i].style.height = 'auto';
 			
 		}
 	}
+}
+
+function clickCollapseBtn(value) {
+	
+	var content = document.getElementsByClassName('content');
+	var openDiv = document.getElementsByClassName('openDiv');
+	var collapseDiv = document.getElementsByClassName('collapseDiv');
+	
+	for(i=0; i<content.length; i++) {
+		if(value==i) {
+		openDiv[i].style.display = 'block';
+		collapseDiv[i].style.display = 'none';
+		content[i].style.height = '20em';
+		
+		}
+	}
+	
 }
 
 </script>
@@ -166,6 +187,8 @@ img {
 	width: 64px;
 	background: white;
 	box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.9);
+	
+	cursor: pointer;
 }
 
 #write img {
@@ -177,20 +200,45 @@ img {
 .openDiv {
 	display: none;
 	height: 2em;
-	width: 90%;
+	width: 92%;
 	bottom: 1.8em;
 	position: absolute;
-	box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.8);
+	box-shadow: inset 0px -20px 20px -5px rgba(255, 255, 255, 1);
 	align: center;
 
 }
 
 .openBtn {
-	border-radius : 20%;
+	border-radius : 28px;
 	position: absolute;
-	width: 10%;
-	bottom: 0;
+/* 	width: 10%; */
+	bottom: 0.7em;
 	left: 45%;
+	background-color: rgb(81, 81, 81);
+	border: none;
+	color: white;
+}
+
+.collapseDiv {
+	display: none;
+	height: 2em;
+	width: 92%;
+	bottom: 1.8em;
+	position: absolute;
+	box-shadow: inset 0px -20px 50px 0px rgba(255, 255, 255, 1);
+	align: center;
+
+}
+
+.collapseBtn {
+	border-radius : 28px;
+	position: absolute;
+/* 	width: 10%; */
+	bottom: 0.7em;
+	left: 45%;
+	background-color: rgb(81, 81, 81);
+	border: none;
+	color: white;
 }
 
 </style>
@@ -214,9 +262,9 @@ img {
 <div class="openDiv">
 <button type="button" class="openBtn" onClick="clickOpenBtn(this.parentNode.value)">show all</button>
 </div>
-<!-- <div class="collapseDiv"> -->
-<!-- <button type="button" class="collapseBtn" onClick="clickCollapseBtn(this.parentNode.value)">show all</button> -->
-<!-- </div> -->
+<div class="collapseDiv">
+<button type="button" class="collapseBtn" onClick="clickCollapseBtn(this.parentNode.value)">collapse</button>
+</div>
 
 </div>
 

@@ -23,7 +23,7 @@
 				SELECT diary_idx, title, content, member_idx, writtendate FROM diary
 				WHERE member_idx=#{member_idx}
 				ORDER BY diary_idx DESC
-			)D 
+			)D WHERE NOT title='fileDBtemp'
 		) WHERE RNUM BETWEEN #{paging.startNo} AND #{paging.endNo}
 		
 	</select>
@@ -71,5 +71,9 @@
 		UPDATE DIARY
 		SET title = #{diary.title}, content = #{diary.content} WHERE diary_idx = #{diary_idx}
 	</update>
+	<insert id="insertDiaryFileTemp" parameterType="dto.Diary">
+		INSERT INTO DIARY(diary_idx, title, content, member_idx, writtendate)
+		VALUES(0, #{diary.title}, #{diary.content}, #{member_idx}, sysdate)
+	</insert>
 	
 </mapper>
