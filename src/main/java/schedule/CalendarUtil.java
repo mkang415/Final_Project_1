@@ -12,6 +12,7 @@ public class CalendarUtil {
 	}
 	
 	//nvl 함수
+	//null값 또는 공백은 잘라낸다
 	public boolean nvl(String msg) {
 		return msg == null || msg.trim().equals("")?true:false;
 	}
@@ -96,6 +97,20 @@ public class CalendarUtil {
 		return s;
 	}
 	
+	
+	public String two(int tt) {
+		return (tt+"").length()>1?(tt+""):"0"+tt;
+	}
+	
+	
+	public String yyyymm(int year, int month) {
+		return ""+year+two(month);
+	}
+	
+	public String yyyymmdd(int year, int month, int day) {
+		return yyyymm(year,month)+two(day);
+	}
+
 	
 
 

@@ -115,9 +115,10 @@ public class CalendarDto {
 
 
 
-
-
-
-
+	public CalendarDto( int member_idx, String rdate) {
+		super();
+		this.member_idx = member_idx;
+		this.rdate = rdate;
+	}
 	
 }
