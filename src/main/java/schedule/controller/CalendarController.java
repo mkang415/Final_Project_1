@@ -1,7 +1,6 @@
 package schedule.controller;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,8 +85,8 @@ public class CalendarController {
 		
 		//rdate에 넣기
 		dto = new CalendarDto(idx, yyyymm);
-		logger.info(tostring(yyyymm));
-
+		logger.info(yyyymm);
+		
 		//DB처리
 		List<CalendarDto> list = CalendarService.getCalendarList(dto);
 		
@@ -105,10 +104,6 @@ public class CalendarController {
 		return "/schedule/calendar";
 	}
 	
-	private String tostring(String yymmmm) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	//일정 추가
 	@RequestMapping (value = "/schedule/calwrite", method= RequestMethod.GET)
@@ -130,7 +125,7 @@ public class CalendarController {
 //		if(req.getSession().getAttribute("login")==null) {
 //		return "/login";
 //	}
-		logger.info(dto.toString());
+//		logger.info(dto.toString());
 		
 		CalendarService.calWrite(dto);
 		
