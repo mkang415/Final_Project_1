@@ -9,7 +9,7 @@ import util.BoardPaging;
 
 public interface BoardDao {
 
-	int freeCntAll();
+	int freeCnt(BoardPaging search);
 
 	List<HashMap<String, Object>> getFreeList(BoardPaging boardPaging);
 
@@ -28,5 +28,9 @@ public interface BoardDao {
 	void delete(int board_idx);
 
 	void setRecommend(Board board);
+
+	int epilCnt(BoardPaging search);
+
+	List<HashMap<String, Object>> getEpilList(BoardPaging boardPaging);
 
 }

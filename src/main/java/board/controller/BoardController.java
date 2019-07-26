@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import board.service.face.BoardService;
 import dto.Board;
-import reply.service.face.ReplyService;
 import util.BoardPaging;
 
 @Controller
@@ -32,29 +32,54 @@ public class BoardController {
 	
 	@Autowired ServletContext context;
 	@Autowired BoardService boardService;
-	@Autowired ReplyService replyService;
 	
 	//	자유 게시판 게시글 리스트
 	@RequestMapping(value = "/board/freelist", method = RequestMethod.GET)
 	public void freeList (
 			@RequestParam(defaultValue = "1")
 			int curPage,
+			BoardPaging search,
 			Model model) {
-		logger.info("자유 게시판");
+		
 		//	게시판 리스트 페이징
-		BoardPaging boardPaging = boardService.getFreePage(curPage);
+		BoardPaging boardPaging = boardService.getFreePage(curPage, search);
+		
+		//	검색어 추가
+		boardPaging.setSearch(search.getSearch());
 		
 		//	게시판 리스트 저장
 		List<HashMap<String, Object>> freeBoardList = boardService.getFreeList(boardPaging);
 		
 		//	페이징 및 리스트 전달
-		model.addAttribute("paging", boardPaging);
+		model.addAttribute("freePaging", boardPaging);
 		model.addAttribute("freeList", freeBoardList);	
 	}
 	
-	//	자유 게시판 게시글
-	@RequestMapping(value = "/board/freeview", method = RequestMethod.GET)
-	public void freeView (
+//	후기 게시판 게시글 리스트
+	@RequestMapping(value = "/board/epillist", method = RequestMethod.GET)
+	public void epilList (
+			@RequestParam(defaultValue = "1")
+			int curPage,
+			BoardPaging search,
+			Model model) {
+		
+		//	게시판 리스트 페이징
+		BoardPaging boardPaging = boardService.getEpilPage(curPage, search);
+		
+		//	검색어 추가
+		boardPaging.setSearch(search.getSearch());
+		
+		//	게시판 리스트 저장
+		List<HashMap<String, Object>> epilBoardList = boardService.getEpilList(boardPaging);
+		
+		//	페이징 및 리스트 전달
+		model.addAttribute("epilPaging", boardPaging);
+		model.addAttribute("epilList", epilBoardList);	
+	}
+	
+	//	게시판 게시글
+	@RequestMapping(value = "/board/view", method = RequestMethod.GET)
+	public void view (
 			int brdidx,
 			HttpSession session,
 			Model model) {
@@ -74,11 +99,15 @@ public class BoardController {
 		//	작성자인지 확인하여 전달.
 		model.addAttribute("checkId", checkId);
 		
-		//	게시글에 달린 댓글 리스트 저장
-		List<HashMap<String, Object>> replyList = replyService.getReplyList(brdidx);
+		if(checkId) {
+			Board board = new Board();
+			board.setBoard_idx(brdidx);
+			board.setMember_idx((int)session.getAttribute("member_idx"));
+			// 추천 여부 판단
+			boolean result = boardService.recommend(board);
 		
-		//	댓글 리스트 전달
-		model.addAttribute("replyList", replyList);
+			model.addAttribute("result", result);
+		}
 	}
 	
 	//	글쓰기 폼 띄우기
@@ -102,15 +131,7 @@ public class BoardController {
 		logger.info("작성 글 저장");
 		boardService.write(board, session);
 		
-		if(board.getDivide()==1) {
-			return "redirect: /board/freeview?brdidx="+board.getBoard_idx();
-		} else if(board.getDivide()==2) {
-			return "redirect: /board/epilview?brdidx="+board.getBoard_idx();
-		} else if(board.getDivide()==3) {
-			return "redirect: /board/photoview?brdidx="+board.getBoard_idx();
-		}
-		
-		return "redirect: /board/freelist";
+		return "redirect: /board/view?brdidx="+board.getBoard_idx();
 	}
 	
 	//	이미지 업로드 처리
@@ -149,15 +170,7 @@ public class BoardController {
 		board.setTitle(title);
 		boardService.setUpdate(board);
 		
-		if(board.getDivide()==1) {
-			return "redirect: /board/freeview?brdidx="+board.getBoard_idx();
-		} else if(board.getDivide()==2) {
-			return "redirect: /board/epilview?brdidx="+board.getBoard_idx();
-		} else if(board.getDivide()==3) {
-			return "redirect: /board/photoview?brdidx="+board.getBoard_idx();
-		}
-		
-		return "redirect: /board/freelist";
+		return "redirect: /board/view?brdidx="+board.getBoard_idx();
 	}
 	
 	//	작성 글 삭제
@@ -181,8 +194,7 @@ public class BoardController {
 	}
 	
 	//	게시글 추천
-	@RequestMapping(value="/board/recommend"
-			, method=RequestMethod.GET)
+	@RequestMapping(value="/board/recommend", method=RequestMethod.GET)
 	public void boardRecommend(Board board,
 			Writer writer,
 			HttpSession session) {

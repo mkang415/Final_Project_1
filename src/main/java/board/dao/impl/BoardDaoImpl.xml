@@ -7,11 +7,15 @@
 
 <mapper namespace="board.dao.face.BoardDao">
 	
-	<!-- 전체 자유게시판 글 개수 -->
-	<select id="freeCntAll"
+	<!-- 자유게시판 글 개수 -->
+	<select id="freeCnt"
+	 parameterType="util.BoardPaging"
 	 resultType="int">
 		select count(*) from board 
-		where divide = 1
+		where divide = 1 
+		<if test="search != null and search !=''">
+			and title like '%' || #{search} || '%'
+		</if>
 	</select>
 	
 	<!-- 자유게시판 리스트 가져오기 -->
@@ -22,8 +26,40 @@
 			select rownum rnum, B.* from (
 				select board_idx, recommend, title, member.nickname, hit, writtendate
 				from board, member
-				where board.member_idx = member.member_idx
-				and divide = 1 order by board_idx desc
+				where board.member_idx = member.member_idx and divide = 1 
+				<if test="search != null and search != ''">
+	 				AND title LIKE '%' || #{search } || '%'
+	 			</if>
+				order by board_idx desc
+			) B order by rnum
+		) board
+		where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<!-- 후기게시판 글 개수 -->
+	<select id="epilCnt"
+	 parameterType="util.BoardPaging"
+	 resultType="int">
+		select count(*) from board 
+		where divide = 2 
+		<if test="search != null and search !=''">
+			and title like '%' || #{search} || '%'
+		</if>
+	</select>
+	
+	<!-- 자유게시판 리스트 가져오기 -->
+	<select id="getEpilList"
+	 parameterType="util.BoardPaging"
+	 resultType="hashmap">
+		select * from (
+			select rownum rnum, B.* from (
+				select board_idx, recommend, title, member.nickname, hit, writtendate
+				from board, member
+				where board.member_idx = member.member_idx and divide = 2 
+				<if test="search != null and search != ''">
+	 				AND title LIKE '%' || #{search } || '%'
+	 			</if>
+				order by board_idx desc
 			) B order by rnum
 		) board
 		where rnum between #{startNo} and #{endNo}

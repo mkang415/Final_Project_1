@@ -14,7 +14,7 @@ import util.BoardPaging;
 
 public interface BoardService {
 
-	BoardPaging getFreePage(int curPage);
+	BoardPaging getFreePage(int curPage, BoardPaging search);
 
 	List<HashMap<String, Object>> getFreeList(BoardPaging boardPaging);
 
@@ -35,5 +35,9 @@ public interface BoardService {
 	boolean recommend(Board board);
 
 	int getRecommend(Board board);
+
+	BoardPaging getEpilPage(int curPage, BoardPaging search);
+
+	List<HashMap<String, Object>> getEpilList(BoardPaging boardPaging);
 
 }

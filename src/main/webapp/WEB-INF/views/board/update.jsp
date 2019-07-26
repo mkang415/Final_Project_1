@@ -60,17 +60,7 @@
 	<td></td>
 	<td>
 		<input type="submit" value="수정"/>
-		<c:choose>
-			<c:when test="${board.divide==1 }">
-				<button type="button" onclick="location.href='/board/freeview?brdidx=${board.board_idx}'">취소</button>
-			</c:when>
-			<c:when test="${board.divide==2 }">
-				<button type="button" onclick="location.href='/board/epilview?brdidx=${board.board_idx}'">취소</button>
-			</c:when>
-			<c:when test="${board.divide==3 }">
-				<button type="button" onclick="location.href='/board/photoview?brdidx=${board.board_idx}'">취소</button>
-			</c:when>
-		</c:choose>
+		<button type="button" onclick="location.href='/board/view?brdidx=${board.board_idx}'">취소</button>
 	</td>
 </tr>
 </table>
