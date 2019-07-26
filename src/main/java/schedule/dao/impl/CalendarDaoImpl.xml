@@ -8,8 +8,7 @@
 <mapper namespace="schedule.dao.face.CalendarDao">
 	
 	<select id="getCalendarList"
-	 resultType="dto.CalendarDto"
-	 parameterType="dto.CalendarDto">
+	 resultType="dto.CalendarDto">
 		select calendar_idx,  member_idx, title, content, rdate, wdate
 		from (select row_number() over(partition by substr(rdate, 1, 8) order by rdate asc) rn,
 				calendar_idx,  member_idx, title, content, rdate, wdate 
@@ -19,8 +18,7 @@
 	</select>
 	
 	
-	<insert id="calWrite"
-	parameterType="dto.CalendarDto">
+	<insert id="calWrite">
 		INSERT into calendar(calendar_idx,  member_idx, title, content, rdate, wdate)
 		VALUES (calendar_seq.nextval, #{member_idx}, #{title}, #{content}, #{rdate}, sysdate)
 	</insert>

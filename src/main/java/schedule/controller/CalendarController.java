@@ -45,9 +45,12 @@ public class CalendarController {
 		
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.DATE, 1); //1일
+		cal.get(Calendar.YEAR);
+		cal.get(Calendar.MONTH);
 		
 		String syear = req.getParameter("year");
 		String smonth = req.getParameter("month");
+		String sdate = req.getParameter("date");
 		
 		int year = cal.get(Calendar.YEAR);
 		if(util.nvl(syear) == false){	// 넘어온 파라메터가 있음
@@ -57,6 +60,11 @@ public class CalendarController {
 		int month = cal.get(Calendar.MONTH) + 1;
 		if(util.nvl(smonth) == false){
 			month = Integer.parseInt(smonth);
+		}
+		
+		int date = cal.get(Calendar.DATE);
+		if(util.nvl(sdate) == false ) {
+			date = Integer.parseInt(sdate);
 		}
 		
 		if(month < 1){
@@ -70,13 +78,16 @@ public class CalendarController {
 		
 		cal.set(year, month-1 , 1);
 		
-		String yymmmm = year + "" + month;
+		
+		
+		
+		String yyyymm = util.yyyymm(year, month);
 		int idx = cal.get(dto.getMember_idx());
 		
-		
 		//rdate에 넣기
-		dto = new CalendarDto();
-		
+		dto = new CalendarDto(idx, yyyymm);
+		logger.info(tostring(yyyymm));
+
 		//DB처리
 		List<CalendarDto> list = CalendarService.getCalendarList(dto);
 		
@@ -94,6 +105,11 @@ public class CalendarController {
 		return "/schedule/calendar";
 	}
 	
+	private String tostring(String yymmmm) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	//일정 추가
 	@RequestMapping (value = "/schedule/calwrite", method= RequestMethod.GET)
 	public void write() {}	
