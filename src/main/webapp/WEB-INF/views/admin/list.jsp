@@ -88,10 +88,13 @@ function checkAll() {
 	text-align: center;
 }
 
+
+
 </style>
 
 </head>
 <body>
+
 	<h1 style="text-align: center; "><a href="/admin/list">게시판 관리</a></h1>
 	<br>
 	<br>
