@@ -14,10 +14,12 @@ public interface CalendarDao {
 	public boolean calWrite(CalendarDto dto);
 	
 	//일정보기
-	public CalendarDto calDetail(int calendar_idx);
+	public CalendarDto calDetail(CalendarDto detail);
 
 	//일정 삭제
 	public boolean calDelete(int calendar_idx);
+
+	public void calupdate(CalendarDto dto);
 
 
 //	public CalendarDto selectCalendar_idx(CalendarDto viewcal);

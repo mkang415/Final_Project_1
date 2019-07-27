@@ -69,7 +69,7 @@ public class CalendarUtil {
 				
 				s += "<tr bgcolor='#FFCA9B'>";
 				s += "<td>";
-				s += "<a href='caldetail?seq=" + dto.getCalendar_idx() + "'>";
+				s += "<a href='caldetail?calendar_idx=" + dto.getCalendar_idx() + "'>";
 				s += "<font style='font-size:15; color:black'>";
 				s += dot3(dto.getTitle());
 				s += "</font>";

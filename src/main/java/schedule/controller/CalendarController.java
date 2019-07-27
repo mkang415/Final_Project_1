@@ -142,18 +142,51 @@ public class CalendarController {
 	
 	
 	
-	//일정자세히보기
-	@RequestMapping(value = "/schedule/caldetail", method= {RequestMethod.GET, RequestMethod.POST})
+	//제목눌렀을때 일정자세히보기
+	@RequestMapping(value = "/schedule/caldetail", method= RequestMethod.GET)
 	public String caldetail (
+			CalendarDto detail,
 			Model model,
-			int calendar_idx
+			HttpServletRequest req
 			) throws Exception {
 		
-		CalendarDto dto = CalendarService.calDetail(calendar_idx);
-
-		model.addAttribute("dto", dto);
+		int calendar_idx = Integer.parseInt(req.getParameter("calendar_idx"));
+		logger.info("캘린더idx" + calendar_idx+"");
+		
+		
+		logger.info("서비스넘어감"+detail.getCalendar_idx()+"");
+		detail = CalendarService.calDetail(detail);
+		
+		
+		detail.setCalendar_idx(calendar_idx);
+		logger.info(detail.toString());
+		
+		model.addAttribute("detail", detail);
 		
 		return "/schedule/caldetail";
+	}
+	
+	
+	//일정 수정
+	@RequestMapping(value = "/schedule/calupdate", method= RequestMethod.GET)
+	public String update(
+			CalendarDto dto,
+			HttpSession session,
+			Model model
+			) {
+		
+		dto = CalendarService.calDetail(dto);
+		
+		model.addAttribute("detail", dto);
+		
+				return "schedule/calupdate";
+	}
+	
+	@RequestMapping (value = "/schedule/calupdate", method=RequestMethod.POST)
+	public String updateProc (CalendarDto dto) {
+		CalendarService.calupdate(dto);
+		
+		return "redirect:/schedule/calendar";
 	}
 	
 	

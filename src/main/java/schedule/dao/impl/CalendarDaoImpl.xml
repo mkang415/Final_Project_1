@@ -27,11 +27,18 @@
 	
 	<select id="calDetail"
 	resultType="dto.CalendarDto"
-	parameterType="java.lang.Integer">
+	parameterType="dto.CalendarDto">
 		select calendar_idx,  member_idx, title, content, rdate, wdate
-		from calendar where calendar_idx = #{calendar_idx}
+		from calendar 
+		where calendar_idx=#{calendar_idx}
 	</select>
 	
+	<update id="calupdate"
+	parameterType="dto.CalendarDto">
+		update calendar 
+		set title = #{title}, content =#{content}
+		where calendar_idx = #{calendar_idx}
+	</update>
 
 	
 	<delete id="calDel"
