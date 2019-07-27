@@ -40,8 +40,6 @@ $(document).ready(function() {
 			$("form").submit();
 		});
 		
-		
-		$("#title").focus();
 		$("#cancel").click(function(){
 			history.back(-1);
 		});
@@ -79,7 +77,7 @@ $(document).ready(function() {
 </tr>
 
 <tr>
-	<td><label>일정날짜</label></td>
+	<td><label for="rdate">일정날짜</label></td>
 	<td>
 <!-- 10년 전부터 5년 후 까지 보여주기 -->
 		<select name="year"> 

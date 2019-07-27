@@ -60,26 +60,27 @@ public class CalendarUtil {
 		String s = "";
 		String dates = (year + "") + two(month + "") + two(day + ""); //2019+07+22 ->20190722
 		
-		s += "<table>";
-		s += "<col width='98'>";
+		
+		s += "<table border=\"1\">";
+		s += "<col width='200'>";
 		
 		for(CalendarDto dto : list) {
 			if(dto.getRdate().substring(0,8).equals(dates)) {
 				
-				s += "<tr bgcolor='yellow'>";
+				s += "<tr bgcolor='#FFCA9B'>";
 				s += "<td>";
-				
 				s += "<a href='caldetail?seq=" + dto.getCalendar_idx() + "'>";
-				s += "<font style='font-size:8; color:black'>";
+				s += "<font style='font-size:15; color:black'>";
 				s += dot3(dto.getTitle());
 				s += "</font>";
 				s += "</a>";
 				s += "</td>";
 				s += "</tr>";
+				
 			}
 		}
-	
 		s += "</table>";
+		
 		return s;
 	
 	}
@@ -89,7 +90,7 @@ public class CalendarUtil {
 	public String dot3(String msg) {
 		String s = "";
 		if(msg.length() >= 10) {
-			s = msg.substring(0,10); //임의로 7글자 까지
+			s = msg.substring(0,10); //임의로 10글자 까지
 			s += "...";
 		} else {
 			s = msg.trim();
@@ -97,7 +98,7 @@ public class CalendarUtil {
 		return s;
 	}
 	
-	
+	//rdate를 위해 사용할 코드들
 	public String two(int tt) {
 		return (tt+"").length()>1?(tt+""):"0"+tt;
 	}
@@ -107,8 +108,8 @@ public class CalendarUtil {
 		return ""+year+two(month);
 	}
 	
-	public String yyyymmdd(int year, int month, int day) {
-		return yyyymm(year,month)+two(day);
+	public String yyyymmdd(int year, int month, int date) {
+		return yyyymm(year,month)+two(date);
 	}
 
 	

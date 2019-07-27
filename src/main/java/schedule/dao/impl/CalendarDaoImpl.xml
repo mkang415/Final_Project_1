@@ -14,11 +14,11 @@
 				calendar_idx,  member_idx, title, content, rdate, wdate 
 				from calendar 
 				where member_idx=#{member_idx} and substr(rdate, 1, 6)= #{rdate}) 
-		where rn between 1 and 5 
+		where rn between 1 and 10
 	</select>
 	
 	
-	<insert id="calWrite">
+	<insert id="calWrite" parameterType="dto.CalendarDto">
 		INSERT into calendar(calendar_idx,  member_idx, title, content, rdate, wdate)
 		VALUES (calendar_seq.nextval, #{member_idx}, #{title}, #{content}, #{rdate}, sysdate)
 	</insert>

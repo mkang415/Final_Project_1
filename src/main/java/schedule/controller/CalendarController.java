@@ -1,8 +1,10 @@
 package schedule.controller;
 
+import java.time.Year;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -61,11 +63,6 @@ public class CalendarController {
 			month = Integer.parseInt(smonth);
 		}
 		
-		int date = cal.get(Calendar.DATE);
-		if(util.nvl(sdate) == false ) {
-			date = Integer.parseInt(sdate);
-		}
-		
 		if(month < 1){
 			month = 12;
 			year--;
@@ -76,15 +73,12 @@ public class CalendarController {
 		}
 		
 		cal.set(year, month-1 , 1);
-		
-		
-		
-		
+				
 		String yyyymm = util.yyyymm(year, month);
-		int idx = cal.get(dto.getMember_idx());
+		int member_idx = 1; // member_idx
 		
 		//rdate에 넣기
-		dto = new CalendarDto(idx, yyyymm);
+		dto = new CalendarDto(member_idx, yyyymm);
 		logger.info(yyyymm);
 		
 		//DB처리
@@ -98,9 +92,6 @@ public class CalendarController {
 		model.addAttribute("jcal", cal);
 		
 		
-		
-		
-		
 		return "/schedule/calendar";
 	}
 	
@@ -112,12 +103,9 @@ public class CalendarController {
 	
 	@RequestMapping(value = "/schedule/calwrite", method=RequestMethod.POST)
 	public String writeproc ( 
-			Model model,
 			CalendarDto dto,
 			HttpSession session,
-			String year,
-			String month,
-			String day
+			HttpServletRequest req
 			)throws Exception {
 		
 		
@@ -125,16 +113,26 @@ public class CalendarController {
 //		if(req.getSession().getAttribute("login")==null) {
 //		return "/login";
 //	}
-//		logger.info(dto.toString());
+		int member_idx = 1;
+		
+		CalendarUtil util = new CalendarUtil();
+		
+		int year = Integer.parseInt(req.getParameter("year"));
+		int month = Integer.parseInt(req.getParameter("month"));
+		int day = Integer.parseInt(req.getParameter("day"));
+		
+		String yyyymmdd = util.yyyymmdd(year, month, day);
+		
+		logger.info("닐짜 파라미터 확인 : " + year + ", " + month + ", " + day);
+		logger.info(dto.toString()); // 날짜 넣기전 
+		
+		dto.setRdate(yyyymmdd);
+		dto.setMember_idx(member_idx);
+		
+		logger.info(dto.toString()); // 날짜 넣고 난 뒤 
 		
 		CalendarService.calWrite(dto);
 		
-		System.out.println("year : "+ year+", month : "+ month+", day : " + day);
-		
-		model.addAttribute("year", year);
-		model.addAttribute("month", month);
-		model.addAttribute("day", day);
-	
 		
 		return "redirect:/schedule/calendar";
 		

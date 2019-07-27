@@ -9,7 +9,6 @@ public interface CalendarService {
 	public List<CalendarDto> getCalendarList(CalendarDto dto);
 
 	public boolean calWrite(CalendarDto dto);
-
 	
 	public CalendarDto calDetail(int calendar_idx);
 

@@ -9,7 +9,6 @@ public interface CalendarDao {
 	//일정
 	public List<CalendarDto> getCalendarList(CalendarDto dto);
 	
-	public boolean addCalendar(CalendarDto caldto);
 
 	//일정 추가
 	public boolean calWrite(CalendarDto dto);

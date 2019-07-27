@@ -40,6 +40,12 @@ $(document).ready(function() {
 </tr>
 
 <tr>
+<td>작성일</td>
+<td>${sysdate}</td>
+</tr>
+
+
+<tr>
 <td>내용</td>
 <td>
 <textarea rows="20" cols="60" readonly="readonly">${TITLE }</textarea>
