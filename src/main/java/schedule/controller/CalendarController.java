@@ -101,7 +101,7 @@ public class CalendarController {
 	public void write() {}	
 			
 	
-	@RequestMapping(value = "/schedule/calwrite", method=RequestMethod.POST)
+	@RequestMapping(value = "/schedule/calwrite_post", method=RequestMethod.POST)
 	public String writeproc ( 
 			CalendarDto dto,
 			HttpSession session,

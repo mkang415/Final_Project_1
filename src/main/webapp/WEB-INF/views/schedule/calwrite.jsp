@@ -58,7 +58,7 @@ $(document).ready(function() {
 
 <div align="center">
 
-<form action="/schedule/calwrite" method="post">
+<form action="/schedule/calwrite_post" method="post">
 
 <table border="1" class="writetb" >
 <col width="200px"><col width="100px">

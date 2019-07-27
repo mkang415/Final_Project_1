@@ -14,7 +14,7 @@
 				calendar_idx,  member_idx, title, content, rdate, wdate 
 				from calendar 
 				where member_idx=#{member_idx} and substr(rdate, 1, 6)= #{rdate}) 
-		where rn between 1 and 10
+		where rn between 1 and 6
 	</select>
 	
 	

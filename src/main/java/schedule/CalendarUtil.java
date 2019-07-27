@@ -61,7 +61,7 @@ public class CalendarUtil {
 		String dates = (year + "") + two(month + "") + two(day + ""); //2019+07+22 ->20190722
 		
 		
-		s += "<table border=\"1\">";
+		s += "<table>";
 		s += "<col width='200'>";
 		
 		for(CalendarDto dto : list) {
@@ -76,6 +76,7 @@ public class CalendarUtil {
 				s += "</a>";
 				s += "</td>";
 				s += "</tr>";
+				s += "<tr height=\"10px\"><td></td></tr>";
 				
 			}
 		}
