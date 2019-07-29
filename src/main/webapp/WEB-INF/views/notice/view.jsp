@@ -24,6 +24,17 @@ $(document).ready(function() {
 		$(location).attr("href", "/notice/list");
 	});
 	
+	//수정버튼 동작
+	$("#btnUpdate").click(function() {
+		$(location).attr("href", "/notice/update?notice_idx=${notice.notice_idx }");
+	});
+
+	//삭제버튼 동작
+	$("#btnDelete").click(function() {
+		$(location).attr("href", "/notice/delete?notice_idx=${notice.notice_idx }");
+	});
+
+	
 	
 	
 	
@@ -60,12 +71,20 @@ $(document).ready(function() {
 	});
 	
 	
+$("#replyTo").click(function() {
+		
+		alert("클릭");
+		
+	});
+
+
+	
 	
 });
 
 
 //**답글 입력
-function insertCommentTo(commentNo) {
+/* function insertCommentTo(commentNo) {
 	
 	$.ajax({
 		type: "post"
@@ -81,7 +100,8 @@ function insertCommentTo(commentNo) {
 			console.log("error");
 			console.log(e);
 		}
-	});
+	}); */
+
 
 
 //댓글 삭제
@@ -107,6 +127,9 @@ function deleteComment(commentNo) {
 		}
 	});
 }
+	
+	
+	
 
 </script>
 <style type="text/css">
@@ -256,7 +279,7 @@ ${notice.content }
 	</td>
 	
 	<td>
-		<button class="btn btn-default">답글</button>
+		<button class="btn btn-default" id="replyTo">답글</button>
 	</td>
 	
 </tr>

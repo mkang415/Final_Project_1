@@ -25,4 +25,8 @@ public interface NoticeDao {
 
 	public NoticeFile selectFilebynotice_idx(Notice notice);
 
+	public void update(Notice notice);
+
+	public void delete(Notice notice);
+
 }

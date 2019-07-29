@@ -41,6 +41,10 @@ public interface NoticeService {
 
 	public boolean deleteComment(NoticeReply noticeReply);
 
+	public void updateNotice(Notice notice);
+
+	public void deleteNotice(Notice notice);
+
 
 
 }

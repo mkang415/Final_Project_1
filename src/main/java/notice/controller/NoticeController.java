@@ -166,13 +166,62 @@ public class NoticeController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-	
-		
 
 	}
+	
+	
+	@RequestMapping(value="/notice/update", method=RequestMethod.GET)
+	public void update( int notice_idx,
+						Model model,
+						HttpSession session) {
+	
+		logger.info("업데이트 창");
+
+		Notice notice = noticeService.getBoardno(notice_idx);
+
+		Member member = memberService.getMemberInfo(session);
+		
+		notice = noticeService.view(notice);
+		
+		model.addAttribute("notice",notice);
+		model.addAttribute("member",member);
+
+	
+	
+}
+
+	
+
+	@RequestMapping(value="/notice/update", method=RequestMethod.POST)
+	public String updateProc(int notice_idx,
+						   Notice notice ) {
+
+		logger.info("업데이트 처리");
+		
+		notice.setNotice_idx(notice_idx);
+		
+		
+		noticeService.updateNotice(notice);
+		
+		return "redirect:"+"/notice/list"; 
+
+		
+
+   }
+		
+	@RequestMapping(value="/notice/delete", method=RequestMethod.GET)
+	public String delete( int notice_idx,    
+						Notice notice) {
+		
+			logger.info("글 삭제");
+			
+			notice.setNotice_idx(notice_idx);
+			
+			noticeService.deleteNotice(notice);
+			
+			return "redirect:"+"/notice/list"; 
+			
+   }
 
 	
 	

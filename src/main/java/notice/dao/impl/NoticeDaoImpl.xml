@@ -98,6 +98,16 @@
     		WHERE notice_idx = #{notice_idx }
     
    		 </update>
+   		 
+   		<update id="update"
+    		parameterType="dto.Notice">
+    		UPDATE notice
+    		SET title = #{title },
+    			content = #{content }
+    		WHERE notice_idx = #{notice_idx }
+    		
+    
+    	</update>
    
      <!--  -->
      
@@ -130,6 +140,14 @@
         
         
      <!--       -->   
+     
+     <delete id="delete"
+			parameterType="dto.Notice">
+	DELETE notice
+	WHERE notice_idx = #{notice_idx }
+			
+			
+	</delete>
         
         
         </mapper>
