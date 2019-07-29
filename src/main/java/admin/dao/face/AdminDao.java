@@ -7,6 +7,7 @@ import java.util.Map;
 import dto.Board;
 import dto.Member;
 import util.AdminBoardPaging;
+import util.AdminMemberBanPaging;
 import util.AdminMemberPaging;
 
 public interface AdminDao {
@@ -41,12 +42,23 @@ public interface AdminDao {
 	
 
 	int selectCntAll3(int member_idx);
-	// 회원정보 상세보기 목록
+	// 회원정보 상세보기 페이징
 	
 	List<HashMap<String, Object>> selectAll3(Map<String, Object> map);
-	// 회원정보 상세보기 리스트 페이징
+	// 회원정보 상세보기 리스트 
+
+	void ban(int member_idx);
+	// 회원정보 인덱스로 영구정지
 
 	
+	
+	int selectCntAll4();
+	// 회원 벤 영구정지 페이징
+
+	List<HashMap<String, Object>> selectAll4(AdminMemberBanPaging AMBP);
+	// 회원 벤 영구정지 리스트
+
+	void noban(int member_idx);
 	
 	
 	

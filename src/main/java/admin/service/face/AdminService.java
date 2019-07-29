@@ -6,6 +6,7 @@ import java.util.List;
 import dto.Board;
 import dto.Member;
 import util.AdminBoardPaging;
+import util.AdminMemberBanPaging;
 import util.AdminMemberInfoPaging;
 import util.AdminMemberPaging;
 
@@ -46,7 +47,19 @@ public interface AdminService {
 	List<HashMap<String, Object>> select(AdminMemberInfoPaging AMIP, int member_idx);
 	// 회원 정보 상세보기 리스트 ( 해당 회원이 작성한 글만 )
 
+	void ban(int member_idx);
+	// 영구정지 눌러서 멤버인덱스 넘겨주기
+
 	
+	
+	
+	AdminMemberBanPaging getcurPage4(int curPage);
+	// 회원 벤 영구정지 페이징
+
+	List<HashMap<String, Object>> select(AdminMemberBanPaging AMBP);
+	// 회원 벤 영구정지 리스트
+
+	void noban(int member_idx);
 	
 	
 	

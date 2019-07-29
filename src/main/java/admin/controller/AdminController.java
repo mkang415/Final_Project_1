@@ -3,6 +3,7 @@ package admin.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import admin.service.face.AdminService;
 import dto.Board;
 import dto.Member;
 import util.AdminBoardPaging;
+import util.AdminMemberBanPaging;
 import util.AdminMemberInfoPaging;
 import util.AdminMemberPaging;
 
@@ -105,5 +107,41 @@ public class AdminController {
 		
 		// 회원 정보 상세보기 - 해당 회원이 쓴 글만
 	}
+	
+	@RequestMapping(value="/admin/ban", method=RequestMethod.GET)
+	public String ban(int member_idx) {
+		
+		adminService.ban(member_idx);
+		
+		return "redirect:/admin/banlist";
+		
+		// 영구정지 버튼누르면 memberclass 값이 2로 바뀌고 banlist로 리다이렉트
+	}
+	
+	@RequestMapping(value="/admin/noban", method=RequestMethod.GET)
+	public String noban(int member_idx) {
+		
+		adminService.noban(member_idx);
+		
+		return "redirect:/admin/member";
+	}
+	
+	
+	@RequestMapping(value="/admin/banlist", method=RequestMethod.GET)
+	public void banlist(
+			@RequestParam(defaultValue = "1")
+			int curPage ,
+			Model model) {
+		
+		AdminMemberBanPaging AMBP = adminService.getcurPage4(curPage);
+		model.addAttribute("AMBP", AMBP);
+		
+		List<HashMap<String, Object>> list = adminService.select(AMBP);
+		model.addAttribute("list", list);
+		
+		// 회원 영구정지 페이지
+	}
+	
+	
 		
 }
