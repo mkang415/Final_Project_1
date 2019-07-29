@@ -17,12 +17,10 @@ public interface CalendarDao {
 	public CalendarDto calDetail(CalendarDto detail);
 
 	//일정 삭제
-	public boolean calDelete(int calendar_idx);
+	public void caldel(CalendarDto dto);
 
 	public void calupdate(CalendarDto dto);
 
-
-//	public CalendarDto selectCalendar_idx(CalendarDto viewcal);
 
 
 }

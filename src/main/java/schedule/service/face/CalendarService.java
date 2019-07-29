@@ -12,9 +12,9 @@ public interface CalendarService {
 	
 	public CalendarDto calDetail(CalendarDto detail);
 
-	public boolean calDelete(int calendar_idx);
-
 	public void calupdate(CalendarDto dto);
+
+	public void caldel(CalendarDto dto);
 
 //	public CalendarDto calview(CalendarDto viewcal);
 

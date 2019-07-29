@@ -1,10 +1,8 @@
 package schedule.controller;
 
-import java.time.Year;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -51,7 +49,6 @@ public class CalendarController {
 		
 		String syear = req.getParameter("year");
 		String smonth = req.getParameter("month");
-		String sdate = req.getParameter("date");
 		
 		int year = cal.get(Calendar.YEAR);
 		if(util.nvl(syear) == false){	// 넘어온 파라메터가 있음
@@ -75,7 +72,7 @@ public class CalendarController {
 		cal.set(year, month-1 , 1);
 				
 		String yyyymm = util.yyyymm(year, month);
-		int member_idx = 1; // member_idx
+		int member_idx = 1; // member_idx 로 바꾸기 ( 세션 )
 		
 		//rdate에 넣기
 		dto = new CalendarDto(member_idx, yyyymm);
@@ -101,7 +98,7 @@ public class CalendarController {
 	public void write() {}	
 			
 	
-	@RequestMapping(value = "/schedule/calwrite_post", method=RequestMethod.POST)
+	@RequestMapping(value = "/schedule/calwrite", method=RequestMethod.POST)
 	public String writeproc ( 
 			CalendarDto dto,
 			HttpSession session,
@@ -113,7 +110,7 @@ public class CalendarController {
 //		if(req.getSession().getAttribute("login")==null) {
 //		return "/login";
 //	}
-		int member_idx = 1;
+		int member_idx = 1; // member_idx 로 바꾸기 ( 세션 )
 		
 		CalendarUtil util = new CalendarUtil();
 		
@@ -192,37 +189,23 @@ public class CalendarController {
 	
 	
 	
-	
-	@RequestMapping (value = "/schedule/caldel", method= {RequestMethod.GET,RequestMethod.POST})
+	//일정삭제
+	@RequestMapping (value = "/schedule/caldel", method= RequestMethod.GET)
 	public String caldel(
 			Model model,
-			int calendar_idx
+			CalendarDto dto
 			) {
 		
-		boolean calDelete = CalendarService.calDelete(calendar_idx);
+		CalendarService.caldel(dto);
 		
-		return "/schedule/calendar";
+		model.addAttribute("msg", "게시글 삭제 완료");
+		model.addAttribute("url", "/schedule/calendar");
+		
+		return "redirect:/schedule/calendar";
 	}
 	
 	
-//	@RequestMapping (value = "/schedule/calview",method=RequestMethod.GET)
-//	public String view(
-//			CalendarDto viewcal,
-//			Model model,
-//			HttpSession session
-//			) {
-//		
-//		//calidx가 1보다 작으면 목록으로보내기
-//		if(viewcal.getCalendar_idx()<1) {
-//		return "redirect:/schedule/calendar";
-//		}
-//		
-//		//게시글 상세 정보 전달
-//		viewcal = CalendarService.calview(viewcal);
-//		
-//		
-//		return "/schedule/caldetail";
-//		}
+
 }
 
 

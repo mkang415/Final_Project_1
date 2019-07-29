@@ -6,7 +6,8 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<script type="text/javascript"
+src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- Bootstrap 3 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -58,7 +59,7 @@ $(document).ready(function() {
 
 <div align="center">
 
-<form action="/schedule/calwrite_post" method="post">
+<form action="/schedule/calwrite" method="post">
 
 <table border="1" class="writetb" >
 <col width="200px"><col width="100px">
@@ -129,7 +130,7 @@ $(document).ready(function() {
 
 </table>
 <br><br>
-<button class="btn btn-primary" id="btnWrite">작성</button>
+<button type="button" class="btn btn-primary" id="btnWrite">작성</button>
 <input type="reset" id="cancel"
 		class="btn btn-danger" value="취소"/>
 		

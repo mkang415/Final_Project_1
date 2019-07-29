@@ -33,15 +33,16 @@ public class CalendarServiceImpl implements CalendarService{
 		return calendarDao.calDetail(detail);
 	}
 
-	//일정 삭제
-	@Override
-	public boolean calDelete(int calendar_idx) {
-		return false;
-	}
-
+	//일정 수정
 	@Override
 	public void calupdate(CalendarDto dto) {
 		calendarDao.calupdate(dto);
+	}
+
+	//일정 삭제
+	@Override
+	public void caldel(CalendarDto dto) {
+		calendarDao.caldel(dto);
 	}
 
 	
