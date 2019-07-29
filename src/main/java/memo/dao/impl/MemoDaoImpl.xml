@@ -38,7 +38,7 @@
 	<!-- idx로 메모 불러오기 -->
 	<select id="view"
 	 parameterType="int"
-	 resultType="dto.Memo">
+ 	 resultType="dto.Memo">
 		select * from memo
 		where memo_idx = #{memo_idx}
 	</select>
