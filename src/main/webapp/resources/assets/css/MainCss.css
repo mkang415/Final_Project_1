@@ -1,9 +1,11 @@
-@charset "utf-8";
+@charset "UTF-8";
+
 
 /* 레이아웃 */
 #mNav {display: none; position: absolute; top: 10px; right: 14px;}
 #header {width: 100%; border-bottom: 1px solid #c6c6c6;}
 #banner {position: relative;}
+#footer {background: #211f1f;}
 
 /* 가운데 영역 */
 .container {position: relative; width: 1280px; margin: 0 auto; background: rgba(0,0,0,0); }
@@ -120,7 +122,9 @@ body.modal_on {overflow: hidden;}
 /* 유튜브 */
 .new {padding: 100px 0; overflow: hidden; position: relative; }
 .new h2 {font-size: 30px; font-weight: 500; margin-bottom: 20px;}
-.new .new_left {position: relative; margin-right: 423px ; height: 500px; overflow: hidden; background: #ccc url(../img/new01.jpg) center center; background-size: cover;}
+.new .new_left {position: relative; margin-left:100px; margin-right: 70px ; height: 500px; overflow: hidden; background: #ccc url(../img/gerrard.jpg);
+
+출처: https://webdir.tistory.com/472 [WEBDIR]) center center; background-size: cover;}
 .new .new_left .play {position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; transform: translate(-50%,-50%); cursor: pointer;}
 .new .new_left .play .st0 {fill: #fff; opacity: 0.3;}
 .new .new_left .play .st1 {fill: #fff;}
@@ -152,6 +156,9 @@ body.modal_on {overflow: hidden;}
 .new .new_right .btn .white {margin-right: 2%; background-color: #fff; color: #3a0e6a;border: 1px solid #3a0e6a;}
 .new .new_right .btn .purple {background-color: #3a0e6a;color: #fff;border: 1px solid #6e40c4;}
 
+
+/* footer */
+.footer_sns
 
 
 /* 미디어쿼리 */

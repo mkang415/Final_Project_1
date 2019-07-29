@@ -17,7 +17,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="/resources/assets/css/reset05.css">
-    <link rel="stylesheet" href="/resources/assets/css/mainstyle.css">
+    <link rel="stylesheet" href="/resources/assets/css/MainCss4.css">
     <link rel="stylesheet" href=/resources/assets/css/swiper.css>
     
     <!-- 파비콘 -->
@@ -156,7 +156,7 @@
     </section>
     <!-- //banner -->
      <section id="help">
-        <div class="container">
+        <div class="container" style="top:100px; margin-left:100px; width:1500px;">
             <div class="row">
                 <div class="help clearfix">
                     <article class="help_box1">
@@ -167,26 +167,26 @@
                                     <ul>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar"></strong> <em>2019.07.22</em></dt>
-                                                <dd></dd>
+                                                <dt><strong class="bar">공지</strong> <em>2019.07.22</em></dt>
+                                                <dd>공지사항이다</dd>
                                             </dl>            
                                         </li>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar"></strong> <em>2019.07.22</em></dt>
-                                                <dd></dd>
+                                                <dt><strong class="bar">공지</strong> <em>2019.07.22</em></dt>
+                                                <dd>공지사항이다</dd>
                                             </dl>
                                         </li>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar"></strong> <em>2019.07.22</em></dt>
-                                                <dd></dd>
+                                                <dt><strong class="bar">공지</strong> <em>2019.07.22</em></dt>
+                                                <dd>공지사항이다</dd>
                                             </dl>
                                         </li>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar"></strong> <em>2019.07.22</em></dt>
-                                                <dd></dd>
+                                                <dt><strong class="bar">공지</strong> <em>2019.07.22</em></dt>
+                                                <dd>공지사항이다</dd>
                                             </dl>
                                         </li>
                                     </ul>
@@ -195,8 +195,8 @@
                                     <ul>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar"></strong> <em></em></dt>
-                                                <dd></dd>
+                                                <dt><strong class="bar">자유게시판</strong> <em>2019.07.22</em></dt>
+                                                <dd>자유게시판이다</dd>
                                             </dl>            
                                         </li>
                                         <li>
@@ -222,9 +222,11 @@
                             </ul>
                         </div>
                     </article>
+                </div>
+                    
                     </div>
                   </div>
-                </div>
+            
              </section>
     
     
@@ -234,7 +236,83 @@
     
     
     
+    <!-- 유튜브 api -->
+    <section id="new">
+        <div class="container" style="width:1400px;">
+            <div class="row">
+                <div class="new">
+                    <h2><em></em></h2>
+                    <div class="new_left" style="bottom: 30px;">
+                        <div class="play" id="showTrailer" data-youtube="jyoqkm9tZ08">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            viewBox="0 0 120 120" style="enable-background:new 0 0 120 120;" xml:space="preserve">
+                                <circle class="st0" cx="60" cy="60.4" r="56"/>
+                                <path class="st1" d="M81,65.4c4.8-2.8,4.8-7.2,0-10L53.5,39.6c-4.8-2.8-8.7-0.5-8.7,5v31.7c0,5.5,3.9,7.8,8.7,5L81,65.4z"/>
+                            </svg>
+                        </div>
+                    </div>
     
+                    </div>
+                </div>
+            </div>
+      
+    </section>
+   
+       <footer id="footer">
+        <div id="footer_sns">
+            <div class="container">
+                <div class="footer_sns">
+                    <ul>
+                        <li class="icon s1"><a href="#"><span class="ir_pm">트위터</span></a></li>
+                        <li class="icon s2"><a href="#"><span class="ir_pm">페이스북</span></a></li>
+                        <li class="icon s3"><a href="#"><span class="ir_pm">인스타그램</span></a></li>
+                        <li class="icon s4"><a href="#"><span class="ir_pm">구글 플레이</span></a></li>
+                        <li class="icon s5"><a href="#"><span class="ir_pm">아이폰 앱스토어</span></a></li>
+                    </ul>    
+                    <div class="tel">
+                        <a href="#">ARS <em>02-999-9999</em></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer_infor">
+            <div class="container">
+                <div class="row">
+                    <div class="footer_infor">
+<!--                         <h2><img src="assets/img/logo_footer.png" alt="megabox"></h2> -->
+                        <ul>
+                            <li><a href="#">회사소개</a></li>
+                            <li><a href="#">채용정보</a></li>
+                            <li><a href="#">제휴/광고/부대사업 문의</a></li>
+                            <li><a href="#">이용약관</a></li>
+                            <li><a href="#">개인정보처리방침</a></li>
+                            <li><a href="#">고객센터</a></li>
+                            <li><a href="#">윤리경영</a></li>
+                        </ul>
+                        <address>
+                            <p>서울특별시 노원구 월계2동 <br><span class="bar2">대표자명 박재현</span> <br><span class="bar2">사업자등록번호 211-86-59478</span> 
+                            	통신판매업신고번호 제 833호</p>
+                            <p>Copyright 2019 by kyungdongHighSchoolGerrard Inc. All right reserved</p>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+  
+  
+    
+        <!-- 트레일러 -->
+    <aside role="complementary" id="blackout" class="overlay">
+        <div id="trailerModal" class="modal">
+            <div id="trailer"></div><!-- YouTube 플레이어로 대체되는 부분 -->
+        </div>
+        <button id="hideTrailer" class="modal_close">닫기</button>
+    </aside>
+    
+     
+     
      
     
     <!-- 자바스크립트 라이브러리 -->
@@ -260,6 +338,27 @@
              delay: 5000,
          },
      });
+     
+     
+     //공지사항 탭 메뉴
+     var tabMenu = $(".notice");
+
+     //컨텐츠 내용을 숨겨주세요!
+     tabMenu.find("ul > li > ul").hide();
+     tabMenu.find("li.active > ul").show();
+
+     function tabList(e){
+         e.preventDefault();       //#의 기능을 차단
+         var target = $(this);
+         target.next().show().parent("li").addClass("active").siblings("li").removeClass("active").find("ul").hide();
+         //버튼을 클릭하면 ~ div를 보여주고
+         //부모의 li 태그에 클래스 추가하고
+         //형제의 li 태그에 클래스 제거하고
+         //제거한 자식의 div 태그를 숨겨줌 
+     }
+
+     tabMenu.find("ul > li > a").click(tabList).focus(tabList);
+     
     </script>
 
 </body>

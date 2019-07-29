@@ -1,9 +1,13 @@
-@charset "utf-8";
+
+@charset "UTF-8";
+
+
 
 /* 레이아웃 */
 #mNav {display: none; position: absolute; top: 10px; right: 14px;}
 #header {width: 100%; border-bottom: 1px solid #c6c6c6;}
 #banner {position: relative;}
+#footer {background: #211f1f;}
 
 /* 가운데 영역 */
 .container {position: relative; width: 1280px; margin: 0 auto; background: rgba(0,0,0,0); }
@@ -120,7 +124,9 @@ body.modal_on {overflow: hidden;}
 /* 유튜브 */
 .new {padding: 100px 0; overflow: hidden; position: relative; }
 .new h2 {font-size: 30px; font-weight: 500; margin-bottom: 20px;}
-.new .new_left {position: relative; margin-right: 423px ; height: 500px; overflow: hidden; background: #ccc url(../img/new01.jpg) center center; background-size: cover;}
+.new .new_left {position: relative; margin-left:100px; margin-right: 70px ; height: 500px; overflow: hidden; background: #ccc url(../img/gerrard.jpg);
+
+출처: https://webdir.tistory.com/472 [WEBDIR]) center center; background-size: cover;}
 .new .new_left .play {position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; transform: translate(-50%,-50%); cursor: pointer;}
 .new .new_left .play .st0 {fill: #fff; opacity: 0.3;}
 .new .new_left .play .st1 {fill: #fff;}
@@ -153,6 +159,31 @@ body.modal_on {overflow: hidden;}
 .new .new_right .btn .purple {background-color: #3a0e6a;color: #fff;border: 1px solid #6e40c4;}
 
 
+/* 푸터 */
+.footer_sns {position: absolute; right: 17px; top: 33px; z-index: 1;}
+.footer_sns li {display: inline-block; width: 36px; height: 36px; margin-left: 4px;}
+.footer_sns li.s1 {background-position: 0 -375px;}
+.footer_sns li.s2 {background-position: -36px -375px;}
+.footer_sns li.s3 {background-position: -72px -375px;}
+.footer_sns li.s4 {background-position: -108px -375px;}
+.footer_sns li.s5 {background-position: -144px -375px;}
+.footer_sns li.s1:hover {background-position: 0 -411px;}
+.footer_sns li.s2:hover {background-position: -36px -411px;}
+.footer_sns li.s3:hover {background-position: -72px -411px;}
+.footer_sns li.s4:hover {background-position: -108px -411px;}
+.footer_sns li.s5:hover {background-position: -144px -411px;}
+.footer_sns .tel {text-align: right; padding-top: 5px;}
+.footer_sns .tel a {color: #8f8f8f; font-size: 21px;}
+.footer_sns .tel a em {color: #fff;}
+
+.footer_infor {padding: 50px 0; width: 80%;}
+.footer_infor h2 img {width: 150px;}
+.footer_infor ul {padding: 15px 0;}
+.footer_infor li {position: relative; display: inline; padding-right: 16px; white-space: nowrap;}
+.footer_infor li:after {content: ''; position: absolute; right: 5px; top: 5px; width: 1px; height: 11px; background: #8f8f8f;}
+.footer_infor li:last-child:after {width: 0; height: 0;}
+.footer_infor li a {color: #8f8f8f;}
+.footer_infor address p {color: #8f8f8f; padding-bottom: 15px;}
 
 /* 미디어쿼리 */
 @media (max-width: 1290px){
