@@ -1,7 +1,6 @@
 package schedule.controller;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +49,6 @@ public class CalendarController {
 		
 		String syear = req.getParameter("year");
 		String smonth = req.getParameter("month");
-		String sdate = req.getParameter("date");
 		
 		int year = cal.get(Calendar.YEAR);
 		if(util.nvl(syear) == false){	// 넘어온 파라메터가 있음
@@ -60,11 +58,6 @@ public class CalendarController {
 		int month = cal.get(Calendar.MONTH) + 1;
 		if(util.nvl(smonth) == false){
 			month = Integer.parseInt(smonth);
-		}
-		
-		int date = cal.get(Calendar.DATE);
-		if(util.nvl(sdate) == false ) {
-			date = Integer.parseInt(sdate);
 		}
 		
 		if(month < 1){
@@ -77,17 +70,14 @@ public class CalendarController {
 		}
 		
 		cal.set(year, month-1 , 1);
-		
-		
-		
-		
+				
 		String yyyymm = util.yyyymm(year, month);
-		int idx = cal.get(dto.getMember_idx());
+		int member_idx = 1; // member_idx 로 바꾸기 ( 세션 )
 		
 		//rdate에 넣기
-		dto = new CalendarDto(idx, yyyymm);
-		logger.info(tostring(yyyymm));
-
+		dto = new CalendarDto(member_idx, yyyymm);
+		logger.info(yyyymm);
+		
 		//DB처리
 		List<CalendarDto> list = CalendarService.getCalendarList(dto);
 		
@@ -99,16 +89,9 @@ public class CalendarController {
 		model.addAttribute("jcal", cal);
 		
 		
-		
-		
-		
 		return "/schedule/calendar";
 	}
 	
-	private String tostring(String yymmmm) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	//일정 추가
 	@RequestMapping (value = "/schedule/calwrite", method= RequestMethod.GET)
@@ -117,12 +100,9 @@ public class CalendarController {
 	
 	@RequestMapping(value = "/schedule/calwrite", method=RequestMethod.POST)
 	public String writeproc ( 
-			Model model,
 			CalendarDto dto,
 			HttpSession session,
-			String year,
-			String month,
-			String day
+			HttpServletRequest req
 			)throws Exception {
 		
 		
@@ -130,16 +110,26 @@ public class CalendarController {
 //		if(req.getSession().getAttribute("login")==null) {
 //		return "/login";
 //	}
-		logger.info(dto.toString());
+		int member_idx = 1; // member_idx 로 바꾸기 ( 세션 )
+		
+		CalendarUtil util = new CalendarUtil();
+		
+		int year = Integer.parseInt(req.getParameter("year"));
+		int month = Integer.parseInt(req.getParameter("month"));
+		int day = Integer.parseInt(req.getParameter("day"));
+		
+		String yyyymmdd = util.yyyymmdd(year, month, day);
+		
+		logger.info("닐짜 파라미터 확인 : " + year + ", " + month + ", " + day);
+		logger.info(dto.toString()); // 날짜 넣기전 
+		
+		dto.setRdate(yyyymmdd);
+		dto.setMember_idx(member_idx);
+		
+		logger.info(dto.toString()); // 날짜 넣고 난 뒤 
 		
 		CalendarService.calWrite(dto);
 		
-		System.out.println("year : "+ year+", month : "+ month+", day : " + day);
-		
-		model.addAttribute("year", year);
-		model.addAttribute("month", month);
-		model.addAttribute("day", day);
-	
 		
 		return "redirect:/schedule/calendar";
 		
@@ -149,54 +139,73 @@ public class CalendarController {
 	
 	
 	
-	//일정자세히보기
-	@RequestMapping(value = "/schedule/caldetail", method= {RequestMethod.GET, RequestMethod.POST})
+	//제목눌렀을때 일정자세히보기
+	@RequestMapping(value = "/schedule/caldetail", method= RequestMethod.GET)
 	public String caldetail (
+			CalendarDto detail,
 			Model model,
-			int calendar_idx
+			HttpServletRequest req
 			) throws Exception {
 		
-		CalendarDto dto = CalendarService.calDetail(calendar_idx);
-
-		model.addAttribute("dto", dto);
+		int calendar_idx = Integer.parseInt(req.getParameter("calendar_idx"));
+		logger.info("캘린더idx" + calendar_idx+"");
+		
+		
+		logger.info("서비스넘어감"+detail.getCalendar_idx()+"");
+		detail = CalendarService.calDetail(detail);
+		
+		
+		detail.setCalendar_idx(calendar_idx);
+		logger.info(detail.toString());
+		
+		model.addAttribute("detail", detail);
 		
 		return "/schedule/caldetail";
 	}
 	
 	
-	
-	
-	
-	@RequestMapping (value = "/schedule/caldel", method= {RequestMethod.GET,RequestMethod.POST})
-	public String caldel(
-			Model model,
-			int calendar_idx
+	//일정 수정
+	@RequestMapping(value = "/schedule/calupdate", method= RequestMethod.GET)
+	public String update(
+			CalendarDto dto,
+			HttpSession session,
+			Model model
 			) {
 		
-		boolean calDelete = CalendarService.calDelete(calendar_idx);
+		dto = CalendarService.calDetail(dto);
 		
-		return "/schedule/calendar";
+		model.addAttribute("detail", dto);
+		
+				return "schedule/calupdate";
+	}
+	
+	@RequestMapping (value = "/schedule/calupdate", method=RequestMethod.POST)
+	public String updateProc (CalendarDto dto) {
+		CalendarService.calupdate(dto);
+		
+		return "redirect:/schedule/calendar";
 	}
 	
 	
-//	@RequestMapping (value = "/schedule/calview",method=RequestMethod.GET)
-//	public String view(
-//			CalendarDto viewcal,
-//			Model model,
-//			HttpSession session
-//			) {
-//		
-//		//calidx가 1보다 작으면 목록으로보내기
-//		if(viewcal.getCalendar_idx()<1) {
-//		return "redirect:/schedule/calendar";
-//		}
-//		
-//		//게시글 상세 정보 전달
-//		viewcal = CalendarService.calview(viewcal);
-//		
-//		
-//		return "/schedule/caldetail";
-//		}
+	
+	
+	//일정삭제
+	@RequestMapping (value = "/schedule/caldel", method= RequestMethod.GET)
+	public String caldel(
+			Model model,
+			CalendarDto dto
+			) {
+		
+		CalendarService.caldel(dto);
+		
+		model.addAttribute("msg", "게시글 삭제 완료");
+		model.addAttribute("url", "/schedule/calendar");
+		
+		return "redirect:/schedule/calendar";
+	}
+	
+	
+
 }
 
 

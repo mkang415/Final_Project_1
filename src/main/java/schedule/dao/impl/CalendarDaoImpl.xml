@@ -14,31 +14,37 @@
 				calendar_idx,  member_idx, title, content, rdate, wdate 
 				from calendar 
 				where member_idx=#{member_idx} and substr(rdate, 1, 6)= #{rdate}) 
-		where rn between 1 and 5 
+		where rn between 1 and 15
+		ORDER BY calendar_idx desc
 	</select>
 	
 	
-	<insert id="calWrite">
+	<insert id="calWrite" parameterType="dto.CalendarDto">
 		INSERT into calendar(calendar_idx,  member_idx, title, content, rdate, wdate)
-		VALUES (calendar_seq.nextval, #{member_idx}, #{title}, #{content}, #{rdate}, sysdate)
+		VALUES (calendar_seq.nextval, #{member_idx}, #{title}, #{content}, #{rdate}, wdate)
 	</insert>
-	
 	
 	
 	<select id="calDetail"
 	resultType="dto.CalendarDto"
-	parameterType="java.lang.Integer">
+	parameterType="dto.CalendarDto">
 		select calendar_idx,  member_idx, title, content, rdate, wdate
-		from calendar where calendar_idx = #{calendar_idx}
+		from calendar 
+		where calendar_idx=#{calendar_idx}
 	</select>
 	
+	<update id="calupdate"
+	parameterType="dto.CalendarDto">
+		update calendar 
+		set title = #{title}, content =#{content}
+		where calendar_idx = #{calendar_idx}
+	</update>
 
-	
-	<delete id="calDel"
-	parameterType="java.lang.Integer">
-	DELETE FROM calendar WHERE calendar_idx=#{calendar_idx}
-	</delete>
-	
+	<update id="caldel"
+	parameterType="dto.CalendarDto">
+		delete calendar
+		where calendar_idx = #{calendar_idx}
+	</update>
 	
 	
 	

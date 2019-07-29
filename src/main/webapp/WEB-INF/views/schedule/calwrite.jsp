@@ -6,7 +6,8 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<script type="text/javascript"
+src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- Bootstrap 3 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -40,8 +41,6 @@ $(document).ready(function() {
 			$("form").submit();
 		});
 		
-		
-		$("#title").focus();
 		$("#cancel").click(function(){
 			history.back(-1);
 		});
@@ -79,7 +78,7 @@ $(document).ready(function() {
 </tr>
 
 <tr>
-	<td><label>일정날짜</label></td>
+	<td><label for="rdate">일정날짜</label></td>
 	<td>
 <!-- 10년 전부터 5년 후 까지 보여주기 -->
 		<select name="year"> 
@@ -131,7 +130,7 @@ $(document).ready(function() {
 
 </table>
 <br><br>
-<button class="btn btn-primary" id="btnWrite">작성</button>
+<button type="button" class="btn btn-primary" id="btnWrite">작성</button>
 <input type="reset" id="cancel"
 		class="btn btn-danger" value="취소"/>
 		

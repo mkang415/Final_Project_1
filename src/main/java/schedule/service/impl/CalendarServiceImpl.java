@@ -29,19 +29,21 @@ public class CalendarServiceImpl implements CalendarService{
 	
 	//일정 상세 보기
 	@Override
-	public CalendarDto calDetail(int calendar_idx) {
-		return calendarDao.calDetail(calendar_idx);
+	public CalendarDto calDetail(CalendarDto detail) {
+		return calendarDao.calDetail(detail);
 	}
 
+	//일정 수정
 	@Override
-	public boolean calDelete(int calendar_idx) {
-		return calendarDao.calDelete(calendar_idx);
+	public void calupdate(CalendarDto dto) {
+		calendarDao.calupdate(dto);
 	}
 
-//	@Override
-//	public CalendarDto calview(CalendarDto viewcal) {
-//		return calendarDao.selectCalendar_idx(viewcal);
-//	}
+	//일정 삭제
+	@Override
+	public void caldel(CalendarDto dto) {
+		calendarDao.caldel(dto);
+	}
 
 	
 
