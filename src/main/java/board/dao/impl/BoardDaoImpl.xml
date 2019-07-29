@@ -47,7 +47,7 @@
 		</if>
 	</select>
 	
-	<!-- 자유게시판 리스트 가져오기 -->
+	<!-- 후기게시판 리스트 가져오기 -->
 	<select id="getEpilList"
 	 parameterType="util.BoardPaging"
 	 resultType="hashmap">
@@ -56,6 +56,35 @@
 				select board_idx, recommend, title, member.nickname, hit, writtendate
 				from board, member
 				where board.member_idx = member.member_idx and divide = 2 
+				<if test="search != null and search != ''">
+	 				AND title LIKE '%' || #{search } || '%'
+	 			</if>
+				order by board_idx desc
+			) B order by rnum
+		) board
+		where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<!-- 사진게시판 글 개수 -->
+	<select id="photoCnt"
+	 parameterType="util.BoardPaging"
+	 resultType="int">
+		select count(*) from board 
+		where divide = 3
+		<if test="search != null and search !=''">
+			and title like '%' || #{search} || '%'
+		</if>
+	</select>
+	
+	<!-- 사진게시판 리스트 가져오기 -->
+	<select id="getPhotoList"
+	 parameterType="util.BoardPaging"
+	 resultType="hashmap">
+		select * from (
+			select rownum rnum, B.* from (
+				select board_idx, recommend, title, member.nickname, hit, writtendate
+				from board, member
+				where board.member_idx = member.member_idx and divide = 3
 				<if test="search != null and search != ''">
 	 				AND title LIKE '%' || #{search } || '%'
 	 			</if>
@@ -82,50 +111,61 @@
 	 	where board_idx = #{brdidx}
 	 </update>
 	 
-	 <!-- 작성 글 데이터 DB에 저장 -->
-	 <insert id="write"
-	  parameterType="dto.Board">
-	  
-	  	<selectKey keyProperty="board_idx" order="BEFORE" resultType="int">
+	 <!-- 글 작성 틀 생성 -->
+	<insert id="shape"
+	 parameterType="dto.Board">
+		<selectKey keyProperty="board_idx" order="BEFORE" resultType="int">
 	  		SELECT board_seq.nextval FROM dual
 	  	</selectKey>
-	  
-	 	insert into board(board_idx, title, content, member_idx, divide) 
+	  	insert into board(board_idx, title, content, member_idx, divide) 
 	 	values (#{board_idx}, #{title}, #{content}, #{member_idx}, #{divide})
-	 </insert>
+	</insert>
 	 
-	 <insert id="imgSave"
-	  parameterType="dto.Image">
-	  	insert into image(image_idx, originname, storename)
-	  	values (image_seq.nextval, #{originname}, #{storename})
-	  </insert>
-	 
-	 <!-- 수정할 게시글 DB에서 불러오기 -->
-	 <select id="getUpdate"
-	  parameterType="int"
+	 <!-- 작성 글 데이터 DB에 저장 -->
+	<select id="write"
+	  parameterType="dto.Board"
 	  resultType="dto.Board">
+	 	update board set title = #{title}, content=#{content}, divide=#{divide}
+	  	where board_idx = #{board_idx}
+	</select>
+
+
+	<!-- 수정할 게시글 DB에서 불러오기 -->
+	<select id="getUpdate"
+	 parameterType="int"
+	 resultType="dto.Board">
 	 	select * from board
 	 	where board_idx=#{board_idx}
-	 </select>
+	</select>
 	 
-	 <!-- 수정한 게시글 DB 갱신 -->
-	 <update id="setUpdate"
-	  parameterType="dto.Board">
+	<!-- 수정한 게시글 DB 갱신 -->
+	<update id="setUpdate"
+	 parameterType="dto.Board">
 	  	update board set title = #{title}, content=#{content}
 	  	where board_idx = #{board_idx}
-	  </update>
+	</update>
 	  
-	  <!-- 게시글 삭제 -->
-	  <delete id="delete"
-	   parameterType="int">
-	  	delete board
+	<!-- 게시글 삭제 -->
+	<delete id="delete"
+	 parameterType="int">
+	 	delete board
 	  	where board_idx= #{board_idx}
-	  </delete>
+	</delete>
 	  
-	  <!-- 추천 수 저장 -->
-	  <update id="setRecommend"
-	   parameterType="dto.Board">
+	<!-- 추천 수 저장 -->
+	<update id="setRecommend"
+	 parameterType="dto.Board">
 	  	update board set recommend = #{recommend}
 	  	where board_idx = #{board_idx}
-	  </update>
+	</update>
+	
+	<!-- 이미지 저장 -->
+	<insert id="imgSave"
+	 parameterType="dto.Image">
+		<selectKey keyProperty="image_idx" order="BEFORE" resultType="int">
+	  		SELECT image_seq.nextval FROM dual
+	  	</selectKey>
+	  	insert into image(image_idx, originname, storename) 
+	 	values (#{image_idx}, #{originname}, #{storename})
+	</insert>
 </mapper>

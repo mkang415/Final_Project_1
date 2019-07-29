@@ -6,8 +6,40 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="memo.dao.face.MemoDao">
-	<select id="test"
+	<select id="memoCnt"
+	 parameterType="int"
+	 resultType="int">
+		select count(*) from memo 
+		where member_idx = #{member_idx}
+	</select>
+	
+	<!-- 자유게시판 리스트 가져오기 -->
+	<select id="memoList"
+	 parameterType="util.MemoPaging"
+	 resultType="hashmap">
+		select * from (
+			select rownum rnum, B.* from (
+				select *
+				from memo
+				where member_idx = #{member_idx}
+				order by memo_idx desc
+			) B order by rnum
+		) board
+		where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<!-- 작성한 메모 DB에 저장 -->
+	<insert id="write"
+	 parameterType="dto.Memo">
+		insert into memo(memo_idx, title, memo, member_idx)
+		values (memo_seq.nextval, #{title}, #{memo}, #{member_idx})
+	</insert>
+	
+	<!-- idx로 메모 불러오기 -->
+	<select id="view"
+	 parameterType="int"
 	 resultType="dto.Memo">
 		select * from memo
+		where memo_idx = #{memo_idx}
 	</select>
 </mapper>

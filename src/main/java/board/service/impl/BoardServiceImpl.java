@@ -90,11 +90,23 @@ public class BoardServiceImpl implements BoardService {
 		return false;
 	}
 
+	//	글 작성 틀 생성
+	@Override
+	public Board boardShape(HttpSession session, int divide) {
+		
+		Board board = new Board();
+		board.setMember_idx((int)session.getAttribute("member_idx"));
+		board.setTitle("no Title");
+		board.setContent("no Content");
+		board.setDivide(divide);
+		boardDao.shape(board);
+		return board;
+		
+	}
+	
 	// 작성글 데이터 dao로 전달
 	@Override
-	public void write(Board board, HttpSession session) {
-
-		board.setMember_idx((int) session.getAttribute("member_idx"));
+	public void write(Board board) {
 
 		boardDao.write(board);
 
@@ -102,7 +114,7 @@ public class BoardServiceImpl implements BoardService {
 
 	// 업로드한 이미지 저장 후 저장경로 반환
 	@Override
-	public String imgSave(MultipartFile file, ServletContext context) {
+	public Image imgSave(MultipartFile file, ServletContext context) {
 
 		// 파일이 저장될 경로
 		String storedPath = context.getRealPath("resources/boardimg");
@@ -131,7 +143,7 @@ public class BoardServiceImpl implements BoardService {
 		image.setStorename(name);
 		boardDao.imgSave(image);
 
-		return "\\resources\\boardimg\\" + image.getStorename();
+		return image;
 	}
 
 	// 수정할 게시글 불러오기
@@ -187,10 +199,32 @@ public class BoardServiceImpl implements BoardService {
 		return paging;
 	}
 
+	//	후기 게시판 리스트 가져오기
 	@Override
 	public List<HashMap<String, Object>> getEpilList(BoardPaging boardPaging) {
 		
 		return boardDao.getEpilList(boardPaging);
 	}
+
+	//	사진 게시판 페이징
+	@Override
+	public BoardPaging getPhotoPage(int curPage, BoardPaging search) {
+		// 자유게시판 전체 게시글 개수
+		int totalCnt = boardDao.photoCnt(search);
+
+		// 페이징 객체 생성
+		BoardPaging paging = new BoardPaging(totalCnt, curPage);
+
+		return paging;
+	}
+
+	//	사진 게시판 리스트 가져오기
+	@Override
+	public List<HashMap<String, Object>> getPhotoList(BoardPaging boardPaging) {
+
+		return boardDao.getPhotoList(boardPaging);
+	}
+
+	
 
 }
