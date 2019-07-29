@@ -8,7 +8,7 @@
       <!-- 처음으로 가기 -->
       <c:if test="${ABP.curPage ne 1 }">
       <li>
-         <a href="/admin/list?curPage=1&search=${ABP.search }"><span>&larr;처음</span></a>
+         <a href="/admin/list?search=${ABP.search }"><span>&larr;처음</span></a>
       </li>
       </c:if>
 

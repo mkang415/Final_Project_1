@@ -89,12 +89,10 @@ function checkAll() {
 }
 
 
-
 </style>
 
 </head>
 <body>
-
 	<h1 style="text-align: center; "><a href="/admin/list">게시판 관리</a></h1>
 	<br>
 	<br>
@@ -125,7 +123,6 @@ function checkAll() {
 	</c:forEach>
 	</table>
 <h4><span style="text-align: center; margin-left:1430px;">total : ${ABP.totalCount }</span></h4>
-
 
 <div id="btnBox">
 

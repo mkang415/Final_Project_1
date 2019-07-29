@@ -12,6 +12,7 @@ import admin.service.face.AdminService;
 import dto.Board;
 import dto.Member;
 import util.AdminBoardPaging;
+import util.AdminMemberBanPaging;
 import util.AdminMemberInfoPaging;
 import util.AdminMemberPaging;
 
@@ -113,6 +114,43 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.selectAll3(map);
 		
 		//회원 상세정보 리스트 (해당 회원이 쓴 글)
+	}
+
+	@Override
+	public void ban(int member_idx) {
+		
+		adminDao.ban(member_idx);
+		
+		// 해당 회원 정보변경 memberclass 1-> 2 회원정지
+	}
+
+	@Override
+	public AdminMemberBanPaging getcurPage4(int curPage) {
+	
+		int totalCount = adminDao.selectCntAll4();
+		
+		AdminMemberBanPaging AMBP = new AdminMemberBanPaging(totalCount, curPage);
+		
+		return AMBP;
+		
+		//회원 벤 영구정지 페이징
+	}
+
+	@Override
+	public List<HashMap<String, Object>> select(AdminMemberBanPaging AMBP) {
+		
+		return adminDao.selectAll4(AMBP);
+		
+		//회원 벤 영구정지 리스트
+	}
+
+	@Override
+	public void noban(int member_idx) {
+
+		adminDao.noban(member_idx);
+		
+		// 해당 회원 정보변경 memberclass 2-> 1 
+		
 	}
 
 	
