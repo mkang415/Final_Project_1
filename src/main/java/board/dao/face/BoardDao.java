@@ -33,4 +33,10 @@ public interface BoardDao {
 
 	List<HashMap<String, Object>> getEpilList(BoardPaging boardPaging);
 
+	int photoCnt(BoardPaging search);
+
+	List<HashMap<String, Object>> getPhotoList(BoardPaging boardPaging);
+
+	void shape(Board board);
+
 }

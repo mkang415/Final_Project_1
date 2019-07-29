@@ -2,6 +2,7 @@ package board.controller;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import board.service.face.BoardService;
 import dto.Board;
+import dto.Image;
 import util.BoardPaging;
 
 @Controller
@@ -77,6 +78,28 @@ public class BoardController {
 		model.addAttribute("epilList", epilBoardList);	
 	}
 	
+//	사진 게시판 게시글 리스트
+	@RequestMapping(value = "/board/photolist", method = RequestMethod.GET)
+	public void photoList (
+			@RequestParam(defaultValue = "1")
+			int curPage,
+			BoardPaging search,
+			Model model) {
+		
+		//	게시판 리스트 페이징
+		BoardPaging boardPaging = boardService.getPhotoPage(curPage, search);
+		
+		//	검색어 추가
+		boardPaging.setSearch(search.getSearch());
+		
+		//	게시판 리스트 저장
+		List<HashMap<String, Object>> photoBoardList = boardService.getPhotoList(boardPaging);
+		
+		//	페이징 및 리스트 전달
+		model.addAttribute("photoPaging", boardPaging);
+		model.addAttribute("photoList", photoBoardList);	
+	}
+	
 	//	게시판 게시글
 	@RequestMapping(value = "/board/view", method = RequestMethod.GET)
 	public void view (
@@ -98,7 +121,6 @@ public class BoardController {
 		
 		//	작성자인지 확인하여 전달.
 		model.addAttribute("checkId", checkId);
-		
 		if(checkId) {
 			Board board = new Board();
 			board.setBoard_idx(brdidx);
@@ -114,35 +136,38 @@ public class BoardController {
 	@RequestMapping(value = "/board/write", method = RequestMethod.GET)
 	public void boardWrite(
 			int divide,
+			HttpSession session,
 			Model model
 			) {
 		logger.info("글쓰기");
 		
-		model.addAttribute("selBoard", divide);
+		Board board = boardService.boardShape(session, divide);
+		logger.info(board.toString());
+		model.addAttribute("board", board);
+
 	}
 	
 	//	작성한 글 저장
 	@RequestMapping(value = "board/write", method = RequestMethod.POST)
 	public String boardWriteProc(
-			Board board,
-			HttpSession session
+			Board board
 			) {
-		
 		logger.info("작성 글 저장");
-		boardService.write(board, session);
-		
+		boardService.write(board);
 		return "redirect: /board/view?brdidx="+board.getBoard_idx();
 	}
 	
 	//	이미지 업로드 처리
 	@PostMapping(value="/upload/image", produces = "application/text; charset=UTF-8")
     @ResponseBody
-    public ResponseEntity<?> uploadImg(@RequestParam("file") MultipartFile file) {
-		
+    public ResponseEntity<?> uploadImg(
+    		@RequestParam("file") MultipartFile file) {
+		Image image = new Image();
 		logger.info("이미지 업로드");
         try {
-            String uploadPath = boardService.imgSave(file, context);
-            return ResponseEntity.ok().body(uploadPath);
+        	image = boardService.imgSave(file, context);
+//            String uploadPath = image.getStorename();
+            return ResponseEntity.ok().body(image);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();

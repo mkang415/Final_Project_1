@@ -120,12 +120,36 @@ table {
 <c:import url="/WEB-INF/views/board/reply.jsp"></c:import>
 
 <c:if test="${login }">
-<button type="button" onclick="location.href='/board/write?divide=1'">글쓰기</button>
+	<c:choose>
+		<c:when test="${freeView.getDivide() eq 1}">
+			<button type="button" onclick="location.href='/board/write?divide=1'">글쓰기</button>
+		</c:when>
+		<c:when test="${freeView.getDivide() eq 2}">
+			<button type="button" onclick="location.href='/board/write?divide=2'">글쓰기</button>
+		</c:when>
+		<c:when test="${freeView.getDivide() eq 3}">
+			<button type="button" onclick="location.href='/board/write?divide=3'">글쓰기</button>
+		</c:when>
+	</c:choose>
+
 	<c:if test="${checkId}">
 		<button type="button" onclick="location.href='/board/update?brdidx=${freeView.getBoard_idx()}'">글수정</button>
 		<button type="button" onclick="location.href='/board/delete?brdidx=${freeView.getBoard_idx()}&divide=${freeView.divide }'">글삭제</button>
 	</c:if>
 </c:if>
-<button onclick="location.href='/board/freelist'">목록</button>
+
+<c:choose>
+	<c:when test="${freeView.getDivide() eq 1}">
+		<button onclick="location.href='/board/freelist'">목록</button>
+	</c:when>
+	<c:when test="${freeView.getDivide() eq 2}">
+		<button onclick="location.href='/board/epillist'">목록</button>
+	</c:when>
+	<c:when test="${freeView.getDivide() eq 3}">
+		<button onclick="location.href='/board/photolist'">목록</button>
+	</c:when>
+</c:choose>
+
+
 </body>
 </html>

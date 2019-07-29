@@ -1,3 +1,6 @@
+<%@page import="dto.Board"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -17,16 +20,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 
-<% int selBoard = (int)request.getAttribute("selBoard"); %>
+<% Board board = (Board) request.getAttribute("board"); %>
+<% int selBoard = board.getDivide(); %>
 </head>
 <body>
 <h1>게시글 작성 페이지</h1>
 <hr>
-
 <form action = "/board/write" method = "post">
-
-
-
+<input type="hidden" name="board_idx" value="${board.getBoard_idx()}">
 <!-- form 태그 영역 감싸기 -->
 <fieldset>
 
@@ -60,20 +61,7 @@
 	<td></td>
 	<td>
 		<input type="submit" value="작성"/>
-		<c:choose>
-			<c:when test="${selBoard==1 }">
-				<button type="button" onclick="location.href='/board/freelist'">취소</button>
-			</c:when>
-			<c:when test="${selBoard==2 }">
-				<button type="button" onclick="location.href='/board/epillist'">취소</button>
-			</c:when>
-			<c:when test="${selBoard==3 }">
-				<button type="button" onclick="location.href='/board/photolist'">취소</button>
-			</c:when>
-		</c:choose>
-		
-			
-
+		<button type="button" onclick="location.href='/board/delete?brdidx=${board.getBoard_idx()}&divide=${board.getDivide()}'">취소</button>
 		
 	</td>
 </tr>
@@ -111,9 +99,12 @@
 	        contentType: false,
 	        enctype: 'multipart/form-data',
 	        processData: false,
-	        success: function(url) {
-	          $(el).summernote('editor.insertImage', url);
-	          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+	        success: function(data) {
+				var url = data.image.getStorename();
+				var idx = data.image.image_idx();
+	        	$(el).summernote('editor.insertImage', "\\resources\\boardimg\\"+url);
+	        	$('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+	        	console.log(idx);
 	        }
 	      });
 	    }

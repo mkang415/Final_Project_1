@@ -5,9 +5,9 @@
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		<!-- 처음으로 가기 -->
-		<c:if test="${paging.startPage ne 1 }">
+		<c:if test="${freePaging.curPage ne 1 }">
 		<li>
-			<a href="/board/freelist&search=${freePaging.search}"><span>&larr;처음</span></a>
+			<a href="/board/freelist?search=${freePaging.search}"><span>&larr;처음</span></a>
 		</li>
 		</c:if>
 
@@ -26,9 +26,7 @@
 	    </c:if>
 
 		<!-- 페이징 리스트 -->
-		<c:forEach
-	     begin="${freePaging.startPage }" end="${freePaging.endPage }"
-	     var="i">
+		<c:forEach begin="${freePaging.startPage }" end="${freePaging.endPage }" var="i">
 	
 			<!-- 현재 보고 있는 페이지번호만 강조해주기 -->
 			<c:if test="${freePaging.curPage eq i}">
@@ -37,7 +35,7 @@
 			</li>
 			</c:if>
 		
-			<c:if test="${paging.curPage ne i}">
+			<c:if test="${freePaging.curPage ne i}">
 			<li>
 				<a href="/board/freelist?curPage=${i }&search=${freePaging.search}">${i }</a>
 			</li>
