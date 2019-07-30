@@ -29,7 +29,7 @@ margin-right : 10;
 CalendarUtil util = new CalendarUtil();
 %>
 
-
+<% Calendar cal2 = Calendar.getInstance(); %>
 <%
 
 Calendar cal = (Calendar)request.getAttribute("jcal");
@@ -74,6 +74,15 @@ String nn = String.format("<a href='%s?year=%d&month=%d'>" +
 <a href="/member/mypage">
 <button>마이페이지로</button></a>
 </div>
+
+<div>
+<label>오늘날짜</label>
+<input type="text" value="
+<%= cal2.get(Calendar.YEAR) %>년&nbsp;
+<%= cal2.get(Calendar.MONTH)+1 %>월&nbsp;
+<%= cal2.get(Calendar.DATE) %>일"/>
+</div>
+
 
 <br>
 

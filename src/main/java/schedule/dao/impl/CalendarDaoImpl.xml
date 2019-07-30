@@ -19,9 +19,10 @@
 	</select>
 	
 	
-	<insert id="calWrite" parameterType="dto.CalendarDto">
+	<insert id="calWrite"
+	parameterType="dto.CalendarDto">
 		INSERT into calendar(calendar_idx,  member_idx, title, content, rdate, wdate)
-		VALUES (calendar_seq.nextval, #{member_idx}, #{title}, #{content}, #{rdate}, wdate)
+		VALUES (calendar_seq.nextval, #{member_idx}, #{title}, #{content}, #{rdate}, sysdate)
 	</insert>
 	
 	
