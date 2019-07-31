@@ -97,7 +97,12 @@ color: #EBFBFF;
 text-decoration:none 
 }
 
-
+#viewdiary {
+position: absolute;
+top: 130px;
+left: 520px;
+with: 100px;
+}
 
 </style>
 
@@ -159,6 +164,14 @@ text-decoration:none
 <h5 id="dd"><a id="d" href="/diary">일기장</a></h5>
 </div>
 
+
+<div id="viewdiary">
+<img src="/resources/img/viewdiary.png" width="600px" height="420px">
+
+
+
+
+</div>
 
 
 
