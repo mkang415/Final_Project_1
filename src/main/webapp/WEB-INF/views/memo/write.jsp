@@ -17,7 +17,7 @@
 		<div style="height: 60px"><input type="text" style="width: 94%" id="title" name = "title" placeholder="제목 입력"/></div>
 		<div style="height: 335px"><textarea style="width: 94%; height: 300px" name="memo" placeholder="메모 내용 입력"></textarea></div>
 		<button type="submit">작성</button>
-		<button type="button" onclick="location.href='/memo/list">취소</button>
+		<button type="button" onclick="location.href='/memo/list'">취소</button>
 	</fieldset>
 </form>
 </div>

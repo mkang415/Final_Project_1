@@ -16,6 +16,16 @@ public class BoardPaging {
 	
 	private String search;
 	
+	private int divide;
+	
+	public int getDivide() {
+		return divide;
+	}
+
+	public void setDivide(int divide) {
+		this.divide = divide;
+	}
+
 	public String getSearch() {
 		return search;
 	}

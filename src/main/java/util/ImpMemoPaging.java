@@ -1,6 +1,6 @@
 package util;
 
-public class QnaPaging {
+public class ImpMemoPaging {
 	private int curPage;	//현재 페이지 번호 (현재 선택한 페이지)
 
 	private int totalCount;	//총 게시글 수 (DB 조회 결과로 얻어옴)
@@ -14,15 +14,17 @@ public class QnaPaging {
 	private int startNo;	//게시물리스트 첫 번호
 	private int endNo;	//게시물리스트 마지막 번호
 	
-	private String search;
+	private int member_idx;
 	
-	public QnaPaging() {}
+	private int mark;
+
+	public ImpMemoPaging() {}
 	
 	// 총 게시글 수만 입력하는 생성자
 	//	curPage == 1
 	//	pageCount == 10
 	//	listCount == 10
-	public QnaPaging(int totalCount) {
+	public ImpMemoPaging(int totalCount) {
 		this.setTotalCount(totalCount);
 		
 		makePaging();
@@ -31,7 +33,7 @@ public class QnaPaging {
 	// 총 게시글 수와 현재 페이지를 입력하는 생성자
 	//	pageCount == 10
 	//	listCount == 10
-	public QnaPaging(int totalCount, int curPage) {
+	public ImpMemoPaging(int totalCount, int curPage) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
 		
@@ -40,7 +42,7 @@ public class QnaPaging {
 
 	// 총 게시글 수와 현재 페이지, 보여지는 게시글 수를 입력하는 생성자
 	//	pageCount == 10
-	public QnaPaging(int totalCount, int curPage, int listCount) {
+	public ImpMemoPaging(int totalCount, int curPage, int listCount) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
 		this.setListCount(listCount);
@@ -49,7 +51,7 @@ public class QnaPaging {
 	}
 
 	// 총 게시글 수와 현재 페이지, 보여지는 게시글 수, 페이지 수를 입력하는 생성자
-	public QnaPaging(int totalCount, int curPage, int listCount, int pageCount) {
+	public ImpMemoPaging(int totalCount, int curPage, int listCount, int pageCount) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
 		this.setListCount(listCount);
@@ -65,7 +67,7 @@ public class QnaPaging {
 		// 기본값 설정
 		if(curPage == 0)	setCurPage(1);	//기본값으로 첫 페이지(1) 세팅
 		if(pageCount == 0)	setPageCount(10); //한 화면에 보이는 페이지수 기본값(10) 세팅
-		if(listCount == 0)	setListCount(10); //한 화면에 보이는 게시글수 기본값(10) 세팅
+		if(listCount == 0) 	setListCount(3);
 		
 		// 총 페이지수 계산
 		totalPage = totalCount / listCount;
@@ -93,17 +95,26 @@ public class QnaPaging {
 
 	@Override
 	public String toString() {
-		return "QnaPaging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount
+		return "MemoPaging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount
 				+ ", totalPage=" + totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage="
-				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + "]";
+				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", member_idx=" + member_idx + ", mark="
+				+ mark + "]";
+	}
+	
+	public int getMark() {
+		return mark;
 	}
 
-	public String getSearch() {
-		return search;
+	public void setMark(int mark) {
+		this.mark = mark;
 	}
 
-	public void setSearch(String search) {
-		this.search = search;
+	public int getMember_idx() {
+		return member_idx;
+	}
+
+	public void setMember_idx(int member_idx) {
+		this.member_idx = member_idx;
 	}
 
 	public int getCurPage() {

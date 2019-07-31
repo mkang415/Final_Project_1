@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import dto.Memo;
+import util.ImpMemoPaging;
 import util.MemoPaging;
 
 public interface MemoService {
@@ -17,5 +18,19 @@ public interface MemoService {
 	void write(Memo memo, HttpSession session);
 
 	Memo view(int memo_idx);
+
+	Memo getUpdate(int memoidx);
+
+	void setUpdate(Memo memo);
+
+	void delete(int memoidx);
+
+	void mark(int memoidx);
+
+	void unmark(int memoidx);
+
+	ImpMemoPaging impGetMemoPage(int impCurPage, HttpSession session);
+
+	List<HashMap<String, Object>> getImpMemoList(ImpMemoPaging impMemoPaging);
 
 }
