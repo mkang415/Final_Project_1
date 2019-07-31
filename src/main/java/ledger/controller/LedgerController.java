@@ -16,9 +16,7 @@ public class LedgerController {
 	
 	@Autowired LedgerService ledgerService;
 	
-	@RequestMapping(value = "/ledger/test", method = RequestMethod.GET)
-	public void ledgerTest() {
-		Ledger test = ledgerService.test();
-		logger.info(test.toString());
-	}
+	@RequestMapping(value = "/ledger/list", method=RequestMethod.GET)
+	public 
+	
 }
