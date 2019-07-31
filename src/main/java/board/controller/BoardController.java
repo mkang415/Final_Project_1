@@ -56,7 +56,7 @@ public class BoardController {
 		model.addAttribute("freeList", freeBoardList);	
 	}
 	
-//	후기 게시판 게시글 리스트
+	//	후기 게시판 게시글 리스트
 	@RequestMapping(value = "/board/epillist", method = RequestMethod.GET)
 	public void epilList (
 			@RequestParam(defaultValue = "1")

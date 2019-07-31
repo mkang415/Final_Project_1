@@ -15,6 +15,8 @@ public class MemoPaging {
 	private int endNo;	//게시물리스트 마지막 번호
 	
 	private int member_idx;
+	
+	private int mark;
 
 	public MemoPaging() {}
 	
@@ -65,7 +67,7 @@ public class MemoPaging {
 		// 기본값 설정
 		if(curPage == 0)	setCurPage(1);	//기본값으로 첫 페이지(1) 세팅
 		if(pageCount == 0)	setPageCount(10); //한 화면에 보이는 페이지수 기본값(10) 세팅
-		if(listCount == 0)	setListCount(6); //한 화면에 보이는 게시글수 기본값(10) 세팅
+		if(listCount == 0) 	setListCount(6);
 		
 		// 총 페이지수 계산
 		totalPage = totalCount / listCount;
@@ -95,9 +97,18 @@ public class MemoPaging {
 	public String toString() {
 		return "MemoPaging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount
 				+ ", totalPage=" + totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage="
-				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", member_idx=" + member_idx + "]";
+				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", member_idx=" + member_idx + ", mark="
+				+ mark + "]";
 	}
 	
+	public int getMark() {
+		return mark;
+	}
+
+	public void setMark(int mark) {
+		this.mark = mark;
+	}
+
 	public int getMember_idx() {
 		return member_idx;
 	}
