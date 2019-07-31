@@ -32,10 +32,11 @@ public class CalendarUtil {
 	public String caldetail(int year, int month, int day) {
 		String s = "";
 		String url = "/schedule/caldetail";
-		
+	
 		s = String.format("<a href='%s?year=%d&month=%d&day=%d'></a>", 
 				url, year, month, day);
 		s += String.format("%2d", day); //2자리
+	
 		
 		return s;
 	}

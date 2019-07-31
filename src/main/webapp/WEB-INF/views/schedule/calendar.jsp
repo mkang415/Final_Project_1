@@ -65,23 +65,15 @@ String nn = String.format("<a href='%s?year=%d&month=%d'>" +
 %>
 
 <h2 style="text-align:center">▷ 일정을 관리하세욥 ◁</h2>
-<hr>
-<br>
 
-<div id="bt">
-<a href="/main">
-<button class="btn">메인으로</button></a>
-<a href="/member/mypage">
-<button>마이페이지로</button></a>
-</div>
 
-<div>
-<label>오늘날짜</label>
-<input type="text" value="
-<%= cal2.get(Calendar.YEAR) %>년&nbsp;
-<%= cal2.get(Calendar.MONTH)+1 %>월&nbsp;
-<%= cal2.get(Calendar.DATE) %>일"/>
-</div>
+<!-- <div> -->
+<!-- <label>오늘날짜</label> -->
+<%-- <input type="text" value=" --%>
+<%-- <%= cal2.get(Calendar.YEAR) %>년&nbsp; --%>
+<%-- <%= cal2.get(Calendar.MONTH)+1 %>월&nbsp; --%>
+<%-- <%= cal2.get(Calendar.DATE) %>일"/> --%>
+<!-- </div> -->
 
 
 <br>
@@ -93,15 +85,31 @@ String nn = String.format("<a href='%s?year=%d&month=%d'>" +
 <col width="200"><col width="200"><col width="200">
 
 <tr height="100">
-	<td colspan="7" align="center">
+	<td align="center">
+		<a href="/main">
+		<img src="/resources/img/main.png"  width="80px" height="80px">
+		</a>
+	</td>
+	<td colspan="5" align="center">
 		<%=pp %>&nbsp;<%=p %>&nbsp;&nbsp;
 		<font color="black" style="font-size: 50px">
 			<%=String.format("%d년&nbsp;&nbsp;%2d월", year, month) %>
 		</font>
 		<%=n %>&nbsp;<%=nn %>
+		<br>
+		<label>오늘 날짜</label>&nbsp;&nbsp;&nbsp;
+		<%= cal2.get(Calendar.YEAR) %>년&nbsp;
+		<%= cal2.get(Calendar.MONTH)+1 %>월&nbsp;
+		<%= cal2.get(Calendar.DATE) %>일
 	</td>
-</tr>
+	
+	<td align="center">
+		<a href="/member/mypage">
+		<img src="/resources/img/mypage.png"  width="80px" height="80px">
+		</a>
+	</td>
 
+</tr>
 
 <tr height="50">
 	<td align="center">일</td>
@@ -125,16 +133,22 @@ for(int i = 1; i < dayOfWeek; i++){
 // 날짜
 int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 for(int i = 1;i <= lastDay; i++){
+	
 	%>
+	
 	<td><%=util.caldetail(year, month, i)%>&nbsp;<%=util.showPen(year, month, i) %>
-		<%=util.makeTable(year, month, i, list) %>		
-	</td>	
+		<%=util.makeTable(year, month, i, list) %>	
+		
+	</td>
+		
 	<%
 	if((i + dayOfWeek - 1) % 7 == 0 && i != lastDay){
 		%>
 		</tr>
-		<tr height="100" align="left" valign="top">		
+		<tr height="100" align="left" valign="top">	
+		
 		<%
+		
 	}
 	
 }

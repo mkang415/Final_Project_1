@@ -3,95 +3,88 @@
     
 <%@ page import = "java.util.Calendar" %>    
 <% Calendar cal = Calendar.getInstance(); %>
-    
+<script type="text/javascript"
+src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<!-- Bootstrap 3 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>    
+
+
+
 <style>
 #background {
 background-image : url('/resources/img/back.jpg');
-border: 0;
-padding: 0; 
- min-height: -webkit-fill-available;
-background-position: top;
-background-size: contain;
-position: relative;
+position: absolute;
+width:100%;
+height:100%;
+background-size: cover;
+background-position: center center;
+}
+
+#com {
+position: absolute;
 }
 
 #cal {
 position: absolute;
-top: 130px;
-left: 390px;
-with: 100px;
-
+top: 5.8%;
+left: 25.5%;
 }
 
 #caltext{
 position: absolute;
-top: 135px;
-left: 398px;
+top: 8.8%;
+left: 25.8%;
 }
 
 #memo {
 position: absolute;
-top: 220px;
-left: 395px;
-with: 100px;
+top: 17.3%;
+left: 25.7%;
 }
 
 #memotext {
 position: absolute;
-top: 200px;
-left: 413px;
-}
-
-#mm {
+top: 16.6%;
+left: 26.7%;
 color: #EBFBFF;
 }
 
+
 #vote {
 position: absolute;
-top: 300px;
-left: 395px;
-with: 100px;
+top: 27.4%;
+left: 25.9%;
 }
 
 #vv {
 position: absolute;
-top: 305px;
-left: 413px;
+top: 30%;
+left: 26.9%;
 color: #EBFBFF;
 }
-
-
-#home {
-position: absolute;
-top: 480px;
-left: 400px;
-with: 100px;
-}
-
-
-#hh {
-position: absolute;
-top: 535px;
-left: 425px;
-color: #EBFBFF;
-}
-
-
 
 #diary {
 position: absolute;
-top: 388px;
-left: 398px;
-with: 100px;
+top: 38%;
+left: 25.9%;
 }
 
 
 #dd {
 position: absolute;
-top: 410px;
-left: 420px;
-color: #EBFBFF;
+top: 42.5%;
+left: 27.5%;
 }
+
+#home {
+position: absolute;
+top: 48.8%;
+left: 25.9%;
+}
+
 
 #d, #h, #a {
 text-decoration:none 
@@ -99,9 +92,25 @@ text-decoration:none
 
 #viewdiary {
 position: absolute;
-top: 130px;
-left: 520px;
-with: 100px;
+top: 6.8%;
+left: 33%;
+}
+
+
+#diaryview {
+position : absolute;
+top:14%;
+text-align: center;
+left: 38.5%;
+}
+
+div#incom {
+position: absolute;
+width: 100%;
+}
+
+table, th {
+	text-align: center;
 }
 
 </style>
@@ -109,12 +118,12 @@ with: 100px;
 
 <div id="background">
 <h1>마이페이지</h1>
+</div>
 
-
-
+<div id="incom">
 
 <div id="com">
-<img src="/resources/img/pc.png" width="100%" height="900px">
+<img src="/resources/img/pcpc.png" width="100%" height="100%">
 
 
 <div id="cal">
@@ -134,14 +143,14 @@ with: 100px;
 
 
 <div id="memo">
-<img src="/resources/img/memo.png"  width="75px" height="75px">
+<img src="/resources/img/memo.png"  width="70px" height="70px">
 </div>
 <div id="memotext">
 <h5 id="mm">메모장</h5>
 </div>
 
 <div id="vote"> 
-<img src="/resources/img/vote.png"  width="75px" height="75px">
+<img src="/resources/img/vote.png"  width="70px" height="70px">
 </div>
 <div id="votetext">
 <h5 id="vv">가계부</h5>
@@ -149,29 +158,52 @@ with: 100px;
 
 
 <div id="home"><a href="/main">
-<img src="/resources/img/home.png"  width="75px" height="75px"></a>
-</div>
-<div id="hometext">
-<h4 id="hh"><a id="h" href="/main">메인</a></h4>
+<img src="/resources/img/main.png"  width="70px" height="70px"></a>
 </div>
 
 
 
 <div id="diary"><a href="/diary">
-<img src="/resources/img/diary.png"  width="75px" height="75px"></a>
+<img src="/resources/img/diary.png"  width="70px" height="70px"></a>
 </div>
 <div id="diarytext">
-<h5 id="dd"><a id="d" href="/diary">일기장</a></h5>
+<h5 id="dd"><a id="d" href="/diary">일기</a></h5>
 </div>
 
 
 <div id="viewdiary">
-<img src="/resources/img/viewdiary.png" width="600px" height="420px">
-
-
-
-
+<img src="/resources/img/viewdiary.png" width="110%" height="50%">
 </div>
+<div id="diaryview">
+<table>
+<tr >
+<td><h3>☞ 가장 최근에 작성하신 일기 입니다 ☜<br>
+<small> 클릭하시면 일기장으로 넘어갑니다</small>
+</h3></td>
+</tr>
+
+<tr>
+	<th>제목</th>
+</tr>
+<tr>
+	<td>${view.title }</td>
+</tr>
+
+<tr>
+	<th>내용</th>
+</tr>
+
+<tr>
+<td height="150px" width="500">${view.content }</td>
+</tr>
+
+</table>
+</div> <!-- viewdiary -->
+
+
+
+
+
 
 
 
@@ -179,5 +211,4 @@ with: 100px;
 
 
 </div> <!-- com end -->
-
-</div>
+</div> <!-- incom end -->
