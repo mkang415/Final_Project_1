@@ -51,6 +51,12 @@ $(document).ready(function() {
 		}).append(
 			$("<input>").attr({
 				type:"hidden",
+				name:"replying",
+				value: "1"
+			})
+		).append(
+			$("<input>").attr({
+				type:"hidden",
 				name:"notice_idx",
 				value:"${notice.notice_idx }"
 			})
@@ -71,36 +77,81 @@ $(document).ready(function() {
 	});
 	
 	
-$("#replyTo").click(function() {
-		
-		alert("클릭");
-		
-	});
 
 
-	
-	
+
+
 });
+//ready function()
 
 
-//**답글 입력
-/* function insertCommentTo(commentNo) {
-	
-	$.ajax({
-		type: "post"
-		, url: "/noticeReplyTo/insert"
+//답글 창 출력
+function ReplyComment(commentNo) {
+
+	 $.ajax({
+		type: "get"
+		, url: "/noticeReplyTo"
 		, dataType: "html"
 		, data: {
-			reply_idx: commentNo
-		}
-		, success: function(data){
-			$("#commentBody").html(data) ;
+			step: commentNo
+			}
+		, success: function(res){
+			console.log(res);
+			$("#replyForm").html(res);
 		}
 		, error: function(e) {
 			console.log("error");
 			console.log(e);
 		}
-	}); */
+		
+	});	
+	
+}
+
+//답글 입력 
+function insertReply() {
+	
+	$form = $("<form>").attr({
+		action: "/noticeReply/insert",
+		method: "post"
+	}).append(
+		$("<input>").attr({
+			type:"hidden",
+			name:"step",
+			value:$("#step").val()
+		})
+	).append(
+		$("<input>").attr({
+			type:"hidden",
+			name:"replying",
+			value:"2"
+		})
+	).append(
+		$("<input>").attr({
+			type:"hidden",
+			name:"notice_idx",
+			value:"${notice.notice_idx }"
+			})
+	).append(
+		$("<input>").attr({
+			type:"hidden",
+			name:"member_idx",
+			value:"${sessionScope.member_idx }"		
+			})
+	).append(
+		$("<textarea>")
+			.attr("name", "reply")
+			.css("display", "none")
+			.text($("#commentContent").val())
+	);
+	$(document.body).append($form);
+	$form.submit();
+	
+	
+	
+}
+
+
 
 
 
@@ -171,12 +222,13 @@ margin-top: 50px;
 
 .notice {
 	font-size : 18px;
+	margin-bottom: 400px;
 }
 
-#filediv{
-	position:absolute;
-	top:600px;
-	left:1100px;
+.filedown{
+	position:relative;
+	
+	left:950px;
 }
 #btnList {
 width: 80px;
@@ -209,8 +261,7 @@ border-radius: 1px;
 
 </head>
 <body>
-<h1>게시판 view</h1>
-<hr>
+
 
 
 <h3 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -238,13 +289,14 @@ border-radius: 1px;
 </div>
 <hr>
 
+<div class="filedown">
+첨부파일 : <a href="/file/download?fileno=${noticeFile.fileno }">${noticeFile.origin_name }</a>
+</div>
+
 <div class = "notice">
 ${notice.content }
 </div>
 
-<div>
-<a href="/file/download?fileno=${noticeFile.fileno }">${noticeFile.origin_name }</a>
-</div>
 
 <!-- 댓글 처리 -->
 <div>
@@ -279,9 +331,12 @@ ${notice.content }
 	</td>
 	
 	<td>
-		<button class="btn btn-default" id="replyTo">답글</button>
+		<button class="btn btn-default" onclick="ReplyComment(${comment.step});">답글</button>
 	</td>
 	
+</tr>
+<tr>
+<td><div id="replyForm"></div></td>
 </tr>
 </c:forEach>
 </tbody>
@@ -290,7 +345,7 @@ ${notice.content }
 
 <!-- 댓글 입력 -->
 <c:if test="${login }" >
-<div class="form-inline text-center">
+<div class="form-inline text-center" style="margin-bottom: 30px;">
 	<input type="text" size="7" class="form-control"
 		id="commentWriter"
 		value="${sessionScope.nick }" readonly="readonly"/>

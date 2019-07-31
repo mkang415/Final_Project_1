@@ -75,17 +75,14 @@ border-radius: 1px;
 </head>
 <body>
 
-<h1>공지사항</h1>
 
-
-<hr>
 
 <c:if test="${login }">
 <div id="btnBox" >
-	<button style="float: right;" id="btnWrite">글쓰기</button>
+	<button style="position: absolute; float:right; left:1340px; top:230px;" id="btnWrite">글쓰기</button>
 </div>
 </c:if>
-<table class="table table-hover table-condensed" style="margin-top:200px; margin-left:240px;
+<table class="table table-hover table-condensed" style="margin-top:300px; margin-left:240px;
  width:1200px;">
 
 <thead style="background: #337AB7; color: white;" >

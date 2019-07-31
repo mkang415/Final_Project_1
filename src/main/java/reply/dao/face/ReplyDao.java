@@ -29,4 +29,12 @@ public interface ReplyDao {
 
 	public int countComment(NoticeReply noticeReply);
 
+	// 답글 입력 위한 step 조정
+	public void updateStep(NoticeReply comment);
+
+	public NoticeReply selectStep(int reply_idx);
+
+	//답글 insert
+	public void insertNoticeReplyTo(NoticeReply comment);
+
 }

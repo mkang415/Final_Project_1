@@ -45,6 +45,10 @@ public interface NoticeService {
 
 	public void deleteNotice(Notice notice);
 
+	public void insertReplyComment(NoticeReply comment);
+
+	public NoticeReply selectStepByReply_idx(int reply_idx);
+
 
 
 }
