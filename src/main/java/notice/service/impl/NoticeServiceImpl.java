@@ -223,6 +223,30 @@ public class NoticeServiceImpl implements NoticeService{
 		
 	}
 
+
+
+	@Override
+	public void insertReplyComment(NoticeReply comment) {
+		
+		replyDao.updateStep(comment);
+		
+		replyDao.insertNoticeReplyTo(comment);
+		
+		System.out.println("*********답글 들어감**********");
+
+		
+	}
+
+
+
+	@Override
+	public NoticeReply selectStepByReply_idx(int reply_idx) {
+		
+		NoticeReply comment = replyDao.selectStep(reply_idx);
+		
+		return comment;
+	}
+
 	
 	
 }

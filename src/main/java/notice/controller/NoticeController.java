@@ -139,13 +139,23 @@ public class NoticeController {
 	}	
 	
 	@RequestMapping(value="/noticeReply/insert", method=RequestMethod.POST)
-	public String noticeReplyInsert( 
+	public String noticeReplyInsert(
+			String replying,
 			NoticeReply noticeReply) {
 
 		NoticeReply comment = noticeReply;
 		
-		noticeService.insertComment(comment);
+		//답글 추가
+		if(replying.equals("2"))
+		{
+			
+			noticeService.insertReplyComment(comment);
 		
+		}
+		
+		else {
+		 noticeService.insertComment(comment);
+		}
 		
 		return "redirect:"+"/notice/view?notice_idx="+comment.getNotice_idx();
 		
@@ -159,7 +169,7 @@ public class NoticeController {
 			) {
 
 			
-		boolean success = noticeService.deleteComment(noticeReply);;
+		boolean success = noticeService.deleteComment(noticeReply);
 		
 		try {
 			out.append("{\"success\":"+success+"}");
@@ -222,6 +232,39 @@ public class NoticeController {
 			return "redirect:"+"/notice/list"; 
 			
    }
+	
+	@RequestMapping(value="/noticeReplyTo", method=RequestMethod.GET)
+	public String noticeReplyTo( Model model,
+								 int step) 
+		
+	{
+		
+		logger.info("답글입력창 출력");
+	
+		
+		model.addAttribute("step",step);
+
+		
+		return "notice/noticeReplyTo";
+			
+   }
+	
+//	@RequestMapping(value="/noticeReplyTo/insert", method=RequestMethod.POST)
+//	public String noticeReplyToInsert( Model model,
+//			NoticeReply noticeReply
+//			) 
+//		
+//		{
+//		
+//		logger.info("답글입력 처리");
+//		
+//		NoticeReply comment = noticeReply;
+//		
+//		noticeService.insertReplyComment(comment);
+//		
+//		
+//		return "redirect:"+"/notice/view?notice_idx="+comment.getNotice_idx();
+//		}
 
 	
 	
