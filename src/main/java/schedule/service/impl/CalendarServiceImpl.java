@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import dto.CalendarDto;
 import schedule.dao.face.CalendarDao;
 import schedule.service.face.CalendarService;
+import util.SchedulePaging;
 
 @Service
 public class CalendarServiceImpl implements CalendarService{
@@ -43,6 +44,31 @@ public class CalendarServiceImpl implements CalendarService{
 	@Override
 	public void caldel(CalendarDto dto) {
 		calendarDao.caldel(dto);
+	}
+
+	@Override
+	public List getList() {
+		return calendarDao.selectAll();
+	}
+
+	@Override
+	public int getTotal() {
+		return calendarDao.countAll();
+	}
+
+	@Override
+	public int getTotal(SchedulePaging search) {
+		return calendarDao.countSearch(search);
+	}
+
+	@Override
+	public List getSchedulePagingList(SchedulePaging paging) {
+		return calendarDao.selectPage(paging);
+	}
+
+	@Override
+	public List getSearchPagingList(SchedulePaging search) {
+		return calendarDao.selectPageSearch(search);
 	}
 
 	
