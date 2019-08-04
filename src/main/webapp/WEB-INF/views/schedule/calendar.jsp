@@ -6,6 +6,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script src="js/html2canvas.js"></script>
 
 <script type="text/javascript"
 src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -38,6 +39,7 @@ List<CalendarDto> list = (List<CalendarDto>)request.getAttribute("list");
 
 int year = cal.get(Calendar.YEAR);
 int month = cal.get(Calendar.MONTH) + 1;
+int newLine=0;
 
 // 요일
 int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
@@ -64,7 +66,12 @@ String nn = String.format("<a href='%s?year=%d&month=%d'>" +
 
 %>
 
+
+
 <h2 style="text-align:center">▷ 일정을 관리하세욥 ◁</h2>
+
+<button onclick=capture()>capture</button>
+
 
 
 <!-- <div> -->
@@ -87,7 +94,7 @@ String nn = String.format("<a href='%s?year=%d&month=%d'>" +
 <tr height="100">
 	<td align="center">
 		<a href="/main">
-		<img src="/resources/img/main.png"  width="80px" height="80px">
+		<img src="/resources/img/mainmain.png"  width="80px" height="80px">
 		</a>
 	</td>
 	<td colspan="5" align="center">
@@ -105,7 +112,7 @@ String nn = String.format("<a href='%s?year=%d&month=%d'>" +
 	
 	<td align="center">
 		<a href="/member/mypage">
-		<img src="/resources/img/mypage.png"  width="80px" height="80px">
+		<img src="/resources/img/mypageee.png"  width="80px" height="80px">
 		</a>
 	</td>
 
@@ -134,15 +141,16 @@ for(int i = 1; i < dayOfWeek; i++){
 int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 for(int i = 1;i <= lastDay; i++){
 	
+	
 	%>
 	
 	<td><%=util.caldetail(year, month, i)%>&nbsp;<%=util.showPen(year, month, i) %>
 		<%=util.makeTable(year, month, i, list) %>	
-		
 	</td>
 		
 	<%
 	if((i + dayOfWeek - 1) % 7 == 0 && i != lastDay){
+		
 		%>
 		</tr>
 		<tr height="100" align="left" valign="top">	
@@ -171,5 +179,4 @@ for(int i = 0;i < (7 - (dayOfWeek + lastDay - 1) % 7) % 7; i++){
 <br>
 <br>
 <br>
-
 

@@ -17,7 +17,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="/resources/assets/css/reset05.css">
-    <link rel="stylesheet" href="/resources/assets/css/MainCss4.css">
+    <link rel="stylesheet" href="/resources/assets/css/MainCss5.css">
     <link rel="stylesheet" href=/resources/assets/css/swiper.css>
     
     <!-- 파비콘 -->
@@ -59,9 +59,9 @@
             <div class="row">
                 <div class="header clearfix">
                     <h1>
-                        <a href="#">
-<!--                             <em><img src="/resources/assets/img/logo.png" alt="MEGABOX"></em> -->
-<!--                             <strong><img src="/resources/assets/img/logo-sub.png" alt="LIFE THEATER"></strong> -->
+                        <a href="/main">
+                            <em><img src="/resources/assets/img/GoodDiary-logo.png" alt="MEGABOX" ></em>
+<!--                             <strong><img src="/resources/assets/img/GoodDiary-logo.png" alt="LIFE THEATER"></strong> -->
                         </a>    
                     </h1>
                     <nav id="mNav">
@@ -70,9 +70,12 @@
                     </nav>
                     <nav class="nav">
                         <ul class="clearfix">
-<!--                             <li><a href="#">스토어</a></li> -->
-<!--                             <li><a href="#">이벤트</a></li> -->
-<!--                             <li><a href="#">로그인</a></li> -->
+                            <li><a href="/notice/list">공지사항</a></li>
+                            <li><a href="#">마이페이지</a></li>
+                            <li><a href="#">가계부</a></li>
+                            <li><a href="#">다이어리</a></li>
+                            <li><a href="#">자유게시판</a></li>
+                            
                         </ul>
                     </nav>    
                 </div>
@@ -89,8 +92,8 @@
     			<div class="row">
     				<div class="bm_left">
     					<ul>
-    						<li class="line"><a href="/notice/list">공지사항</a></li>
-    					    <li><a href="#">마이페이지</a></li>
+<!--     						<li class="line"><a href="/notice/list">공지사항</a></li> -->
+<!--     					    <li><a href="#">마이페이지</a></li> -->
 <!--     						<li><a href="#">클래식</a></li> -->
     					</ul>	
     				</div>
@@ -121,7 +124,7 @@
         		<div class="swiper-slide co1">
         			<div class="container">
                             <div class="row">
-                                <h3>메인이당</h3>
+                                <h3>메인</h3>
                                 <p>다이어리 </p>
                             </div>
                         </div>
@@ -130,7 +133,7 @@
         		<div class="swiper-slide co2">
         		      <div class="container">
                            <div class="row">
-                                <h3>가계부도 됨</h3>
+                                <h3>가계부 기능</h3>
                                 <p>가계부 </p>
                             </div>
                         </div>	
@@ -159,8 +162,8 @@
         <div class="container" style="top:100px; margin-left:100px; width:1500px;">
             <div class="row">
                 <div class="help clearfix">
-                    <article class="help_box1">
-                        <h3><em>공지사항</em></h3>
+                    <article class="help_box1" style="width:600px;">
+                        <h3><em></em></h3>
                         <div class="notice">
                             <ul>
                                 <li class="active"><a href="#">공지사항</a>
@@ -222,10 +225,55 @@
                             </ul>
                         </div>
                     </article>
-                </div>
-                    
+                	
+                	<article class="help_box2" style="width:600px; margin-left:160px;">
+                	<h3></h3>
+                	<div class="service" style="height:390px;">
+                		<ul>
+                		<li>
+                			<a href="#">
+                				<span class="img_svg" style="width:100px;">
+                					<img src="/resources/assets/img/accounting.png"><img>
+                				</span>
+                				<strong>가계부</strong>
+                			</a>
+                		</li>
+  						<li><a href="">
+  								<span class="img_svg" style="width:100px;">
+                  					<img src="/resources/assets/img/agendas.png"><img>
+              					</span>
+                				<strong>다이어리</strong>
+                		
+  							</a>
+  						</li>              		
+
+  						<li><a href="">
+  								<span class="img_svg" style="width:100px; margin-left:111px;">
+                					<img src="/resources/assets/img/note-book.png"><img>
+                				</span>
+                				<strong>메모</strong>
+                		
+  							</a>
+  						</li>              		
+
+  						<li><a href="">
+  								<span class="img_svg" style="width:100px;">
+                					<img src="/resources/assets/img/user.png"><img>
+                				</span>
+                				<strong>마이페이지</strong>
+                		
+  							</a>
+  						</li>              		
+                		
+                		</ul>
+                	
+                	
+                	</div>
+                	
+                	</article>
+                		</div>
                     </div>
-                  </div>
+                 </div>
             
              </section>
     

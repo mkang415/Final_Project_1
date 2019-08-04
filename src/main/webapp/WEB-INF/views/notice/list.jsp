@@ -4,12 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
- 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<c:import url="/WEB-INF/views/layout/header.jsp"/> 
+
+
+     <!-- Bootstrap 3 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 <script type="text/javascript"
    src="http://code.jquery.com/jquery-2.2.4.js"></script>
@@ -25,10 +27,7 @@ $(document).ready(function() {
 });
 
 </script>
-<!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 
 <style type="text/css">
@@ -56,10 +55,10 @@ table, th {
 	text-align: center;
 }
 
-.container {
-	border-left : 1px solid #eee;
-	border-right : 1px solid #eee;
-}
+/* .container { */
+/* 	border-left : 1px solid #eee; */
+/* 	border-right : 1px solid #eee; */
+/* } */
 #btnWrite {
 width: 100px;
 height: 40px;
@@ -72,8 +71,7 @@ border-radius: 1px;
  
 </style>
 
-</head>
-<body>
+
 
 
 
@@ -111,5 +109,6 @@ border-radius: 1px;
 
 <c:import url="/WEB-INF/views/layout/NoticePaging.jsp" />
 
-</body>
-</html>
+
+<c:import url="/WEB-INF/views/layout/footer.jsp"/>
+

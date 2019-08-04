@@ -1,6 +1,6 @@
 package util;
 
-public class SchedulePaging {
+public class LedgerPaging {
 	private int curPage;	//현재 페이지 번호 (현재 선택한 페이지)
 
 	private int totalCount;	//총 게시글 수 (DB 조회 결과로 얻어옴)
@@ -16,21 +16,23 @@ public class SchedulePaging {
 	
 	
 	private String search; //검색어
+	
 	public String getSearch() {
 		return search;
 	}
-
+	
 	public void setSearch(String search) {
 		this.search = search;
 	}
 	
+	public LedgerPaging() {}
 	
 	
 	// 총 게시글 수만 입력하는 생성자
 	//	curPage == 1
 	//	pageCount == 10
 	//	listCount == 10
-	public SchedulePaging(int totalCount) {
+	public LedgerPaging(int totalCount) {
 		this.setTotalCount(totalCount);
 		
 		makePaging();
@@ -39,7 +41,7 @@ public class SchedulePaging {
 	// 총 게시글 수와 현재 페이지를 입력하는 생성자
 	//	pageCount == 10
 	//	listCount == 10
-	public SchedulePaging(int totalCount, int curPage) {
+	public LedgerPaging(int totalCount, int curPage) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
 		
@@ -48,7 +50,7 @@ public class SchedulePaging {
 
 	// 총 게시글 수와 현재 페이지, 보여지는 게시글 수를 입력하는 생성자
 	//	pageCount == 10
-	public SchedulePaging(int totalCount, int curPage, int listCount) {
+	public LedgerPaging(int totalCount, int curPage, int listCount) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
 		this.setListCount(listCount);
@@ -57,7 +59,7 @@ public class SchedulePaging {
 	}
 
 	// 총 게시글 수와 현재 페이지, 보여지는 게시글 수, 페이지 수를 입력하는 생성자
-	public SchedulePaging(int totalCount, int curPage, int listCount, int pageCount) {
+	public LedgerPaging(int totalCount, int curPage, int listCount, int pageCount) {
 		this.setTotalCount(totalCount);
 		this.setCurPage(curPage);
 		this.setListCount(listCount);
@@ -177,4 +179,5 @@ public class SchedulePaging {
 	public void setEndNo(int endNo) {
 		this.endNo = endNo;
 	}
+
 }
