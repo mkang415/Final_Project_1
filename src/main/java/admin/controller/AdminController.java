@@ -23,7 +23,7 @@ import util.AdminMemberPaging;
 
 @Controller
 public class AdminController {
-	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+	private static Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired AdminService adminService;
 	

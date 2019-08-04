@@ -96,8 +96,9 @@ function checkAll() {
 	<h1 style="text-align: center; "><a href="/admin/list">게시판 관리</a></h1>
 	<br>
 	<br>
+	
 	<table class="table table-striped" border="1" style="text-align: center;
- 	width: 80%; margin-left: auto; margin-right: auto;">
+ 	width: 1200px; margin: auto;">
 	<tr>	
 	<th style="text-align: center;"><input type="checkbox" id="checkAll" onclick="checkAll();"/></th>
 	<th style="text-align: center;">글번호</th>

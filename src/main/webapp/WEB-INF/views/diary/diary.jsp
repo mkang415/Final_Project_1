@@ -11,6 +11,9 @@
 <meta charset="UTF-8">
 <title>#Diary</title>
 
+
+
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
@@ -105,7 +108,7 @@ body, html {
  	margin-left: 25%;
 	margin-right: 25%;
 	margin-top: 50px;
-	margin-bottom: 100px;
+	margin-bottom: 200px;
 	
 	padding: 30px;
 	
@@ -241,6 +244,19 @@ img {
 	color: white;
 }
 
+.btnBox {
+	position: absolute;
+	width: auto;
+	height: 1em;
+	top: 1em;
+	right: 1em;
+	padding-left: 1em;
+	padding-right: 1em;	
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;		
+
+}
+
 </style>
 
 </head>
@@ -255,6 +271,10 @@ img {
 <c:forEach items="${diaryList }" var="list">
 <div class="diary">
 <div class="datebox"><fmt:formatDate value="${list.writtendate }" pattern="yyyy.MM.dd hh:mm"/></div>
+<div align="center" class="btnBox">
+	<button type="button" id="modifyBtn" onClick="location.href='/diary/modify?diary_idx=${list.diary_idx}'"></button>
+	<button type="button" id="deleteBtn" onClick="location.href='/diary/delete?diary_idx=${list.diary_idx}'"></button> 
+</div>
 
 <div class="title"><h2>${list.title }</h2></div>
 <div class="content">${list.content }</div>
@@ -266,11 +286,6 @@ img {
 <button type="button" class="collapseBtn" onClick="clickCollapseBtn(this.parentNode.value)">collapse</button>
 </div>
 
-</div>
-
-<div align="center">
-	<button type="button" id="deleteBtn" onClick="location.href='/diary/delete?diary_idx=${list.diary_idx}'"></button> 
-	<button type="button" id="modifyBtn" onClick="location.href='/diary/modify?diary_idx=${list.diary_idx}'"></button>
 </div>
 
 </c:forEach>
