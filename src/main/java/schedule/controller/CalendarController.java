@@ -13,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import dto.CalendarDto;
 import schedule.CalendarUtil;
 import schedule.service.face.CalendarService;
+import util.SchedulePaging;
 
 @Controller
 public class CalendarController {
@@ -203,6 +205,32 @@ public class CalendarController {
 		
 		return "redirect:/schedule/calendar";
 	}
+	
+	
+	@RequestMapping (value = "/schedule/list",method=RequestMethod.GET)
+	public String list (
+			@RequestParam(defaultValue = "0")int curPage,
+			SchedulePaging search,
+			Model model
+			) {
+		
+		int totalCount = CalendarService.getTotal(search); //검색어 적용 게시글 수
+		
+		//페이징 생성
+		SchedulePaging paging = new SchedulePaging(totalCount, curPage);
+		paging.setSearch(search.getSearch()); //검색어 추가
+		model.addAttribute("paging",paging);
+		
+		List list = CalendarService.getSearchPagingList(paging);
+		
+		model.addAttribute("list",list);
+		
+		return "/schedule/list";
+		
+		
+	}
+	
+	
 	
 	
 

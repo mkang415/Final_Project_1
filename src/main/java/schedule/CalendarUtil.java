@@ -37,7 +37,6 @@ public class CalendarUtil {
 				url, year, month, day);
 		s += String.format("%2d", day); //2자리
 	
-		
 		return s;
 	}
 	
