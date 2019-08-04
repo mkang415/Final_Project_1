@@ -7,8 +7,25 @@
 
 <mapper namespace="ledger.dao.face.LedgerDao">
 	
-	<select id="test"
-	 resultType="dto.Ledger">
-		select * from ledger
+	<select id="selectCntAll"
+	 resultType="int">
+		SELECT count(*) FROM LEDGER
+		ORDER BY LEDGER_IDX
 	</select>
+	
+	<select id="selectAll"
+	 parameterType="util.LedgerPaging"
+	 resultType="hashmap">
+	 SELECT * FROM (
+	 SELECT rownum rnum, B.* FROM (
+	 SELECT ledger_idx, member_idx, item, cost, writtendate
+	 FROM ledger
+	 
+	 ORDER BY ledger_idx DESC
+	 ) B
+	 ORDER BY rnum
+	 )
+	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
 </mapper>
