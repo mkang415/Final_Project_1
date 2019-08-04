@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import dto.Ledger;
 import ledger.service.face.LedgerService;
 
-@Controller
-public class LedgerController {
-	public static Logger logger = LoggerFactory.getLogger(LedgerController.class);
+//@Controller
+//public class LedgerController {
+//	public static Logger logger = LoggerFactory.getLogger(LedgerController.class);
 	
-	@Autowired LedgerService ledgerService;
+//	@Autowired LedgerService ledgerService;
 	
-	@RequestMapping(value = "/ledger/list", method=RequestMethod.GET)
-	public 
-	
-}
+//	@RequestMapping(value = "/ledger/list", method=RequestMethod.GET)
+//	public 
+//	
+//}
