@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ledger.service.face.LedgerService;
 import util.LedgerPaging;
 
-//@Controller
-//public class LedgerController {
-//	public static Logger logger = LoggerFactory.getLogger(LedgerController.class);
+@Controller
+public class LedgerController {
+	public static Logger logger = LoggerFactory.getLogger(LedgerController.class);
 	
-//	@Autowired LedgerService ledgerService;
+	@Autowired LedgerService ledgerService;
 	
 	@RequestMapping(value = "/ledger/ledger", method=RequestMethod.GET)
 	public void ledger(

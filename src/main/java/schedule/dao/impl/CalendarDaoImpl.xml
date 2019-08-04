@@ -64,7 +64,7 @@
 	</select>	
 	
 	<select id="selectPage"
-	parameterType="util.schedulePaging"
+	parameterType="util.SchedulePaging"
 	resultType="dto.CalendarDto">
 		select * from (
 			select rownum rnum, B.* from (
