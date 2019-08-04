@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DOCTYPE -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qna.dao.face.FreQnaDao">
+
+	<!-- 자주 묻는 질문 가져오기 -->
+	<select id="getfreList"
+	 resultType="hashmap">
+		select * from freqna order by freqna_idx
+	</select>
+	
+	<!-- 작성한 자주 묻는 질문 저장 -->
+	<insert id="write"
+	 parameterType="dto.FreQna">
+		insert into freqna(freqna_idx, question, answer)
+		values(freqna_seq.nextval, #{question}, #{answer})
+	</insert>
+	
+	<!-- 수정할 데이터 불러오기 -->
+	<select id="getUpdate"
+	 parameterType="int"
+	 resultType="dto.FreQna">
+		select * from freqna
+		where freqna_idx = #{freqna_idx}
+	</select>
+	
+	<!-- 수정할 데이터 저장하기 -->
+	<update id="setUpdate"
+	 parameterType="dto.FreQna">
+		update freqna 
+		set question = #{question}, answer = #{answer}
+		where freqna_idx = #{freqna_idx}
+	</update>
+	
+	<!-- 데이터 삭제 -->
+	<delete id="delete"
+	 parameterType="int">
+		delete freqna 
+		where freqna_idx = #{freqna_idx}
+	</delete>
+</mapper>
+

@@ -166,8 +166,9 @@ public class BoardController {
 		logger.info("이미지 업로드");
         try {
         	image = boardService.imgSave(file, context);
-//            String uploadPath = image.getStorename();
-            return ResponseEntity.ok().body(image);
+        	logger.info(image.getStorename());
+            String uploadPath = image.getStorename();
+            return ResponseEntity.ok().body(uploadPath);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();

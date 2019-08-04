@@ -31,7 +31,7 @@ table {
 
 <script type="text/javascript">
 //댓글 입력
-function fn_comment(code){
+function fn_comment(){
 		
 	$.ajax({
 		type:'POST',
@@ -106,9 +106,7 @@ function getCommentList(){
 <body>
 <div class="container">
 	<div class="container">
-    	<form id="commentListForm" name="commentListForm" method="post">
         	<div id="commentList"></div>
-   		</form>
 	</div>
     <form id="commentForm" name="commentForm" method="post">
     <input type="hidden" name="board_idx" value="${freeView.getBoard_idx()}">
@@ -122,7 +120,7 @@ function getCommentList(){
                     	<textarea style="width: 1100px" rows="3" cols="30" id="reply" name="reply"></textarea>
                     	<br>
                     	<div>
-                        	<a href='#' onClick="fn_comment('${freeView.getBoard_idx()}')" class="btn pull-right btn-success">등록</a>
+                        	<a href='#' onClick="fn_comment()" class="btn pull-right btn-success">등록</a>
                     	</div>
                 	</td>
 				</tr>
