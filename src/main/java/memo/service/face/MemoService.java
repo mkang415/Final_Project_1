@@ -17,10 +17,6 @@ public interface MemoService {
 
 	void write(Memo memo, HttpSession session);
 
-	Memo view(int memo_idx);
-
-	Memo getUpdate(int memoidx);
-
 	void setUpdate(Memo memo);
 
 	void delete(int memoidx);

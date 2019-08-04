@@ -15,8 +15,6 @@ public interface MemoDao {
 
 	void write(Memo memo);
 
-	Memo view(int memo_idx);
-
 	void update(Memo memo);
 
 	void delete(int memo_idx);

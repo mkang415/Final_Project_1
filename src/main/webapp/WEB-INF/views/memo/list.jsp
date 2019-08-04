@@ -8,51 +8,117 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- jQuery 2.2.4 -->
-<script type="text/javascript"
- src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-- summernote -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#btnSearch").click(function() {
+		location.href="/board/freelist?search="+$("#search").val();
+	});
+});
+</script>
 
 </head>
 <body>
+
 <h1>메모 페이지</h1>
 <hr>
-<button type="button" onclick="location.href='/memo/write'">메모 작성</button>
-<br>
-<h3>중요 메모</h3>
-<div style="width: 1000px; float: inherit;">
-	<c:import url="/WEB-INF/views/layout/impMemoPaging.jsp"></c:import>
-	<c:forEach items="${impMemoList }" var = "i">
-		<div style="width: 300px; height: 400px; border: 1px solid #eee; float: left; overflow: hidden">
-			<div style="height: 60px; border: 1px solid #eee;">
-				${i.TITLE }
-				<button type="button" onclick="unmark(${i.MEMO_IDX})">unmarking</button>
-			</div>
-			<div style="height: 338px; border: 1px solid #eee;" onclick="location.href='/memo/view?memoidx=${i.MEMO_IDX}'">
-				${i.MEMO }
-			</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalWrite">
+  	메모 작성
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalWrite" tabindex="-1" role="dialog" aria-labelledby="ModalWrite" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable" role="document">
+    	<div class="modal-content">
+    		<form action="/memo/write" method = "post">
+      		<div class="modal-header">
+      		<input type="text" style="width: 94%" id="title" name = "title" placeholder="제목 입력"/>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          		<span aria-hidden="true">&times;</span>
+        	</button>
+      		</div>
+    		<div class="modal-body">
+        		<textarea style="width: 94%; height: 300px" id="summernote" name="memo" placeholder="메모 내용 입력"></textarea>
+      		</div>
+      		<div class="modal-footer">
+      			<button type="submit" class="btn btn-primary">Save changes</button>      		
+      		</div>
+      		</form>
 		</div>
-	</c:forEach>
+  	</div>
 </div>
+
 <br><br><br>
-<h3>새 메모</h3>
-<div style="width: 1000px">
-	<c:import url="/WEB-INF/views/layout/memoPaging.jsp"></c:import>
-	<c:forEach items="${memoList }" var = "m">
-		<div style="width: 300px; height: 400px; border: 1px solid #eee; float: left; overflow: hidden">
-			<div style="height: 60px; border: 1px solid #eee;">
-				${m.TITLE }
-				<button type="button" onclick="mark(${i.MEMO_IDX})">marking</button>
-			</div>
-			<div style="height: 338px; border: 1px solid #eee;" onclick="location.href='/memo/view?memoidx=${m.MEMO_IDX}'">
-				${m.MEMO }
-			</div>
-		</div>
-	</c:forEach>
+<div id="memoList">
+
 </div>
+<script>
+	$('#summernote').summernote({
+		height: 300,
+	  	minHeight: null,
+	  	maxHeight: null,
+	  	focus: true,
+	  	lang: 'ko-KR', // default: 'en-US'
+	  	toolbar: [
+	  	    // [groupName, [list of button]]
+	  	    ['style', ['bold', 'italic', 'underline', 'clear']],
+	  	    ['font', ['strikethrough']],
+	  	    ['color', ['color']],
+	  	    ['para', ['ul', 'ol', 'paragraph']],
+	  	    ['height', ['height']],
+	  	  	['insert', ['link']]
+	  	  ]
+	});
+
+	function unmark(memoidx){
+		$.ajax({
+			type : 'GET',
+			url : '/memo/unmark',
+			data : {'memoidx' : memoidx },
+			success : function() {
+				getMemoList();
+			}
+		});
+	}
+	
+	function mark(memoidx){
+		$.ajax({
+			type : 'GET',
+			url : '/memo/mark',
+			data : {'memoidx' : memoidx },
+			success : function() {
+				getMemoList();
+			}
+		});
+	}
+	
+	$(function(){
+		getMemoList();
+	});
+	
+	function getMemoList(){
+		$.ajax({
+			type: 'GET',
+			url : "/memo/getview",
+			dataType : "html",
+			data : { },
+			success: function(data){
+				$("#memoList").html(data);
+			}
+		})
+	}
+	
+</script>
 </body>
 </html>

@@ -50,14 +50,6 @@
 		values (memo_seq.nextval, #{title}, #{memo}, #{member_idx})
 	</insert>
 	
-	<!-- idx로 메모 불러오기 -->
-	<select id="view"
-	 parameterType="int"
- 	 resultType="dto.Memo">
-		select * from memo
-		where memo_idx = #{memo_idx}
-	</select>
-	
 	<!-- 메모 수정 db 저장 -->
 	<update id="update"
 	 parameterType="dto.Memo">

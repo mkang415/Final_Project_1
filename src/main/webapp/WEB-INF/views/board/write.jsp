@@ -99,9 +99,8 @@
 	        contentType: false,
 	        enctype: 'multipart/form-data',
 	        processData: false,
-	        success: function(data) {
-				var url = data.image.getStorename();
-				var idx = data.image.image_idx();
+	        success: function(url) {
+
 	        	$(el).summernote('editor.insertImage', "\\resources\\boardimg\\"+url);
 	        	$('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
 	        	console.log(idx);

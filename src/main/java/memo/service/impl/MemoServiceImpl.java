@@ -74,20 +74,6 @@ public class MemoServiceImpl implements MemoService{
 		
 	}
 
-	//	메모 상세보기
-	@Override
-	public Memo view(int memo_idx) {
-		
-		return memoDao.view(memo_idx);
-	}
-
-	//	수정할 메모 데이터 불러오기
-	@Override
-	public Memo getUpdate(int memo_idx) {
-		
-		return memoDao.view(memo_idx);
-	}
-
 	//	수정한 메모 입력
 	@Override
 	public void setUpdate(Memo memo) {

@@ -1,16 +1,16 @@
+<%@page import="dto.Board"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- jQuery 2.2.4 -->
-<script type="text/javascript"
- src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <!-- summernote -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
@@ -19,57 +19,43 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
-<style type="text/css">
-
-table, th, td {
-	border: 1px solid #ccc;
-	border-collapse: collapse;
-}
-
-table {
-	width: 80%
-}
-</style>
 
 </head>
 <body>
-<h1>QNA 페이지</h1>
+<h1>자주묻는 질문 수정 페이지</h1>
 <hr>
-<div>
-<table class="table table-striped table hover table-condensed">
+<form action = "/freqna/update" method = "post">
+<!-- form 태그 영역 감싸기 -->
+<fieldset>
+
+<!-- fieldset 설명 -->
+<legend>자주묻는 질문 수정</legend>
+<input type="hidden" name="freqna_idx" value="${freqna.freqna_idx}">
+<table>
+<!-- 전달 파라미터, 전송할 데이터 -->
+
 <tr>
-	<td colspan="3"><h3>${qna.getTitle()}</h3></td>
+	<td style="width: 10%"><label for="question">질문</label></td>
+	<td style="width: 90%"><input type="text" style="width: 94%" id="question" name = "question" value="${freqna.question}"/></td>
 </tr>
 
 <tr>
-	<td><c:choose>
-			<c:when test="${empty qna.getAnswer_date()}">미확인</c:when>
-			<c:when test="${not empty qna.getAnswer_date()}">답변완료</c:when>
-		</c:choose></td>
-	<td>${qna.getNickname()}</td>
-	<td><fmt:formatDate value="${qna.getQuestion_date()}" pattern="yyyy-MM-dd HH:mm" /></td>
+	<td>답변</td>
+	<td><textarea id="summernote" name="answer">${freqna.answer }</textarea></td>
 </tr>
 
+<!-- <form>데이터 전송(Submit) 버튼 -->
 <tr>
-	<td colspan="3">${qna.getQuestion()}</td>
+	<td></td>
+	<td>
+		<input type="submit" value="수정"/>
+		<button type="button" onclick="location.href='/freqna/list'">취소</button>	
+	</td>
 </tr>
 </table>
-</div>
 
-<c:import url="/WEB-INF/views/qna/answer.jsp"></c:import>
-
-<c:if test="${login }">
-	<c:if test = "${admin ne true }">
-		<button type="button" onclick="location.href='/qna/write'">문의하기</button>
-		<button onclick="location.href='/qna/newlist'">목록</button>
-	</c:if>
-	<c:if test="${checkId}">
-		<button type="button" onclick="location.href='/qna/update?qnaidx=${qna.getQna_idx()}'">질문 수정</button>
-		<button type="button" onclick="location.href='/qna/delete?qnaidx=${qna.getQna_idx()}'">질문 삭제</button>
-	</c:if>
-</c:if>	
-	
-
+</fieldset>
+</form>
 
 <script>
 	$('#summernote').summernote({

@@ -21,7 +21,6 @@ import util.LedgerPaging;
 	
 //	@Autowired LedgerService ledgerService;
 	
-
 	@RequestMapping(value = "/ledger/ledger", method=RequestMethod.GET)
 	public void ledger(
 			@RequestParam(defaultValue = "1") 
@@ -35,5 +34,4 @@ import util.LedgerPaging;
 		model.addAttribute("list", list);
 		
 	}
-	
 }
