@@ -3,6 +3,25 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<style type="text/css">
+
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+</style>
+
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		<!-- 처음으로 가기 -->
