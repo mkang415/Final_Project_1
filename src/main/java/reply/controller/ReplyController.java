@@ -63,7 +63,7 @@ public class ReplyController {
 	}
 	
 	//	댓글 수정
-	@RequestMapping(value = "reply/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "reply/update", method = RequestMethod.POST)
 	public @ResponseBody String update(
 			BoardReply boardReply
 			) {
