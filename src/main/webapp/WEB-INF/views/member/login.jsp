@@ -13,7 +13,10 @@
 }
 
 .join_content {
-	margin: 0 auto;
+	margin-top:50px;
+	position:relative;
+	left:680px;
+
 	max-width: 335px;
 	min-width: 200px;
 }
@@ -78,11 +81,51 @@
 	top:600px;
 	left:700px;
 }
+
+#btnLogin{position: relative;
+			left: 745px; top:70px; }
+
+#loginImg {position: relative;
+			width: 800px; left:450px;}
+
+#memberjoin{
+			position:relative;
+			top:95px;
+			left:860px;
+}
+
+#memberFind{
+			position:relative;
+			top:95px;
+			left:690px;
+}
+
+#underLine{
+			position:relative;
+			top:90px;
+			width:335px;
+			left:680px;
+}
+
+a{	 color:black;	
+	font-size: 14px;
+	font-weight: 700;}
+	
+a:link{text-decoration: none;  }
+a:hover {color:#00BFFF;}
+
 </style>
 </head>
 <body>
-<h1>로그인 화면</h1>
-<hr>
+<header>
+
+<a href="/main">
+<img id="loginImg" src="/resources/assets/img/GoodDiary-logo.png"></img>
+</a>
+
+</header>
+
+
 
 
 
@@ -109,6 +152,13 @@
 		<span>로그인</span>
 	</button>
 </form>
+
+<div id="underLine">
+<hr>
+</div>
+
+<a id="memberjoin" href="/member/join">회원가입</a>
+<a id="memberFind" href="#">비밀번호찾기</a>
 
 
 

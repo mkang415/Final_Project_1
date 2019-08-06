@@ -49,6 +49,8 @@ public interface NoticeService {
 
 	public NoticeReply selectStepByReply_idx(int reply_idx);
 
+	public List<Notice> mainNoticeList();
+
 
 
 }

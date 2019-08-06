@@ -16,7 +16,8 @@
 }
 
 .join_content {
-	margin: 0 auto;
+	margin-top:50px;
+	margin-left:680px;
 	max-width: 335px;
 	min-width: 200px;
 }
@@ -81,6 +82,42 @@
 	top:600px;
 	left:700px;
 }
+
+#btnJoin{position: relative;
+			left: 745px; top:70px;
+			margin-bottom:100px; }
+
+#loginImg {position: relative;
+			width: 800px; left:450px;}
+
+#underLine{
+			position:relative;
+			top:0;
+			width:1600px;
+			left:30px;
+}
+
+.joinProcess {
+			position:relative;
+			float:right;
+			display:block;
+			bottom:30px;
+			
+		
+			
+}
+
+.joinProcess ul li{		
+						margin-right: 20px;
+						padding-right: 20px;
+						list-style:none;
+						font-size: 12px;
+						font-weight: 700;
+						float:left; }
+						
+
+
+
 </style>
 
 <script type="text/javascript">
@@ -252,7 +289,29 @@ $(document).ready(function() {
 
 </head>
 <body>
-<h1>회원가입 이당</h1>
+
+<header>
+
+<a href="/main">
+<img id="loginImg" src="/resources/assets/img/GoodDiary-logo.png"></img>
+</a>
+
+</header>
+<div id="underLine">
+<hr>
+</div>
+
+<nav>
+
+	<div class="joinProcess">
+	<ul class="clearfix">
+			<li style="color:#00BFFF;"><h3>1. 이메일, 비밀번호 입력</h3></li>
+			<li><h3>2. 이메일인증</h3></li>
+			<li><h3>3. 가입완료</h3></li>
+	</ul>
+	</div>
+
+</nav>
 
 <form action="/member/join" method="post">
 

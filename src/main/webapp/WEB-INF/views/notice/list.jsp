@@ -23,6 +23,15 @@ $(document).ready(function() {
 	$("#btnWrite").click(function() {
 		location.href="/notice/write";
 	});
+	
+	$("#btnSearch").click(function() {
+		location.href="/notice/list?select=" +$("#select").val()+"&search="+$("#search").val();
+	});
+
+	$("#chatting").click(function() {
+		location.href="/notice/chatting";
+	});
+
 
 });
 
@@ -34,7 +43,10 @@ $(document).ready(function() {
 
 table, th {
 	text-align: center;
+	
 }
+
+
 
 /* 글쓰기 버튼 위치 설정 */
 #pagingBox {
@@ -49,11 +61,11 @@ table, th {
 }
 
 
+tr {height: 40px;  }
+
+td {padding-top: 10px;}
 
 
-table, th {
-	text-align: center;
-}
 
 /* .container { */
 /* 	border-left : 1px solid #eee; */
@@ -69,6 +81,16 @@ border: solid 2px;
 border-radius: 1px;
 }
  
+ 
+#chatting {
+width: 100px;
+height: 40px;
+background: #474e60;
+font-size: 13px;
+color: #fff;
+border: solid 2px;
+border-radius: 1px;
+} 
 </style>
 
 
@@ -80,16 +102,20 @@ border-radius: 1px;
 	<button style="position: absolute; float:right; left:1340px; top:230px;" id="btnWrite">글쓰기</button>
 </div>
 </c:if>
+<div id="btnBox" >
+	<button style="position: absolute; float:right; left:1340px; top:290px;" id="chatting">1대1 채팅</button>
+</div>
+
 <table class="table table-hover table-condensed" style="margin-top:300px; margin-left:240px;
  width:1200px;">
 
 <thead style="background: #337AB7; color: white;" >
-	<tr>
-		<th style="width: 10%;">번호</th>
-		<th style="width: 45%;">제목</th>
-		<th style="width: 15%;">작성자</th>
-		<th style="width: 10%;">조회수</th>
-		<th style="width: 20%;">작성일</th>
+	<tr style="height: 50px;">
+		<th style="width: 10%; padding-bottom: 13px;"></th>
+		<th style="width: 45%; padding-bottom: 13px;">제목</th>
+		<th style="width: 15%; padding-bottom: 13px;">작성자</th>
+		<th style="width: 10%; padding-bottom: 13px;">조회수</th>
+		<th style="width: 20%; padding-bottom: 13px;">작성일</th>
 	</tr>
 </thead>
 <tbody>
@@ -108,6 +134,15 @@ border-radius: 1px;
 </table>
 
 <c:import url="/WEB-INF/views/layout/NoticePaging.jsp" />
+
+<div class="form-inline text-center" style="margin-bottom:200px;">
+<select class="form-control form-control-sm" name="select" id="select">
+	<option value="title" selected>제목</option>
+	<option value="content">내용</option>
+</select>
+	<input class="form-control" type="text" id="search" />
+	<button id="btnSearch" class="btn">검색</button>
+</div> 
 
 
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>

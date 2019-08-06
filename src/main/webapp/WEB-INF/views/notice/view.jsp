@@ -335,9 +335,9 @@ ${notice.content }
 	</td>
 	
 </tr>
-<tr>
-<td><div id="replyForm"></div></td>
-</tr>
+
+<div id="replyForm"></div>
+
 </c:forEach>
 </tbody>
 </table>	<!-- 댓글 리스트 end -->

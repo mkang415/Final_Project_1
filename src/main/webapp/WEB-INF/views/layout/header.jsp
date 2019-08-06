@@ -17,8 +17,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="/resources/assets/css/resetLayout.css">
-    <link rel="stylesheet" href="/resources/assets/css/MainCss5.css">
-    <link rel="stylesheet" href=/resources/assets/css/swiper.css>
+    <link rel="stylesheet" href="/resources/assets/css/headerCss.css">
     
     <!-- 파비콘 -->
 <!--     <link rel="shortcut icon" href="/resources/assets/icons/favicon.ico"> -->
@@ -51,15 +50,19 @@
          alert("현재 브라우저는 지원하지 않습니다. 크롬 브라우저를 추천합니다.!");
       </script>
    <![endif]-->
+<style type="text/css">
+a:link{text-decoration: none;}
+
+</style>
 
 </head>
 <body>
     
     <header id="header">
-        <div class="container">
+        <div class="container" style="width: 1430px; margin-left:100px;">
             <div class="row">
                 <div class="header clearfix">
-                    <h1>
+                    <h1 style="margin-top:0;">
                         <a href="/main">
                             <em><img src="/resources/assets/img/GoodDiary-logo.png" alt="MEGABOX" ></em>
 <!--                             <strong><img src="/resources/assets/img/GoodDiary-logo.png" alt="LIFE THEATER"></strong> -->
@@ -69,7 +72,7 @@
                         <h2 class="ir_so">전체메뉴</h2>
                         <a href="#" class="ham"><span></span></a>
                     </nav>
-                    <nav class="nav">
+                    <nav class="nav" style="margin-top:15px;">
                         <ul class="clearfix">
                             <li><a href="/notice/list">공지사항</a></li>
                             <li><a href="#">마이페이지</a></li>

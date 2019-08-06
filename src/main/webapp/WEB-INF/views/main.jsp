@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+ 
     
 <!DOCTYPE html>
 <html>
@@ -168,30 +170,15 @@
                             <ul>
                                 <li class="active"><a href="#">공지사항</a>
                                     <ul>
+                                    <c:forEach items="${list }" var="i">
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar">공지</strong> <em>2019.07.22</em></dt>
-                                                <dd>공지사항이다</dd>
+                                                <dt><strong class="bar">${i.title }</strong> <em><fmt:formatDate value="${i.writtendate }" pattern="yyyy-MM-dd" /></em></dt>
+                                                <dd>${i.content }</dd>
                                             </dl>            
                                         </li>
-                                        <li>
-                                            <dl>
-                                                <dt><strong class="bar">공지</strong> <em>2019.07.22</em></dt>
-                                                <dd>공지사항이다</dd>
-                                            </dl>
-                                        </li>
-                                        <li>
-                                            <dl>
-                                                <dt><strong class="bar">공지</strong> <em>2019.07.22</em></dt>
-                                                <dd>공지사항이다</dd>
-                                            </dl>
-                                        </li>
-                                        <li>
-                                            <dl>
-                                                <dt><strong class="bar">공지</strong> <em>2019.07.22</em></dt>
-                                                <dd>공지사항이다</dd>
-                                            </dl>
-                                        </li>
+                                   </c:forEach>
+
                                     </ul>
                                 </li>
                                 <li><a href="#">자유게시판</a>
@@ -204,20 +191,20 @@
                                         </li>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar"></strong> <em></em></dt>
-                                                <dd></dd>
+                                                <dt><strong class="bar">자유게시판</strong> <em>2019.07.22</em></dt>
+                                                <dd>자유게시판이다</dd>
                                             </dl>
                                         </li>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar"></strong> <em></em></dt>
-                                                <dd> </dd>
+                                                <dt><strong class="bar">자유게시판</strong> <em>2019.07.22</em></dt>
+                                                <dd>자유게시판이다 </dd>
                                             </dl>
                                         </li>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar"></strong> <em></em></dt>
-                                                <dd></dd>
+                                                <dt><strong class="bar">자유게시판</strong> <em>2019.07.22</em></dt>
+                                                <dd>자유게시판이다</dd>
                                             </dl>
                                         </li>
                                     </ul>
@@ -258,9 +245,9 @@
 
   						<li><a href="">
   								<span class="img_svg" style="width:100px;">
-                					<img src="/resources/assets/img/user.png"><img>
+                					<img src="/resources/assets/img/question.png"><img>
                 				</span>
-                				<strong>마이페이지</strong>
+                				<strong>Q&A</strong>
                 		
   							</a>
   						</li>              		
@@ -338,7 +325,7 @@
                             <li><a href="#">윤리경영</a></li>
                         </ul>
                         <address>
-                            <p>서울특별시 노원구 월계2동 <br><span class="bar2">대표자명 박재현</span> <br><span class="bar2">사업자등록번호 211-86-59478</span> 
+                            <p>서울특별시 노원구 월계2동 <br><span class="bar2">대표자명 : 강민규, 강현지, 김영현, 박재현, 석진엽 </span> <br><span class="bar2">사업자등록번호 211-86-59478</span> 
                             	통신판매업신고번호 제 833호</p>
                             <p>Copyright 2019 by kyungdongHighSchoolGerrard Inc. All right reserved</p>
                         </address>
