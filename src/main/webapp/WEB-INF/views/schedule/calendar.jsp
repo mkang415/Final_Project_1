@@ -70,10 +70,6 @@ String nn = String.format("<a href='%s?year=%d&month=%d'>" +
 
 <h2 style="text-align:center">▷ 일정을 관리하세욥 ◁</h2>
 
-<button onclick=capture()>capture</button>
-
-
-
 <!-- <div> -->
 <!-- <label>오늘날짜</label> -->
 <%-- <input type="text" value=" --%>
@@ -175,8 +171,12 @@ for(int i = 0;i < (7 - (dayOfWeek + lastDay - 1) % 7) % 7; i++){
 </div>
 
 
-
 <br>
 <br>
-<br>
+<div id="all" style="text-align:center">
+<a href="/schedule/list">
+<button type="button" class="btn btn-success" >
+모든일정보러가기</button></a>
+</div>
+<br><br>
 

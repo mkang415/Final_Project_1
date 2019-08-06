@@ -45,7 +45,7 @@ public class CalendarUtil {
 		String s = "";
 		
 		String url="/schedule/calwrite";
-		String image = "<img src='/resources/img/pen.jpg'>";
+		String image = "<img src='/resources/img/pen.png'>";
 		s = String.format("<a href='%s?year=%d&month=%d&day=%d'>%s</a>", 
 				url, year, month, day, image);
 		

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import dto.CalendarDto;
+import dto.Member;
+import member.service.face.MemberService;
 import schedule.CalendarUtil;
 import schedule.service.face.CalendarService;
 import util.SchedulePaging;
@@ -24,6 +26,7 @@ import util.SchedulePaging;
 public class CalendarController {
 
 	@Autowired CalendarService CalendarService;
+	@Autowired MemberService memberService;
 	
 	public static Logger logger = LoggerFactory.getLogger(CalendarController.class);
 	
@@ -32,7 +35,8 @@ public class CalendarController {
 			HttpSession session,
 			HttpServletRequest req,
 			Model model,
-			CalendarDto dto
+			CalendarDto dto,
+			Member member
 			) throws Exception {
 		
 		//id값 구하기
@@ -41,6 +45,10 @@ public class CalendarController {
 //		}
 		
 //		int member_idx = (((Member) req.getSession().getAttribute("login")).getMember_idx());
+		
+		
+
+		
 		
 		CalendarUtil util = new CalendarUtil();
 		
@@ -74,10 +82,19 @@ public class CalendarController {
 		cal.set(year, month-1 , 1);
 				
 		String yyyymm = util.yyyymm(year, month);
-		int member_idx = 1; // member_idx 로 바꾸기 ( 세션 )
+//		int member_idx = 1; // member_idx 로 바꾸기 ( 세션 )
+//		Member member_idx = memberService.getMemberInfo(session);
+		
+//		String id = (String)session.getAttribute("member_idx");
+//		int member_idx = Integer.parseInt(id);
+//		
+//		session.setAttribute("id", session.getAttribute("member_idx"));
+		
+		member = memberService.getMemberInfo(session);
+		System.out.println(member);
 		
 		//rdate에 넣기
-		dto = new CalendarDto(member_idx, yyyymm);
+		dto = new CalendarDto(member.getMember_idx(), yyyymm);
 		logger.info(yyyymm);
 		
 		//DB처리
@@ -104,15 +121,19 @@ public class CalendarController {
 	public String writeproc ( 
 			CalendarDto dto,
 			HttpSession session,
-			HttpServletRequest req
+			HttpServletRequest req,
+			Member member
 			)throws Exception {
 		
 		
-		//id값 구하기
-//		if(req.getSession().getAttribute("login")==null) {
-//		return "/login";
-//	}
-		int member_idx = 1; // member_idx 로 바꾸기 ( 세션 )
+//		String id= (String)session.getAttribute("loginEmail");
+//		int member_idx = 1; // member_idx 로 바꾸기 ( 세션 )
+		
+//		String id = (String)session.getAttribute("member_idx");
+//		
+//		int member_idx = Integer.parseInt(id);
+		
+		member = memberService.getMemberInfo(session);
 		
 		CalendarUtil util = new CalendarUtil();
 		
@@ -126,7 +147,7 @@ public class CalendarController {
 		logger.info(dto.toString()); // 날짜 넣기전 
 		
 		dto.setRdate(yyyymmdd);
-		dto.setMember_idx(member_idx);
+		dto.setMember_idx(member.getMember_idx());
 		
 		logger.info(dto.toString()); // 날짜 넣고 난 뒤 
 		
@@ -147,6 +168,7 @@ public class CalendarController {
 			CalendarDto detail,
 			Model model,
 			HttpServletRequest req
+			
 			) throws Exception {
 		
 		int calendar_idx = Integer.parseInt(req.getParameter("calendar_idx"));
@@ -171,9 +193,10 @@ public class CalendarController {
 	public String update(
 			CalendarDto dto,
 			HttpSession session,
-			Model model
+			Model model,
+			Member member
 			) {
-		
+		member = memberService.getMemberInfo(session);
 		dto = CalendarService.calDetail(dto);
 		
 		model.addAttribute("detail", dto);
@@ -195,9 +218,11 @@ public class CalendarController {
 	@RequestMapping (value = "/schedule/caldel", method= RequestMethod.GET)
 	public String caldel(
 			Model model,
-			CalendarDto dto
+			CalendarDto dto,
+			HttpSession session,
+			Member member
 			) {
-		
+		member = memberService.getMemberInfo(session);
 		CalendarService.caldel(dto);
 		
 		model.addAttribute("msg", "게시글 삭제 완료");
@@ -211,9 +236,11 @@ public class CalendarController {
 	public String list (
 			@RequestParam(defaultValue = "0")int curPage,
 			SchedulePaging search,
-			Model model
+			Model model,
+			HttpSession session,
+			Member member
 			) {
-		
+		member = memberService.getMemberInfo(session);
 		int totalCount = CalendarService.getTotal(search); //검색어 적용 게시글 수
 		
 		//페이징 생성
