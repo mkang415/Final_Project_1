@@ -45,12 +45,21 @@ public class NoticeServiceImpl implements NoticeService{
 		if( param!=null && !"".equals(param) ) {
 			curPage = Integer.parseInt(param);
 		}
+		
+		//검색어 
+		String select = (String)req.getParameter("select");
+		String search = (String)req.getParameter("search");
+
+		
+		
 		//전체 게시글 수 
-		int totalCount = noticeDao.selectCntAll();
+		int totalCount = noticeDao.selectCntAll(select,search);
 				
 		//전체 게시글 수와 현재 페이지 값을 넣고 보여질 페이지 객체에 넣기
 		NoticePaging paging = new NoticePaging(totalCount, curPage);
-
+		paging.setSelect(select);
+		paging.setSearch(search);
+		
 		return paging;
 	}
 
@@ -245,6 +254,14 @@ public class NoticeServiceImpl implements NoticeService{
 		NoticeReply comment = replyDao.selectStep(reply_idx);
 		
 		return comment;
+	}
+
+
+
+	@Override
+	public List<Notice> mainNoticeList() {
+		List<Notice> list = noticeDao.mainSelectAll();
+		return list;
 	}
 
 	

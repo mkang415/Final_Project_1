@@ -20,11 +20,37 @@
 				SELECT notice_idx, title, content,member.nickname, hit, writtendate 
 				FROM notice, member 
 				WHERE notice.member_idx = member.member_idx
+				<choose>
+				<when test="select != null and select == 'title'">
+				AND title LIKE '%' || #{search } || '%' 
+				</when>
+
+				<when test="select != null and select == 'content'">
+				AND content LIKE '%' || #{search } || '%' 
+				</when>
+
+				</choose>
 				ORDER BY notice_idx DESC
 		 	) B
           ORDER BY rnum  
 		)
        WHERE rnum BETWEEN #{startNo } AND #{endNo } 
+    
+    </select>
+    
+    <select id="mainSelectAll"
+    		resultType="dto.Notice">
+          		SELECT * FROM (
+                SELECT rownum rnum, B.* FROM (
+				SELECT notice_idx, title, content, hit, writtendate 
+				FROM notice
+				ORDER BY notice_idx DESC
+		 	) B
+          ORDER BY rnum  
+		)
+       WHERE rnum BETWEEN 1 AND 4
+    		
+    		
     
     </select>   
     

@@ -10,7 +10,7 @@ public interface NoticeDao {
 
 	public List<Notice> selectAll(NoticePaging paging);
 
-	public int selectCntAll();
+	public int selectCntAll(String select, String search);
 
 	public void updateHit(Notice notice);
 
@@ -28,5 +28,7 @@ public interface NoticeDao {
 	public void update(Notice notice);
 
 	public void delete(Notice notice);
+
+	public List<Notice> mainSelectAll(); 
 
 }

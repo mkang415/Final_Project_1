@@ -45,6 +45,13 @@
 		<version>1.6.1</version>
 	</dependency>
 	
+	<!-- 웹소켓 -->
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-websocket</artifactId>
+	<version>${org.springframework-version}</version>
+</dependency>
+	
 	<!-- Jackson Databind -->
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
