@@ -158,7 +158,7 @@ table, th {
 
 
 <div id="home"><a href="/main">
-<img src="/resources/img/main.png"  width="70px" height="70px"></a>
+<img src="/resources/img/mainmain.png"  width="70px" height="70px"></a>
 </div>
 
 

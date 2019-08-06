@@ -14,6 +14,7 @@ public class SchedulePaging {
 	private int startNo;	//게시물리스트 첫 번호
 	private int endNo;	//게시물리스트 마지막 번호
 	
+	public SchedulePaging() {}
 	
 	private String search; //검색어
 	public String getSearch() {

@@ -223,7 +223,7 @@ public class CalendarController {
 		
 		List list = CalendarService.getSearchPagingList(paging);
 		
-		model.addAttribute("list",list);
+		model.addAttribute("list2",list);
 		
 		return "/schedule/list";
 		
