@@ -1,7 +1,14 @@
 package diary.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -21,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import diary.service.face.DiaryService;
 import dto.Diary;
@@ -166,4 +176,62 @@ public class DiaryController {
     	return "redirect:/diary";
     	
     }
+    
+	@RequestMapping(value="/navermap/send", method=RequestMethod.GET)
+	public void test(@RequestParam String data, HttpServletResponse resp) {
+		
+		try {
+			
+			resp.setContentType("text/html;charset=UTF-8");
+//			System.out.println(data);
+			String placename = URLEncoder.encode(data, "UTF-8");
+			String coordinate="127.1054328,37.3595963";
+				
+			String curl = "https://naveropenapi.apigw.ntruss.com/map-place/v1/search?query="+placename
+				+ "&coordinate="+coordinate+"";
+				
+			URL url;
+			url = new URL(curl);
+			try {
+				HttpURLConnection urlconnection = (HttpURLConnection)url.openConnection();
+				urlconnection.setRequestProperty("X-NCP-APIGW-API-KEY-ID", "l0hnqofc58");
+				urlconnection.setRequestProperty("X-NCP-APIGW-API-KEY", "6sRsSy26mRvrpU4fdb6o3MerZIzdRnIv6yhNcYHf");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				BufferedReader br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+				
+				String jsonData;
+					
+				StringBuffer response = new StringBuffer();
+					
+				while((jsonData = br.readLine())!=null) {
+					response.append(jsonData);
+				}
+					
+				br.close();
+					
+					
+				System.out.println("body : "+response.toString());
+					
+				JsonParser jsonParser = new JsonParser();
+					
+				String json = response.toString();
+					
+				JsonObject jobj = (JsonObject)jsonParser.parse(json);
+					
+				PrintWriter pw = resp.getWriter();
+					
+				pw.print(jobj);
+					
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+		
+}
 }

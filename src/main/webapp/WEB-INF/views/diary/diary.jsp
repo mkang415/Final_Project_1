@@ -12,8 +12,6 @@
 <title>#Diary</title>
 
 
-
-
 <link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
@@ -162,7 +160,7 @@ img {
 .datebox {
 	position: absolute;
 	width: auto;
-	height: 1em;
+	height: 2em;
 	top: 1.5em;
 	left: -3em;
 	padding-left: 1em;
