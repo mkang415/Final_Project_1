@@ -92,8 +92,8 @@ text-decoration:none
 
 #viewdiary {
 position: absolute;
-top: 6.8%;
-left: 33%;
+top: 2.5%;
+left: 30%;
 }
 
 
@@ -101,7 +101,7 @@ left: 33%;
 position : absolute;
 top:14%;
 text-align: center;
-left: 38.5%;
+left: 38%;
 }
 
 div#incom {
@@ -135,7 +135,7 @@ table, th {
 <a id="a" href="/schedule/calendar">
 &nbsp;<%= cal.get(Calendar.YEAR) %>년
 <br>
-<%= cal.get(Calendar.MONTH)+1 %>월
+&nbsp;<%= cal.get(Calendar.MONTH)+1 %>월
 <%= cal.get(Calendar.DATE) %>일
 </a></h4>
 </div>
@@ -146,7 +146,7 @@ table, th {
 <img src="/resources/img/memo.png"  width="70px" height="70px">
 </div>
 <div id="memotext">
-<h5 id="mm">메모장</h5>
+<h5 id="mm">게시판</h5>
 </div>
 
 <div id="vote"> 
@@ -158,7 +158,7 @@ table, th {
 
 
 <div id="home"><a href="/main">
-<img src="/resources/img/main.png"  width="70px" height="70px"></a>
+<img src="/resources/img/mainmain.png"  width="70px" height="70px"></a>
 </div>
 
 
@@ -172,7 +172,7 @@ table, th {
 
 
 <div id="viewdiary">
-<img src="/resources/img/viewdiary.png" width="110%" height="50%">
+<img src="/resources/img/note.png" width="70%" height="60%">
 </div>
 <div id="diaryview">
 <table>
