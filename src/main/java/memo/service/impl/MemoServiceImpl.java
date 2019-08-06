@@ -11,58 +11,24 @@ import org.springframework.stereotype.Service;
 import dto.Memo;
 import memo.dao.face.MemoDao;
 import memo.service.face.MemoService;
-import util.ImpMemoPaging;
-import util.MemoPaging;
 
 @Service
 public class MemoServiceImpl implements MemoService{
 	@Autowired MemoDao memoDao;
 
-	//	로그인한 유저의 새 메모 페이징
-	@Override
-	public MemoPaging getMemoPage(int curPage, HttpSession session) {
-		int member_idx = (int) session.getAttribute("member_idx");
-
-		Memo memo = new Memo();
-		memo.setMember_idx(member_idx);
-		memo.setMark(1);
-		
-		//	메모 개수
-		int totalCnt = memoDao.memoCnt(memo);
-		
-		MemoPaging paging = new MemoPaging(totalCnt, curPage);
-		return paging;
-	}
-
-	//	로그인한 유저의 중요 메모 페이징
-	@Override
-	public ImpMemoPaging impGetMemoPage(int curPage, HttpSession session) {
-		int member_idx = (int) session.getAttribute("member_idx");
-
-		Memo memo = new Memo();
-		memo.setMember_idx(member_idx);
-		memo.setMark(2);
-		
-		//	메모 개수
-		int totalCnt = memoDao.memoCnt(memo);
-		
-		ImpMemoPaging paging = new ImpMemoPaging(totalCnt, curPage);
-		return paging;
-	}
-	
 	//	로그인한 유저의 메모 리스트 가져오기
 	@Override
-	public List<HashMap<String, Object>> getMemoList(MemoPaging memoPaging) {
+	public List<HashMap<String, Object>> getMemoList(HttpSession session, int mark) {
 		
-		return memoDao.memoList(memoPaging);
-	}
-	
-	//	로그인한 유저의 메모 리스트 가져오기
-	@Override
-	public List<HashMap<String, Object>> getImpMemoList(ImpMemoPaging impMemoPaging) {
+		int member_idx = (int)session.getAttribute("member_idx");
 		
-		return memoDao.impMemoList(impMemoPaging);
+		Memo memo = new Memo();
+		memo.setMember_idx(member_idx);
+		memo.setMark(mark);
+		
+		return memoDao.memoList(memo);
 	}
+
 
 	//	작성한 메모 DB에 저장
 	@Override

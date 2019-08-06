@@ -7,40 +7,16 @@
 
 <mapper namespace="memo.dao.face.MemoDao">
 
-	<!-- 새 메모 개수 -->
-	<select id="memoCnt"
-	 parameterType="dto.Memo"
-	 resultType="int">
-		select count(*) from memo 
-		where member_idx = #{member_idx} and mark = #{mark}
-	</select>
-	
+
 	<!-- 새 메모 리스트 가져오기 -->
-	<select id="memoList"
-	 parameterType="util.MemoPaging"
+	<select id="memoList" 
+	 parameterType="dto.Memo"
 	 resultType="hashmap">
-		select * from (
-			select rownum rnum, B.* from (
-				select * from memo
-				where member_idx = #{member_idx} and mark = 1
-				order by memo_idx desc
-			) B order by rnum
-		) memo
-		where rnum between #{startNo} and #{endNo}
-	</select>
-	
-	<!-- 중요 메모 리스트 가져오기 -->
-	<select id="impMemoList"
-	 parameterType="util.ImpMemoPaging"
-	 resultType="hashmap">
-		select * from (
-			select rownum rnum, B.* from (
-				select * from memo
-				where member_idx = #{member_idx} and mark = 2
-				order by memo_idx desc
-			) B order by rnum
-		) memo
-		where rnum between #{startNo} and #{endNo}
+
+		select * from memo
+		where member_idx = #{member_idx} and mark = #{mark}
+		order by markdate desc, memo_idx desc
+
 	</select>
 	
 	<!-- 작성한 메모 DB에 저장 -->
@@ -74,7 +50,7 @@
 	<!-- 중요 메모 해제 설정 -->
 	<update id="unmark"
 	 parameterType="int">
-		update memo set mark = 1
+		update memo set mark = 1, markdate = null
 		where memo_idx = #{memo_idx}
 	</update>
 </mapper>

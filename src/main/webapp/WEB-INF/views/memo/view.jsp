@@ -1,11 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+
+<!-- owl carousel -->
+<link rel="stylesheet" href="/resources/owlcarousel/owl.carousel.min.css">
+<script src="/resources/owlcarousel/owl.carousel.min.js"></script>
+<link rel="stylesheet" href="/resources/owlcarousel/owl.theme.default.min.css">
 
 <h3>중요 메모</h3>
 <div style="width: 1000px;">
-<c:import url="/WEB-INF/views/layout/impMemoPaging.jsp"></c:import>
-<c:forEach items="${impMemoList }" var = "i">
+
+<div id="owl-one" class="owl-carousel owl-theme">
+<c:if test="${fn:length(impMemoList) gt 0 and impMemoList ne null}">
+<c:forEach items="${impMemoList }" begin="0" end="${fn:length(impMemoList)-1}" step="3" varStatus="st">
+<div class="item">
+
+<c:if test="${st.end >= st.index+2}">
+	<c:forEach items="${impMemoList }" var="i" begin="${st.index}" end="${st.index+2}">
 	<div style="width: 300px; height: 400px; border: 1px solid #eee; float: left; overflow: hidden">
 		<div style="height: 60px; border: 1px solid #eee;">
 			${i.TITLE }
@@ -15,7 +27,29 @@
 			${i.MEMO }
 		</div>
 	</div>
-	
+	</c:forEach>
+</c:if>
+
+<c:if test="${st.end < st.index+2}">
+	<c:forEach items="${impMemoList }" var="i" begin="${st.index}" end="${st.end}">
+	<div style="width: 300px; height: 400px; border: 1px solid #eee; float: left; overflow: hidden">
+		<div style="height: 60px; border: 1px solid #eee;">
+			${i.TITLE }
+			<button type="button" onclick="unmark('${i.MEMO_IDX}')">unmarking</button>
+		</div>
+		<div style="height: 338px; border: 1px solid #eee;" data-toggle="modal" data-target="#impModal${i.MEMO_IDX}">
+			${i.MEMO }
+		</div>
+	</div>
+	</c:forEach>
+</c:if>
+
+</div>
+</c:forEach>
+</c:if>
+</div>
+
+<c:forEach items="${impMemoList }" var = "i">
 	<!-- Modal -->
 	<div class="modal fade" id="impModal${i.MEMO_IDX}" tabindex="-1" role="dialog" aria-labelledby="impModal${i.MEMO_IDX}" aria-hidden="true">
   		<div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -63,18 +97,46 @@
 
 <h3>새 메모</h3>
 <div style="width: 1000px">
-<c:import url="/WEB-INF/views/layout/memoPaging.jsp"></c:import>
-<c:forEach items="${memoList }" var = "m">
+
+<div id="owl-two" class="owl-carousel owl-theme">
+<c:if test="${fn:length(memoList) gt 0 and memoList ne null}">
+<c:forEach items="${memoList }" begin="0" end="${fn:length(memoList)-1}" step="6" varStatus="st">
+<div class="item">
+
+<c:if test="${st.end >= st.index+5}">
+	<c:forEach items="${memoList }" var="m" begin="${st.index}" end="${st.index+5}">
 	<div style="width: 300px; height: 400px; border: 1px solid #eee; float: left; overflow: hidden">
 		<div style="height: 60px; border: 1px solid #eee;">
 			${m.TITLE }
 			<button type="button" onclick="mark('${m.MEMO_IDX}')">marking</button>
 		</div>
-			<div style="height: 338px; border: 1px solid #eee;" data-toggle="modal" data-target="#modal${m.MEMO_IDX}">
+		<div style="height: 338px; border: 1px solid #eee;" data-toggle="modal" data-target="#modal${m.MEMO_IDX}">
 			${m.MEMO }
 		</div>
 	</div>
-		
+ 	</c:forEach>
+</c:if>
+
+<c:if test="${st.end < st.index+5}">
+	<c:forEach items="${memoList }" var="m" begin="${st.index}" end="${st.end}">
+	<div style="width: 300px; height: 400px; border: 1px solid #eee; float: left; overflow: hidden">
+		<div style="height: 60px; border: 1px solid #eee;">
+			${m.TITLE }
+			<button type="button" onclick="mark('${m.MEMO_IDX}')">marking</button>
+		</div>
+		<div style="height: 338px; border: 1px solid #eee;" data-toggle="modal" data-target="#modal${m.MEMO_IDX}">
+			${m.MEMO }
+		</div>
+	</div>
+ 	</c:forEach>
+</c:if>
+
+</div>
+</c:forEach>
+</c:if>
+</div>
+
+<c:forEach items="${memoList }" var = "m">
 	<!-- Modal -->
 	<div class="modal fade" id="modal${m.MEMO_IDX}" tabindex="-1" role="dialog" aria-labelledby="modal${m.MEMO_IDX}" aria-hidden="true">
   		<div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -118,3 +180,21 @@
 </script>
 </c:forEach>
 </div>
+
+<script>
+
+$('#owl-one').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    items:1
+});
+
+$('#owl-two').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    items:1
+});
+
+</script>

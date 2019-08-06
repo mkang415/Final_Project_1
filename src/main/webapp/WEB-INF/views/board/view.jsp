@@ -8,16 +8,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<!-- summernote -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+
+
 
 <% Boolean result = (Boolean)request.getAttribute("result"); %>
 
 <script type="text/javascript">
-$(document).ready(function() {
+/* $(document).ready(function() {
 	
 	//	추천버튼 초기화
 	if(${result==true}) {
@@ -60,7 +66,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-});
+}); */
 </script>
 
 <style type="text/css">

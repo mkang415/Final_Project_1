@@ -13,6 +13,8 @@ public interface ReplyService {
 
 	void insert(HttpSession session, BoardReply reply);
 
-	void delete(int reply_idx);
+	int delete(int reply_idx);
+
+	void brdDelete(int brdidx);
 
 }

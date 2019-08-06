@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class ReplyController {
 	@Autowired ReplyService replyService;
 
 	//	댓글 삽입
-	@RequestMapping(value = "reply/insert", method=RequestMethod.POST)
+	@RequestMapping(value = "/reply/insert", method=RequestMethod.POST)
 	public @ResponseBody String insertReply(
 			HttpSession session,
 			BoardReply reply
@@ -36,24 +37,37 @@ public class ReplyController {
 	}
 	
 	//	댓글 리스트 불러오기
-	@RequestMapping(value = "reply/list", method=RequestMethod.GET)
-	public @ResponseBody List<HashMap<String, Object>> replyList(
+	@RequestMapping(value = "/reply/list", method=RequestMethod.POST)
+	public String replyList(
 			Model model,
-			BoardReply reply
+			int board_idx,
+			HttpSession session
 			) {
-		List<HashMap<String, Object>> replyList = replyService.getReplyList(reply.getBoard_idx());
+		logger.info("댓글 리스트 불러오기");
+		List<HashMap<String, Object>> replyList = replyService.getReplyList(board_idx);
+		model.addAttribute("replylist", replyList);
 		
-		return replyList;
+		return "reply/getreply";
 	}
 	
-//	//	댓글 삭제
-//	@RequestMapping(value = "reply/delete", method=RequestMethod.POST)
-//	public String deleteReply(
-//			int reply_idx ) {
-//		logger.info("댓글 삭제");
-//		logger.info("번호 : "+ reply_idx);
-//		replyService.delete(reply_idx);
-//		
-//		return "redirect: /board/freeview?brdidx="+reply.getBoard_idx();
-//	}
+	//	댓글 삭제
+	@RequestMapping(value = "/reply/delete", method=RequestMethod.GET)
+	public String deleteReply(
+			int reidx ) {
+		logger.info("댓글 삭제");
+		logger.info("번호 : "+ reidx);
+		int board_idx = replyService.delete(reidx);
+		
+		
+		return "redirect: /board/view?brdidx="+board_idx;
+	}
+	
+	//	댓글 수정
+	@RequestMapping(value = "reply/insert", method = RequestMethod.POST)
+	public @ResponseBody String update(
+			BoardReply boardReply
+			) {
+	
+		return "success";
+	}
 }

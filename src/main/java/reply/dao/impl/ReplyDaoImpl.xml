@@ -11,7 +11,7 @@
 	<select id="getReplyList"
  	 parameterType="int"
  	 resultType="hashmap">
-		select reply_idx, board_idx, member.nickname, reply, writtendate 
+		select reply_idx, member.member_idx, board_idx, member.nickname, reply, writtendate
 		from board_reply, member
 		where board_reply.member_idx = member.member_idx
 		and board_idx = #{board_idx}
@@ -32,9 +32,27 @@
 		where reply_idx = #{reply_idx}
 	</delete>
 
+	<!-- 게시글 삭제시 해당 댓글 삭제 -->
+	<delete id="brdDelete"
+	 parameterType="int">
+		delete board_reply
+		where board_idx = #{board_idx}
+	</delete>
+
+	<!-- 댓글의 게시판 번호 가져오기 -->
+	<select id="getBrdidx"
+	 parameterType="int"
+	 resultType="int">
+		select board_idx from board_reply
+		where reply_idx = #{reply_idx}
+	</select>
+
+
+
+
 	<resultMap type="dto.NoticeReply" id="NoticeReply">
     	<result column="nickname" property="writer"/>
-    </resultMap>
+    </resultMap>	
 	
 <!--   공지사항 댓글쿼리 시작  -->
  <select id="selectComment"
