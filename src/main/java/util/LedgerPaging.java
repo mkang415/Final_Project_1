@@ -14,7 +14,16 @@ public class LedgerPaging {
 	private int startNo;	//게시물리스트 첫 번호
 	private int endNo;	//게시물리스트 마지막 번호
 	
+	private int member_idx;
 	
+	public int getMember_idx() {
+		return member_idx;
+	}
+
+	public void setMember_idx(int member_idx) {
+		this.member_idx = member_idx;
+	}
+
 	private String search; //검색어
 	
 	public String getSearch() {
@@ -179,5 +188,6 @@ public class LedgerPaging {
 	public void setEndNo(int endNo) {
 		this.endNo = endNo;
 	}
+
 
 }

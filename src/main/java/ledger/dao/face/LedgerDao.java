@@ -8,8 +8,16 @@ import util.LedgerPaging;
 
 public interface LedgerDao {
 
-	int selectCntAll();
+	int selectCntAll(Ledger ledger);
 
 	List<HashMap<String, Object>> selectAll(LedgerPaging LP);
 
+	Ledger total(Ledger ledger);
+
+	Ledger total2(Ledger ledger);
+
+	void write(Ledger ledger);
+
+	
+	
 }
