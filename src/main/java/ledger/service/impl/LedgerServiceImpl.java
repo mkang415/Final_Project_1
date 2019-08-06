@@ -3,6 +3,8 @@ package ledger.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,9 @@ public class LedgerServiceImpl implements LedgerService{
 	@Autowired LedgerDao ledgerDao;
 
 	@Override
-	public LedgerPaging getCurpage(int curPage) {
+	public LedgerPaging getCurpage(int curPage, Ledger ledger) {
 
-		int totalCount = ledgerDao.selectCntAll();
+		int totalCount = ledgerDao.selectCntAll(ledger);
 		
 		LedgerPaging LP = new LedgerPaging(totalCount, curPage);
 		
@@ -32,6 +34,29 @@ public class LedgerServiceImpl implements LedgerService{
 
 		return ledgerDao.selectAll(LP);
 	}
+
+	@Override
+	public Ledger getTotal(Ledger ledger) {
+		
+		return ledgerDao.total(ledger);
+	}
+
+	@Override
+	public Ledger getTotal2(Ledger ledger) {
+
+		return ledgerDao.total2(ledger);
+	}
+
+	@Override
+	public void write(Ledger ledger, HttpSession session) {
+
+		ledger.setMember_idx((int)session.getAttribute("member_idx"));
+		
+		ledgerDao.write(ledger);
+	}
+
+	
+	
 
 	
 }
