@@ -11,12 +11,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
 <style type="text/css">
 
 table, th, td {
@@ -53,45 +47,21 @@ function fn_comment(){
 
 
 $(function(){
-    
+	console.log("function");
     getCommentList();
     
 });
 
 function getCommentList(){
-    
+    console.log("getCommentList");
     $.ajax({
-        type:'GET',
+        type:'POST',
         url : "/reply/list",
-        dataType : "json",
-        data:$("#commentForm").serialize(),
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+        dataType : "html",
+        data:$("#comment").serialize(),
         success : function(data){
-            
-            var html = "";
-            var cCnt = data.length;
-            
-            if(data.length > 0){
-                
-                for(i=0; i<data.length; i++){
-                    html += "<div>";
-                    html += "<div><table class='table'><h6><strong>"+data[i].NICKNAME+"</strong></h6>"
-                    html += "<tr><td>"+data[i].REPLY + "</td></tr>";
-                    html += "</table></div>";
-                    html += "</div>";
-                }
-                
-            } else {
-                
-                html += "<div>";
-                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-                html += "</table></div>";
-                html += "</div>";
-                
-            }
-            
-            $("#cCnt").html(cCnt);
-            $("#commentList").html(html);
+        	console.log("success");
+            $("#commentList").html(data);
             
         },
         error:function(request,status,error){
@@ -117,7 +87,7 @@ function getCommentList(){
         	<table class="table">                    
             	<tr>
                 	<td>
-                    	<textarea style="width: 1100px" rows="3" cols="30" id="reply" name="reply"></textarea>
+                    	<textarea id="summernote" style="width: 800px" rows="3" cols="30" name="reply"></textarea>
                     	<br>
                     	<div>
                         	<a href='#' onClick="fn_comment()" class="btn pull-right btn-success">등록</a>
@@ -129,7 +99,27 @@ function getCommentList(){
 	</div>      
     </form>
 </div>
-
+<form id="comment" method="post">
+<input type="hidden" name="board_idx" value="${freeView.getBoard_idx()}">
+</form>
+<script>
+	$('#summernote').summernote({
+		height: 100,
+	  	minHeight: null,
+	  	maxHeight: null,
+	  	focus: true,
+	  	lang: 'ko-KR', // default: 'en-US'
+	  	toolbar: [
+	  	    // [groupName, [list of button]]
+	  	    ['style', ['bold', 'italic', 'underline', 'clear']],
+	  	    ['font', ['strikethrough']],
+	  	    ['color', ['color']],
+	  	    ['para', ['ul', 'ol', 'paragraph']],
+	  	    ['height', ['height']],
+	  	  	['insert', ['link']]
+	  	  ]
+	});
+</script>
  
 </body>
 </html>

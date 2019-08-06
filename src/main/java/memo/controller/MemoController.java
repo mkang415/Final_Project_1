@@ -12,12 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import dto.Memo;
 import memo.service.face.MemoService;
-import util.ImpMemoPaging;
-import util.MemoPaging;
 
 @Controller
 public class MemoController {
@@ -27,27 +24,17 @@ public class MemoController {
 	MemoService memoService;
 
 	@RequestMapping(value = "/memo/getview", method = RequestMethod.GET)
-	public String memoView(@RequestParam(defaultValue = "1") int curPage,
-			@RequestParam(defaultValue = "1") int impCurPage, HttpSession session, Model model) {
+	public String memoView(
+			HttpSession session, Model model) {
 
 		logger.info("view");
 		
-		// 메모 리스트 페이징
-		MemoPaging memoPaging = memoService.getMemoPage(curPage, session);
-		memoPaging.setMember_idx((int) session.getAttribute("member_idx"));
-
 		// 메모 리스트 불러오기
-		List<HashMap<String, Object>> memoList = memoService.getMemoList(memoPaging);
-		model.addAttribute("memoPaging", memoPaging);
+		List<HashMap<String, Object>> memoList = memoService.getMemoList(session, 1);
 		model.addAttribute("memoList", memoList);
 
-		// 중요 메모 페이징
-		ImpMemoPaging impMemoPaging = memoService.impGetMemoPage(impCurPage, session);
-		impMemoPaging.setMember_idx((int) session.getAttribute("member_idx"));
-
-		// 메모 리스트 불러오기
-		List<HashMap<String, Object>> impMemoList = memoService.getImpMemoList(impMemoPaging);
-		model.addAttribute("impMemoPaging", impMemoPaging);
+		// 중요 메모 리스트 불러오기
+		List<HashMap<String, Object>> impMemoList = memoService.getMemoList(session, 2);
 		model.addAttribute("impMemoList", impMemoList);
 
 		return "memo/view";

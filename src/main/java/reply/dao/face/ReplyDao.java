@@ -9,10 +9,6 @@ import dto.Notice;
 import dto.NoticeReply;
 
 	
-
-
-
-
 public interface ReplyDao {
 
 	List<HashMap<String, Object>> getReplyList(int board_idx);
@@ -36,5 +32,9 @@ public interface ReplyDao {
 
 	//답글 insert
 	public void insertNoticeReplyTo(NoticeReply comment);
+
+	void brdDelete(int board_idx);
+
+	int getBrdidx(int reply_idx);
 
 }

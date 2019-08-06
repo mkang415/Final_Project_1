@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import board.service.face.BoardService;
 import dto.Board;
 import dto.Image;
+import reply.service.face.ReplyService;
 import util.BoardPaging;
 
 @Controller
@@ -33,6 +34,7 @@ public class BoardController {
 	
 	@Autowired ServletContext context;
 	@Autowired BoardService boardService;
+	@Autowired ReplyService replyService;
 	
 	//	자유 게시판 게시글 리스트
 	@RequestMapping(value = "/board/freelist", method = RequestMethod.GET)
@@ -206,8 +208,9 @@ public class BoardController {
 			int divide
 			) {
 
+		replyService.brdDelete(brdidx);
 		boardService.delete(brdidx);
-		
+
 		if(divide==1) {
 			return "redirect: /board/freelist";
 		} else if (divide==2) {

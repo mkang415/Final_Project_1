@@ -4,14 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import dto.Memo;
-import util.ImpMemoPaging;
-import util.MemoPaging;
 
 public interface MemoDao {
 
-	int memoCnt(Memo memo);
-
-	List<HashMap<String, Object>> memoList(MemoPaging memoPaging);
+	List<HashMap<String, Object>> memoList(Memo memo);
 
 	void write(Memo memo);
 
@@ -22,7 +18,5 @@ public interface MemoDao {
 	void mark(int memo_idx);
 
 	void unmark(int memo_idx);
-
-	List<HashMap<String, Object>> impMemoList(ImpMemoPaging impMemoPaging);
 
 }
