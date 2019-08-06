@@ -3,24 +3,11 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<style type="text/css">
 
-ul.pagination {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-}
-
-ul.pagination li {display: inline;}
-
-ul.pagination li a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-</style>
+<!-- Bootstrap 3 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <div class="text-center">
 	<ul class="pagination pagination-sm">
@@ -47,9 +34,6 @@ ul.pagination li a {
 	    </c:if>
 
 
-
-
-
 		<!-- 페이징 리스트 -->
 		<c:forEach
 	     begin="${paging.startPage }" end="${paging.endPage }"
@@ -57,7 +41,7 @@ ul.pagination li a {
 	
 			<!-- 현재 보고 있는 페이지번호만 강조해주기 -->
 			<c:if test="${paging.curPage eq i}">
-			<li class="active">
+			<li>
 				<a href="/diary?curPage=${i }">${i }</a>
 			</li>
 			</c:if>
