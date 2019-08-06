@@ -6,9 +6,9 @@
 <div class="text-center">
    <ul class="pagination pagination-sm">
       <!-- 처음으로 가기 -->
-      <c:if test="${ABP.startPage ne 1 }">
+      <c:if test="${ABP.curPage ne 1 }">
       <li>
-         <a href="/admin/list"><span>&larr;처음</span></a>
+         <a href="/admin/list?search=${ABP.search }"><span>&larr;처음</span></a>
       </li>
       </c:if>
 
@@ -25,7 +25,7 @@
 
       <c:if test="${ABP.curPage ne 1 }">
       <li>
-         <a href="/admin/list?curPage=${ABP.curPage-1 }"><span>&laquo;</span></a>
+         <a href="/admin/list?curPage=${ABP.curPage-1 }&search=${ABP.search}"><span>&laquo;</span></a>
        </li>
        </c:if>
 
@@ -41,13 +41,13 @@
          <!-- 현재 보고 있는 페이지번호만 강조해주기 -->
          <c:if test="${ABP.curPage eq i}">
          <li class="active">
-            <a href="/admin/list?curPage=${i }">${i }</a>
+            <a href="/admin/list?curPage=${i }&search=${ABP.search}">${i }</a>
          </li>
          </c:if>
       
          <c:if test="${ABP.curPage ne i}">
          <li>
-            <a href="/admin/list?curPage=${i }">${i }</a>
+            <a href="/admin/list?curPage=${i }&search=${ABP.search}">${i }</a>
          </li>
          </c:if>
          
@@ -65,7 +65,7 @@
 
       <c:if test="${ABP.curPage ne ABP.totalPage }">
       <li>
-         <a href="/admin/list?curPage=${ABP.curPage+1 }">
+         <a href="/admin/list?curPage=${ABP.curPage+1 }&search=${ABP.search}">
          <span>&raquo;</span>
       </a>
       </li>

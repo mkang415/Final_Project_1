@@ -10,29 +10,45 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dto.Notice;
 import dto.NoticeFile;
+import dto.NoticeReply;
 import util.NoticePaging;
-
 
 public interface NoticeService {
 
+	public NoticePaging getCurpage(HttpServletRequest req);
+
 	public List<Notice> list(NoticePaging paging);
 
-	public NoticePaging getCurPage(HttpServletRequest req);
-
-	public Notice getNoticeno(HttpServletRequest req);
+	public Notice getBoardno(int notice_idx);
 
 	public Notice view(Notice notice);
 
-	public void writeNotice(Notice notice, HttpSession session, MultipartFile fileupload);
+	public void writeBoard(Notice notice, HttpSession session, MultipartFile fileupload);
+
+
+	
+	public void filesave(MultipartFile fileupload, ServletContext context, int notice_idx);
+
+	public NoticeFile getFile(int fileno);
+
+	public NoticeFile viewFile(Notice notice);
+
+	public List<NoticeReply> getCommentList(Notice notice);
+
+
+
+	public void insertComment(NoticeReply comment);
+
+	public boolean deleteComment(NoticeReply noticeReply);
 
 	public void updateNotice(Notice notice);
 
 	public void deleteNotice(Notice notice);
 
+	public void insertReplyComment(NoticeReply comment);
 
-	public void filesave(MultipartFile fileupload, ServletContext context, int notice_no);
+	public NoticeReply selectStepByReply_idx(int reply_idx);
 
-	public NoticeFile viewFile(Notice notice);
 
-	public NoticeFile getFile(int fileno);
+
 }

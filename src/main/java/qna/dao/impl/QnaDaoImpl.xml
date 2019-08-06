@@ -6,8 +6,91 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="qna.dao.face.QnaDao">
-	<select id="test"
-	 resultType="dto.Qna">
-		select * from Qna
+	
+	<!-- qna 개수 가져오기 -->
+	<select id="qnaCnt"
+	 parameterType="util.QnaPaging"
+	 resultType="int">
+		select count(*) from qna
+		<if test="search != null and search !=''">
+			and title like '%' || #{search} || '%'
+		</if>
 	</select>
+	
+	<!-- qna 리스트 가져오기 -->
+	<select id="getNewList"
+	 parameterType="util.QnaPaging"
+	 resultType="hashmap">
+		select * from (
+			select rownum rnum, B.* from (
+				select qna_idx, title, question, answer, member.nickname, 
+					question_date, answer_date
+				from qna, member
+				where qna.member_idx = member.member_idx
+				<if test="search != null and search != ''">
+	 				AND title LIKE '%' || #{search } || '%'
+	 			</if>
+				order by qna_idx desc
+			) B order by rnum
+		) qna
+		where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<!-- qna 글 불러오기 -->
+	<select id="qnaView"
+	 parameterType="int"
+	 resultType="dto.Qna">
+		select qna_idx, title, question, answer, member.nickname, member.member_idx,
+			question_date, answer_date
+		from qna, member
+		where qna.member_idx = member.member_idx and qna_idx = #{qna_idx}
+	</select>
+	
+	<!-- 작성한 qna 저장 -->
+	<insert id="write"
+	 parameterType="dto.Qna">
+	 	<selectKey keyProperty="qna_idx" order="BEFORE" resultType="int">
+	  		SELECT qna_seq.nextval FROM dual
+	  	</selectKey>
+	  		insert into qna(qna_idx, title, question, member_idx)
+			values (#{qna_idx}, #{title}, #{question}, #{member_idx})
+	</insert>
+	
+	<!-- 수정한 qna 저장 -->
+	<update id="setUpdate"
+	 parameterType="dto.Qna">
+		update qna set title = #{title}, question = #{question}
+		where qna_idx = #{qna_idx}
+	</update>
+	
+	<!-- DB에서 삭제 -->
+	<delete id="delete"
+	 parameterType="int">
+		delete qna
+		where qna_idx = #{qna_idx}
+	</delete>
+	
+	<!-- 멤버 등급 확인 -->
+	<select id="checkAdmin"
+	 parameterType="int"
+	 resultType="int">
+		select memberclass from member
+		where member_idx = #{member_idx}
+	</select>
+	
+	<!-- qna 답변 호출 -->
+	<select id="getAnswer"
+	 parameterType="int"
+	 resultType="dto.Qna">
+		select answer, answer_date from qna
+		where qna_idx = #{qna_idx}
+	</select>
+	
+	<!-- qna 답변 저장 -->
+	<update id="setAnswer"
+	 parameterType="dto.Qna">
+		update qna 
+		set answer = #{answer}, answer_date = sysdate
+		where qna_idx = #{qna_idx}
+	</update>
 </mapper>

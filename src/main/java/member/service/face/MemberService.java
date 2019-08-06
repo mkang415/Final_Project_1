@@ -10,7 +10,7 @@ public interface MemberService {
 
 	public boolean login(Member member);
 
-	Member getMemberInfo(HttpSession session);
+	public Member getMemberInfo(HttpSession session);
 
 	public void insertMember(Member member) throws Exception;
 

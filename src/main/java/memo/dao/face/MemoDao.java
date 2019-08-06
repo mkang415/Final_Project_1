@@ -1,9 +1,28 @@
 package memo.dao.face;
 
+import java.util.HashMap;
+import java.util.List;
+
 import dto.Memo;
+import util.ImpMemoPaging;
+import util.MemoPaging;
 
 public interface MemoDao {
 
-	Memo test();
+	int memoCnt(Memo memo);
+
+	List<HashMap<String, Object>> memoList(MemoPaging memoPaging);
+
+	void write(Memo memo);
+
+	void update(Memo memo);
+
+	void delete(int memo_idx);
+
+	void mark(int memo_idx);
+
+	void unmark(int memo_idx);
+
+	List<HashMap<String, Object>> impMemoList(ImpMemoPaging impMemoPaging);
 
 }

@@ -7,8 +7,50 @@
 
 <mapper namespace="ledger.dao.face.LedgerDao">
 	
-	<select id="test"
-	 resultType="dto.Ledger">
-		select * from ledger
+	<select id="selectCntAll"
+	 parameterType="dto.Ledger"
+	 resultType="int">
+		SELECT count(*) FROM LEDGER
+		WHERE member_idx = #{member_idx}
 	</select>
+	
+	<select id="selectAll"
+	 parameterType="util.LedgerPaging"
+	 resultType="hashmap">
+	 SELECT * FROM (
+	 SELECT rownum rnum, B.* FROM (
+	 SELECT ledger_idx, member_idx, item, plusM, minusM, writtendate
+	 FROM ledger
+	 WHERE member_idx = #{member_idx}
+	 ORDER BY writtendate DESC
+	 ) B
+	 ORDER BY rnum
+	 )
+	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<select id="total"
+	 parameterType="dto.Ledger"
+	 resultType="dto.Ledger">
+	 	SELECT to_char(writtendate,'YY/MM') "writtendate", sum(plusm) "plusM"
+		FROM ledger
+        where member_idx = #{member_idx}
+		GROUP BY to_char(writtendate,'YY/MM')
+	 </select>
+	
+	<select id="total2"
+	 parameterType="dto.Ledger"
+	 resultType="dto.Ledger">
+	 	SELECT to_char(writtendate,'YY/MM') "writtendate", sum(minusm) "minusM"
+		FROM ledger
+        where member_idx = #{member_idx}
+		GROUP BY to_char(writtendate,'YY/MM')
+	 </select>
+	 
+	 <insert id="write"
+	  parameterType="dto.Ledger">
+	  	INSERT INTO ledger(ledger_idx, member_idx, item, plusM, minusM, writtendate)
+	  	VALUES (ledger_seq.nextval, #{member_idx}, #{item}, #{plusM}, #{minusM}, sysdate)
+	 </insert>
+	
 </mapper>

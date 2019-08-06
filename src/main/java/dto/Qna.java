@@ -10,12 +10,23 @@ public class Qna {
 	private int member_idx;
 	private Date question_date;
 	private Date answer_date;
+	private String nickname;
+	
 	@Override
 	public String toString() {
 		return "Qna [qna_idx=" + qna_idx + ", title=" + title + ", question=" + question + ", answer=" + answer
 				+ ", member_idx=" + member_idx + ", question_date=" + question_date + ", answer_date=" + answer_date
-				+ "]";
+				+ ", nickname=" + nickname + "]";
 	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public int getQna_idx() {
 		return qna_idx;
 	}

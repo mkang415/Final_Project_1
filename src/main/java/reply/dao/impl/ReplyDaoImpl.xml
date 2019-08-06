@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reply.dao.face.ReplyDao">
+
+
+	<!-- 댓글 리스트 가져오기 -->
+	<select id="getReplyList"
+ 	 parameterType="int"
+ 	 resultType="hashmap">
+		select reply_idx, board_idx, member.nickname, reply, writtendate 
+		from board_reply, member
+		where board_reply.member_idx = member.member_idx
+		and board_idx = #{board_idx}
+		order by reply_idx desc
+	</select>
+
+	<!-- 댓글 삽입 -->
+	<select id="insert"
+	 parameterType="dto.BoardReply">
+		insert into board_reply(reply_idx, board_idx, member_idx, reply)
+		values (board_reply_seq.nextval, #{board_idx}, #{member_idx}, #{reply})
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete"
+	 parameterType="int">
+		delete board_reply
+		where reply_idx = #{reply_idx}
+	</delete>
+
+	<resultMap type="dto.NoticeReply" id="NoticeReply">
+    	<result column="nickname" property="writer"/>
+    </resultMap>
+	
+<!--   공지사항 댓글쿼리 시작  -->
+ <select id="selectComment"
+		parameterType="dto.Notice"
+		resultMap="NoticeReply">
+			    SELECT * FROM (
+				SELECT rownum rnum, B.* FROM (
+				SELECT
+                        reply_idx,
+						reply,
+						notice_idx,
+						writtendate,
+						member.nickname,
+						step
+						
+					FROM notice_reply, member
+					WHERE notice_reply.member_idx = member.member_idx 
+					AND notice_idx = #{notice_idx }					
+					ORDER BY step DESC
+					) B
+				) ORDER BY step DESC
+
+</select> 
+
+<!-- 답글 조회 쿼리 -->
+
+
+
+
+<!--  -->
+
+<select id="countComment"
+		parameterType="dto.NoticeReply"
+		resultType="int">
+		
+		SELECT COUNT(*) FROM notice_reply
+		WHERE reply_idx = #{reply_idx }
+
+
+
+</select>
+<select id="selectStep"
+		parameterType="int"
+		resultType="dto.NoticeReply">
+		
+			SELECT
+                reply_idx,
+				reply,
+				notice_idx,
+				writtendate,
+				step
+						
+		   FROM notice_reply
+		   WHERE reply_idx = #{reply_idx }
+		
+
+</select>
+
+
+
+<insert id="insertNoticeReply"
+		parameterType="dto.NoticeReply">
+		
+		
+INSERT INTO notice_reply(reply_idx, notice_idx, member_idx, reply, step )
+VALUES(notice_reply_seq.nextval,#{notice_idx },#{member_idx }, #{reply },(SELECT MAX(step)+1 FROM notice_reply ) )
+
+
+</insert>
+
+<insert id="insertNoticeReplyTo"
+		parameterType="dto.NoticeReply">
+		
+		<selectKey order="BEFORE" resultType="int" keyProperty="step" >
+				SELECT step-1
+				FROM 
+				notice_reply
+				WHERE step = #{step } 
+		</selectKey>
+		
+		
+		
+INSERT INTO notice_reply(reply_idx, notice_idx, member_idx, reply, step )
+VALUES(notice_reply_seq.nextval,#{notice_idx },#{member_idx }, #{reply },#{step } )
+
+
+</insert>
+
+
+
+<delete id="deleteComment"
+		parameterType="dto.NoticeReply">
+	DELETE notice_reply
+	WHERE reply_idx = #{reply_idx } 
+
+</delete>
+
+
+<update id="updateStep"
+		parameterType="dto.NoticeReply">
+	update notice_reply
+	SET step = step-1
+	WHERE step &lt; #{step }
+
+</update>
+
+
+
+
+
+<!--  공지사항 댓글쿼리 끝  -->
+
+</mapper>

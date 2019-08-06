@@ -24,7 +24,7 @@
 	</repositories>
 	
 	<dependencies>
-	
+
 	<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 	<dependency>
 	    <groupId>com.google.code.gson</groupId>
@@ -38,7 +38,7 @@
 	    <artifactId>json</artifactId>
 	    <version>20160810</version>
 	</dependency>
-	
+
 	<!-- Mail -->
 	<dependency>
 		<groupId>org.springframework</groupId>

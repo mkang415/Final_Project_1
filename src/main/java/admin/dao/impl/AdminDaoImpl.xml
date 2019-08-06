@@ -6,28 +6,167 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="admin.dao.face.AdminDao">
-
-	<select id="selectCntAll" resultType="int">
-		SELECT count(*) FROM BOARD ORDER BY
-		BOARD_IDX
+	
+	<sql id="selectBoard">
+		SELECT
+			board_idx,
+			title,
+			content,
+			member_idx,
+			hit,
+			recommend,
+			writtendate
+		FROM board
+	</sql>
+	
+	<sql id="selectSearch">
+	 		SELECT rownum rnum, B.* FROM (
+	 				<include refid="selectBoard" />
+	 				WHERE 1=1
+	 				<if test="search != null and search != ''">
+	 						AND title LIKE '%' || #{search } || '%'
+	 				</if>
+	 				ORDER BY board_idx DESC
+	 		) B
+	 		ORDER BY rnum
+	 </sql>
+	
+	<select id="countSearch"
+	 parameterType="util.AdminBoardPaging"
+	 resultType="int">
+	 	SELECT COUNT(*) FROM(
+	 			<include refid="selectSearch" />
+	 	)CNT
+	 </select>
+	 
+	 <select id="selectPageSearch"
+	  parameterType="util.AdminBoardPaging"
+	  resultType="hashmap">
+	 	SELECT * FROM(
+	 			SELECT rownum rnum, B.* FROM (
+	 				SELECT
+						board_idx,
+						title,
+						content,
+						member.nickname,
+						hit,
+						recommend,
+						writtendate
+						FROM board, member
+	 				WHERE 1=1 and board.member_idx = member.member_idx
+	 				<if test="search != null and search != ''">
+	 						AND title LIKE '%' || #{search } || '%'
+	 				</if>
+	 				ORDER BY board_idx DESC
+	 		) B
+	 		ORDER BY rnum
+	 	) 
+	 	WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	 </select>
+	 
+	 
+	
+	<select id="select"
+	 parameterType="int"
+	 resultType="dto.Board">
+		select board_idx, title, content, member.nickname, member.email, hit, recommend, writtendate
+		from board, member
+		where board.member_idx = member.member_idx
+		and board_idx = #{board_idx}
 	</select>
 	
-	<select id="selectAll"
-	 parameterType="util.AdminBoardPaging"
+	<delete id="deleteBoardList" parameterType="String">
+		DELETE FROM board
+		WHERE board_idx IN (${_parameter})
+	</delete>
+	
+	<select id="selectCntAll2" resultType="int">
+		SELECT count(*) FROM MEMBER
+		WHERE memberclass = 1
+		ORDER BY MEMBER_IDX
+	</select>
+	
+	<select id="selectAll2"
+	 parameterType="util.AdminMemberPaging"
 	 resultType="hashmap">
 	 SELECT * FROM (
 	 SELECT rownum rnum, B.* FROM (
-	 SELECT * FROM board
-	 ORDER BY board_idx DESC
+	SELECT member_idx, email, pw, nickname, memberClass, joindate, auth_key, auth_status
+	from member
+	WHERE memberclass = 1
+
+	 ORDER BY member_idx DESC
 	 ) B
 	 ORDER BY rnum
 	 )
 	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
 	</select>
 	
-	<delete id="delete"
-	 parameterType="dto.Board">
-	 DELETE FROM board
-	 WHERE board_idx in ("+names+");
-	</delete>
+	<select id="select2"
+	 parameterType="int"
+	 resultType="dto.Member">
+		SELECT * FROM Member
+		WHERE member_idx = #{member_idx}
+	</select>
+	
+	<select id="selectCntAll3" 
+	 parameterType="int"
+	 resultType="int">
+		SELECT count(*) FROM BOARD
+		WHERE member_idx = #{member_idx}
+		ORDER BY BOARD_IDX
+	</select>
+
+	<select id="selectAll3"
+	 parameterType="map"
+	 resultType="hashmap">
+		SELECT * FROM (
+		 SELECT rownum rnum, B.* FROM (
+		select board_idx, title, content, member.nickname, hit, recommend, writtendate
+	from board, member
+	where board.member_idx = member.member_idx
+	and MEMBER.member_idx = #{member_idx}
+	 ORDER BY board_idx DESC
+	 ) B
+	 ORDER BY rnum
+	 )
+	 WHERE rnum BETWEEN #{AMIP.startNo} AND #{AMIP.endNo}
+	</select>
+	
+	<update id="ban"
+	 parameterType="int">
+		UPDATE MEMBER
+		SET memberClass = 2
+		WHERE Member.member_idx = #{member_idx}
+	</update>
+	
+	<update id="noban"
+	 parameterType="int">
+		UPDATE MEMBER
+		SET memberClass = 1
+		WHERE Member.member_idx = #{member_idx}
+	</update>
+	
+	<select id="selectCntAll4" resultType="int">
+		SELECT count(*) FROM MEMBER
+		WHERE memberclass = 2
+		ORDER BY MEMBER_IDX
+	</select>
+	
+	<select id="selectAll4"
+	 parameterType="util.AdminMemberBanPaging"
+	 resultType="hashmap">
+	 SELECT * FROM (
+	 SELECT rownum rnum, B.* FROM (
+	SELECT member_idx, email, pw, nickname, memberClass, joindate, auth_key, auth_status
+	from member
+	WHERE memberclass = 2
+
+	 ORDER BY member_idx DESC
+	 ) B
+	 ORDER BY rnum
+	 )
+	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
+
 </mapper>

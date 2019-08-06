@@ -2,7 +2,6 @@ package notice.dao.face;
 
 import java.util.List;
 
-import dto.Member;
 import dto.Notice;
 import dto.NoticeFile;
 import util.NoticePaging;
@@ -17,19 +16,17 @@ public interface NoticeDao {
 
 	public Notice selectNoticeByNoticeno(Notice notice);
 
-	public void insertNotice(Notice notice);
+	public void insertBoard(Notice notice);
 
-	public Member selectMemberbyMemberEmail(String id);
+
+	public void insertFile(NoticeFile filetest);
+
+	public NoticeFile getFilebyFileNo(int fileno);
+
+	public NoticeFile selectFilebynotice_idx(Notice notice);
 
 	public void update(Notice notice);
 
 	public void delete(Notice notice);
 
-	public void insertFile(NoticeFile filetest);
-
-	public int selectNoticeno();
-
-	public NoticeFile selectFilebyNoticeno(Notice notice);
-
-	public NoticeFile getFilebyFileNo(int fileno);
 }

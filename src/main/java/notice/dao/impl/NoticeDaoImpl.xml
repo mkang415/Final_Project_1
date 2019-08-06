@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 마이바티스 3 Mapper DOCTYPE -->
+<!--  마이바티스 3 Mapper DOCTYPE -->
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="notice.dao.face.NoticeDao">
-   <select id="selectAll"
+        <mapper namespace="notice.dao.face.NoticeDao">
+
+	<resultMap type="dto.Notice" id="Notice">
+    	<result column="nickname" property="writer"/>
+    </resultMap>
+	
+		<!-- select 문 -->
+       <select id="selectAll"
     		parameterType="util.NoticePaging"
-            resultType="dto.Notice">
- 
-    		SELECT * FROM (
+            resultMap="Notice">
+      		SELECT * FROM (
                 SELECT rownum rnum, B.* FROM (
-				SELECT notice_idx,title, content, writer_email, writer_nick,member_idx, hit, writtendate FROM Notice
+				SELECT notice_idx, title, content,member.nickname, hit, writtendate 
+				FROM notice, member 
+				WHERE notice.member_idx = member.member_idx
 				ORDER BY notice_idx DESC
-		 	)B
-			ORDER BY rnum
-		) Notice
-		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+		 	) B
+          ORDER BY rnum  
+		)
+       WHERE rnum BETWEEN #{startNo } AND #{endNo } 
     
     </select>   
     
@@ -25,72 +32,37 @@
     		resultType="int">
     		
     		SELECT COUNT(*)
-    		FROM Notice
+    		FROM notice
     		
     </select>
     
-    
-        <update id="updateHit"
-    		parameterType="dto.Notice">
-    		UPDATE Notice
-    		SET hit = hit+1
-    		WHERE notice_idx = #{notice_idx }
-    
-    	</update>
     	
-    	    <update id="update"
-    		parameterType="dto.Notice">
-    		UPDATE Notice
-    		SET title = #{title },
-    			content = #{content }
-    		WHERE notice_idx= #{notice_idx }
-    		
     
-    		</update>
-    
-       <select id="selectNoticeByNoticeno"
+        <select id="selectNoticeByNoticeno"
     		parameterType="dto.Notice"
-    		resultType="dto.Notice">
+    		resultMap="Notice">
         		SELECT  
         		
         		notice_idx, 
         		title, 
-        		content, 
-        		writer_email, 
-        		writer_nick, 
+        		content,  
         		hit, 
-        		writtendate 
-        		FROM Notice
-				WHERE notice_idx = #{notice_idx }
-    	</select>
-    	
-    	
-    	   <select id="selectMemberbyMemberEmail"
-    		parameterType="String"
-    		resultType="dto.Member">
-		SELECT  
-		member_idx
-	 	,email
-	 	,pw
-	 	,nickname
-		,memberClass
-		,joindate
-		,auth_key
-	 	auth_status
-			FROM 
-			member
-			WHERE email = #{email }	  
-    		
+        		writtendate,
+        		member.nickname
+        		 
+        		FROM notice,member
+				WHERE notice.member_idx = member.member_idx 
+				AND
+				notice_idx = #{notice_idx }
     </select>
-
-     
-    <select id="selectFilebyNoticeno"
+    
+        <select id="selectFilebynotice_idx"
     		parameterType="dto.Notice"
     		resultType="dto.NoticeFile">
     			SELECT fileno, 
     			origin_name, 
     			stored_name, 
-    			notice_idx
+    			notice_idx 
     			
     			FROM 
     			NoticeFile
@@ -100,52 +72,83 @@
 	
     </select>
     
-<!--     <select id="getFilebyFileNo" -->
-<!--     		parameterType="int" -->
-<!--     		resultType="web.dto.FileTest"> -->
+    <select id="getFilebyFileNo"
+    		parameterType="int"
+    		resultType="dto.NoticeFile">
     		
-<!--     			SELECT fileno,  -->
-<!--     			origin_name,  -->
-<!--     			stored_name,  -->
-<!--     			boardno  -->
+    			SELECT fileno, 
+    			origin_name, 
+    			stored_name, 
+    			notice_idx 
     			
-<!--     			FROM  -->
-<!--     			fileprac -->
+    			FROM 
+    			NoticeFile
     			
-<!--     			WHERE  -->
-<!--     			fileno = #{fileno } -->
+    			WHERE 
+    			fileno = #{fileno }
     		
-<!--     </select> -->
+    </select>
+    <!--  -->  
+    
+    <!-- update -->
+        <update id="updateHit"
+    		parameterType="dto.Notice">
+    		UPDATE notice
+    		SET hit = hit+1
+    		WHERE notice_idx = #{notice_idx }
+    
+   		 </update>
+   		 
+   		<update id="update"
+    		parameterType="dto.Notice">
+    		UPDATE notice
+    		SET title = #{title },
+    			content = #{content }
+    		WHERE notice_idx = #{notice_idx }
+    		
+    
+    	</update>
+   
+     <!--  -->
      
-<!-- 	<insert id="insertBoard" -->
-<!-- 			parameterType="web.dto.Board"> -->
+     <!-- insert -->
+     
+     <insert id="insertBoard"
+     		 parameterType="dto.Notice">
+     
+     	<selectKey order="BEFORE" resultType="int" keyProperty="notice_idx" >
+				SELECT notice_seq.nextval
+				FROM 
+				dual  
+		</selectKey>
 			
-<!-- 			<selectKey order="BEFORE" resultType="int" keyProperty="board_no" > -->
-<!-- 				SELECT  board_seq.nextval -->
-<!-- 				FROM  -->
-<!-- 				dual   -->
-<!-- 			</selectKey> -->
+	INSERT INTO notice ( notice_idx, title, content, member_idx  ) 
+	VALUES ( #{notice_idx }, #{title }, #{content }, #{member_idx } )
+     
+     
+     </insert>
+     
+     
+     <insert id="insertFile"
+     		parameterType="dto.NoticeFile">
+     		
+     	INSERT INTO NoticeFile(fileno, origin_name, stored_name, notice_idx )
+		VALUES (NoticeFile_seq.nextval, #{origin_name }, #{stored_name }, #{notice_idx }  )
+     
+     
+     </insert>   
+        
+        
+     <!--       -->   
+     
+     <delete id="delete"
+			parameterType="dto.Notice">
+	DELETE notice
+	WHERE notice_idx = #{notice_idx }
 			
-<!-- 	INSERT INTO board ( board_no, title, content, writer_id, writer_nick, hit )  -->
-<!-- 	VALUES ( #{board_no }, #{title }, #{content }, #{writer_id } ,#{writer_nick }, 1 ) -->
-
-<!-- 	</insert>    -->
-	
-<!-- 	<delete id="delete" -->
-<!-- 			parameterType="web.dto.Board"> -->
-<!-- 	DELETE board  -->
-<!-- 	WHERE board_no = #{board_no } -->
 			
-			
-<!-- 	</delete> -->
-	
-<!-- 	<insert id="insertFile" -->
-<!-- 			parameterType="web.dto.FileTest"> -->
-	
-<!-- 		INSERT INTO fileprac(fileno, origin_name, stored_name, boardno ) -->
-<!-- 		VALUES (filetest_seq.nextval, #{origin_name }, #{stored_name }, #{boardno }  ) -->
-
-<!-- 	</insert> -->
-	 
-    	
-</mapper>
+	</delete>
+        
+        
+        </mapper>
+    

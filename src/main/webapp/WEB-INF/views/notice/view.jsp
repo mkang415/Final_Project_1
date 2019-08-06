@@ -26,15 +26,161 @@ $(document).ready(function() {
 	
 	//수정버튼 동작
 	$("#btnUpdate").click(function() {
-		$(location).attr("href", "/notice/update?notice_idx=${board.board_no }");
+		$(location).attr("href", "/notice/update?notice_idx=${notice.notice_idx }");
 	});
 
 	//삭제버튼 동작
 	$("#btnDelete").click(function() {
-		$(location).attr("href", "/notice/delete?notice_idx=${board.board_no }");
+		$(location).attr("href", "/notice/delete?notice_idx=${notice.notice_idx }");
 	});
 
+	
+	
+	
+	
+	
+	// 댓글 입력
+	$("#btnCommInsert").click(function() {
+		// 게시글 번호.... ${board.board_no }
+// 		console.log($("#commentWriter").val());
+// 		console.log($("#commentContent").val());
+		
+		$form = $("<form>").attr({
+			action: "/noticeReply/insert",
+			method: "post"
+		}).append(
+			$("<input>").attr({
+				type:"hidden",
+				name:"replying",
+				value: "1"
+			})
+		).append(
+			$("<input>").attr({
+				type:"hidden",
+				name:"notice_idx",
+				value:"${notice.notice_idx }"
+			})
+		).append(
+			$("<input>").attr({
+				type:"hidden",
+				name:"member_idx",
+				value:"${sessionScope.member_idx }"		
+			})
+		).append(
+			$("<textarea>")
+				.attr("name", "reply")
+				.css("display", "none")
+				.text($("#commentContent").val())
+		);
+		$(document.body).append($form);
+		$form.submit();
+	});
+	
+	
+
+
+
+
 });
+//ready function()
+
+
+//답글 창 출력
+function ReplyComment(commentNo) {
+
+	 $.ajax({
+		type: "get"
+		, url: "/noticeReplyTo"
+		, dataType: "html"
+		, data: {
+			step: commentNo
+			}
+		, success: function(res){
+			console.log(res);
+			$("#replyForm").html(res);
+		}
+		, error: function(e) {
+			console.log("error");
+			console.log(e);
+		}
+		
+	});	
+	
+}
+
+//답글 입력 
+function insertReply() {
+	
+	$form = $("<form>").attr({
+		action: "/noticeReply/insert",
+		method: "post"
+	}).append(
+		$("<input>").attr({
+			type:"hidden",
+			name:"step",
+			value:$("#step").val()
+		})
+	).append(
+		$("<input>").attr({
+			type:"hidden",
+			name:"replying",
+			value:"2"
+		})
+	).append(
+		$("<input>").attr({
+			type:"hidden",
+			name:"notice_idx",
+			value:"${notice.notice_idx }"
+			})
+	).append(
+		$("<input>").attr({
+			type:"hidden",
+			name:"member_idx",
+			value:"${sessionScope.member_idx }"		
+			})
+	).append(
+		$("<textarea>")
+			.attr("name", "reply")
+			.css("display", "none")
+			.text($("#commentContent").val())
+	);
+	$(document.body).append($form);
+	$form.submit();
+	
+	
+	
+}
+
+
+
+
+
+//댓글 삭제
+function deleteComment(commentNo) {
+	$.ajax({
+		type: "post"
+		, url: "/noticeReply/delete"
+		, dataType: "json"
+		, data: {
+			reply_idx: commentNo
+		}
+		, success: function(data){
+			if(data.success) {
+				
+				$("[data-commentno='"+commentNo+"']").remove();
+				
+			} else {
+				alert("댓글 삭제 실패");
+			}
+		}
+		, error: function() {
+			console.log("error");
+		}
+	});
+}
+	
+	
+	
 
 </script>
 <style type="text/css">
@@ -76,12 +222,13 @@ margin-top: 50px;
 
 .notice {
 	font-size : 18px;
+	margin-bottom: 400px;
 }
 
-#filediv{
-	position:absolute;
-	top:600px;
-	left:1100px;
+.filedown{
+	position:relative;
+	
+	left:950px;
 }
 #btnList {
 width: 80px;
@@ -114,13 +261,12 @@ border-radius: 1px;
 
 </head>
 <body>
-<h1>게시판 view</h1>
-<hr>
+
 
 
 <h3 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;자유게시판</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공지사항</h3>
 
 
 <div class="clearfix"></div>
@@ -132,7 +278,7 @@ border-radius: 1px;
 
 <h1 class="pull-left">${notice.title }</h1><br><br><br><br>
 <h5 class="pull-left">작성일 : <fmt:formatDate value="${notice.writtendate }" pattern="yyyy-MM-dd" /></h5>
-<h5 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 작성자 : ${nick }  </h5>
+<h5 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 작성자 : ${notice.writer}  </h5>
 <h5 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 조회수 : ${notice.hit }  </h5>
 <div class="text-right">	
 	<button id="btnList">목록</button>
@@ -143,13 +289,73 @@ border-radius: 1px;
 </div>
 <hr>
 
+<div class="filedown">
+첨부파일 : <a href="/file/download?fileno=${noticeFile.fileno }">${noticeFile.origin_name }</a>
+</div>
+
 <div class = "notice">
 ${notice.content }
 </div>
 
+
+<!-- 댓글 처리 -->
 <div>
-<a href="/file/download?fileno=${noticeFile.fileno }">${noticeFile.origin_name }</a>
-</div>
+
+<hr>
+
+<!-- 댓글 리스트 -->
+<table class="table table-striped table-hover table-condensed">
+<thead>
+<tr>
+
+	<th>작성자</th>
+	<th>댓글</th>
+	<th>작성일</th>
+	<th></th>
+</tr>
+</thead>
+<tbody>
+<c:forEach items="${commentList }" var="comment">
+<tr data-commentno="${comment.reply_idx }">
+	<td>${comment.writer }</td>
+	<td>${comment.reply }</td>
+	<td>
+		<fmt:formatDate value="${comment.writtendate }"
+			pattern="yy-MM-dd hh:mm:ss" />
+	</td>
+	<td>
+		<c:if test="${sessionScope.nick eq comment.writer }">
+		<button class="btn btn-default"
+			onclick="deleteComment(${comment.reply_idx });">삭제</button>
+		</c:if>
+	</td>
+	
+	<td>
+		<button class="btn btn-default" onclick="ReplyComment(${comment.step});">답글</button>
+	</td>
+	
+</tr>
+<tr>
+<td><div id="replyForm"></div></td>
+</tr>
+</c:forEach>
+</tbody>
+</table>	<!-- 댓글 리스트 end -->
+
+
+<!-- 댓글 입력 -->
+<c:if test="${login }" >
+<div class="form-inline text-center" style="margin-bottom: 30px;">
+	<input type="text" size="7" class="form-control"
+		id="commentWriter"
+		value="${sessionScope.nick }" readonly="readonly"/>
+	<textarea rows="2" cols="60"
+		class="form-control" id="commentContent"></textarea>
+	<button id="btnCommInsert" class="btn">입력</button>
+</div>	<!-- 댓글 입력 end -->
+</c:if>
+
+</div>	<!-- 댓글 처리 end -->
 
 
 

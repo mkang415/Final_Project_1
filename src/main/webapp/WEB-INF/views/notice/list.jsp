@@ -4,12 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
- 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<c:import url="/WEB-INF/views/layout/header.jsp"/> 
+
+
+     <!-- Bootstrap 3 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 <script type="text/javascript"
    src="http://code.jquery.com/jquery-2.2.4.js"></script>
@@ -19,16 +21,13 @@
 $(document).ready(function() {
 	//글쓰기 버튼 누르면 이동
 	$("#btnWrite").click(function() {
-		location.href="/board/write";
+		location.href="/notice/write";
 	});
 
 });
 
 </script>
-<!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 
 <style type="text/css">
@@ -56,10 +55,10 @@ table, th {
 	text-align: center;
 }
 
-.container {
-	border-left : 1px solid #eee;
-	border-right : 1px solid #eee;
-}
+/* .container { */
+/* 	border-left : 1px solid #eee; */
+/* 	border-right : 1px solid #eee; */
+/* } */
 #btnWrite {
 width: 100px;
 height: 40px;
@@ -72,20 +71,16 @@ border-radius: 1px;
  
 </style>
 
-</head>
-<body>
-
-<h1>공지사항</h1>
 
 
-<hr>
+
 
 <c:if test="${login }">
 <div id="btnBox" >
-	<button style="float: right;" id="btnWrite">글쓰기</button>
+	<button style="position: absolute; float:right; left:1340px; top:230px;" id="btnWrite">글쓰기</button>
 </div>
 </c:if>
-<table class="table table-hover table-condensed" style="margin-top:200px; margin-left:240px;
+<table class="table table-hover table-condensed" style="margin-top:300px; margin-left:240px;
  width:1200px;">
 
 <thead style="background: #337AB7; color: white;" >
@@ -102,7 +97,7 @@ border-radius: 1px;
 	<tr>
 		<td>${i.notice_idx }</td>
 		<td><a href="/notice/view?notice_idx=${i.notice_idx }">${i.title }</a></td>
-		<td>${i.writer_email }</td>
+		<td>${i.writer }</td>
 		<td>${i.hit }</td>
 	<td><fmt:formatDate value="${i.writtendate }" pattern="yyyy-MM-dd" /></td>
 
@@ -114,5 +109,6 @@ border-radius: 1px;
 
 <c:import url="/WEB-INF/views/layout/NoticePaging.jsp" />
 
-</body>
-</html>
+
+<c:import url="/WEB-INF/views/layout/footer.jsp"/>
+
