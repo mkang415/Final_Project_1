@@ -16,4 +16,10 @@ public interface MemberDao {
 
 	public void updateAuth_status(Member member);
 
+	public int selectAuth(Member member);
+
+	public int selectCntByCode(String code);
+
+	public void pwUpdate(Member member);
+
 }

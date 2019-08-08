@@ -16,6 +16,15 @@ public interface MemberService {
 
 	public void updateAuth_status(Member member);
 
+	public void sendCode(Member member) throws Exception;
+
+	public boolean findMember(String code);
+
+
+	public void update(Member member);
+
+	
+
 
 
 }

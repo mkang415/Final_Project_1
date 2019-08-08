@@ -3,11 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 
 <script type="text/javascript"
    src="http://code.jquery.com/jquery-2.2.4.js"></script>
@@ -86,14 +81,15 @@ $(document).ready(function() {
 
 
 //답글 창 출력
-function ReplyComment(commentNo) {
+function ReplyComment(commentNo, commentWriter) {
 
 	 $.ajax({
 		type: "get"
 		, url: "/noticeReplyTo"
 		, dataType: "html"
 		, data: {
-			step: commentNo
+			step: commentNo,
+			writer: commentWriter
 			}
 		, success: function(res){
 			console.log(res);
@@ -203,8 +199,10 @@ margin-top: 50px;
 }
 
 .total {
-	margin : 0 auto;
-	width : 75%;
+	margin-top: 100px;
+	width : 1100px;
+	margin-bottom: 300px;
+	margin-left:290px;
 }
 .sumnail{
 	
@@ -228,7 +226,7 @@ margin-top: 50px;
 .filedown{
 	position:relative;
 	
-	left:950px;
+	left:830px;
 }
 #btnList {
 width: 80px;
@@ -259,18 +257,9 @@ border-radius: 1px;
 }
 </style>
 
-</head>
-<body>
 
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
 
-
-<h3 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공지사항</h3>
-
-
-<div class="clearfix"></div>
-<hr>
 
 
 <div class="total">
@@ -331,7 +320,7 @@ ${notice.content }
 	</td>
 	
 	<td>
-		<button class="btn btn-default" onclick="ReplyComment(${comment.step});">답글</button>
+		<button class="btn btn-default" onclick="ReplyComment(${comment.step}, '${comment.writer }');">답글</button>
 	</td>
 	
 </tr>
@@ -357,7 +346,7 @@ ${notice.content }
 
 </div>	<!-- 댓글 처리 end -->
 
+</div>
 
 
-</body>
-</html>
+<c:import url="/WEB-INF/views/layout/footer.jsp"/>

@@ -73,8 +73,9 @@
                     <nav class="nav">
                         <ul class="clearfix">
                             <li><a href="/notice/list">공지사항</a></li>
-                            <li><a href="#">마이페이지</a></li>
-                            <li><a href="#">가계부</a></li>
+
+                            <li><a href="/schedule/calendar">마이페이지</a></li>
+                            <li><a href="/ledger/ledger">가계부</a></li>
                             <li><a href="/diary">다이어리</a></li>
                             <li><a href="#">자유게시판</a></li>
                             
@@ -218,7 +219,7 @@
                 	<div class="service" style="height:390px;">
                 		<ul>
                 		<li>
-                			<a href="#">
+                			<a href="/ledger/ledger">
                 				<span class="img_svg" style="width:100px;">
                 					<img src="/resources/assets/img/accounting.png"><img>
                 				</span>
@@ -243,7 +244,7 @@
   							</a>
   						</li>              		
 
-  						<li><a href="">
+  						<li><a href="/qna/newlist">
   								<span class="img_svg" style="width:100px;">
                 					<img src="/resources/assets/img/question.png"><img>
                 				</span>
