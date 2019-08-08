@@ -103,8 +103,8 @@ public class CalendarUtil {
 	// 일정제목이 길면 ...처리
 	public String dot3(String msg) {
 		String s = "";
-		if(msg.length() >= 15) {
-			s = msg.substring(0,15); //임의로 10글자 까지
+		if(msg.length() >= 13) {
+			s = msg.substring(0,13); //임의로 10글자 까지
 			s += "...";
 		} else {
 			s = msg.trim();

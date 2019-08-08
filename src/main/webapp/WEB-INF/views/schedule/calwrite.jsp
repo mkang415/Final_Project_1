@@ -35,25 +35,33 @@ int tday = cal.get(Calendar.DATE);
  %>
 
 
+
+
 <script type="text/javascript">
 $(document).ready(function() {
 		$("#btnWrite").click(function(){
+				if($('#title').val()==''){
+					alert('!일정의 제목을 입력해 주세요!');
+					$('#title').focus();
+					return;
+				}
 			$("form").submit();
 		});
 		
 		$("#cancel").click(function(){
 			history.back(-1);
 		});
+		
+		
+		
+		
 });
 	
 
 </script>
 
-<style>
 
 
-
-</style>
 
 <div align="center">
 <br>
@@ -70,7 +78,7 @@ $(document).ready(function() {
 	<label for="title">제목</label></td>
 	
 	<td style="text-align : center;">
-	<input type="text" size="100%" style="padding:11px" name="title" placeholder="일정의 제목을 입력하세요!" />
+	<input type="text" size="100%" style="padding:11px" id="title" name="title" placeholder="일정의 제목을 입력하세요!" />
 	</td>
 </tr>
 

@@ -20,20 +20,19 @@ $(document).ready(function(){
 </script>
 
 
-
-<h4>&nbsp; 총 일정 리스트 : ${paging.totalCount } 개</h4>
+<br>
+<h4>&nbsp;&nbsp;&nbsp; 총 일정 리스트 : ${paging.totalCount } 개</h4>
 <br><br>
 <div class="clearfix">
-<table class="table table-striped table-hover" style="table-layout:fixed;">
+<table class="table table-striped table-hover" style="table-layout:fixed; text-align : center;" >
 
-<thead>
+<thead >
 	<tr>
-		<th style="width: 8%;">일정번호</th>
-		<th style="width: 30%;">제목</th>
-		<th style="width: 32%;">내용</th>
-		<th style="width: 10%;">약속날짜</th>
-		<th style="width: 10%;">작성날짜</th>
-		<th style="width: 10%;">회원번호</th>
+		<th style="width: 8%; text-align : center;">일정번호</th>
+		<th style="width: 35%; text-align : center;">제목</th>
+		<th style="width: 37%; text-align : center;">내용</th>
+		<th style="width: 10%; text-align : center;">약속한날짜</th>
+		<th style="width: 10%; text-align : center;">작성한날짜</th>
 	</tr>
 </thead>
 <tbody>
@@ -44,7 +43,6 @@ $(document).ready(function(){
 		<td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">${i.content }</td>
 		<td>${i.rdate }</td>
 		<td><fmt:formatDate value="${i.wdate}" pattern="yyyy-MM-dd"/></td>
-		<td>${i.member_idx }</td>
 	</tr>
 </c:forEach>
 </tbody>
