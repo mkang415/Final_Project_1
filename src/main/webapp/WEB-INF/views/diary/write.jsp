@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>#DiaryWrite</title>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<!-- header -->
+<c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
+<!-- header -->
+
 
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
@@ -16,7 +19,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l0hnqofc58"></script>
 
-<!--  -->
 
 <script type="text/javascript">
 
@@ -28,9 +30,7 @@ var geoY;
 
 function mapSearchF() {
 		
-var data = $('#mapSearch').val();
-		
-console.log(data);
+	var data = $('#mapSearch').val();
 		
 	$.ajax({
 		data: {"data": data},
@@ -72,13 +72,15 @@ function getElementsFromData(data) {
 		placeList[i] = {"name":name, "road_address":road_address, "jibun_address":jibun_address, "phone_number":phone_number, "geocoding":geocoding, "distance":distance, "sessionId":sessionId};	
 		
 		list += "<div class='list' onclick='changeMap("+i+")'>" + ptagStart + name + ptagEnd + ptagStart + road_address + ptagEnd + divEnd;
-		
 	}
+		if(data["places"].length<5) {
+			for(i=data["places"].length; i<5; i++) {
+				list+="<div class='list'></div>";
+			}
+		}
 		
 	document.getElementById("placeinfo").innerHTML = list;
 	
-	
-	console.log(placeList);
 	
 	var mapOptions = {
 		center: new naver.maps.LatLng(parseFloat(data["places"][0]["y"]), parseFloat(data["places"][0]["x"])),
@@ -86,13 +88,13 @@ function getElementsFromData(data) {
 	};
 
 	var map = new naver.maps.Map('map', mapOptions);
-
-	console.log("test : "+ typeof parseFloat(data["places"][0]["x"]));
 			
 	var marker = new naver.maps.Marker({
 		position: new naver.maps.LatLng(parseFloat(data["places"][0]["y"]), parseFloat(data["places"][0]["x"])),
 		map: map
 	});
+	
+	console.log(list);
 	
 }
 
@@ -136,36 +138,24 @@ function addMap() {
 	console.log("x:"+ geoX);
 	console.log("y:"+geoY);
 	if(placename!=null) {
-		var imgTag = "<img id='imgid'>";
+
 		var imgUrl = "https://naveropenapi.apigw.ntruss.com/map-static/v2/raster-cors?w=480&h=300&markers=type:d|size:mid|pos:"+geoY+"%20"+geoX+"&X-NCP-APIGW-API-KEY-ID=l0hnqofc58";
 
 		$("#modal_map").attr("style", "display:none");
 		$('#summernote').summernote('editor.insertImage', imgUrl);
-
+		
+		var insertPlaceName = "<p align='center'>" + placename + "</p>";
+		var insertRoadAddress = "<p align='center'>" + road_address + "</p><br>";	
+		
+		$("#summernote").summernote('pasteHTML', insertPlaceName);
+		$("#summernote").summernote('pasteHTML', insertRoadAddress);		
+		
+// 		$("#summernote").summernote('editor.insertText', placename);
+// 		$("#summernote").summernote('editor.insertText', road_address);
 	}
 }
 
 </script>
-
-<style type="text/css">
-
-.list {
-	margin: 0;
-	padding-left: 1em;
-	padding-right: 1em;
-	border: 1px solid black;
-
-}
-
-#map {
-	display: inline-block;
-}
-
-#placeinfo {
-	display: inline-block;
-}
-
-</style>
 
 <!--  -->
 
@@ -195,44 +185,70 @@ function addMap() {
 
 
 #modal_map {
-  display: none;
-  position:relative;
-  width:100%;
-  height:100%;
-  z-index:1;
+	display: none;
+	position:relative;
+	width:100%;
+	height:100%;
+	z-index:1;
 }
 
 #modal_map .modal_content {
-position: fixed;
+	position: fixed;
 	top: 20%;
-left: 25%;
+	left: 25%;
 
-  width:50%;
-  padding:1em;
-  background:#fff;
-  border:2px solid #666;
+	width:auto;
+	padding:10px;
+	background:#fff;
+	border:2px solid #666;
 }
 
 #modal_map .modal_layer {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0, 0, 0, 0.5);
-  z-index:-1;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:rgba(0, 0, 0, 0.5);
+	z-index:-1;
 }
 
+#dataDiv {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	position: relative;
+}
 
+.list {
+	margin-top: 0;
+	margin-right: 1em;
+	padding-left: 1em;
+	padding-top: 0;
+	padding-bottom: 0;
+	border-top: 1px solid grey;
+	border-bottom: 1px solid grey;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 390px;
+	height: 78px;
+}
+
+#map {
+	display: inline-block;
+}
+
+#placeinfo {
+	display: inline-block;
+	height: 400px;
+	margin-right: 10px;
+	width: 400px;
+
+}
 
 
 </style>
 
-</head>
-<body>
 
-<h1 style="text-align:center">Diary Write</h1>
-<hr>
 <div class="wrapper">
 
 
@@ -258,22 +274,22 @@ left: 25%;
 <div id="modal_map">
 
 	<div class="modal_content">
+	<div><h1>Insert Map</h1></div>
+	<hr>
 
-
-	<input type="text" id="mapSearch"> <button type="button" id="mapSearchBtn" onclick="mapSearchF()">검색</button>
+	<div>
+		<input type="text" id="mapSearch"> <button type="button" id="mapSearchBtn" onclick="mapSearchF()">검색</button>
+	</div>
+	
 	<div id="dataDiv">
 		<div id="map" style="width:400px;height:400px;"></div>
 		<div id="placeinfo"></div>
 	</div>
-
+	<div>
 		<button type="button" onClick="addMap()">저장</button><button type="button" onClick="mapModalClose()">취소</button>
 		
-		<script type="text/javascript">
-			function mapModalClose() {
-				$("#modal_map").attr("style", "display:none");
-			}
-		</script>
 
+	</div>
 	</div>
 
 
@@ -282,6 +298,11 @@ left: 25%;
 </div>
 </div>
 
+<script type="text/javascript">
+	function mapModalClose() {
+		$("#modal_map").attr("style", "display:none");
+	}
+</script>
 
 
 <script type="text/javascript">
@@ -323,5 +344,8 @@ $(document).ready(function() {
     }
 });
 </script>
-</body>
-</html>
+
+
+
+<!-- footer -->
+<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
