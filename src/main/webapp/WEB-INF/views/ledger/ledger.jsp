@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -13,6 +13,9 @@
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+	
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">	
 
 <!-- bootstrap 4.3.1 -->
 <link rel="stylesheet"
@@ -20,9 +23,9 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" -->
+<!-- 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
+<!-- 	crossorigin="anonymous"></script> -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
 	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -31,6 +34,19 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+	
+<script type="text/javascript">
+
+$(document).ready(function() {
+   
+   $("#search").click(function() {
+
+      location.href="/ledger/ledger?datepicker="+$("#datepicker").val()+"&datepicker2="+$("#datepicker2").val();
+      
+   });
+});
+</script>
+	
 <style type="text/css">
 #btnBox {
 	position: absolute;
@@ -41,9 +57,57 @@
 }
 </style>
 
+<style>
+/*datepicer 버튼 롤오버 시 손가락 모양 표시*/
+.ui-datepicker-trigger{cursor: pointer;}
+/*datepicer input 롤오버 시 손가락 모양 표시*/
+.hasDatepicker{cursor: pointer;}
+</style>
 </head>
 <body>
-
+	From: <input type="text" id="datepicker">
+    To: <input type="text" id="datepicker2">
+ 
+    <script>
+        $(function() {
+            //모든 datepicker에 대한 공통 옵션 설정
+            $.datepicker.setDefaults({
+                dateFormat: 'yy-mm-dd' //Input Display Format 변경
+                ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+                ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+                ,changeYear: true //콤보박스에서 년 선택 가능
+                ,changeMonth: true //콤보박스에서 월 선택 가능                
+                ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+                ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+                ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+                ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+                ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+                ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+                ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+                ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+                ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+                ,minDate: "-100Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                ,maxDate: "+100Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후) 
+            
+            	,showButtonPanel: true
+            	,currentText: '오늘 날짜'
+            	,closeText: '닫기'
+            	
+            });
+ 
+            //input을 datepicker로 선언
+            $("#datepicker").datepicker();                    
+            $("#datepicker2").datepicker();
+            
+            //From의 초기값을 오늘 날짜로 설정
+            $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+            //To의 초기값을 설정
+            $('#datepicker2').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+        });
+    </script>
+	
+	<button type="button" id="search">조회</button>
+	
 	<div class="modal fade" id="ModalWrite" tabindex="-1" role="dialog"
 		aria-labelledby="ModalWrite" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -58,13 +122,14 @@
 					<h2 style="text-align: center">가계부 작성</h2>
 					<div class="modal-header">
 						<input type="text" style="width: 98%;" id="item" name="item"
-							 placeholder="사유 입력" />
+							 placeholder="항목 필수 입력" />
 					</div>
 					<div class="modal-body">
-						<textarea style="width: 49%;"
-							id="plusM" name="plusM" placeholder="수입 입력"></textarea>
-						<textarea style="width: 49%;" 
-							id="minusM" name="minusM" placeholder="지출 입력"></textarea>
+					<h4 style="text-align: center">수입/지출</h4>
+						<input type="number" style="width: 49%;"
+							id="plusM" name="plusM" value=0 min=0>
+						<input type="number" style="width: 49%;" 
+							id="minusM" name="minusM" value=0 min=0>
 					</div>
 
 					<div class="modal-footer">
@@ -105,13 +170,17 @@
 	</div>
 	<h4>
 		<span style="text-align: center; margin-left: 1430px;">${totalplus.getWrittendate()}
-			수입 : ${totalplus.getPlusM() }</span>
+			월 수입 : ${totalplus.getPlusM() }</span>
 	</h4>
 	<h4>
 		<span style="text-align: center; margin-left: 1430px;">${totalminus.getWrittendate()}
-			지출 : ${totalminus.getMinusM() }</span>
+			월 지출 : ${totalminus.getMinusM() }</span>
 	</h4>
-
+	<br>
+	<h4>
+		<span style="text-align: center; margin-left: 1430px;">${totalminus.getWrittendate()}
+			월 결산 : ${totalplus.getPlusM()+totalminus.getMinusM() }</span>
+	</h4>
 	<br>
 
 

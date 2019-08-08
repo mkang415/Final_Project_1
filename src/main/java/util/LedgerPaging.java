@@ -12,9 +12,30 @@ public class LedgerPaging {
 	private int endPage;	//화면에 보이는 끝 페이지 (계산으로 알아냄)
 	
 	private int startNo;	//게시물리스트 첫 번호
-	private int endNo;	//게시물리스트 마지막 번호
 	
 	private int member_idx;
+	private String datepicker;
+	private String datepicker2;
+	
+	public String getDatepicker() {
+		return datepicker;
+	}
+
+	public void setDatepicker(String datepicker) {
+		this.datepicker = datepicker;
+	}
+
+	public String getDatepicker2() {
+		return datepicker2;
+	}
+
+	public void setDatepicker2(String datepicker2) {
+		this.datepicker2 = datepicker2;
+	}
+
+	private int endNo;	//게시물리스트 마지막 번호
+	
+	
 	
 	public int getMember_idx() {
 		return member_idx;
