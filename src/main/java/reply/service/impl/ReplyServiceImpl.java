@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.velocity.runtime.directive.Parse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,23 @@ public class ReplyServiceImpl implements ReplyService{
 	public void brdDelete(int board_idx) {
 		replyDao.brdDelete(board_idx);
 		
+	}
+
+	//	댓글 수정
+	@Override
+	public void update(BoardReply boardReply) {
+		
+		replyDao.update(boardReply);
+		
+	}
+
+	//	게시글의 댓글 개수 가져오기
+	@Override
+	public int getCntReply(String board_idx) {
+		
+		int brdidx = Integer.parseInt(board_idx);
+		
+		return replyDao.getCntReply(brdidx);
 	}
 
 }

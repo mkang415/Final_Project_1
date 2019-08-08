@@ -74,4 +74,23 @@
 		document.getElementById(replybtn).style.display="block";
 		document.getElementById(updatebtn).style.display="none";
 	}
+	
+	function up_comment(){
+		
+		$.ajax({
+			type:'POST',
+			url : "/reply/update",
+			data:$("#updateForm").serialize(),
+			success : function(data){
+			if(data=="success")
+				{
+					getCommentList();
+					$("#reply").val("");
+				}
+			},
+			error:function(request,status,error){
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
 </script>

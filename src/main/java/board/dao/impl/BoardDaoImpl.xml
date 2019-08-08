@@ -111,24 +111,15 @@
 	 	where board_idx = #{brdidx}
 	 </update>
 	 
-	 <!-- 글 작성 틀 생성 -->
-	<insert id="shape"
-	 parameterType="dto.Board">
-		<selectKey keyProperty="board_idx" order="BEFORE" resultType="int">
+	 <!-- 작성 글 데이터 DB에 저장 -->
+	<insert id="write"
+	  parameterType="dto.Board">
+	  	<selectKey keyProperty="board_idx" order="BEFORE" resultType="int">
 	  		SELECT board_seq.nextval FROM dual
 	  	</selectKey>
 	  	insert into board(board_idx, title, content, member_idx, divide) 
 	 	values (#{board_idx}, #{title}, #{content}, #{member_idx}, #{divide})
 	</insert>
-	 
-	 <!-- 작성 글 데이터 DB에 저장 -->
-	<select id="write"
-	  parameterType="dto.Board"
-	  resultType="dto.Board">
-	 	update board set title = #{title}, content=#{content}, divide=#{divide}
-	  	where board_idx = #{board_idx}
-	</select>
-
 
 	<!-- 수정할 게시글 DB에서 불러오기 -->
 	<select id="getUpdate"
@@ -165,7 +156,36 @@
 		<selectKey keyProperty="image_idx" order="BEFORE" resultType="int">
 	  		SELECT image_seq.nextval FROM dual
 	  	</selectKey>
-	  	insert into image(image_idx, originname, storename) 
-	 	values (#{image_idx}, #{originname}, #{storename})
+	  	insert into image(image_idx, originname, storename, member_idx) 
+	 	values (#{image_idx}, #{originname}, #{storename}, #{member_idx})
 	</insert>
+	
+	<!-- 이미지 데이터 가져오기 -->
+	<select id="getImage"
+	 parameterType="String"
+	 resultType="dto.Image">
+		select * from image
+		where storename = #{storename}
+	</select>
+	
+	<!-- 이미지 board_idx 셋팅 -->
+	<update id="setBrdidx"
+	 parameterType="dto.Image">
+	 	update image set board_idx = #{board_idx}
+	 	where image_idx = #{image_idx}
+	</update>
+	 
+	<!-- 게시글 삭제시 업로드한 이미지도 삭제 -->
+	<delete id="deleteImg"
+	 parameterType="int">
+		delete image
+		where board_idx = #{board_idx} 
+	</delete>
+	
+	<delete id="delnullimg"
+	 parameterType="int">
+		delete image
+		where member_idx = #{member_idx}
+		and board_idx is null
+	</delete>
 </mapper>
