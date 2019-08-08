@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>#DiaryWrite</title>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<!-- header -->
+<c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
+<!-- header -->
+
 
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
@@ -35,8 +38,7 @@
 </head>
 <body>
 
-<h1 style="text-align:center">Diary Modify</h1>
-<hr>
+
 <div class="wrapper">
 
 
@@ -96,5 +98,7 @@ $(document).ready(function() {
     }
 });
 </script>
-</body>
-</html>
+
+
+<!-- footer -->
+<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>

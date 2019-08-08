@@ -4,12 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>#Diary</title>
+<!-- header -->
+<c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
+<!-- header -->
 
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
@@ -92,10 +89,13 @@ body, html {
 	padding: 0;
 	padding-top: 50px;
 	border: 0;
-/* 	background: #E3CEF6; */
- 	background-image: url('resources/diary/img/bg.jpg');
+ 	background: #F1F1F1; 
+/*   	background-image: url('resources/diary/img/bggrey.jpg'); */
 	min-height: 100%;
+
 }
+
+
 
 .diary {
 
@@ -115,7 +115,7 @@ body, html {
 
 .content {
 	height: none;
-	min-height: 3em;
+	min-height: 20em;
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-bottom: 50px;
@@ -200,7 +200,7 @@ img {
 
 .openDiv {
 	display: none;
-	height: 2em;
+	height: 3em;
 	width: 92%;
 	bottom: 1.8em;
 	position: absolute;
@@ -222,7 +222,7 @@ img {
 
 .collapseDiv {
 	display: none;
-	height: 2em;
+	height: 3em;
 	width: 92%;
 	bottom: 1.8em;
 	position: absolute;
@@ -257,11 +257,6 @@ img {
 
 </style>
 
-</head>
-<body>
-
-<h1 style="text-align:center">Diary</h1>
-<hr>
 <div class="wrapper">
 
 <div id="write"><img src="resources/diary/img/write.png" onClick="location.href='/diary/write'"></div>
@@ -294,5 +289,6 @@ img {
 
 </div>
 
-</body>
-</html>
+
+<!-- footer -->
+<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
