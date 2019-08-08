@@ -43,8 +43,6 @@ function fn_comment(){
 		}
 	});
 }
-	
-
 
 $(function(){
 	console.log("function");

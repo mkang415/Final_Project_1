@@ -89,32 +89,20 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return false;
 	}
-
-	//	글 작성 틀 생성
-	@Override
-	public Board boardShape(HttpSession session, int divide) {
-		
-		Board board = new Board();
-		board.setMember_idx((int)session.getAttribute("member_idx"));
-		board.setTitle("no Title");
-		board.setContent("no Content");
-		board.setDivide(divide);
-		boardDao.shape(board);
-		return board;
-		
-	}
 	
 	// 작성글 데이터 dao로 전달
 	@Override
-	public void write(Board board) {
+	public void write(HttpSession session, Board board) {
 
+		board.setMember_idx((int) session.getAttribute("member_idx")); 
+		
 		boardDao.write(board);
 
 	}
 
 	// 업로드한 이미지 저장 후 저장경로 반환
 	@Override
-	public Image imgSave(MultipartFile file, ServletContext context) {
+	public Image imgSave(MultipartFile file, ServletContext context, HttpSession session) {
 
 		// 파일이 저장될 경로
 		String storedPath = context.getRealPath("resources/boardimg");
@@ -139,6 +127,7 @@ public class BoardServiceImpl implements BoardService {
 		}
 
 		Image image = new Image();
+		image.setMember_idx((int)session.getAttribute("member_idx"));
 		image.setOriginname(file.getOriginalFilename());
 		image.setStorename(name);
 		boardDao.imgSave(image);
@@ -225,6 +214,38 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.getPhotoList(boardPaging);
 	}
 
-	
+	//	이미지 정보 가져오기
+	@Override
+	public Image getImage(String storename) {
+		
+		return boardDao.getImage(storename);
+	}
+
+	//	이미지에 board idx 저장
+	@Override
+	public void setBrdidx(Image setImage, Integer integer) {
+		
+		setImage.setImage_idx(integer);
+		
+		boardDao.setBrdidx(setImage);
+		
+	}
+
+	//	게시글 삭제시 이미지도 삭제
+	@Override
+	public void deleteImg(int board_idx) {
+		
+		boardDao.deleteImg(board_idx);
+	}
+
+	//	글 작성 취소할 경우 업로드 이미지 삭제
+	@Override
+	public void delnullimg(HttpSession session) {
+		
+		int member_idx = (int)session.getAttribute("member_idx");
+		
+		boardDao.delnullimg(member_idx);
+		
+	}
 
 }

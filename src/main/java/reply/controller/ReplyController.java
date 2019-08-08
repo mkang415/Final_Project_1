@@ -68,6 +68,7 @@ public class ReplyController {
 			BoardReply boardReply
 			) {
 	
+		replyService.update(boardReply);
 		return "success";
 	}
 }

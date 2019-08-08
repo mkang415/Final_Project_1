@@ -26,8 +26,8 @@
 <body>
 <h1>게시글 작성 페이지</h1>
 <hr>
-<form action = "/board/write" method = "post">
-<input type="hidden" name="board_idx" value="${board.getBoard_idx()}">
+<form id="boardForm" action = "/board/write" method = "post" style="width: 1200px">
+
 <!-- form 태그 영역 감싸기 -->
 <fieldset>
 
@@ -37,8 +37,8 @@
 <table>
 <!-- 전달 파라미터, 전송할 데이터 -->
 <tr>
-	<td>게시판</td>
-	<td>
+	<td style="min-width: 50px">게시판</td>
+	<td style="min-width: 450px">
 		<select name="divide">
 			<option value="1"<% if(selBoard == 1){ %>selected<% } %>>자유게시판</option>
 			<option value="2"<% if(selBoard == 2){ %>selected<% } %>>후기게시판</option>
@@ -50,10 +50,16 @@
 	<td style="width: 10%"><label for="title">제목</label></td>
 	<td style="width: 90%"><input type="text" style="width: 94%" id="title" name = "title" placeholder="제목 입력"/></td>
 </tr>
-
 <tr>
 	<td>내용</td>
 	<td><textarea id="summernote" name="content"></textarea></td>
+</tr>
+<tr>
+	<td>이미지</td>
+	<td>
+	<div id="preveal">
+	</div>
+	</td>
 </tr>
 
 <!-- <form>데이터 전송(Submit) 버튼 -->
@@ -61,8 +67,7 @@
 	<td></td>
 	<td>
 		<input type="submit" value="작성"/>
-		<button type="button" onclick="location.href='/board/delete?brdidx=${board.getBoard_idx()}&divide=${board.getDivide()}'">취소</button>
-		
+		<button type="button" onclick="location.href='/board/delimg?divide=${board.getDivide()}'">취소</button>
 	</td>
 </tr>
 </table>
@@ -103,11 +108,26 @@
 
 	        	$(el).summernote('editor.insertImage', "\\resources\\boardimg\\"+url);
 	        	$('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-	        	console.log(idx);
+
+	        	getImage(url);
 	        }
 	      });
-	    }
+	}
+	
+	function getImage(url){
+		$.ajax({
+			type : 'POST',
+			url : "/board/getimg",
+			dataType : "html",
+			data : {"storename" : url},
+			success: function(data) {
+				console.log(data);
+				$('#preveal').append(data);
+			}
+		});
 
+	}
+	
 </script>
 
 </body>

@@ -53,6 +53,13 @@ public class BoardController {
 		//	게시판 리스트 저장
 		List<HashMap<String, Object>> freeBoardList = boardService.getFreeList(boardPaging);
 		
+		String board_idx = "0";
+		 for (int i = 0; i < freeBoardList.size(); i++) {
+			logger.info("i: "+i);
+			board_idx = freeBoardList.get(i).get("BOARD_IDX").toString();
+	        freeBoardList.get(i).put("CNTREPLY", replyService.getCntReply(board_idx));
+		 }
+
 		//	페이징 및 리스트 전달
 		model.addAttribute("freePaging", boardPaging);
 		model.addAttribute("freeList", freeBoardList);	
@@ -138,13 +145,13 @@ public class BoardController {
 	@RequestMapping(value = "/board/write", method = RequestMethod.GET)
 	public void boardWrite(
 			int divide,
-			HttpSession session,
 			Model model
 			) {
 		logger.info("글쓰기");
 		
-		Board board = boardService.boardShape(session, divide);
-		logger.info(board.toString());
+		Board board = new Board();
+		board.setDivide(divide);
+
 		model.addAttribute("board", board);
 
 	}
@@ -152,10 +159,28 @@ public class BoardController {
 	//	작성한 글 저장
 	@RequestMapping(value = "board/write", method = RequestMethod.POST)
 	public String boardWriteProc(
-			Board board
+			Board board,
+			@RequestParam (value = "image", required=false) List<Integer> image,
+			HttpSession session
 			) {
+		
+		boardService.write(session, board);
+		Image setImage = new Image();
+		setImage.setBoard_idx(board.getBoard_idx());
+		
+		
 		logger.info("작성 글 저장");
-		boardService.write(board);
+		if(image != null) {
+			for(int i=0; i<image.size(); i++) {
+				logger.info("인덱스: "+image.get(i));
+				boardService.setBrdidx(setImage, image.get(i));
+			}
+		logger.info(board.toString());
+		}
+		/*
+		 * for(int i : image) { logger.info("index:"+image.get(i)); }
+		 */
+		
 		return "redirect: /board/view?brdidx="+board.getBoard_idx();
 	}
 	
@@ -163,11 +188,12 @@ public class BoardController {
 	@PostMapping(value="/upload/image", produces = "application/text; charset=UTF-8")
     @ResponseBody
     public ResponseEntity<?> uploadImg(
-    		@RequestParam("file") MultipartFile file) {
+    		@RequestParam("file") MultipartFile file,
+    		HttpSession session) {
 		Image image = new Image();
 		logger.info("이미지 업로드");
         try {
-        	image = boardService.imgSave(file, context);
+        	image = boardService.imgSave(file, context, session);
         	logger.info(image.getStorename());
             String uploadPath = image.getStorename();
             return ResponseEntity.ok().body(uploadPath);
@@ -210,6 +236,9 @@ public class BoardController {
 
 		replyService.brdDelete(brdidx);
 		boardService.delete(brdidx);
+		
+		//	해당 이미지 삭제
+		boardService.deleteImg(brdidx);
 
 		if(divide==1) {
 			return "redirect: /board/freelist";
@@ -239,5 +268,38 @@ public class BoardController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//	이미지 데이터 보내기
+	@RequestMapping(value="/board/getimg", method=RequestMethod.POST)
+	public String getImage(
+			Model model,
+			String storename
+			) {
+		logger.info("getimage");
+		Image image= boardService.getImage(storename);
+		logger.info(image.toString());
+		model.addAttribute("image", image);
+		return "board/imagelist";
+	}
+	
+	//	글 작성 취소시 업로드한 이미지 삭제.
+	@RequestMapping(value = "/board/delimg", method=RequestMethod.GET)
+	public String delnullimg(
+			int divide,
+			HttpSession session
+			) {
+		
+		logger.info("글 작성 취소");
+		boardService.delnullimg(session);
+
+		if(divide==1) {
+			return "/board/freelist";
+		} else if (divide==2) {
+			return "/board/epillist";
+		} else if (divide==3) {
+			return "/board/photolist";
+		}
+		return "redirect: main";
 	}
 }

@@ -37,4 +37,8 @@ public interface ReplyDao {
 
 	int getBrdidx(int reply_idx);
 
+	void update(BoardReply boardReply);
+
+	int getCntReply(int board_idx);
+
 }
