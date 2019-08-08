@@ -20,49 +20,32 @@ $(document).ready(function(){
 </script>
 
 
-
-
-
-
-
-<c:choose>
-	<c:when test="${empty login }">
-		<a href="/member/login"><button class="btn pull-right">로그인</button></a>
-	</c:when>
-	<c:otherwise>
-		<div class="pull-right">
-			<c:out value="${nick }" />님 환영합니다<br><br>
-			<a href="/member/logout"><button class="btn btn-warning">로그아웃</button></a>
-		</div>
-	</c:otherwise>
-</c:choose>
-
-<h5 class="pull-right"> 총 일정 리스트 : ${paging.totalCount }</h5>
 <br>
-<div class="clearfix"></div>
-<table class="table table-striped table-hover">
-<thead>
+<h4 style="border: 1px;">&nbsp;&nbsp;&nbsp; 총 일정 리스트 : ${paging.totalCount } 개</h4>
+<br><br>
+<div class="clearfix" align="center">
+<table class="table table-striped table-hover" style="table-layout:fixed; text-align : center; width: 80%" >
+
+<thead >
 	<tr>
-		<th>일정번호</th>
-		<th>제목</th>
-		<th>내용</th>
-		<th>약속날짜</th>
-		<th>작성날짜</th>
+		<th style="width: 40%; text-align : center;">제목</th>
+		<th style="width: 40%; text-align : center;">내용</th>
+		<th style="width: 10%; text-align : center;">약속한날짜</th>
+		<th style="width: 10%; text-align : center;">작성한날짜</th>
 	</tr>
 </thead>
 <tbody>
 <c:forEach items="${list2 }" var="i">
 	<tr>
-		<td>${i.calendar_idx }</td>
 		<td><a href="/schedule/caldetail?calendar_idx=${i.calendar_idx}">${i.title }</a></td>
-		<td>${i.content }</td>
+		<td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">${i.content }</td>
 		<td>${i.rdate }</td>
-		<td>${i.wdate }</td>
+		<td><fmt:formatDate value="${i.wdate}" pattern="yyyy-MM-dd"/></td>
 	</tr>
 </c:forEach>
 </tbody>
 </table>
-
+</div>
 
 <div class="form-inline text-center">
 	<input class="form-control" type="text" id="search"  placeholder="제목만 검색 허용"  />

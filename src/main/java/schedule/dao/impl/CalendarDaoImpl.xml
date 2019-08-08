@@ -4,6 +4,8 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+
 
 <mapper namespace="schedule.dao.face.CalendarDao">
 	
@@ -18,9 +20,11 @@
 		ORDER BY calendar_idx desc
 	</select>
 	
-	
+
 	<insert id="calWrite"
 	parameterType="dto.CalendarDto">
+	 
+	
 		INSERT into calendar(calendar_idx,  member_idx, title, content, rdate, wdate)
 		VALUES (calendar_seq.nextval, #{member_idx}, #{title}, #{content}, #{rdate}, sysdate)
 	</insert>
@@ -51,16 +55,21 @@
 	<sql id="selectCalendar">
 		select calendar_idx,  member_idx, title, content, rdate, wdate
 		from calendar
+		where member_idx = #{member_idx}
 	</sql>
 	
 	<select id="selectAll"
 	resultType="dto.CalendarDto">
-	<include refid="selectCalendar"/>
-	order by calendar_idx
+	<include refid="selectCalendar" />
+		ORDER BY calendar_idx
+	
 	</select>
 	
-	<select id="countAll" resultType="int">
-		select count(*) from calendar
+	<select id="countAll"
+	parameterType="dto.CalendarDto"
+	 resultType="int">
+		select count(member_idx) from calendar
+		where member_idx = #{member_idx}
 	</select>	
 	
 	<select id="selectPage"
@@ -68,9 +77,11 @@
 	resultType="dto.CalendarDto">
 		select * from (
 			select rownum rnum, B.* from (
-					<include refid="selectCalendar"/>
+				select calendar_idx,  member_idx, title, content, rdate, wdate
+				from calendar
+				where member_idx = #{member_idx}
 					order by calendar_idx desc
-				)	B
+						)B
 				order by rnum
 		) R
 		where rnum between #{startNo} and #{endNo}
@@ -79,7 +90,7 @@
 	<sql id="selectSearch">
 		select rownum rnum, B.* from (
 			<include refid="selectCalendar"/>
-			where 1=1
+			
 			<if test="search != null and search != ''">
 			and title LIKE '%' || #{search} || '%'
 			</if> 
@@ -102,7 +113,9 @@
 	 resultType="int">
 		select count(*)	from (
 			<include refid="selectSearch" />
-		) calendar
+			
+		) cnt
+		
 	</select>
 	
 	

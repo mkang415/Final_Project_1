@@ -14,6 +14,8 @@ public class SchedulePaging {
 	private int startNo;	//게시물리스트 첫 번호
 	private int endNo;	//게시물리스트 마지막 번호
 	
+	private int member_idx;
+	
 	public SchedulePaging() {}
 	
 	private String search; //검색어
@@ -100,13 +102,6 @@ public class SchedulePaging {
 		endNo = curPage*listCount;
 	}
 
-	@Override
-	public String toString() {
-		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
-				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
-	}
-
 	public int getCurPage() {
 		return curPage;
 	}
@@ -178,4 +173,22 @@ public class SchedulePaging {
 	public void setEndNo(int endNo) {
 		this.endNo = endNo;
 	}
+
+	public int getMember_idx() {
+		return member_idx;
+	}
+
+	public void setMember_idx(int member_idx) {
+		this.member_idx = member_idx;
+	}
+
+	@Override
+	public String toString() {
+		return "SchedulePaging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount
+				+ ", totalPage=" + totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage="
+				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", member_idx=" + member_idx + ", search="
+				+ search + "]";
+	}
+
+	
 }

@@ -86,7 +86,7 @@ left: 25.9%;
 }
 
 
-#d, #h, #a {
+#d, #h, #a, #di {
 text-decoration:none 
 }
 
@@ -99,9 +99,9 @@ left: 30%;
 
 #diaryview {
 position : absolute;
-top:14%;
+top:11%;
 text-align: center;
-left: 38%;
+left: 37%;
 }
 
 div#incom {
@@ -117,7 +117,7 @@ table, th {
 
 
 <div id="background">
-<h1>마이페이지</h1>
+<h5>&nbsp;&nbsp;mypage</h5>
 </div>
 
 <div id="incom">
@@ -146,7 +146,7 @@ table, th {
 <img src="/resources/img/memo.png"  width="70px" height="70px">
 </div>
 <div id="memotext">
-<h5 id="mm">게시판</h5>
+<h5 id="mm"><a id="d" href="/memo/list">메모장</a></h5>
 </div>
 
 <div id="vote"> 
@@ -174,22 +174,22 @@ table, th {
 <div id="viewdiary">
 <img src="/resources/img/note.png" width="70%" height="60%">
 </div>
-<div id="diaryview">
+
+
+<div id="diaryview" style="height:300px; overflow-y:scroll">
 <table>
 <tr >
-<td><h3>☞ 가장 최근에 작성하신 일기 입니다 ☜<br>
-<small> 클릭하시면 일기장으로 넘어갑니다</small>
-</h3></td>
+<td><h3><a href="/diary" id="di">☞ 가장 최근에 작성하신 일기 입니다 ☜</a></h3></td>
 </tr>
 
 <tr>
 	<th>제목</th>
 </tr>
-<tr>
+<tr height="30px">
 	<td>${view.title }</td>
 </tr>
 
-<tr>
+<tr height="30px">
 	<th>내용</th>
 </tr>
 

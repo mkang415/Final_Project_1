@@ -46,6 +46,8 @@ public class CalendarServiceImpl implements CalendarService{
 		calendarDao.caldel(dto);
 	}
 
+	
+	//일정 리스트랑 검색기능
 	@Override
 	public List getList() {
 		return calendarDao.selectAll();
@@ -75,4 +77,5 @@ public class CalendarServiceImpl implements CalendarService{
 
 	
 
+	
 }

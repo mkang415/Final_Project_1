@@ -53,6 +53,7 @@ public class CalendarUtil {
 		
 	}
 	
+	
 	// 01, 02, 03 ~ 09 (두글자숫자)
 	public String two(String msg) {
 		return msg.trim().length()<2?"0"+msg:msg.trim();
@@ -102,8 +103,8 @@ public class CalendarUtil {
 	// 일정제목이 길면 ...처리
 	public String dot3(String msg) {
 		String s = "";
-		if(msg.length() >= 15) {
-			s = msg.substring(0,15); //임의로 10글자 까지
+		if(msg.length() >= 13) {
+			s = msg.substring(0,13); //임의로 10글자 까지
 			s += "...";
 		} else {
 			s = msg.trim();
@@ -120,6 +121,7 @@ public class CalendarUtil {
 	public String yyyymm(int year, int month) {
 		return ""+year+two(month);
 	}
+	
 	
 	public String yyyymmdd(int year, int month, int date) {
 		return yyyymm(year,month)+two(date);
