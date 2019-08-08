@@ -20,6 +20,8 @@ public interface LedgerService {
 
 	void write(Ledger ledger, HttpSession session);
 
+	List<HashMap<String, Object>> select2(String datepicker, String datepicker2);
+
 	
 
 

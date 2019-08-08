@@ -2,6 +2,7 @@ package ledger.dao.face;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dto.Ledger;
 import util.LedgerPaging;
@@ -17,6 +18,8 @@ public interface LedgerDao {
 	Ledger total2(Ledger ledger);
 
 	void write(Ledger ledger);
+
+	List<HashMap<String, Object>> picker(Map<String, Object> map);
 
 	
 	
