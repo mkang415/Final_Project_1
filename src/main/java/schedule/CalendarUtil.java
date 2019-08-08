@@ -53,6 +53,7 @@ public class CalendarUtil {
 		
 	}
 	
+	
 	// 01, 02, 03 ~ 09 (두글자숫자)
 	public String two(String msg) {
 		return msg.trim().length()<2?"0"+msg:msg.trim();

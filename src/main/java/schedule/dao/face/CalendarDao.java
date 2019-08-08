@@ -20,6 +20,7 @@ public interface CalendarDao {
 	//일정 삭제
 	public void caldel(CalendarDto dto);
 
+	//일정 수정
 	public void calupdate(CalendarDto dto);
 
 	//게시글 전체 조회

@@ -25,6 +25,7 @@ import util.SchedulePaging;
 @Controller
 public class CalendarController {
 
+	
 	@Autowired CalendarService CalendarService;
 	@Autowired MemberService memberService;
 	
@@ -36,7 +37,7 @@ public class CalendarController {
 			HttpServletRequest req,
 			Model model,
 			CalendarDto dto,
-			Member member
+			Member member_idx
 			) throws Exception {
 		
 		//id값 구하기
@@ -44,7 +45,7 @@ public class CalendarController {
 //			return "/login";
 //		}
 		
-//		int member_idx = (((Member) req.getSession().getAttribute("login")).getMember_idx());
+//		int member_idx = (((Member) req.getSession().getAttribute("loginEmail")).getMember_idx());
 		
 		
 
@@ -90,11 +91,13 @@ public class CalendarController {
 //		
 //		session.setAttribute("id", session.getAttribute("member_idx"));
 		
-		member = memberService.getMemberInfo(session);
-		System.out.println(member);
+		member_idx = memberService.getMemberInfo(session);
+		logger.info("member확인합니다"+member_idx);
+		
+		
 		
 		//rdate에 넣기
-		dto = new CalendarDto(member.getMember_idx(), yyyymm);
+		dto = new CalendarDto(member_idx.getMember_idx(), yyyymm);
 		logger.info(yyyymm);
 		
 		//DB처리
@@ -122,7 +125,7 @@ public class CalendarController {
 			CalendarDto dto,
 			HttpSession session,
 			HttpServletRequest req,
-			Member member
+			Member member_idx
 			)throws Exception {
 		
 		
@@ -133,8 +136,7 @@ public class CalendarController {
 //		
 //		int member_idx = Integer.parseInt(id);
 		
-		member = memberService.getMemberInfo(session);
-		
+		member_idx = memberService.getMemberInfo(session);
 		CalendarUtil util = new CalendarUtil();
 		
 		int year = Integer.parseInt(req.getParameter("year"));
@@ -147,7 +149,7 @@ public class CalendarController {
 		logger.info(dto.toString()); // 날짜 넣기전 
 		
 		dto.setRdate(yyyymmdd);
-		dto.setMember_idx(member.getMember_idx());
+		dto.setMember_idx(member_idx.getMember_idx());
 		
 		logger.info(dto.toString()); // 날짜 넣고 난 뒤 
 		
@@ -194,9 +196,12 @@ public class CalendarController {
 			CalendarDto dto,
 			HttpSession session,
 			Model model,
-			Member member
+			Member member_idx
 			) {
-		member = memberService.getMemberInfo(session);
+		
+		member_idx = memberService.getMemberInfo(session);
+		
+		
 		dto = CalendarService.calDetail(dto);
 		
 		model.addAttribute("detail", dto);
@@ -222,6 +227,7 @@ public class CalendarController {
 			HttpSession session,
 			Member member
 			) {
+		
 		member = memberService.getMemberInfo(session);
 		CalendarService.caldel(dto);
 		
@@ -232,15 +238,20 @@ public class CalendarController {
 	}
 	
 	
+	//일정 list랑 검색(제목만)
 	@RequestMapping (value = "/schedule/list",method=RequestMethod.GET)
 	public String list (
 			@RequestParam(defaultValue = "0")int curPage,
 			SchedulePaging search,
 			Model model,
 			HttpSession session,
-			Member member
+			Member member_idx
 			) {
-		member = memberService.getMemberInfo(session);
+		member_idx = memberService.getMemberInfo(session);
+		//logger.info("idx" + member_idx);
+		
+		search.setMember_idx(member_idx.getMember_idx());
+		
 		int totalCount = CalendarService.getTotal(search); //검색어 적용 게시글 수
 		
 		//페이징 생성
@@ -248,6 +259,7 @@ public class CalendarController {
 		paging.setSearch(search.getSearch()); //검색어 추가
 		model.addAttribute("paging",paging);
 		
+		paging.setMember_idx(member_idx.getMember_idx());
 		List list = CalendarService.getSearchPagingList(paging);
 		
 		model.addAttribute("list2",list);

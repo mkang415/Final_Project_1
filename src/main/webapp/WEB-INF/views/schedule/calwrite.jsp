@@ -8,16 +8,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script type="text/javascript"
 src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-<!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<!-- jQuery 2.2.4 -->
-<script type="text/javascript"
- src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 
-<h3 style="text-align:center">▷ 일정 쓰기 ◁</h3>
+
+
 
  
 <% 
@@ -51,35 +51,32 @@ $(document).ready(function() {
 
 <style>
 
-.writetb {
- text-align : center;
-}
+
 
 </style>
 
 <div align="center">
-
+<br>
+<h3 style="text-align:center">▷ 일정 쓰기 ◁</h3>
+<br>
 <form action="/schedule/calwrite" method="post">
 
 <table border="1" class="writetb" >
 <col width="200px"><col width="100px">
 
-<tr height="30"  valign="top">
-	<td><label>아이디</label>	${member_idx }</td>
-	<td>	<input type="hidden" name="id" value="${member_idx }">
-	</td>
-</tr>
 
-
-<tr>
-	<td><label for="title">제목</label></td>
-	<td><input type="text" size="100%" name="title">
+<tr >
+	<td style="text-align : center;"  class="table-success"  height="50">
+	<label for="title">제목</label></td>
+	
+	<td style="text-align : center;">
+	<input type="text" size="100%" style="padding:11px" name="title" placeholder="일정의 제목을 입력하세요!" />
 	</td>
 </tr>
 
 <tr>
-	<td><label for="rdate">일정날짜</label></td>
-	<td>
+	<td style="text-align : center;"  class="table-warning" height="50"><label for="rdate">일정날짜</label></td>
+	<td style="text-align : center;">
 <!-- 10년 전부터 5년 후 까지 보여주기 -->
 		<select name="year"> 
 		
@@ -123,8 +120,9 @@ $(document).ready(function() {
 
 
 <tr>
-	<td><label for="content">내용</label></td>
-	<td><textarea rows="20" cols="100%" name="content"></textarea>
+	<td style="text-align : center;" class="table-danger"><label for="content">내용</label></td>
+	<td><textarea rows="20" cols="100%" name="content" id="summernote" style="text-align:left"
+	 ></textarea>
 	</td>
 </tr>
 
@@ -137,3 +135,45 @@ $(document).ready(function() {
 </form>
 
 </div>
+
+
+
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+
+    $('#summernote').summernote({
+
+height : 300, // 에디터의 높이 
+
+minHeight : null,
+maxHeight : null,
+placeholder: "일정의 상세 내용을 입력하세요!",
+focus : true,
+
+toolbar: [
+	    // [groupName, [list of button]]
+	    ['style', ['bold', 'italic', 'underline', 'clear']],
+	    ['font', ['strikethrough', 'superscript', 'subscript']],
+	    ['fontsize', ['fontsize']],
+	    ['color', ['color']],
+	    ['para', ['ul', 'ol', 'paragraph']],
+	    ['height', ['height']]
+	  ],
+	
+lang : 'ko-KR' // 기본 메뉴언어 US->KR로 변경
+
+    });
+
+});
+var postForm = function() {
+
+var contents =  $('textarea[name="content"]').html($('#summernote').code());
+}
+
+
+
+
+
+</script>

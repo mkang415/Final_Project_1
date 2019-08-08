@@ -7,11 +7,12 @@
 
 <script type="text/javascript"
 src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 
 <%
@@ -36,30 +37,35 @@ text-align : center;
 
 
 </style>
-<div class="detail">
+<br>
+<h3 style="text-align:center">▷ 일정 보기 ◁</h3>
+
+<div class="detail" align="center">
+
+<br>
 <table border="1">
-<col width="200"><col width="500">
+<col width="200"><col width="700px">
 
 <tr>
-<td>제목</td>
+<td ><label>제목</label></td>
 <td>${detail.title }</td>
 </tr>
 
 <tr>
-<td>일정</td>
+<td><label>일정 날짜</label></td>
 <td>${detail.rdate}</td>
 </tr>
 
 <tr>
-<td>작성일</td>
-<td>${detail.wdate}</td>
+<td><label>작성한 날짜</label></td>
+<td><fmt:formatDate value="${detail.wdate}" pattern="yyyy-MM-dd"/></td>
 </tr>
 
 
 <tr>
-<td>내용</td>
+<td  width="200" height="300"><label>내용</label></td>
 <td>
-<textarea rows="5" cols="80" readonly="readonly">${detail.content }</textarea>
+<div >${detail.content }</div>
 </td>
 </tr>
 
@@ -67,7 +73,7 @@ text-align : center;
 </div>
 <br><br>
 
-
+<div align="center">
 <a href="/schedule/calendar"><button class="btn btn-default">목록</button></a>
 
 
@@ -80,3 +86,6 @@ text-align : center;
 <button class="btn btn-danger">삭제</button></a>
 
 </c:if>
+</div>
+
+<br><br>

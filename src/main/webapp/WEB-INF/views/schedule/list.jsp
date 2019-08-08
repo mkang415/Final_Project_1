@@ -21,33 +21,19 @@ $(document).ready(function(){
 
 
 
+<h4>&nbsp; 총 일정 리스트 : ${paging.totalCount } 개</h4>
+<br><br>
+<div class="clearfix">
+<table class="table table-striped table-hover" style="table-layout:fixed;">
 
-
-
-
-<c:choose>
-	<c:when test="${empty login }">
-		<a href="/member/login"><button class="btn pull-right">로그인</button></a>
-	</c:when>
-	<c:otherwise>
-		<div class="pull-right">
-			<c:out value="${nick }" />님 환영합니다<br><br>
-			<a href="/member/logout"><button class="btn btn-warning">로그아웃</button></a>
-		</div>
-	</c:otherwise>
-</c:choose>
-
-<h5 class="pull-right"> 총 일정 리스트 : ${paging.totalCount }</h5>
-<br>
-<div class="clearfix"></div>
-<table class="table table-striped table-hover">
 <thead>
 	<tr>
-		<th>일정번호</th>
-		<th>제목</th>
-		<th>내용</th>
-		<th>약속날짜</th>
-		<th>작성날짜</th>
+		<th style="width: 8%;">일정번호</th>
+		<th style="width: 30%;">제목</th>
+		<th style="width: 32%;">내용</th>
+		<th style="width: 10%;">약속날짜</th>
+		<th style="width: 10%;">작성날짜</th>
+		<th style="width: 10%;">회원번호</th>
 	</tr>
 </thead>
 <tbody>
@@ -55,14 +41,15 @@ $(document).ready(function(){
 	<tr>
 		<td>${i.calendar_idx }</td>
 		<td><a href="/schedule/caldetail?calendar_idx=${i.calendar_idx}">${i.title }</a></td>
-		<td>${i.content }</td>
+		<td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">${i.content }</td>
 		<td>${i.rdate }</td>
-		<td>${i.wdate }</td>
+		<td><fmt:formatDate value="${i.wdate}" pattern="yyyy-MM-dd"/></td>
+		<td>${i.member_idx }</td>
 	</tr>
 </c:forEach>
 </tbody>
 </table>
-
+</div>
 
 <div class="form-inline text-center">
 	<input class="form-control" type="text" id="search"  placeholder="제목만 검색 허용"  />
