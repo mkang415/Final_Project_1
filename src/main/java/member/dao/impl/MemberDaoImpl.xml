@@ -22,6 +22,28 @@
   		WHERE email = #{email } AND pw = #{pw }
   	
   		</select>
+  		
+
+
+    	<select id="selectAuth"
+  		parameterType="dto.Member"
+  		resultType="int">
+  		
+  		SELECT auth_status FROM member
+  		WHERE email = #{email } AND pw = #{pw }
+  	
+  		</select>
+  		
+  		
+  		    <select id="selectCntByCode"
+    		parameterType="String"
+    		resultType="int">
+    		
+    		SELECT COUNT(*) FROM member
+    		WHERE auth_key = #{code }
+    
+   
+    	</select>
     
        <select id="selectMemberbyMemberId"
     		parameterType="String"
@@ -58,6 +80,16 @@
 			WHERE auth_key = #{auth_key }		
 			
 			
+	</update>
+	
+	<update id="pwUpdate"
+			parameterType="dto.Member">
+			UPDATE member
+			SET pw = #{pw }
+			WHERE auth_key = #{auth_key }
+	
+	
+	
 	</update>
 
 

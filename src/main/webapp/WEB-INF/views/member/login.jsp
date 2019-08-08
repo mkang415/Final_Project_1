@@ -1,10 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script type="text/javascript"
+   src="http://code.jquery.com/jquery-2.2.4.js"></script>
+
+<script type="text/javascript">
+
+
+// $(document).ready(function() {
+	
+// //로그인실패
+// $("#btnLogin").click(function() {
+// 	$.ajax({
+// 		type : "POST",
+// 		url : "/member/login",
+// 		data : {
+// 			email: $("#email").val(),
+// 			pw:$("#pw").val()
+// 		},
+// 		dataType : 'json',
+// 		success : function(data) {
+// 			if( data.success ) {
+// 				$("#login").submit();
+
+// 			} else {
+// 				$("#loginMsg").html("아이디 혹은 비밀번호가 틀립니다.").css("color", "red");	
+				
+// 			}
+	
+// 		}
+// 	})
+// });
+
+
+
+// });
+
+</script>
+
+
 
 <style>
 .error {
@@ -129,7 +170,7 @@ a:hover {color:#00BFFF;}
 
 
 
-<form action="/member/login" method="post">
+<form action="/member/login" id="login" method="post">
 
 <div class="join_content">
 		<div class="row_group">
@@ -152,13 +193,17 @@ a:hover {color:#00BFFF;}
 		<span>로그인</span>
 	</button>
 </form>
+<div id="loginMsg">
+</div>
 
 <div id="underLine">
 <hr>
 </div>
 
 <a id="memberjoin" href="/member/join">회원가입</a>
-<a id="memberFind" href="#">비밀번호찾기</a>
+<a id="memberFind" href="/member/findpw">비밀번호찾기</a>
+
+
 
 
 

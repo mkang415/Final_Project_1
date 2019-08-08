@@ -31,12 +31,12 @@ public class LedgerController {
 			Ledger ledger,
 			Model model) {
 		
-		ledger.setMember_idx((int) session.getAttribute("member_idx"));
+		ledger.setMember_idx( (Integer) session.getAttribute("member_idx"));
 		
 		LedgerPaging LP = ledgerService.getCurpage(curPage, ledger);
 		model.addAttribute("LP", LP);
 		
-		LP.setMember_idx((int) session.getAttribute("member_idx"));
+		LP.setMember_idx( (Integer) session.getAttribute("member_idx"));
 		
 		List<HashMap<String, Object>> list = ledgerService.select(LP);
 		model.addAttribute("list", list);

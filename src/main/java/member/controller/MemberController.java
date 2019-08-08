@@ -1,5 +1,8 @@
 package member.controller;
 
+import java.io.IOException;
+import java.io.Writer;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -29,6 +32,7 @@ public class MemberController {
 	}
 
 
+
 	@RequestMapping(value = "/interceptor/noLogin", method = RequestMethod.GET)
 	public void loginFail() {
 		logger.info("로그인실패");
@@ -37,7 +41,8 @@ public class MemberController {
 
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
 	public String loginProc(Member member,
-						  HttpSession session) {
+						  HttpSession session,
+						  Writer out) {
 		
 		logger.info("로그인처리");
 		
@@ -45,7 +50,7 @@ public class MemberController {
 		String redirectUrl = null;
 		if(memberService.login(member)) {
 			//로그인 성공
-			
+			boolean success = memberService.login(member);
 			//세션 정보저장
 			session.setAttribute("login", true);
 			session.setAttribute("loginEmail", member.getEmail());
@@ -59,16 +64,22 @@ public class MemberController {
 
 			//리다이렉트 URL 지정
 			redirectUrl = "/main";
+			}
+
 			
-		} else {
+			
+		 else {
 			//로그인 실패
-			
 			//리다이렉트 URL 지정
-			redirectUrl = "/member/nologin";
-		}
+			 redirectUrl = "/member/nologin";
+			
+					
+		 }
+			
+		
 		
 		return "redirect:" +redirectUrl;
-	
+
 	}
 	
 	@RequestMapping(value = "/member/logout", method = RequestMethod.GET)
@@ -114,6 +125,82 @@ public class MemberController {
 		
 		
 	}
+
+	
+	@RequestMapping(value = "/member/findpw", method = RequestMethod.GET)
+	public void findPw(Member member) throws Exception {
+		
+		logger.info("비밀번호 찾기페이지 ");
+		
+		
+		
+		
+	}
+
+	
+	
+	@RequestMapping(value = "/member/findpwproc", method = RequestMethod.POST)
+	public String findPwProc(Member member) throws Exception {
+		
+		
+		logger.info("사용자 이메일로 코드 보내기 ");
+
+		memberService.sendCode(member);
+		
+		return "member/entercode";
+		
+		
+	}
+	
+	
+	@RequestMapping(value = "/member/entercode", method = RequestMethod.POST)
+	public String enterCodeProc(String code,
+			Model model) {
+		
+		
+		logger.info("인증번호 입력 ");
+
+		if(memberService.findMember(code)) {
+			
+		
+		
+			return "redirect:"+"/member/updatepw?code="+code;
+		}
+
+		
+		else
+			return "member/findFail";
+		
+		
+	}
+
+
+	@RequestMapping(value = "/member/updatepw", method = RequestMethod.GET)
+	public void updatePw(String code,
+						Model model
+						)  
+	{
+		
+		
+		logger.info("비밀번호 변경 페이지");
+		model.addAttribute("code", code);
+		
+	}
+
+	
+	@RequestMapping(value = "/member/updatepw", method = RequestMethod.POST)
+	public String updatePwProc(Member member)  {
+		
+		
+		logger.info("비밀번호 변경 ");
+
+		memberService.update(member);
+		
+		return "member/updatecomplete";
+		
+		
+	}
+
 	
 
 

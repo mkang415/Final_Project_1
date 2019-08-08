@@ -235,7 +235,8 @@ public class NoticeController {
 	
 	@RequestMapping(value="/noticeReplyTo", method=RequestMethod.GET)
 	public String noticeReplyTo( Model model,
-								 int step) 
+								 int step,
+								 String writer) 
 		
 	{
 		
@@ -243,7 +244,7 @@ public class NoticeController {
 	
 		
 		model.addAttribute("step",step);
-
+		model.addAttribute("writer",writer);
 		
 		return "notice/noticeReplyTo";
 			

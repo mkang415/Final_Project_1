@@ -10,6 +10,8 @@
 
 <div class="form-inline text-center" style="margin-bottom: 30px;">
 	<input type="hidden" name="step" id="step" value="${step }"/>
+	<span>${writer }&nbsp 님에 대한 답글입니다.</span>
+	
 <%-- 	<input type="text" size="7" class="form-control"
 		id="commentWriter"
 		value="${sessionScope.nick }" readonly="readonly"/> --%>

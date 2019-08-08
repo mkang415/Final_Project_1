@@ -50,7 +50,7 @@ public class LedgerServiceImpl implements LedgerService{
 	@Override
 	public void write(Ledger ledger, HttpSession session) {
 
-		ledger.setMember_idx((int)session.getAttribute("member_idx"));
+		ledger.setMember_idx((Integer)session.getAttribute("member_idx"));
 		
 		ledgerDao.write(ledger);
 	}
