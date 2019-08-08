@@ -117,7 +117,7 @@ table, th {
 
 
 <div id="background">
-<h1>마이페이지</h1>
+<h5>&nbsp;&nbsp;mypage</h5>
 </div>
 
 <div id="incom">

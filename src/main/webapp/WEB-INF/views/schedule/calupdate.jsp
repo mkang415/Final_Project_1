@@ -28,34 +28,33 @@ align : "center";
 <br>
 <form action="/schedule/calupdate" method="post">
 
-	<input type="hidden" name="calendar_idx" value="${detail.calendar_idx }" />
-	
-	<table border="1">
-<col width="200"><col width="700px">
+	<table class="table table-bordered" style="width: 80%">
+<col width="150"><col width="500">
 
 <tr>
-	<td style="text-align : center;"><label for="title">제목</label></td>
-	<td><input type="text" id="title" size="100%" name="title" value="${detail.title }"/></td>
+	<td style="text-align : center;"  class="table-warning">
+	<label for="title">제목</label></td>
+	<td colspan="3"><input type="text" id="title" style="width: 100%; height: 100%; padding: 10px; " name="title" value="${detail.title }"/></td>
 </tr>
 
 <tr>
-<td style="text-align : center;"><label>일정</label></td>
-<td style="text-align : center;">${detail.rdate}</td>
-</tr>
+<td style="text-align : center;" class="table-warning">
+<label>일정</label></td>
+<td style="text-align : center;">
+${detail.rdate}</td>
 
-<tr>
-<td style="text-align : center;"><label>작성일</label></td>
+<td style="text-align : center;" class="table-warning">
+<label>작성일</label></td>
 <td style="text-align : center;"><fmt:formatDate value="${detail.wdate}" pattern="yyyy-MM-dd"/></td>
 </tr>
 
 <tr>
-	<td style="text-align : center;"><label for="content">내용</label></td>
-	<td><textarea rows="10" cols="40" id="summernote" name="content" style="text-align:left" >${detail.content }</textarea></td>
+	<td  colspan="4"><textarea rows="20" cols="100%" id="summernote" name="content" style="text-align:left" >${detail.content }</textarea></td>
 </tr>
 
 
 </table>
-<br><br><br>
+<br>
 
 <a href="/schedule/calendar"><button class="btn btn-default">목록</button></a>
 

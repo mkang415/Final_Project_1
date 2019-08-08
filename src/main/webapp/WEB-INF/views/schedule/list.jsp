@@ -21,16 +21,15 @@ $(document).ready(function(){
 
 
 <br>
-<h4>&nbsp;&nbsp;&nbsp; 총 일정 리스트 : ${paging.totalCount } 개</h4>
+<h4 style="border: 1px;">&nbsp;&nbsp;&nbsp; 총 일정 리스트 : ${paging.totalCount } 개</h4>
 <br><br>
-<div class="clearfix">
-<table class="table table-striped table-hover" style="table-layout:fixed; text-align : center;" >
+<div class="clearfix" align="center">
+<table class="table table-striped table-hover" style="table-layout:fixed; text-align : center; width: 80%" >
 
 <thead >
 	<tr>
-		<th style="width: 8%; text-align : center;">일정번호</th>
-		<th style="width: 35%; text-align : center;">제목</th>
-		<th style="width: 37%; text-align : center;">내용</th>
+		<th style="width: 40%; text-align : center;">제목</th>
+		<th style="width: 40%; text-align : center;">내용</th>
 		<th style="width: 10%; text-align : center;">약속한날짜</th>
 		<th style="width: 10%; text-align : center;">작성한날짜</th>
 	</tr>
@@ -38,7 +37,6 @@ $(document).ready(function(){
 <tbody>
 <c:forEach items="${list2 }" var="i">
 	<tr>
-		<td>${i.calendar_idx }</td>
 		<td><a href="/schedule/caldetail?calendar_idx=${i.calendar_idx}">${i.title }</a></td>
 		<td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">${i.content }</td>
 		<td>${i.rdate }</td>

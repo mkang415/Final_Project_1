@@ -26,7 +26,7 @@
 	 
 	
 		INSERT into calendar(calendar_idx,  member_idx, title, content, rdate, wdate)
-		VALUES (calendar_seq.nextval, #{member_idx}, #{title, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{rdate}, sysdate)
+		VALUES (calendar_seq.nextval, #{member_idx}, #{title}, #{content}, #{rdate}, sysdate)
 	</insert>
 	
 	
@@ -41,7 +41,7 @@
 	<update id="calupdate"
 	parameterType="dto.CalendarDto">
 		update calendar 
-		set title = #{title, jdbcType=VARCHAR}, content =#{content, jdbcType=VARCHAR}
+		set title = #{title}, content =#{content}
 		where calendar_idx = #{calendar_idx}
 	</update>
 

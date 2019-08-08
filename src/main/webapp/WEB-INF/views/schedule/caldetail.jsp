@@ -43,28 +43,26 @@ text-align : center;
 <div class="detail" align="center">
 
 <br>
-<table border="1">
-<col width="200"><col width="700px">
+<table class="table table-bordered" style="width: 80%">
+<col width="100"><col width="500">
 
 <tr>
-<td ><label>제목</label></td>
-<td>${detail.title }</td>
+<th  class="table-warning"><label>제목</label></th>
+<td colspan="3">${detail.title }</td>
 </tr>
 
 <tr>
-<td><label>일정 날짜</label></td>
-<td>${detail.rdate}</td>
-</tr>
+<th  class="table-warning"><label>일정 날짜</label></th>
+<td >${detail.rdate}</td>
 
-<tr>
-<td><label>작성한 날짜</label></td>
+<th  class="table-warning"><label>작성한 날짜</label></th>
 <td><fmt:formatDate value="${detail.wdate}" pattern="yyyy-MM-dd"/></td>
 </tr>
 
 
 <tr>
-<td  width="200" height="300"><label>내용</label></td>
-<td>
+<th  width="200" height="300"  class="table-warning"><label>내용</label></th>
+<td colspan="3">
 <div >${detail.content }</div>
 </td>
 </tr>

@@ -62,23 +62,22 @@ $(document).ready(function() {
 
 
 
-
 <div align="center">
 <br>
 <h3 style="text-align:center">▷ 일정 쓰기 ◁</h3>
 <br>
 <form action="/schedule/calwrite" method="post">
 
-<table border="1" class="writetb" >
-<col width="200px"><col width="100px">
+<table class="table table-bordered" style="width: 80%" class="writetb" >
+<col width="100"><col width="500">
 
 
 <tr >
-	<td style="text-align : center;"  class="table-success"  height="50">
+	<td style="text-align : center;"  class="table-success"  >
 	<label for="title">제목</label></td>
 	
 	<td style="text-align : center;">
-	<input type="text" size="100%" style="padding:11px" id="title" name="title" placeholder="일정의 제목을 입력하세요!" />
+	<input type="text" size="100%" style="width: 100%; height: 100%; padding: 10px; "  id="title" name="title" placeholder="일정의 제목을 입력하세요!" />
 	</td>
 </tr>
 
@@ -92,9 +91,9 @@ $(document).ready(function() {
 			for(int i = tyear - 10; i < tyear + 6; i++){
 				%>	
 				<option <%=year.equals(i+"")?"selected='selected'":"" %>
-					value="<%=i %>"><%=i %></option>				
+					value="<%=i %>"><%=i %></option>			
 				<%
-			}		
+			}	
 		%>
 		
 		</select>년
@@ -128,8 +127,7 @@ $(document).ready(function() {
 
 
 <tr>
-	<td style="text-align : center;" class="table-danger"><label for="content">내용</label></td>
-	<td><textarea rows="20" cols="100%" name="content" id="summernote" style="text-align:left"
+	<td colspan="2"><textarea rows="20" cols="100%" name="content" id="summernote" style="text-align:left"
 	 ></textarea>
 	</td>
 </tr>
