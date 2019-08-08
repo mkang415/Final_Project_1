@@ -10,10 +10,14 @@ public class Ledger {
 	private int minusM;
 	private String writtendate;
 	
+	private String datepicker;
+	private String datepicker2;
+	
 	@Override
 	public String toString() {
 		return "Ledger [ledger_idx=" + ledger_idx + ", member_idx=" + member_idx + ", item=" + item + ", plusM=" + plusM
-				+ ", minusM=" + minusM + ", writtendate=" + writtendate + "]";
+				+ ", minusM=" + minusM + ", writtendate=" + writtendate + ", datepicker=" + datepicker
+				+ ", datepicker2=" + datepicker2 + "]";
 	}
 
 	public int getLedger_idx() {
@@ -63,6 +67,23 @@ public class Ledger {
 	public void setWrittendate(String writtendate) {
 		this.writtendate = writtendate;
 	}
+
+	public String getDatepicker() {
+		return datepicker;
+	}
+
+	public void setDatepicker(String datepicker) {
+		this.datepicker = datepicker;
+	}
+
+	public String getDatepicker2() {
+		return datepicker2;
+	}
+
+	public void setDatepicker2(String datepicker2) {
+		this.datepicker2 = datepicker2;
+	}
+	
 	
 	
 	

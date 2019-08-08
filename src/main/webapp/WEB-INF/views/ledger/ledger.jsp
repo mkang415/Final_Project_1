@@ -12,10 +12,12 @@
 
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript"
-   src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-   
+
+	src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+	
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">   
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">	
+
 
 <!-- bootstrap 4.3.1 -->
 <link rel="stylesheet"
@@ -24,19 +26,32 @@
    crossorigin="anonymous">
 
 <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" -->
-<!--    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
-<!--    crossorigin="anonymous"></script> -->
+
+<!-- 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" -->
+<!-- 	crossorigin="anonymous"></script> -->
+
 <script
    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
    crossorigin="anonymous"></script>
 <script
-   src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-   integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-   crossorigin="anonymous"></script>
+
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+	
+<script type="text/javascript">
+
+$(document).ready(function() {
    
-   
-   
+   $("#search").click(function() {
+
+      location.href="/ledger/ledger?datepicker="+$("#datepicker").val()+"&datepicker2="+$("#datepicker2").val();
+      
+   });
+});
+</script>
+
 <style type="text/css">
 #btnBox {
    position: absolute;
@@ -53,39 +68,10 @@
 /*datepicer input 롤오버 시 손가락 모양 표시*/
 .hasDatepicker{cursor: pointer;}
 </style>
-<script type="text/javascript">
-
-$(document).ready(function() {
-	
-	$("#search").click(function() {
-
-		
-		$form = $("<form>").attr({
-			action: "/ledger/search",
-			method: "post"
-		}).append(
-			$("<input>").attr({
-				type:"hidden",
-				name:"datepicker",
-				value: $('#datepicker').val()
-			})
-		).append(
-			$("<input>").attr({
-				type:"hidden",
-				name:"datepicker2",
-				value: $('#datepicker2').val()
-			})
-		);
-
-		$(document.body).append($form);
-		$form.submit();
-	});
-});
-	</script>
 
 </head>
 <body>
-   From: <input type="text" id="datepicker">
+	From: <input type="text" id="datepicker">
     To: <input type="text" id="datepicker2">
  
     <script>
@@ -109,10 +95,10 @@ $(document).ready(function() {
                 ,minDate: "-100Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
                 ,maxDate: "+100Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후) 
             
-               ,showButtonPanel: true
-               ,currentText: '오늘 날짜'
-               ,closeText: '닫기'
-               
+            	,showButtonPanel: true
+            	,currentText: '오늘 날짜'
+            	,closeText: '닫기'
+            	
             });
  
             //input을 datepicker로 선언
@@ -125,97 +111,99 @@ $(document).ready(function() {
             $('#datepicker2').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
         });
     </script>
+	
+	<button type="button" id="search">조회</button>
+	
+	<div class="modal fade" id="ModalWrite" tabindex="-1" role="dialog"
+		aria-labelledby="ModalWrite" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable" role="document">
+			<div class="modal-content">
+				<form action="/ledger/write" method="post">
+				
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<br>
+					<h2 style="text-align: center">가계부 작성</h2>
+					<div class="modal-header">
+						<input type="text" style="width: 98%;" id="item" name="item"
+							 placeholder="항목 필수 입력" />
+					</div>
+					<div class="modal-body">
+					<h4 style="text-align: center">수입/지출</h4>
+						<input type="number" style="width: 49%;"
+							id="plusM" name="plusM" value=0 min=0>
+						<input type="number" style="width: 49%;" 
+							id="minusM" name="minusM" value=0 min=0>
+					</div>
 
-   <div class="modal fade" id="ModalWrite" tabindex="-1" role="dialog"
-      aria-labelledby="ModalWrite" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable" role="document">
-         <div class="modal-content">
-            <form action="/ledger/write" method="post">
-            
-                  <button type="button" class="close" data-dismiss="modal"
-                     aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                  </button>
-                  <br>
-               <h2 style="text-align: center">가계부 작성</h2>
-               <div class="modal-header">
-                  <input type="text" style="width: 98%;" id="item" name="item"
-                      placeholder="항목 필수 입력" />
-               </div>
-               <div class="modal-body">
-               <h4 style="text-align: center">수입/지출</h4>
-                  <input type="number" style="width: 49%;"
-                     id="plusM" name="plusM" value=0 min=0>
-                  <input type="number" style="width: 49%;" 
-                     id="minusM" name="minusM" value=0 min=0>
-               </div>
-
-               <div class="modal-footer">
-                  <button type="submit">작성</button>
-               </div>
-            </form>
-         </div>
-      </div>
-   </div>
-
-
-   <h1 style="text-align: center;">
-      <a href="/ledger/ledger">가계부</a>
-   </h1>
-   <div style="width: center;">
-      <br> <br>
-      <table class="table table-striped" border="1"
-         style="text-align: center; width: 60%; margin-left: auto; margin-right: auto;">
-         <tr>
-
-            <th style="text-align: center;">날짜</th>
-            <th style="text-align: center;">사유</th>
-            <th style="text-align: center;">수입</th>
-            <th style="text-align: center;">지출</th>
-
-         </tr>
-
-         <c:forEach items="${list }" var="i">
-            <tr>
-               <td><fmt:formatDate value="${i.WRITTENDATE }"
-                     pattern="yyyy-MM-dd" /></td>
-               <td>${i.ITEM }</td>
-               <td>${i.PLUSM }</td>
-               <td>${i.MINUSM }</td>
-            </tr>
-         </c:forEach>
-      </table>
-   </div>
-   <h4>
-      <span style="text-align: center; margin-left: 1430px;">${totalplus.getWrittendate()}
-         수입 : ${totalplus.getPlusM() }</span>
-   </h4>
-   <h4>
-      <span style="text-align: center; margin-left: 1430px;">${totalminus.getWrittendate()}
-         지출 : ${totalminus.getMinusM() }</span>
-   </h4>
-   <br>
-   <h4>
-      <span style="text-align: center; margin-left: 1430px;">${totalminus.getWrittendate()}
-         결산 : ${totalplus.getPlusM()+totalminus.getMinusM() }</span>
-   </h4>
-   <br>
+					<div class="modal-footer">
+						<button type="submit">작성</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 
-   <div id="btnBox" style="margin-left: 500px">
+	<h1 style="text-align: center;">
+		<a href="/ledger/ledger">가계부</a>
+	</h1>
+	<div style="width: center;">
+		<br> <br>
+		<table class="table table-striped" border="1"
+			style="text-align: center; width: 60%; margin-left: auto; margin-right: auto;">
+			<tr>
 
-      <!-- Button trigger modal -->
-      <span><button type="button" data-toggle="modal" data-target="#ModalWrite">작성</button></span> 
-      <span><a href="/main"><button>메인</button></a></span>
+				<th style="text-align: center;">날짜</th>
+				<th style="text-align: center;">사유</th>
+				<th style="text-align: center;">수입</th>
+				<th style="text-align: center;">지출</th>
 
-      &nbsp;&nbsp;&nbsp;&nbsp;
+			</tr>
 
-   </div>
+			<c:forEach items="${list }" var="i">
+				<tr>
+					<td><fmt:formatDate value="${i.WRITTENDATE }"
+							pattern="yyyy-MM-dd" /></td>
+					<td>${i.ITEM }</td>
+					<td>${i.PLUSM }</td>
+					<td>${i.MINUSM }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+	<h4>
+		<span style="text-align: center; margin-left: 1430px;">${totalplus.getWrittendate()}
+			월 수입 : ${totalplus.getPlusM() }</span>
+	</h4>
+	<h4>
+		<span style="text-align: center; margin-left: 1430px;">${totalminus.getWrittendate()}
+			월 지출 : ${totalminus.getMinusM() }</span>
+	</h4>
+	<br>
+	<h4>
+		<span style="text-align: center; margin-left: 1430px;">${totalminus.getWrittendate()}
+			월 결산 : ${totalplus.getPlusM()+totalminus.getMinusM() }</span>
+	</h4>
+	<br>
+
+
+	<div id="btnBox" style="margin-left: 500px">
+
+		<!-- Button trigger modal -->
+		<span><button type="button" data-toggle="modal" data-target="#ModalWrite">작성</button></span> 
+		<span><a href="/main"><button>메인</button></a></span>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;
+
+	</div>
 
 
 
 
-   <c:import url="/WEB-INF/views/layout/ledgerpaging.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/ledgerpaging.jsp"></c:import>
 
 </body>
 </html>

@@ -22,9 +22,9 @@ public interface BoardService {
 
 	Boolean checkId(HttpSession session, Board freeView);
 
-	void write(Board board);
+	void write(HttpSession session, Board board);
 
-	Image imgSave(MultipartFile fileupload, ServletContext context);
+	Image imgSave(MultipartFile fileupload, ServletContext context, HttpSession session);
 
 	Board getUpdate(int brdidx);
 
@@ -44,6 +44,12 @@ public interface BoardService {
 
 	List<HashMap<String, Object>> getPhotoList(BoardPaging boardPaging);
 
-	Board boardShape(HttpSession session, int divide);
+	Image getImage(String storename);
+
+	void setBrdidx(Image setImage, Integer integer);
+
+	void deleteImg(int brdidx);
+
+	void delnullimg(HttpSession session);
 
 }

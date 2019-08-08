@@ -2,6 +2,7 @@ package ledger.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +25,9 @@ public class LedgerServiceImpl implements LedgerService{
 		int totalCount = ledgerDao.selectCntAll(ledger);
 		
 		LedgerPaging LP = new LedgerPaging(totalCount, curPage);
+		
+		LP.setDatepicker(ledger.getDatepicker());
+		LP.setDatepicker2(ledger.getDatepicker2());
 		
 		return LP;
 		
@@ -53,6 +57,17 @@ public class LedgerServiceImpl implements LedgerService{
 		ledger.setMember_idx((Integer)session.getAttribute("member_idx"));
 		
 		ledgerDao.write(ledger);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> select2(String datepicker, String datepicker2) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("datepicker", datepicker);
+		map.put("datepicker2", datepicker2);
+		
+		return ledgerDao.picker(map);
 	}
 
 	

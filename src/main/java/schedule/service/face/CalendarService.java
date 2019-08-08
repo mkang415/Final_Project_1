@@ -7,14 +7,19 @@ import util.SchedulePaging;
 
 public interface CalendarService {
 
+	//달력일정
 	public List<CalendarDto> getCalendarList(CalendarDto dto);
 
+	//일정쓰기
 	public boolean calWrite(CalendarDto dto);
 	
+	//일정 보기
 	public CalendarDto calDetail(CalendarDto detail);
 
+	//일정 수정
 	public void calupdate(CalendarDto dto);
 
+	//일정 삭제
 	public void caldel(CalendarDto dto);
 
 	//게시글 전체 조회

@@ -6,7 +6,7 @@
 <h2>일정상세보기</h2>
 
 
-
+<div align="center">
 <table border="1">
 <col width="200"><col width="500">
 
@@ -33,7 +33,7 @@
 </tr>
 
 </table>
-
+</div>
 <!-- 버튼영역 -->
 <div class="text-center">
 <a href="/schedule/calendar"><button class="btn btn-default">목록</button></a>

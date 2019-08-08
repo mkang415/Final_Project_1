@@ -47,7 +47,24 @@
 		where reply_idx = #{reply_idx}
 	</select>
 
-
+	<!-- 댓글 수정 -->
+	<update id="update"
+	 parameterType="dto.BoardReply">
+		update board_reply set reply = #{reply}
+		where reply_idx = #{reply_idx}
+	</update>
+	
+	<!-- 게시글의 댓글 갯수 -->
+	<select id="getCntReply"
+	 parameterType="int"
+	 resultType="int">
+		select count(*) from board_reply
+		where board_idx = #{board_idx}
+	</select>
+	
+	
+	
+	
 
 
 	<resultMap type="dto.NoticeReply" id="NoticeReply">

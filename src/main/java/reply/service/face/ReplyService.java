@@ -17,4 +17,8 @@ public interface ReplyService {
 
 	void brdDelete(int brdidx);
 
+	void update(BoardReply boardReply);
+
+	int getCntReply(String board_idx);
+
 }

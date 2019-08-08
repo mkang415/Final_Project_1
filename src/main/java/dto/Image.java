@@ -7,12 +7,32 @@ public class Image {
 	private String originname;
 	private String storename;
 	private long filesize;
+	private int board_idx;
+	private int member_idx;
 	
 	@Override
 	public String toString() {
 		return "Image [image_idx=" + image_idx + ", originname=" + originname + ", storename=" + storename
-				+ ", filesize=" + filesize + "]";
+				+ ", filesize=" + filesize + ", board_idx=" + board_idx + ", member_idx=" + member_idx + "]";
 	}
+
+	public int getMember_idx() {
+		return member_idx;
+	}
+
+	public void setMember_idx(int member_idx) {
+		this.member_idx = member_idx;
+	}
+
+	public int getBoard_idx() {
+		return board_idx;
+	}
+
+
+	public void setBoard_idx(int board_idx) {
+		this.board_idx = board_idx;
+	}
+
 
 	public int getImage_idx() {
 		return image_idx;

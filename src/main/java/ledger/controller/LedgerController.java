@@ -1,5 +1,8 @@
 package ledger.controller;
 
+
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,6 +50,9 @@ public class LedgerController {
 		Ledger totalminus = ledgerService.getTotal2(ledger);
 		model.addAttribute("totalminus", totalminus);
 		
+		logger.info(ledger.getDatepicker());
+		logger.info(ledger.getDatepicker2());
+		
 	}
 	
 	@RequestMapping(value = "/ledger/write", method = RequestMethod.POST)
@@ -54,7 +60,28 @@ public class LedgerController {
 			Ledger ledger,
 			HttpSession session) {
 		
+		int minus = (ledger.getMinusM()*-1);
+		logger.info("마이너스"+minus);
+		ledger.setMinusM(minus);
+		
 		ledgerService.write(ledger, session);
+		
+		return "redirect: /ledger/ledger";
+	}
+	
+	
+	
+	@RequestMapping(value = "/ledger/search", method = RequestMethod.POST)
+	public String ledgerSearch(
+			String datepicker,
+			String datepicker2,
+			Model model) {
+		
+		logger.info(datepicker);
+		logger.info(datepicker2);
+
+		List<HashMap<String, Object>> picker = ledgerService.select2(datepicker, datepicker2);
+		model.addAttribute("picker", picker);
 		
 		return "redirect: /ledger/ledger";
 	}

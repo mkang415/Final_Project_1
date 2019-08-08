@@ -37,6 +37,11 @@ public interface BoardDao {
 
 	List<HashMap<String, Object>> getPhotoList(BoardPaging boardPaging);
 
-	void shape(Board board);
+	Image getImage(String storename);
 
+	void setBrdidx(Image setImage);
+
+	void deleteImg(int board_idx);
+
+	void delnullimg(int member_idx);
 }
