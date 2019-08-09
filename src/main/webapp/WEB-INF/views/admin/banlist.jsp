@@ -4,11 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<c:import url="/WEB-INF/views/layout/header.jsp"/> 
 
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript"
@@ -21,20 +17,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
-<style type="text/css">
 
-#btnBox {
-	position: fixed;
-	right: 400px;
-	height: 100px;
-	margin: auto;
-	text-align: center;
-}
 
-</style>
 
-</head>
-<body>
+
 	<h1 style="text-align: center; "><a href="/admin/banlist">영구 정지 목록</a></h1>
 	<br>
 	<br>
@@ -64,16 +50,9 @@
 <br>
 
 
-<div id="btnBox">
 
-<a href="/main"><button>메인</button></a>
-
-&nbsp;&nbsp;&nbsp;&nbsp;
-
-</div>
 
 
 <c:import url="/WEB-INF/views/layout/adminmemberbanpaging.jsp"></c:import>
 
-</body>
-</html>
+<c:import url="/WEB-INF/views/layout/footer.jsp"/> 

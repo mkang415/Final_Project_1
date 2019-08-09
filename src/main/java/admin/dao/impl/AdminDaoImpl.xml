@@ -14,7 +14,6 @@
 			content,
 			member_idx,
 			hit,
-			recommend,
 			writtendate
 		FROM board
 	</sql>
@@ -50,7 +49,6 @@
 						content,
 						member.nickname,
 						hit,
-						recommend,
 						writtendate
 						FROM board, member
 	 				WHERE 1=1 and board.member_idx = member.member_idx
@@ -69,7 +67,7 @@
 	<select id="select"
 	 parameterType="int"
 	 resultType="dto.Board">
-		select board_idx, title, content, member.nickname, member.email, hit, recommend, writtendate
+		select board_idx, title, content, member.nickname, member.email, hit,  writtendate
 		from board, member
 		where board.member_idx = member.member_idx
 		and board_idx = #{board_idx}
@@ -122,7 +120,7 @@
 	 resultType="hashmap">
 		SELECT * FROM (
 		 SELECT rownum rnum, B.* FROM (
-		select board_idx, title, content, member.nickname, hit, recommend, writtendate
+		select board_idx, title, content, member.nickname, hit, writtendate
 	from board, member
 	where board.member_idx = member.member_idx
 	and MEMBER.member_idx = #{member_idx}
