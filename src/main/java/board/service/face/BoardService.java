@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dto.Board;
 import dto.Image;
+import dto.Recommend;
 import util.BoardPaging;
 
 public interface BoardService {
@@ -32,10 +33,6 @@ public interface BoardService {
 
 	void delete(int brdidx);
 
-	boolean recommend(Board board);
-
-	int getRecommend(Board board);
-
 	BoardPaging getEpilPage(int curPage, BoardPaging search);
 
 	List<HashMap<String, Object>> getEpilList(BoardPaging boardPaging);
@@ -51,5 +48,13 @@ public interface BoardService {
 	void deleteImg(int brdidx);
 
 	void delnullimg(HttpSession session);
+
+	int getRecoCnt(String board_idx);
+
+	boolean checkReco(int board_idx, HttpSession session);
+
+	void unreco(Recommend recommend);
+
+	void reco(Recommend recommend);
 
 }

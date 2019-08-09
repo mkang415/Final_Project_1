@@ -2,7 +2,6 @@ package board.controller;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import board.service.face.BoardService;
 import dto.Board;
 import dto.Image;
+import dto.Recommend;
 import reply.service.face.ReplyService;
 import util.BoardPaging;
 
@@ -58,6 +58,7 @@ public class BoardController {
 			logger.info("i: "+i);
 			board_idx = freeBoardList.get(i).get("BOARD_IDX").toString();
 	        freeBoardList.get(i).put("CNTREPLY", replyService.getCntReply(board_idx));
+	        freeBoardList.get(i).put("RECOMMEND", boardService.getRecoCnt(board_idx));
 		 }
 
 		//	페이징 및 리스트 전달
@@ -130,15 +131,7 @@ public class BoardController {
 		
 		//	작성자인지 확인하여 전달.
 		model.addAttribute("checkId", checkId);
-		if(checkId) {
-			Board board = new Board();
-			board.setBoard_idx(brdidx);
-			board.setMember_idx((int)session.getAttribute("member_idx"));
-			// 추천 여부 판단
-			boolean result = boardService.recommend(board);
 		
-			model.addAttribute("result", result);
-		}
 	}
 	
 	//	글쓰기 폼 띄우기
@@ -177,9 +170,6 @@ public class BoardController {
 			}
 		logger.info(board.toString());
 		}
-		/*
-		 * for(int i : image) { logger.info("index:"+image.get(i)); }
-		 */
 		
 		return "redirect: /board/view?brdidx="+board.getBoard_idx();
 	}
@@ -251,25 +241,6 @@ public class BoardController {
 		
 	}
 	
-	//	게시글 추천
-	@RequestMapping(value="/board/recommend", method=RequestMethod.GET)
-	public void boardRecommend(Board board,
-			Writer writer,
-			HttpSession session) {
-		
-		// 추천 여부 판단
-		boolean result = boardService.recommend(board);
-		
-		// 추천수
-		int recommend = boardService.getRecommend(board);
-		
-		try {
-			writer.write("{\"result\":"+result+", \"recommend\":"+recommend+"}");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	//	이미지 데이터 보내기
 	@RequestMapping(value="/board/getimg", method=RequestMethod.POST)
 	public String getImage(
@@ -301,5 +272,68 @@ public class BoardController {
 			return "/board/photolist";
 		}
 		return "redirect: main";
+	}
+	
+	//	추천 영역 불러오기
+	@RequestMapping(value = "/board/getreco", method = RequestMethod.POST)
+	public String getreco(
+			int board_idx,
+			HttpSession session,
+			Model model
+			) {
+		
+		logger.info("추천영역");
+		
+		//	해당 게시글 추천 개수 구하기
+		String brdidx = String.valueOf(board_idx);
+		int recoCnt = boardService.getRecoCnt(brdidx);
+		
+		model.addAttribute("recocnt", recoCnt);
+		
+		//	추천 여부 확인하여 반환
+		boolean result = boardService.checkReco(board_idx, session);
+		
+		model.addAttribute("result", result);
+		
+		return "board/recommend";
+	
+	}
+	
+	// 추천 취소
+	@RequestMapping(value = "/board/unreco", method = RequestMethod.POST)
+	public String unreco(
+			int board_idx,
+			HttpSession session
+			) {
+		
+		logger.info("추천취소");
+		
+		Recommend recommend = new Recommend();
+		
+		recommend.setBoard_idx(board_idx);
+		recommend.setMember_idx((int)session.getAttribute("member_idx"));
+		
+		boardService.unreco(recommend);
+		
+		return "redirect: /board/view?brdidx="+board_idx;
+	}
+	
+	//	추천
+	@RequestMapping(value = "/board/reco", method = RequestMethod.POST)
+	public String reco(
+			int board_idx,
+			HttpSession session
+			) {
+		
+		logger.info("추천");
+		
+		Recommend recommend = new Recommend();
+		
+		recommend.setBoard_idx(board_idx);
+		recommend.setMember_idx((int)session.getAttribute("member_idx"));
+		
+		boardService.reco(recommend);
+		
+		return "redirect: /board/view?brdidx="+board_idx;
 	}
 }

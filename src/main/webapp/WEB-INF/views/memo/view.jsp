@@ -8,8 +8,8 @@
 <script src="/resources/owlcarousel/owl.carousel.min.js"></script>
 <link rel="stylesheet" href="/resources/owlcarousel/owl.theme.default.min.css">
 
-<h3>중요 메모</h3>
-<div style="width: 1000px;">
+<h3 style="margin: 10px">중요 메모</h3>
+<div style="width: 1100px;">
 
 <div id="owl-one" class="owl-carousel owl-theme">
 <c:if test="${fn:length(impMemoList) gt 0 and impMemoList ne null}">
@@ -18,28 +18,30 @@
 
 <c:if test="${st.end >= st.index+2}">
 	<c:forEach items="${impMemoList }" var="i" begin="${st.index}" end="${st.index+2}">
-	<div style="width: 300px; height: 400px; border: 1px solid #eee; float: left; overflow: hidden">
-		<div style="height: 60px; border: 1px solid #eee;">
+	<div class="card" style="width: 300px; height: 400px; float: left; overflow: hidden; margin: 10px">
+  		<div class="card-header" style="height: 60px;">
+			<button type="button" onclick="unmark('${i.MEMO_IDX}')">해제</button>
 			${i.TITLE }
-			<button type="button" onclick="unmark('${i.MEMO_IDX}')">unmarking</button>
-		</div>
-		<div style="height: 338px; border: 1px solid #eee;" data-toggle="modal" data-target="#impModal${i.MEMO_IDX}">
-			${i.MEMO }
-		</div>
+			<button type="button" onclick="deleteMemo('${i.MEMO_IDX}')">삭제</button>
+  		</div>
+  		<div class="card-body" style="height: 338px;" data-toggle="modal" data-target="#impModal${i.MEMO_IDX}">
+    		<p class="card-text">${i.MEMO }</p>
+  		</div>
 	</div>
 	</c:forEach>
 </c:if>
 
 <c:if test="${st.end < st.index+2}">
 	<c:forEach items="${impMemoList }" var="i" begin="${st.index}" end="${st.end}">
-	<div style="width: 300px; height: 400px; border: 1px solid #eee; float: left; overflow: hidden">
-		<div style="height: 60px; border: 1px solid #eee;">
-			${i.TITLE }
-			<button type="button" onclick="unmark('${i.MEMO_IDX}')">unmarking</button>
-		</div>
-		<div style="height: 338px; border: 1px solid #eee;" data-toggle="modal" data-target="#impModal${i.MEMO_IDX}">
-			${i.MEMO }
-		</div>
+	<div class="card" style="width: 300px; height: 400px; float: left; overflow: hidden; margin: 10px">
+  		<div class="card-header">
+  			<button type="button" onclick="unmark('${i.MEMO_IDX}')">해제</button>
+    		${i.TITLE }
+			<button type="button" onclick="deleteMemo('${i.MEMO_IDX}')">삭제</button>
+  		</div>
+  		<div class="card-body" data-toggle="modal" data-target="#impModal${i.MEMO_IDX}">
+    		<p class="card-text">${i.MEMO }</p>
+  		</div>
 	</div>
 	</c:forEach>
 </c:if>
@@ -66,8 +68,7 @@
         			<textarea id="summernote${i.MEMO_IDX}" name="memo" style="width: 94%">${i.MEMO}</textarea>
       			</div>
       			<div class="modal-footer">
-      				<button type="submit" class="btn btn-primary">수정</button>
-        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      				<button type="submit" class="btn btn-primary">수정</button>        			
       			</div>
       			</form>
     		</div>
@@ -93,9 +94,9 @@
 </script>
 </c:forEach>
 </div>
-<br><br><br>
+<br>
 
-<h3>새 메모</h3>
+<h3 style="margin: 10px">새 메모</h3>
 <div style="width: 1000px">
 
 <div id="owl-two" class="owl-carousel owl-theme">
@@ -105,28 +106,30 @@
 
 <c:if test="${st.end >= st.index+5}">
 	<c:forEach items="${memoList }" var="m" begin="${st.index}" end="${st.index+5}">
-	<div style="width: 300px; height: 400px; border: 1px solid #eee; float: left; overflow: hidden">
-		<div style="height: 60px; border: 1px solid #eee;">
+	<div class="card" style="width: 300px; height: 400px; float: left; overflow: hidden; margin: 10px">
+  		<div class="card-header">
+			<button type="button" onclick="mark('${m.MEMO_IDX}')">마킹</button>
 			${m.TITLE }
-			<button type="button" onclick="mark('${m.MEMO_IDX}')">marking</button>
-		</div>
-		<div style="height: 338px; border: 1px solid #eee;" data-toggle="modal" data-target="#modal${m.MEMO_IDX}">
-			${m.MEMO }
-		</div>
+			<button type="button" onclick="deleteMemo('${m.MEMO_IDX}')">삭제</button>
+  		</div>
+  		<div class="card-body" data-toggle="modal" data-target="#impModal${m.MEMO_IDX}">
+    		<p class="card-text">${m.MEMO }</p>
+  		</div>
 	</div>
  	</c:forEach>
 </c:if>
 
 <c:if test="${st.end < st.index+5}">
 	<c:forEach items="${memoList }" var="m" begin="${st.index}" end="${st.end}">
-	<div style="width: 300px; height: 400px; border: 1px solid #eee; float: left; overflow: hidden">
-		<div style="height: 60px; border: 1px solid #eee;">
+	<div class="card" style="width: 300px; height: 400px; float: left; overflow: hidden; margin: 10px">
+  		<div class="card-header">
+			<button type="button" onclick="mark('${m.MEMO_IDX}')">마킹</button>
 			${m.TITLE }
-			<button type="button" onclick="mark('${m.MEMO_IDX}')">marking</button>
-		</div>
-		<div style="height: 338px; border: 1px solid #eee;" data-toggle="modal" data-target="#modal${m.MEMO_IDX}">
-			${m.MEMO }
-		</div>
+			<button type="button" onclick="deleteMemo('${m.MEMO_IDX}')">삭제</button>
+  		</div>
+  		<div class="card-body" data-toggle="modal" data-target="#impModal${m.MEMO_IDX}">
+    		<p class="card-text">${m.MEMO }</p>
+  		</div>
 	</div>
  	</c:forEach>
 </c:if>
@@ -154,7 +157,6 @@
       			</div>
       			<div class="modal-footer">
       				<button type="submit" class="btn btn-primary">수정</button>
-        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       			</div>
       			</form>
     		</div>

@@ -10,6 +10,11 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
 <!-- summernote -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -17,57 +22,6 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
-
-
-
-<% Boolean result = (Boolean)request.getAttribute("result"); %>
-
-<script type="text/javascript">
-/* $(document).ready(function() {
-	
-	//	추천버튼 초기화
-	if(${result==true}) {
-		$("#btnRecommend")
-			.toggleClass("btn-danger")
-			.text("추천 취소");
-	}else{
-		$("btnRecommend")
-			.toggleClass("btn-primary")
-			.text("추천");
-	}
-	
-	//	추천 수행
-	$("#btnRecommend").click(function(){
-		$.ajax({
-			type: "get",
-			url: "/board/recommend",
-			dataType: "json",
-			data: {
-				member_idx: '${sessionScope.member_idx}',
-				board_idx: '${freeView.getBoard_idx()}'
-			},
-			success: function(data) {
-				console.log(data);
-				if(data.result) {
-					$("#btnRecommend")
-						.text("추천 취소")
-						.toggleClass("btn-primary")
-						.toggleClass("btn-danger");
-				} else {
-					$("#btnRecommend")
-						.text("추천")
-						.toggleClass("btn-danger")
-						.toggleClass("btn-primary");
-				}
-				$("#recommend").text(data.recommend);
-			},
-			error: function(e) {
-				console.log(e.responseText);
-			}
-		});
-	});
-}); */
-</script>
 
 <style type="text/css">
 
@@ -103,26 +57,17 @@ table {
 <tr>
 	<td colspan="3">${freeView.getContent()}
 </tr>
-<tr>
-	<td>
-		<c:if test="${login}">
-			<c:if test="${checkId ne true}">
-				<button id="btnRecommend" class="btn pull-right">추천</button>
-			</c:if>
-		</c:if>
-	</td>
-	<td>추천 : <span id="recommend">${freeView.getRecommend()}</span></td>
-	<td>
-		<c:if test="${login}">
-			<c:if test="${checkId ne true}">
-				<button>신고</button>
-			</c:if>
-		</c:if>
-	</td>
-</tr>
 </table>
+<br><br>
+<div class="container">
+	<div class="row justify-content-md-center">
+		<div class="col col-lg-2"></div>
+		<div id="reco_area" class="col-md-auto"></div>
+		<div class="col col-lg-2"></div>
+	</div>
 </div>
-
+</div>
+<br><br>
 <c:import url="/WEB-INF/views/board/reply.jsp"></c:import>
 
 <c:if test="${login }">
@@ -156,6 +101,48 @@ table {
 	</c:when>
 </c:choose>
 
+<script>
+
+$(function(){
+	getRecommend();
+});
+
+function getRecommend(){
+	$.ajax({
+		type: 'POST',
+		url : "/board/getreco",
+		dataType : "html",
+		data:$("#comment").serialize(),
+		success: function(data){
+			$("#reco_area").html(data);
+		}
+	});
+}
+
+function unreco(){
+	$.ajax({
+		type : 'POST',
+		url : '/board/unreco',
+		data : $("#comment").serialize(),
+		success : function() {
+			getRecommend();
+		}
+	});
+}
+
+function reco(){
+	$.ajax({
+		type : 'POST',
+		url : '/board/reco',
+		data : $("#comment").serialize(),
+		success : function() {
+			getRecommend();
+		}
+	});
+}
+
+
+</script>
 
 </body>
 </html>

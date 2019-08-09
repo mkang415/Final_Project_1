@@ -53,4 +53,5 @@
 		update memo set mark = 1, markdate = null
 		where memo_idx = #{memo_idx}
 	</update>
+	
 </mapper>

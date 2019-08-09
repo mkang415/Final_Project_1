@@ -1,15 +1,16 @@
 package board.dao.face;
 
 import dto.Board;
+import dto.Recommend;
 
 public interface RecommendDao {
 
-	int selectCountRecommend(Board board);
+	int getRecoCnt(int brdidx);
 
-	void deleteRecommend(Board board);
+	int checkReco(Recommend recommend);
 
-	void insertRecommend(Board board);
+	void unreco(Recommend recommend);
 
-	int selectTotalRecommend(Board board);
+	void reco(Recommend recommend);
 
 }
