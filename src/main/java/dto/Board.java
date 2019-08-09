@@ -10,15 +10,14 @@ public class Board {
 	private String nickname;
 	private String email;
 	private int hit;
-	private int recommend;
 	private int divide;
 	private Date writtendate;
 	
 	@Override
 	public String toString() {
 		return "Board [board_idx=" + board_idx + ", title=" + title + ", content=" + content + ", member_idx="
-				+ member_idx + ", nickname=" + nickname + ", email=" + email + ", hit=" + hit + ", recommend="
-				+ recommend + ", divide=" + divide + ", writtendate=" + writtendate + "]";
+				+ member_idx + ", nickname=" + nickname + ", email=" + email + ", hit=" + hit + ", divide=" + divide
+				+ ", writtendate=" + writtendate + "]";
 	}
 
 	public int getBoard_idx() {
@@ -77,14 +76,6 @@ public class Board {
 		this.hit = hit;
 	}
 
-	public int getRecommend() {
-		return recommend;
-	}
-
-	public void setRecommend(int recommend) {
-		this.recommend = recommend;
-	}
-
 	public int getDivide() {
 		return divide;
 	}
@@ -100,6 +91,8 @@ public class Board {
 	public void setWrittendate(Date writtendate) {
 		this.writtendate = writtendate;
 	}
+	
+	
 	
 	
 	

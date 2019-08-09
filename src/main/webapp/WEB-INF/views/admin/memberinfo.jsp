@@ -4,6 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+    
+<c:import url="/WEB-INF/views/layout/header.jsp"/> 
+
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript"
  src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -71,7 +74,6 @@
 	<th style="text-align: center;">내용</th>
 	<th style="text-align: center;">작성자</th>
 	<th style="text-align: center;">조회수</th>
-	<th style="text-align: center;">추천수</th>
 	<th style="text-align: center;">작성일</th>
 	</tr>
 
@@ -83,7 +85,6 @@
 			<td>${i.CONTENT }</td>
 			<td>${i.NICKNAME }</td>
 			<td>${i.HIT }</td>
-			<td>${i.RECOMMEND }</td>
 			<td>${i.WRITTENDATE }</td>
 		</tr>
 	</c:forEach>
@@ -116,8 +117,5 @@
 
 
 
+<c:import url="/WEB-INF/views/layout/footer.jsp"/> 
 
-
-
-</body>
-</html>

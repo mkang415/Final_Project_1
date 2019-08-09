@@ -4,11 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    
+<c:import url="/WEB-INF/views/layout/header.jsp"/> 
 
 <!-- jQuery 2.2.4 -->
 <!-- <script type="text/javascript" -->
@@ -92,8 +89,7 @@ function checkAll() {
 
 </style>
 
-</head>
-<body>
+
 
 	<h1 style="text-align: center; "><a href="/admin/list">게시판 관리</a></h1>
 	<br>
@@ -108,7 +104,6 @@ function checkAll() {
 	<th style="text-align: center;">내용</th>
 	<th style="text-align: center;">작성자</th>
 	<th style="text-align: center;">조회수</th>
-	<th style="text-align: center;">추천수</th>
 	<th style="text-align: center;">작성일</th>
 	</tr>
 	
@@ -120,7 +115,6 @@ function checkAll() {
 			<td>${i.CONTENT }</td>
 			<td>${i.NICKNAME }</td>
 			<td>${i.HIT }</td>
-			<td>${i.RECOMMEND }</td>
 			<td><fmt:formatDate value="${i.WRITTENDATE }" pattern="yy-MM-dd HH:mm:ss" /></td>
 		</tr>
 	</c:forEach>
@@ -129,8 +123,7 @@ function checkAll() {
 
 
 <div id="btnBox" style="margin-left: 300px;">
-<a href="/main"><button >메인</button></a>
-&nbsp;&nbsp;&nbsp;&nbsp;
+
 
 <button id="btnDelete" style = "color: red;">삭제</button>
 </div>
@@ -152,7 +145,4 @@ function checkAll() {
 
 <c:import url="/WEB-INF/views/layout/adminboardpaging.jsp"></c:import>
 
-
-
-</body>
-</html>
+<c:import url="/WEB-INF/views/layout/footer.jsp"/> 
