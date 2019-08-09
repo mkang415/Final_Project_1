@@ -50,6 +50,7 @@ public class LedgerController {
 		Ledger totalminus = ledgerService.getTotal2(ledger);
 		model.addAttribute("totalminus", totalminus);
 		
+		model.addAttribute("ledger", ledger);
 		logger.info(ledger.getDatepicker());
 		logger.info(ledger.getDatepicker2());
 		
@@ -72,7 +73,7 @@ public class LedgerController {
 	
 	
 	@RequestMapping(value = "/ledger/search", method = RequestMethod.POST)
-	public String ledgerSearch(
+	public void ledgerSearch(
 			String datepicker,
 			String datepicker2,
 			Model model) {
@@ -83,7 +84,7 @@ public class LedgerController {
 		List<HashMap<String, Object>> picker = ledgerService.select2(datepicker, datepicker2);
 		model.addAttribute("picker", picker);
 		
-		return "redirect: /ledger/ledger";
+		
 	}
 	
 }

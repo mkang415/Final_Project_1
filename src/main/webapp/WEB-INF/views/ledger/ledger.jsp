@@ -95,9 +95,7 @@ $(document).ready(function() {
                 ,minDate: "-100Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
                 ,maxDate: "+100Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후) 
             
-            	,showButtonPanel: true
-            	,currentText: '오늘 날짜'
-            	,closeText: '닫기'
+        		,updateViewDate: true
             	
             });
  
@@ -105,6 +103,7 @@ $(document).ready(function() {
             $("#datepicker").datepicker();                    
             $("#datepicker2").datepicker();
             
+           
             //From의 초기값을 오늘 날짜로 설정
             $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
             //To의 초기값을 설정
@@ -175,17 +174,17 @@ $(document).ready(function() {
 		</table>
 	</div>
 	<h4>
-		<span style="text-align: center; margin-left: 1430px;">${totalplus.getWrittendate()}
-			월 수입 : ${totalplus.getPlusM() }</span>
+		<span style="text-align: center; margin-left: 1430px;">
+			수입 : ${totalplus.getPlusM() }</span>
 	</h4>
 	<h4>
-		<span style="text-align: center; margin-left: 1430px;">${totalminus.getWrittendate()}
-			월 지출 : ${totalminus.getMinusM() }</span>
+		<span style="text-align: center; margin-left: 1430px;">
+			지출 : ${totalminus.getMinusM() }</span>
 	</h4>
 	<br>
 	<h4>
-		<span style="text-align: center; margin-left: 1430px;">${totalminus.getWrittendate()}
-			월 결산 : ${totalplus.getPlusM()+totalminus.getMinusM() }</span>
+		<span style="text-align: center; margin-left: 1430px;">
+			결산 : ${totalplus.getPlusM()+totalminus.getMinusM() }</span>
 	</h4>
 	<br>
 
