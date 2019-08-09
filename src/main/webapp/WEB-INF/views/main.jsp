@@ -78,7 +78,6 @@
                             <li><a href="/ledger/ledger">가계부</a></li>
                             <li><a href="/diary">다이어리</a></li>
                             <li><a href="/board/freeList">자유게시판</a></li>
-                            
                         </ul>
                     </nav>    
                 </div>
