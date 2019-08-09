@@ -61,7 +61,7 @@
 	<select id="selectAll"
 	resultType="dto.CalendarDto">
 	<include refid="selectCalendar" />
-		ORDER BY calendar_idx
+		ORDER BY rdate desc
 	
 	</select>
 	
@@ -80,7 +80,7 @@
 				select calendar_idx,  member_idx, title, content, rdate, wdate
 				from calendar
 				where member_idx = #{member_idx}
-					order by calendar_idx desc
+					order by rdate desc
 						)B
 				order by rnum
 		) R
@@ -94,7 +94,7 @@
 			<if test="search != null and search != ''">
 			and title LIKE '%' || #{search} || '%'
 			</if> 
-			order by calendar_idx desc
+			order by rdate desc
 			)B
 			order by rnum
 	</sql>

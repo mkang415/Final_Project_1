@@ -241,7 +241,7 @@ public class CalendarController {
 	//일정 list랑 검색(제목만)
 	@RequestMapping (value = "/schedule/list",method=RequestMethod.GET)
 	public String list (
-			@RequestParam(defaultValue = "0")int curPage,
+			@RequestParam(defaultValue = "1")int curPage,
 			SchedulePaging search,
 			Model model,
 			HttpSession session,

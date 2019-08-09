@@ -6,12 +6,16 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<script type="text/javascript"
-src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+<!-- jquery -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<!-- bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+<!-- summernote -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
@@ -61,6 +65,35 @@ $(document).ready(function() {
 </script>
 
 
+<style>
+
+
+#background {
+background-image : url('/resources/img/back4.jpg');
+position: absolute;
+width:100%;
+height:100%;
+background-size: inherit;
+background-position: center center;
+
+}
+
+
+.table-bordered td{
+ border:1px solid black;
+}
+
+.table-bordered th{
+ border:1px solid black;
+}
+
+.table td, .table th {
+    padding: 0.2rem;
+}
+</style>
+
+
+<div id="background">
 
 <div align="center">
 <br>
@@ -68,21 +101,21 @@ $(document).ready(function() {
 <br>
 <form action="/schedule/calwrite" method="post">
 
-<table class="table table-bordered" style="width: 80%" class="writetb" >
+<table class="table table-bordered" style="width: 80%; table-layout:fixed;">
 <col width="100"><col width="500">
 
 
 <tr >
-	<td style="text-align : center;"  class="table-success"  >
-	<label for="title">제목</label></td>
+	<th style="text-align : center;"  class="table-Active"  >
+	<label for="title">제목</label></th>
 	
 	<td style="text-align : center;">
-	<input type="text" size="100%" style="width: 100%; height: 100%; padding: 10px; "  id="title" name="title" placeholder="일정의 제목을 입력하세요!" />
+	<input type="text" size="100%" style="width: 100%; height: 100%; padding: 7px; "  id="title" name="title" placeholder="일정의 제목을 입력하세요!" />
 	</td>
 </tr>
 
 <tr>
-	<td style="text-align : center;"  class="table-warning" height="50"><label for="rdate">일정날짜</label></td>
+	<th style="text-align : center;"  class="table-Active" height="50"><label for="rdate">일정날짜</label></th>
 	<td style="text-align : center;">
 <!-- 10년 전부터 5년 후 까지 보여주기 -->
 		<select name="year"> 
@@ -127,7 +160,8 @@ $(document).ready(function() {
 
 
 <tr>
-	<td colspan="2"><textarea rows="20" cols="100%" name="content" id="summernote" style="text-align:left"
+	<td colspan="2">
+	<textarea rows="20" cols="100%" name="content" id="summernote" style="text-align:left" 
 	 ></textarea>
 	</td>
 </tr>
@@ -141,7 +175,7 @@ $(document).ready(function() {
 </form>
 
 </div>
-
+</div>
 
 
 <script type="text/javascript">

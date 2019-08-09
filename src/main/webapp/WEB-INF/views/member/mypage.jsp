@@ -3,13 +3,13 @@
     
 <%@ page import = "java.util.Calendar" %>    
 <% Calendar cal = Calendar.getInstance(); %>
-<script type="text/javascript"
-src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- jquery -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>    
+<!-- bootstrap4 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
 
@@ -42,41 +42,42 @@ left: 25.8%;
 #memo {
 position: absolute;
 top: 17.3%;
-left: 25.7%;
+left: 26.2%;
 }
 
 #memotext {
 position: absolute;
-top: 16.6%;
-left: 26.7%;
-color: #EBFBFF;
+top: 22%;
+left: 27%;
+color: #464646;
 }
 
 
 #vote {
 position: absolute;
-top: 27.4%;
+top: 27%;
 left: 25.9%;
 }
 
 #vv {
 position: absolute;
-top: 30%;
-left: 26.9%;
-color: #EBFBFF;
+top: 32%;
+left: 26.2%;
+font-size: medium;
 }
 
 #diary {
 position: absolute;
-top: 38%;
-left: 25.9%;
+top: 38.2%;
+left: 25.7%;
 }
 
 
 #dd {
 position: absolute;
-top: 42.5%;
-left: 27.5%;
+top: 43.2%;
+left: 27.2%;
+font-size: medium;
 }
 
 #home {
@@ -113,12 +114,33 @@ table, th {
 	text-align: center;
 }
 
+#ca {
+font-size: large;	
+}
+
+#mm {
+ font-size: medium;
+}
+
+#logout {
+position: absolute;
+top: 65%;
+left: 70%;
+z-index: 1;
+}
+
 </style>
 
 
 <div id="background">
-<h5>&nbsp;&nbsp;mypage</h5>
+
+<div id="logout">
+<a href="/member/logout">
+<button type="button" class="btn btn-dark" >로그아웃</button></a>
 </div>
+
+
+
 
 <div id="incom">
 
@@ -131,29 +153,29 @@ table, th {
 <img src="/resources/img/cal.png" width="80px" height="80px"></a>
 </div>
 <div id="caltext">
-<h4>
-<a id="a" href="/schedule/calendar">
+<p id="ca">
+<a id="a" href="/schedule/calendar" style="color: #942894;">
 &nbsp;<%= cal.get(Calendar.YEAR) %>년
 <br>
 &nbsp;<%= cal.get(Calendar.MONTH)+1 %>월
 <%= cal.get(Calendar.DATE) %>일
-</a></h4>
+</a></p>
 </div>
 
 
 
 <div id="memo">
-<img src="/resources/img/memo.png"  width="70px" height="70px">
+<img src="/resources/img/folder.png"  width="70px" height="70px">
 </div>
 <div id="memotext">
-<h5 id="mm"><a id="d" href="/memo/list">메모장</a></h5>
+<p id="mm"><a id="d" href="/memo/list" style="color:#8B5927;">게시판</a></p>
 </div>
 
 <div id="vote"> 
-<img src="/resources/img/vote.png"  width="70px" height="70px">
+<img src="/resources/img/wallet.png"  width="70px" height="70px">
 </div>
 <div id="votetext">
-<h5 id="vv">가계부</h5>
+<p id="vv"><a id="d" href="/ledger/ledger" style="color: white;">가계부</a></p>
 </div>
 
 
@@ -164,10 +186,10 @@ table, th {
 
 
 <div id="diary"><a href="/diary">
-<img src="/resources/img/diary.png"  width="70px" height="70px"></a>
+<img src="/resources/img/ddiary.png"  width="70px" height="65px"></a>
 </div>
 <div id="diarytext">
-<h5 id="dd"><a id="d" href="/diary">일기</a></h5>
+<p id="dd"><a id="d" href="/diary" style="color: #00008C;">일기</a></p>
 </div>
 
 
@@ -179,7 +201,7 @@ table, th {
 <div id="diaryview" style="height:300px; overflow-y:scroll">
 <table>
 <tr >
-<td><h3><a href="/diary" id="di">☞ 가장 최근에 작성하신 일기 입니다 ☜</a></h3></td>
+<td><h3><a href="/diary" id="di" style="color: #3e48ab">☞ 가장 최근에 작성하신 일기 입니다 ☜</a></h3></td>
 </tr>
 
 <tr>
@@ -212,3 +234,4 @@ table, th {
 
 </div> <!-- com end -->
 </div> <!-- incom end -->
+</div>
