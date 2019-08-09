@@ -16,7 +16,7 @@
     <title> 푸터 영역</title>   
 
     <!-- css -->
-    <link rel="stylesheet" href="/resources/assets/css/resetLayout.css">
+<!--     <link rel="stylesheet" href="/resources/assets/css/resetLayout.css"> -->
     <link rel="stylesheet" href="/resources/assets/css/headerCss.css">
     
     <!-- 파비콘 -->
