@@ -4,11 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
+<c:import url="/WEB-INF/views/layout/header.jsp"/> 
 
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript"
@@ -69,8 +66,7 @@ $(document).ready(function() {
 .hasDatepicker{cursor: pointer;}
 </style>
 
-</head>
-<body>
+
 	From: <input type="text" id="datepicker">
     To: <input type="text" id="datepicker2">
  
@@ -193,7 +189,7 @@ $(document).ready(function() {
 
 		<!-- Button trigger modal -->
 		<span><button type="button" data-toggle="modal" data-target="#ModalWrite">작성</button></span> 
-		<span><a href="/main"><button>메인</button></a></span>
+	
 
 		&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -204,5 +200,4 @@ $(document).ready(function() {
 
 	<c:import url="/WEB-INF/views/layout/ledgerpaging.jsp"></c:import>
 
-</body>
-</html>
+<c:import url="/WEB-INF/views/layout/footer.jsp"/> 

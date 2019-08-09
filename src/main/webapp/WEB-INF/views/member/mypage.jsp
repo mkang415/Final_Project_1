@@ -224,14 +224,6 @@ z-index: 1;
 
 
 
-
-
-
-
-
-
-
-
 </div> <!-- com end -->
 </div> <!-- incom end -->
 </div>

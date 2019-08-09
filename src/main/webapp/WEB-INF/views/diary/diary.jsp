@@ -265,10 +265,11 @@ img {
 
 #modal_delete .modal_content {
 	position: fixed;
-	top: 15%;
-	left: 20%;
+	top: 30%;
+	left: 35%;
 
-	width:auto;
+	width:30%;
+	height: 150px;
 	padding:10px;
 	background:#fff;
 	border:2px solid #666;
@@ -322,11 +323,15 @@ img {
 
 	<div class="modal_content">
 
-	<div>
+	<div id="modalTextBox">
 	<p>정말 삭제하시겠습니까?</p>
+	</div>
+
+	<div id="modalBtnBox">
 	<button type="button" onClick="deleteDiary()">확인</button>
 	<button type="button" onClick="deleteModalClose()">취소</button>
 	</div>
+
 	</div>
 
 	<div class="modal_layer"></div>
@@ -337,18 +342,22 @@ img {
 
 <script type="text/javascript">
 
-	function deleteDiary(diary_idx) {
-		location.href='/diary/delete?diary_idx='+diary_idx;
-		deleteModalClose();
-	}
+var globalDiary_idx='';
 
-	function deleteModalOpen() {
-		$("#modal_delete").attr("style", "display:block");
-	}
+function deleteDiary() {
+	location.href='/diary/delete?diary_idx='+globalDiary_idx;
+	deleteModalClose();
+}
 
-	function deleteModalClose() {
-		$("#modal_delete").attr("style", "display:none");
-	}
+function deleteModalOpen(diary_idx) {
+	globalDiary_idx = diary_idx;
+	$("#modal_delete").attr("style", "display:block");
+}
+
+function deleteModalClose() {
+	$("#modal_delete").attr("style", "display:none");
+}
+
 </script>
 
 </div>
