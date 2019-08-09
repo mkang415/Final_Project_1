@@ -11,15 +11,27 @@
 <script type="text/javascript"
 src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
     
- <!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
     
 <style>
 #bt {
 text-aling : right;
 margin-right : 10;
+}
+
+
+#background {
+background-image : url('/resources/img/back5.jpg');
+position: absolute;
+width:100%;
+height:120%;
+background-size: cover;
+background-position: center center;
+
 }
 
 </style>    
@@ -67,19 +79,13 @@ String nn = String.format("<a href='%s?year=%d&month=%d'>" +
 %>
 
 
-
-<h2 style="text-align:center">▷ 일정을 관리하세욥 ◁</h2>
-
-<!-- <div> -->
-<!-- <label>오늘날짜</label> -->
-<%-- <input type="text" value=" --%>
-<%-- <%= cal2.get(Calendar.YEAR) %>년&nbsp; --%>
-<%-- <%= cal2.get(Calendar.MONTH)+1 %>월&nbsp; --%>
-<%-- <%= cal2.get(Calendar.DATE) %>일"/> --%>
-<!-- </div> -->
+<div id="background">
 
 
-<br>
+
+<h3 style="text-align:center;">[CALENDAR]</h3>
+
+
 
 <div align="center">
 
@@ -178,5 +184,7 @@ for(int i = 0;i < (7 - (dayOfWeek + lastDay - 1) % 7) % 7; i++){
 <button type="button" class="btn btn-success" >
 모든일정보러가기</button></a>
 </div>
-<br><br>
+</div>
+
+<br>
 

@@ -65,6 +65,7 @@ public class CalendarUtil {
 		cal.set(year, month-1, day);
 		return cal;
 		
+		
 	}
 	
 	// 각 날짜 별로 테이블 생성
@@ -80,10 +81,10 @@ public class CalendarUtil {
 		for(CalendarDto dto : list) {
 			if(dto.getRdate().substring(0,8).equals(dates)) {
 				
-				s += "<tr bgcolor='#FFE4B5'>";
+				s += "<tr bgcolor='#FAC87D'>";
 				s += "<td>";
 				s += "<a href='caldetail?calendar_idx=" + dto.getCalendar_idx() + "'>";
-				s += "<font style='font-size:15; color:black'>";
+				s += "<font style='font-size:13; color:black'>";
 				s += dot3(dto.getTitle());
 				s += "</font>";
 				s += "</a>";
@@ -95,8 +96,11 @@ public class CalendarUtil {
 		}
 		s += "</table>";
 		
+		
+		
 		return s;
 	
+		
 	}
 	
 	
