@@ -12,6 +12,11 @@
 	 resultType="int">
 		SELECT count(*) FROM LEDGER
 		WHERE member_idx = #{member_idx}
+		<if test="datepicker !=null and datepicker2 !=null">
+	
+	 AND writtendate <![CDATA[ >= ]]> trunc(to_date(#{datepicker})) and writtendate <![CDATA[ < ]]> trunc(to_date(#{datepicker2}))+1
+
+	</if>
 	</select>
 	
 	<select id="selectAll"
@@ -39,19 +44,29 @@
 	<select id="total"
 	 parameterType="dto.Ledger"
 	 resultType="dto.Ledger">
-	 	SELECT to_char(writtendate,'YY/MM') "writtendate", sum(plusm) "plusM"
+	 	SELECT to_char(writtendate,'') "writtendate", sum(plusm) "plusM"
 		FROM ledger
         where member_idx = #{member_idx}
-		GROUP BY to_char(writtendate,'YY/MM')
+        <if test="datepicker !=null and datepicker2 !=null">
+	
+	 AND writtendate <![CDATA[ >= ]]> trunc(to_date(#{datepicker})) and writtendate <![CDATA[ < ]]> trunc(to_date(#{datepicker2}))+1
+
+	</if>
+		GROUP BY to_char(writtendate,'')
 	 </select>
 	
 	<select id="total2"
 	 parameterType="dto.Ledger"
 	 resultType="dto.Ledger">
-	 	SELECT to_char(writtendate,'YY/MM') "writtendate", sum(minusm) "minusM"
+	 	SELECT to_char(writtendate,'') "writtendate", sum(minusm) "minusM"
 		FROM ledger
         where member_idx = #{member_idx}
-		GROUP BY to_char(writtendate,'YY/MM')
+        <if test="datepicker !=null and datepicker2 !=null">
+	
+	 AND writtendate <![CDATA[ >= ]]> trunc(to_date(#{datepicker})) and writtendate <![CDATA[ < ]]> trunc(to_date(#{datepicker2}))+1
+
+	</if>
+		GROUP BY to_char(writtendate,'')
 	 </select>
 	 
 	 <insert id="write"

@@ -3,6 +3,8 @@ package admin.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import admin.service.face.AdminService;
 import dto.Board;
 import dto.Member;
+import member.service.face.MemberService;
 import util.AdminBoardPaging;
 import util.AdminMemberBanPaging;
 import util.AdminMemberInfoPaging;
@@ -26,12 +29,14 @@ public class AdminController {
 	private static Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired AdminService adminService;
+
 	
 	@RequestMapping(value = "/admin/list", method = RequestMethod.GET)
 	public String boardList(
 			@RequestParam(defaultValue = "1") int curPage ,
 			AdminBoardPaging search,
 			Model model) {
+
 		
 		int totalCount = adminService.getTotal(search); //검색어 적용 게시글 수
 		
@@ -42,7 +47,7 @@ public class AdminController {
 		List<HashMap<String, Object>> list = adminService.getSearchPagingList(ABP); //검색어 적용 게시글 조회
 		model.addAttribute("list", list);
 		
-		return "admin/list";
+		return "/admin/list";
 		// 게시글 관리 페이지
 	}
 	
