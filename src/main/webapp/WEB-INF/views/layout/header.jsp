@@ -13,7 +13,7 @@
     <meta name="author" content="webstoryboy">
     <meta name="description" content=".">
     <meta name="keywords" content=" 동영상 이미지도해볼까,이미지 슬라이드">
-    <title> 푸터 영역</title>
+    <title> 푸터 영역</title>   
 
     <!-- css -->
     <link rel="stylesheet" href="/resources/assets/css/resetLayout.css">

@@ -32,6 +32,12 @@
          <exclude-mapping path="/interceptor/fail"/>
          <beans:bean class="interceptor.ProjectInterceptor" />
       </interceptor>
+
+       <interceptor>
+         <mapping path="/diary/**" />
+         <exclude-mapping path="/interceptor/fail"/>
+         <beans:bean class="interceptor.ProjectInterceptor" />
+      </interceptor>
    
    </interceptors>
 

@@ -8,7 +8,6 @@
 <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 <!-- header -->
 
-
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
@@ -140,9 +139,10 @@ function addMap() {
 	if(placename!=null) {
 
 		var imgUrl = "https://naveropenapi.apigw.ntruss.com/map-static/v2/raster-cors?w=480&h=300&markers=type:d|size:mid|pos:"+geoY+"%20"+geoX+"&X-NCP-APIGW-API-KEY-ID=l0hnqofc58";
-
+		
 		$("#modal_map").attr("style", "display:none");
-		$('#summernote').summernote('editor.insertImage', imgUrl);
+		$('#summernote').summernote('insertImage', imgUrl);
+		
 		
 		var insertPlaceName = "<p align='center'>" + placename + "</p>";
 		var insertRoadAddress = "<p align='center'>" + road_address + "</p><br>";	
@@ -194,8 +194,8 @@ function addMap() {
 
 #modal_map .modal_content {
 	position: fixed;
-	top: 20%;
-	left: 25%;
+	top: 15%;
+	left: 20%;
 
 	width:auto;
 	padding:10px;
@@ -231,6 +231,7 @@ function addMap() {
 	text-overflow: ellipsis;
 	width: 390px;
 	height: 78px;
+	cursor: pointer;
 }
 
 #map {
@@ -245,6 +246,57 @@ function addMap() {
 
 }
 
+#closeBtn {
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	top: 1em;
+	right: 1em;
+	border: 0;
+/* 	outline: 0; */
+/* 	background: url('resources/diary/img/cancel.png') no-repeat; */
+	cursor: pointer;
+
+}
+
+#mapBtn {
+	padding: 0;
+	padding-bottom: 2px;
+	margin-left: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #333;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #fff;
+    border-color: #fff;
+    border-radius: 1px;
+    outline: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+
+   	
+}
+
+#mapBtnDiv {
+    position: relative;
+   	left: 89%;
+   	top: 50px;
+   	cursor: pointer;
+}
+
+#write-field {
+	position: relative;
+}
 
 </style>
 
@@ -253,8 +305,12 @@ function addMap() {
 
 
 <form action="/diary/write" method="post">
-	<div>
-	<button type="button" onClick="mapBtnClick()">위치 추가하기</button>
+	<div id="write-field">
+
+	<div id="mapBtnDiv" onClick="mapBtnClick()">
+	Insert Map
+	<button type="button" id="mapBtn"><img src="/resources/diary/img/map.png" /></button>
+	</div>
 	<script type="text/javascript">
 		function mapBtnClick() {
 			$("#modal_map").attr("style", "display:block");
@@ -274,11 +330,12 @@ function addMap() {
 <div id="modal_map">
 
 	<div class="modal_content">
+	<button type="button" id="closeBtn" onClick="mapModalClose()"><img src="/resources/diary/img/closeBtn.png" /></button>
 	<div><h1>Insert Map</h1></div>
 	<hr>
 
 	<div>
-		<input type="text" id="mapSearch"> <button type="button" id="mapSearchBtn" onclick="mapSearchF()">검색</button>
+		<input type="text" id="mapSearch" placeholder="장소명을 입력하세요"> <button type="button" id="mapSearchBtn" onclick="mapSearchF()">검색</button>
 	</div>
 	
 	<div id="dataDiv">
@@ -286,7 +343,7 @@ function addMap() {
 		<div id="placeinfo"></div>
 	</div>
 	<div>
-		<button type="button" onClick="addMap()">저장</button><button type="button" onClick="mapModalClose()">취소</button>
+		<button type="button" onClick="addMap()">저장</button>
 		
 
 	</div>
