@@ -53,14 +53,14 @@ $(document).ready(function(){
         		<textarea style="width: 94%; height: 300px" id="summernote" name="memo" placeholder="메모 내용 입력"></textarea>
       		</div>
       		<div class="modal-footer">
-      			<button type="submit" class="btn btn-primary">Save changes</button>      		
+      			<button type="submit" class="btn btn-primary">작성</button>      		
       		</div>
       		</form>
 		</div>
   	</div>
 </div>
 
-<br><br><br>
+<br>
 <div id="memoList">
 
 </div>
@@ -118,6 +118,18 @@ $(document).ready(function(){
 				$("#memoList").html(data);
 			}
 		})
+	}
+	
+	function deleteMemo(memoidx){
+		$.ajax({
+			type : 'GET',
+			url : '/memo/delete',
+			data : {'memoidx' : memoidx },
+			success : function(data) {
+				getMemoList();
+				
+			}
+		});
 	}
 	
 </script>

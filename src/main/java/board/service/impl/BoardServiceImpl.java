@@ -18,6 +18,7 @@ import board.dao.face.RecommendDao;
 import board.service.face.BoardService;
 import dto.Board;
 import dto.Image;
+import dto.Recommend;
 import util.BoardPaging;
 
 @Service
@@ -155,27 +156,6 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
-	// 추천
-	@Override
-	public boolean recommend(Board board) {
-		if (recommendDao.selectCountRecommend(board) > 0) {
-			recommendDao.deleteRecommend(board);
-			return false;
-		} else {
-			recommendDao.insertRecommend(board);
-			return true;
-		}
-	}
-
-	// 추천 수 가져오기
-	@Override
-	public int getRecommend(Board board) {
-		int recommend = recommendDao.selectTotalRecommend(board);
-		board.setRecommend(recommend);
-		boardDao.setRecommend(board);
-		return recommend;
-	}
-
 	// 후기 게시판 페이징
 	@Override
 	public BoardPaging getEpilPage(int curPage, BoardPaging search) {
@@ -245,6 +225,55 @@ public class BoardServiceImpl implements BoardService {
 		int member_idx = (int)session.getAttribute("member_idx");
 		
 		boardDao.delnullimg(member_idx);
+		
+	}
+
+	//	게시글 추천 개수
+	@Override
+	public int getRecoCnt(String board_idx) {
+		
+		int brdidx = Integer.parseInt(board_idx);
+		
+		return recommendDao.getRecoCnt(brdidx);
+	}
+
+	//	추천 여부 판단
+
+	@Override
+	public boolean checkReco(int board_idx, HttpSession session) {
+		
+		String id = (String) session.getAttribute("loginEmail");
+		
+		if (id != null && !"".equals(id)) {
+			int memIdx = (int) session.getAttribute("member_idx");
+			Recommend recommend = new Recommend();
+			recommend.setBoard_idx(board_idx);
+			recommend.setMember_idx(memIdx);
+			if (recommendDao.checkReco(recommend) > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+		
+	}
+
+	//	추천 취소
+	@Override
+	public void unreco(Recommend recommend) {
+		
+		recommendDao.unreco(recommend);
+		
+	}
+	
+	//	추천
+	@Override
+	public void reco(Recommend recommend) {
+		
+		recommendDao.reco(recommend);
 		
 	}
 

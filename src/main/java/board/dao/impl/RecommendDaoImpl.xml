@@ -5,30 +5,34 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- 추천 개수 구하기 -->
 <mapper namespace="board.dao.face.RecommendDao">
-	<select id="selectCountRecommend"
-	 parameterType="dto.Board"
+	<select id="getRecoCnt"
+	 parameterType="int"
 	 resultType="int">
 		select count(*) from recommend
-		where member_idx=#{member_idx} and board_idx=#{board_idx}
+		where board_idx = #{board_idx}
 	</select>
 	
-	<insert id="insertRecommend" 
-	 parameterType="dto.Board">
-		insert into recommend (recommend_idx, member_idx, board_idx)
-		values(recommend_seq.nextval, #{member_idx}, #{board_idx})
-	</insert>
+	<!-- 게시글에 추천 했는지 여부 판단 -->
+	<select id="checkReco"
+	 parameterType="dto.Recommend"
+	 resultType="int">
+		select count(*) from recommend
+		where board_idx = #{board_idx} and member_idx = #{member_idx}
+	</select>
 	
-	<delete id="deleteRecommend"
-	 parameterType="dto.Board">
-	 	delete from recommend
-	 	where member_idx=#{member_idx} and board_idx=#{board_idx}
+	<!-- 추천 취소 -->
+	<delete id="unreco"
+	 parameterType="dto.Recommend">
+	 	delete recommend
+	 	where board_idx=#{board_idx} and member_idx=#{member_idx}	
 	</delete>
 	
-	<select id="selectTotalRecommend"
-	 parameterType="dto.Board"
-	 resultType="int">
-	 	select count(*) from recommend
-	 	where board_idx=#{board_idx}
-	</select>
+	<!-- 추천 -->
+	<insert id="reco"
+	 parameterType="dto.Recommend">
+		insert into recommend (recommend_idx, board_idx, member_idx)
+		values (recommend_seq.nextval, #{board_idx}, #{member_idx})
+	</insert>
 </mapper>
