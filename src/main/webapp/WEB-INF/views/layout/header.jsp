@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
 <!DOCTYPE html>
 <html>
@@ -79,10 +79,10 @@ a:link{text-decoration: none;}
                     <nav class="nav" style="margin-top:10px; position:relative; left:505px;" >
                         <ul class="clearfix">
                             <li><a href="/notice/list">공지사항</a></li>
-                            <li><a href="#">마이페이지</a></li>
-                            <li><a href="#">가계부</a></li>
+                            <li><a href="/member/mypage">마이페이지</a></li>
+                            <li><a href="/ledger/ledger">가계부</a></li>
                             <li><a href="/diary">다이어리</a></li>
-                            <li><a href="#">자유게시판</a></li>
+                            <li><a href="/board/freeList">자유게시판</a></li>
                             
                         </ul>
                     </nav>    
