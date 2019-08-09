@@ -8,9 +8,9 @@
 
 
      <!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 
 
 <script type="text/javascript"
@@ -80,6 +80,12 @@ color: #fff;
 border: solid 2px;
 border-radius: 1px;
 }
+
+#btnSearch {
+position: relative; 
+right:30px;
+
+}
  
  
 #chatting {
@@ -135,14 +141,21 @@ border-radius: 1px;
 
 <c:import url="/WEB-INF/views/layout/NoticePaging.jsp" />
 
-<div class="form-inline text-center" style="margin-bottom:200px;">
-<select class="form-control form-control-sm" name="select" id="select">
+<div class="form-inline text-center" style="margin-bottom:200px; position:relative; left:630px;">
+<select class="custom-select" name="select" id="select">
 	<option value="title" selected>제목</option>
 	<option value="content">내용</option>
 </select>
+	<div class="col-2">
 	<input class="form-control" type="text" id="search" />
-	<button id="btnSearch" class="btn">검색</button>
+	</div>
+	
+	<input type="button" id="btnSearch" class="btn btn-primary" value="검색"/>
+<!-- 	<button id="btnSearch" class="btn">검색</button> -->
+	
 </div> 
+
+<
 
 
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>
