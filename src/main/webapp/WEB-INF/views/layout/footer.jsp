@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div id="footer_infor">
+        <div id="footer_infor" style="width:1200px; margin-left:50px;">
             <div class="container">
                 <div class="row">
                     <div class="footer_infor">
@@ -34,7 +34,7 @@
                             <li><a href="#">윤리경영</a></li>
                         </ul>
                         <address>
-                            <p>서울특별시 노원구 월계2동 <br><span class="bar2">대표자명 박재현</span> <br><span class="bar2">사업자등록번호 211-86-59478</span> 
+                            <p>서울특별시 노원구 월계2동 <br><span class="bar2">대표자명 : 강민규, 강현지, 김영현, 박재현, 석진엽</span> <br><span class="bar2">사업자등록번호 211-86-59478</span> 
                             	통신판매업신고번호 제 833호</p>
                             <p>Copyright 2019 by kyungdongHighSchoolGerrard Inc. All right reserved</p>
                         </address>

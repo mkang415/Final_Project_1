@@ -37,7 +37,7 @@
 .header h1 strong img {width: 126px;}
 .header .nav {float: right; margin-top:7px;}
 .header .nav ul {border-left:0;}
-.header .nav ul li {float: left; width: 105px; text-align: center; border-right: 0;}
+.header .nav ul li {float: left; width: 100px; text-align: center; border-right: 0;}
 .header .nav ul li a {display: block; padding: 19px 10px; font-size: 16px; font-weight: 700; color: #444;}
 .header .nav ul li a:link {text-decoration: none;}
 
@@ -183,11 +183,11 @@ body.modal_on {overflow: hidden;}
 .footer_infor {padding: 50px 0; width: 80%;}
 .footer_infor h2 img {width: 150px;}
 .footer_infor ul {padding: 15px 0;}
-.footer_infor li {position: relative; display: inline; padding-right: 16px; white-space: nowrap;}
+.footer_infor li {position: relative; display: inline; padding-right: 16px; white-space: nowrap; font-size: 13px;}
 .footer_infor li:after {content: ''; position: absolute; right: 5px; top: 5px; width: 1px; height: 11px; background: #8f8f8f;}
 .footer_infor li:last-child:after {width: 0; height: 0;}
 .footer_infor li a {color: #8f8f8f;}
-.footer_infor address p {color: #8f8f8f; padding-bottom: 15px;}
+.footer_infor address p {color: #8f8f8f; padding-bottom: 15px; font-size:13px;}
 
 /* 고객센터 */
 .service {overflow:hidden; height:385px;}
