@@ -255,6 +255,35 @@ img {
 
 }
 
+#modal_delete {
+	display: none;
+	position:relative;
+	width:100%;
+	height:100%;
+	z-index:1;
+}
+
+#modal_delete .modal_content {
+	position: fixed;
+	top: 15%;
+	left: 20%;
+
+	width:auto;
+	padding:10px;
+	background:#fff;
+	border:2px solid #666;
+}
+
+#modal_delete .modal_layer {
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:rgba(0, 0, 0, 0.5);
+	z-index:-1;
+}
+
 </style>
 
 <div class="wrapper">
@@ -266,10 +295,11 @@ img {
 <div class="datebox"><fmt:formatDate value="${list.writtendate }" pattern="yyyy.MM.dd hh:mm"/></div>
 <div align="center" class="btnBox">
 	<button type="button" id="modifyBtn" onClick="location.href='/diary/modify?diary_idx=${list.diary_idx}'"></button>
-	<button type="button" id="deleteBtn" onClick="location.href='/diary/delete?diary_idx=${list.diary_idx}'"></button> 
+<%-- 	<button type="button" id="deleteBtn" onClick="location.href='/diary/delete?diary_idx=${list.diary_idx}'"></button>  --%>
+	<button type="button" id="deleteBtn" onClick="deleteModalOpen(${list.diary_idx})"></button> 
 </div>
 
-<div class="title"><h2>${list.title }</h2></div>
+<div class="title"><h1>${list.title }</h1></div>
 <div class="content">${list.content }</div>
 
 <div class="openDiv">
@@ -286,6 +316,40 @@ img {
 <div id="pagingbox" align="center">
 	<c:import url="/WEB-INF/views/layout/diaryPaging.jsp" />
 </div>
+
+<!-- Delete Modal -->
+<div id="modal_delete">
+
+	<div class="modal_content">
+
+	<div>
+	<p>정말 삭제하시겠습니까?</p>
+	<button type="button" onClick="deleteDiary()">확인</button>
+	<button type="button" onClick="deleteModalClose()">취소</button>
+	</div>
+	</div>
+
+	<div class="modal_layer"></div>
+        
+</div>
+<!--  -->
+
+
+<script type="text/javascript">
+
+	function deleteDiary(diary_idx) {
+		location.href='/diary/delete?diary_idx='+diary_idx;
+		deleteModalClose();
+	}
+
+	function deleteModalOpen() {
+		$("#modal_delete").attr("style", "display:block");
+	}
+
+	function deleteModalClose() {
+		$("#modal_delete").attr("style", "display:none");
+	}
+</script>
 
 </div>
 
