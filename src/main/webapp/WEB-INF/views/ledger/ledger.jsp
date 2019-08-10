@@ -54,9 +54,14 @@ $(document).ready(function() {
    position: absolute;
    right: 400px;
    height: 100px;
-   margin: auto;
+  
    text-align: center;
+   
 }
+
+
+
+
 </style>
 
 <style>
@@ -168,36 +173,48 @@ $(document).ready(function() {
 				</tr>
 			</c:forEach>
 		</table>
+		<br>
+		<table class="table table-striped" border="1"
+			style="text-align: center; width: 60%; margin-left: auto; margin-right: auto;">
+		
+			<tr>
+					
+					<th style="text-align: center; ">
+					결산 내역</th>
+					
+					<th style="text-align: center; ">
+					수입 : ${totalplus.getPlusM() }</th>
+				
+					<th style="text-align: center; ">
+					지출 : ${totalminus.getMinusM() }</th>
+				
+					<th style="text-align: center; ">
+					정산 : ${totalplus.getPlusM()+totalminus.getMinusM() }</th>
+					
+			</tr>
+		</table>
 	</div>
-	<h4>
-		<span style="text-align: center; margin-left: 1430px;">
-			수입 : ${totalplus.getPlusM() }</span>
-	</h4>
-	<h4>
-		<span style="text-align: center; margin-left: 1430px;">
-			지출 : ${totalminus.getMinusM() }</span>
-	</h4>
-	<br>
-	<h4>
-		<span style="text-align: center; margin-left: 1430px;">
-			결산 : ${totalplus.getPlusM()+totalminus.getMinusM() }</span>
-	</h4>
-	<br>
-
-
-	<div id="btnBox" style="margin-left: 500px">
+	
+	
+	
+	
+	
+	
+	
+<br>
+	<div id="btnBox">
 
 		<!-- Button trigger modal -->
-		<span><button type="button" data-toggle="modal" data-target="#ModalWrite">작성</button></span> 
+		<button type="button" data-toggle="modal" data-target="#ModalWrite">작성</button>
 	
 
-		&nbsp;&nbsp;&nbsp;&nbsp;
 
 	</div>
 
+<c:import url="/WEB-INF/views/layout/ledgerpaging.jsp"></c:import>
 
 
 
-	<c:import url="/WEB-INF/views/layout/ledgerpaging.jsp"></c:import>
+	
 
 <c:import url="/WEB-INF/views/layout/footer.jsp"/> 

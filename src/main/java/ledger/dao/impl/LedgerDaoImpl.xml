@@ -12,7 +12,7 @@
 	 resultType="int">
 		SELECT count(*) FROM LEDGER
 		WHERE member_idx = #{member_idx}
-		<if test="datepicker !=null and datepicker2 !=null">
+		<if test="datepicker !=null and datepicker2 !=null and datepicker !='' and datepicker2 !=''">
 	
 	 AND writtendate <![CDATA[ >= ]]> trunc(to_date(#{datepicker})) and writtendate <![CDATA[ < ]]> trunc(to_date(#{datepicker2}))+1
 
@@ -28,7 +28,7 @@
 	 SELECT ledger_idx, member_idx, item, plusM, minusM, writtendate
 	 FROM ledger
 	 WHERE member_idx = #{member_idx}
-	<if test="datepicker !=null and datepicker2 !=null">
+	<if test="datepicker !=null and datepicker2 !=null and datepicker !='' and datepicker2 !=''">
 	
 	 AND writtendate <![CDATA[ >= ]]> trunc(to_date(#{datepicker})) and writtendate <![CDATA[ < ]]> trunc(to_date(#{datepicker2}))+1
 
@@ -47,7 +47,7 @@
 	 	SELECT to_char(writtendate,'') "writtendate", sum(plusm) "plusM"
 		FROM ledger
         where member_idx = #{member_idx}
-        <if test="datepicker !=null and datepicker2 !=null">
+        <if test="datepicker !=null and datepicker2 !=null and datepicker !='' and datepicker2 !=''">
 	
 	 AND writtendate <![CDATA[ >= ]]> trunc(to_date(#{datepicker})) and writtendate <![CDATA[ < ]]> trunc(to_date(#{datepicker2}))+1
 
@@ -61,7 +61,7 @@
 	 	SELECT to_char(writtendate,'') "writtendate", sum(minusm) "minusM"
 		FROM ledger
         where member_idx = #{member_idx}
-        <if test="datepicker !=null and datepicker2 !=null">
+        <if test="datepicker !=null and datepicker2 !=null and datepicker !='' and datepicker2 !=''">
 	
 	 AND writtendate <![CDATA[ >= ]]> trunc(to_date(#{datepicker})) and writtendate <![CDATA[ < ]]> trunc(to_date(#{datepicker2}))+1
 
