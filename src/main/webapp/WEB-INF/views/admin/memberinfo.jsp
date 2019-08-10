@@ -27,6 +27,17 @@
 	text-align: center;
 }
 
+#over {
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 1; 
+-webkit-box-orient: vertical;
+word-wrap:break-word; 
+height: 30px; 
+white-space: nowrap;
+}
+
 </style>
 
 <h1 style="text-align: center; "><a href="/admin/member">회원 상세정보</a></h1>
@@ -65,24 +76,22 @@
 <h1 style="text-align: center; ">작성글 목록</h1>
 <br>
 <table class="table table-striped" border="1" style="text-align: center;
- 	width: 60%; margin-left: auto; margin-right: auto;">
+ 	width: 60%; table-layout:fixed; margin-left: auto; margin-right: auto;">
 
 	<tr>
 	
-	<th style="text-align: center;">글번호</th>
-	<th style="text-align: center;">제목</th>
-	<th style="text-align: center;">내용</th>
-	<th style="text-align: center;">작성자</th>
-	<th style="text-align: center;">조회수</th>
-	<th style="text-align: center;">작성일</th>
+	<th style="text-align: center; width: 10%;">글번호</th>
+	<th style="text-align: center; width: 45%;">제목</th>
+	<th style="text-align: center; width: 15%;">작성자</th>
+	<th style="text-align: center; width: 10%;">조회수</th>
+	<th style="text-align: center; width: 20%;">작성일</th>
 	</tr>
 
 	<c:forEach items="${list }" var="i">
 		<tr>
 			
 			<td>${i.BOARD_IDX }</td>
-			<td><a href="/admin/boardview?board_idx=${i.BOARD_IDX }">${i.TITLE }</a></td>
-			<td>${i.CONTENT }</td>
+			<td><div id="over"><a href="/admin/boardview?board_idx=${i.BOARD_IDX }">${i.TITLE }</a></div></td>
 			<td>${i.NICKNAME }</td>
 			<td>${i.HIT }</td>
 			<td>${i.WRITTENDATE }</td>

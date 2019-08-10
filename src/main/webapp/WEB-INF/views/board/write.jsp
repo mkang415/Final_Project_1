@@ -76,6 +76,7 @@
 </form>
 
 <script>
+var mainImage = "none";
 	$('#summernote').summernote({
 		height: 300,
 	  	minHeight: null,
@@ -107,7 +108,7 @@
 	        success: function(url) {
 
 	        	$(el).summernote('editor.insertImage', "\\resources\\boardimg\\"+url);
-	        	$('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+	        	$('#imageBoard > ul').append('<li><img style= "width: 480px;" src="'+url+'"/></li>');
 
 	        	getImage(url);
 	        }
@@ -115,19 +116,36 @@
 	}
 	
 	function getImage(url){
+		
 		$.ajax({
 			type : 'POST',
 			url : "/board/getimg",
 			dataType : "html",
-			data : {"storename" : url},
+			data : {"storename" : url, "mainImg" : mainImage},
 			success: function(data) {
-				console.log(data);
+				if(mainImage == "none") {
+					console.log("성공");
+					console.log(url);
+					mainImage = url;
+				} else {
+/* 					console.log(mainImage); */
+				}
 				$('#preveal').append(data);
 			}
 		});
 
 	}
-	
+
+	function setImg(image) {
+		$.ajax({
+			type : 'POST',
+			url : "/board/setimg",
+			data : {"mainImg" : image},
+			success: function(data) {
+				mainImage = data;
+			}
+		});
+	}
 </script>
 
 </body>

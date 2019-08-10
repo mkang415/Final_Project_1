@@ -2,29 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 
-<!-- jQuery 2.2.4 -->
-<script type="text/javascript"
- src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<c:import url="/WEB-INF/views/layout/header.jsp"/> 
 
-<!-- Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
 table, th, tr {
 	text-align: center;
-}
-
-.container {
-	border-left: 1px solid #eee;
-	border-right: 1px solid #eee;
 }
 </style>
 
@@ -34,9 +18,11 @@ $(document).ready(function(){
 		location.href="/board/epillist?search="+$("#search").val();
 	});
 });
+
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
 </script>
-</head>
-<body>
+
 <h1>게시판 리스트</h1>
 <hr>
 <table class="table table-striped table hover table-condensed">
@@ -48,17 +34,46 @@ $(document).ready(function(){
 		<th style="width : 20%">작성일</th>
 	</tr>
 
-<c:forEach items="${epilList}" var = "i">
+<c:forEach items="${epilList}" var = "i" >
+<fmt:formatDate value="${i.WRITTENDATE}" pattern="yyyy-MM-dd" var="write_dt"/>
 	<tr>
-		<td>${i.RECOMMEND}</td>
-		<td><a href="/board/view?brdidx=${i.BOARD_IDX}">${i.TITLE}</a></td>
+		<td>
+			<c:choose>
+				<c:when test="${i.RECOMMEND==0 }"><span class="badge badge-light">${i.RECOMMEND}</span></c:when>
+				<c:when test="${i.RECOMMEND<=10}"><span class="badge badge-primary">${i.RECOMMEND}</span></c:when>
+				<c:when test="${i.RECOMMEND>10}"><span class="badge badge-danger">${i.RECOMMEND}</span></c:when>
+			</c:choose>
+		</td>
+ 		<td><a href="/board/view?brdidx=${i.BOARD_IDX}"> ${i.TITLE} <span class="badge badge-light">${i.CNTREPLY}</span></a></td>
 		<td>${i.NICKNAME}</td>
-		<td>${i.HIT}</td>
-		<td><fmt:formatDate value="${i.WRITTENDATE}" pattern="yyyy-MM-dd" /></td>
+		<td>
+			<c:choose>
+				<c:when test="${i.HIT<=100 }"><span class="badge badge-light">${i.HIT}</span></c:when>
+				<c:when test="${i.HIT<=1000}"><span class="badge badge-secondary">${i.HIT}</span></c:when>
+				<c:when test="${i.HIT>1000}"><span class="badge badge-danger">${i.HIT}</span></c:when>
+			</c:choose>
+		</td>
+		<td>
+			<c:choose>
+				<c:when test="${today <= write_dt }"><fmt:formatDate value="${i.WRITTENDATE}" pattern="HH:mm:ss"/></c:when>
+				<c:when test="${today > write_dt }"><fmt:formatDate value="${i.WRITTENDATE}" pattern="yyyy-MM-dd"/></c:when>
+			</c:choose>
+		</td>
 	</tr>
 </c:forEach>
 </table>
 <c:import url="/WEB-INF/views/layout/epilPaging.jsp"></c:import>
+
+<div class="form-row" style="margin: auto;">
+	<div class="col-5">
+	</div>
+	<div class="col-2">
+	<input class="form-control" type="text" id="search"/>
+	</div>
+	<div class="col">
+	<input type="button" id="btnSearch" class="btn btn-primary" value="검색"/>
+	</div>
+</div>
 
 <div>
 <c:if test="${login }">
@@ -68,9 +83,4 @@ ${nick }<br>
 <button type="button" onclick="location.href='/main'">메인</button>
 </div>
 
-<div class="form-inline text-center">
-	<input class="form-control" type="text" id="search" />
-	<button id="btnSearch" class="btn">검색</button>
-</div> 
-</body>
-</html>
+<c:import url="/WEB-INF/views/layout/footer.jsp"/>

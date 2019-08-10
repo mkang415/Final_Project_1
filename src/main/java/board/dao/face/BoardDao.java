@@ -44,4 +44,6 @@ public interface BoardDao {
 	void deleteImg(int board_idx);
 
 	void delnullimg(int member_idx);
+
+	int getmemidx(int board_idx);
 }

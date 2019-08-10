@@ -7,7 +7,7 @@
   	<!-- 첫 페이지 아니라면 처음 버튼과 이전 페이지 버튼 활성화-->
   	<c:if test="${LP.curPage ne 1 }">
   		<li class="page-item"><a class="page-link" href="/ledger/ledger?datepicker=${ledger.getDatepicker() }&datepicker2=${ledger.getDatepicker2()}"><span>처음</span></a></li>
-  		<li class="page-item"><a class="page-link" href="ledger/ledger?curPage=${LP.curPage-1 }&datepicker=${ledger.getDatepicker() }&datepicker2=${ledger.getDatepicker2()}"><span>&laquo;</span></a>
+  		<li class="page-item"><a class="page-link" href="/ledger/ledger?curPage=${LP.curPage-1 }&datepicker=${ledger.getDatepicker() }&datepicker2=${ledger.getDatepicker2()}"><span>&laquo;</span></a>
   	</c:if>
   	
   	<!-- 첫 페이지일 경우 처음 버튼과 이전 페이지 버튼 비활성화 -->
