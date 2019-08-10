@@ -167,4 +167,32 @@
 	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
 	</select>
 
+	<select id="selectCntAll5" resultType="int">
+		SELECT count(*) FROM report
+		ORDER BY report_idx
+	</select>
+	
+	<select id="selectAll5"
+	 parameterType="util.AdminReportPaging"
+	 resultType="hashmap">
+	 SELECT * FROM (
+	 SELECT rownum rnum, B.* FROM (
+	select report_idx, report.content, member.nickname, board.title, viewcheck, report.writtendate, report.board_idx, report.member_idx
+	from report, member, board
+	where report.member_idx = member.member_idx
+   and report.board_idx = board.board_idx
+	 ORDER BY report_idx DESC
+	 ) B
+	 ORDER BY rnum
+	 )
+	 WHERE rnum BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<update id="viewcheck"
+	 parameterType="int">
+	 	UPDATE REPORT
+	 	SET viewcheck = 1
+	 	WHERE report_idx = #{report_idx}
+	 </update>
+
 </mapper>

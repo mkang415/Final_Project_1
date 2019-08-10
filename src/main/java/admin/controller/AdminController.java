@@ -23,6 +23,7 @@ import util.AdminBoardPaging;
 import util.AdminMemberBanPaging;
 import util.AdminMemberInfoPaging;
 import util.AdminMemberPaging;
+import util.AdminReportPaging;
 
 @Controller
 public class AdminController {
@@ -147,6 +148,36 @@ public class AdminController {
 		// 회원 영구정지 페이지
 	}
 	
-	
+	@RequestMapping(value = "/interceptor/adminFail", method = RequestMethod.GET)
+	public void adminFail() {
+		logger.info("관리자 외 접근금지");
 		
+		// 관리자페이지 접근제한 인터셉터
+	}
+	
+	@RequestMapping(value="/admin/report", method=RequestMethod.GET)
+	public String reportlist(
+			@RequestParam(defaultValue = "1") int curPage,
+			Model model) {
+		
+		AdminReportPaging ARP = adminService.getcurPage5(curPage);
+		model.addAttribute("ARP", ARP);
+		
+		List<HashMap<String, Object>> list = adminService.select(ARP);
+		model.addAttribute("list", list);
+
+		return "/admin/report";
+		
+		// 회원신고목록 페이지
+	}
+	
+	@RequestMapping(value="/admin/viewcheck", method=RequestMethod.GET)
+	public String viewcheck(int report_idx) {
+		
+		adminService.viewcheck(report_idx);
+		
+		return "redirect:/admin/report";
+	}
+	
+	
 }

@@ -23,6 +23,7 @@ public interface MemberService {
 
 	public void update(Member member);
 
+
 	
 
 

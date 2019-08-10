@@ -81,10 +81,21 @@ function checkAll() {
 #btnBox {
    z-index: 1;
    position: absolute;
-   right: 400px;
+   right: 200px;
    height: 100px;
    margin: auto;
    text-align: center;
+}
+
+#over {
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 1; 
+-webkit-box-orient: vertical;
+word-wrap:break-word; 
+height: 30px; 
+white-space: nowrap;
 }
 
 </style>
@@ -96,33 +107,31 @@ function checkAll() {
 	<br>
 	
 	<table class="table table-striped" border="1" style="text-align: center;
- 	width: 1200px; margin: auto;">
+ 	width: 80%; table-layout:fixed; margin: auto;">
 	<tr>	
-	<th style="text-align: center;"><input type="checkbox" id="checkAll" onclick="checkAll();"/></th>
-	<th style="text-align: center;">글번호</th>
-	<th style="text-align: center;">제목</th>
-	<th style="text-align: center;">내용</th>
-	<th style="text-align: center;">작성자</th>
-	<th style="text-align: center;">조회수</th>
-	<th style="text-align: center;">작성일</th>
+	<th style="text-align: center; width: 5%;"><input type="checkbox" id="checkAll" onclick="checkAll();"/></th>
+	<th style="text-align: center; width: 10%;">글번호</th>
+	<th style="text-align: center; width: 40%;">제목</th>
+	<th style="text-align: center; width: 10%;">작성자</th>
+	<th style="text-align: center; width: 10%;">조회수</th>
+	<th style="text-align: center; width: 25%;">작성일</th>
 	</tr>
 	
 	<c:forEach items="${list }" var="i">
 		<tr>
 			<td><input type="checkbox" name="checkRow" value="${i.BOARD_IDX }"/></td>
 			<td>${i.BOARD_IDX }</td>
-			<td><a href="/admin/boardview?board_idx=${i.BOARD_IDX }">${i.TITLE }</a></td>
-			<td>${i.CONTENT }</td>
+			<td><div id="over"><a href="/admin/boardview?board_idx=${i.BOARD_IDX }">${i.TITLE }</a></div></td>
 			<td>${i.NICKNAME }</td>
 			<td>${i.HIT }</td>
 			<td><fmt:formatDate value="${i.WRITTENDATE }" pattern="yy-MM-dd HH:mm:ss" /></td>
 		</tr>
 	</c:forEach>
 	</table>
-<h4><span style="text-align: center; margin-left:1430px;">total : ${ABP.totalCount }</span></h4>
+<h4><span style="text-align: center; margin-left:1410px;">total : ${ABP.totalCount }</span></h4>
 
 
-<div id="btnBox" style="margin-left: 300px;">
+<div id="btnBox" style="margin-left: 500px;">
 
 
 <button id="btnDelete" style = "color: red;">삭제</button>
