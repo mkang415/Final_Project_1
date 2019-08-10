@@ -1,7 +1,5 @@
 package board.controller;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,6 +81,14 @@ public class BoardController {
 		//	게시판 리스트 저장
 		List<HashMap<String, Object>> epilBoardList = boardService.getEpilList(boardPaging);
 		
+		String board_idx = "0";
+		 for (int i = 0; i < epilBoardList.size(); i++) {
+			logger.info("i: "+i);
+			board_idx = epilBoardList.get(i).get("BOARD_IDX").toString();
+			epilBoardList.get(i).put("CNTREPLY", replyService.getCntReply(board_idx));
+			epilBoardList.get(i).put("RECOMMEND", boardService.getRecoCnt(board_idx));
+		 }
+		
 		//	페이징 및 리스트 전달
 		model.addAttribute("epilPaging", boardPaging);
 		model.addAttribute("epilList", epilBoardList);	
@@ -104,6 +110,14 @@ public class BoardController {
 		
 		//	게시판 리스트 저장
 		List<HashMap<String, Object>> photoBoardList = boardService.getPhotoList(boardPaging);
+		
+		String board_idx = "0";
+		 for (int i = 0; i < photoBoardList.size(); i++) {
+			logger.info("i: "+i);
+			board_idx = photoBoardList.get(i).get("BOARD_IDX").toString();
+			photoBoardList.get(i).put("CNTREPLY", replyService.getCntReply(board_idx));
+			photoBoardList.get(i).put("RECOMMEND", boardService.getRecoCnt(board_idx));
+		 }
 		
 		//	페이징 및 리스트 전달
 		model.addAttribute("photoPaging", boardPaging);
@@ -146,7 +160,6 @@ public class BoardController {
 		board.setDivide(divide);
 
 		model.addAttribute("board", board);
-
 	}
 	
 	//	작성한 글 저장
@@ -245,13 +258,26 @@ public class BoardController {
 	@RequestMapping(value="/board/getimg", method=RequestMethod.POST)
 	public String getImage(
 			Model model,
-			String storename
+			String storename,
+			String mainImg
 			) {
 		logger.info("getimage");
+		logger.info(mainImg);
 		Image image= boardService.getImage(storename);
 		logger.info(image.toString());
 		model.addAttribute("image", image);
+		model.addAttribute("mainImage", mainImg);
 		return "board/imagelist";
+	}
+	
+	//	이미지 데이터 보내기
+	@RequestMapping(value="/board/setimg", method=RequestMethod.POST)
+	public  @ResponseBody String setImage(
+
+			String mainImg
+			) {
+		
+		return mainImg;
 	}
 	
 	//	글 작성 취소시 업로드한 이미지 삭제.
@@ -265,11 +291,11 @@ public class BoardController {
 		boardService.delnullimg(session);
 
 		if(divide==1) {
-			return "/board/freelist";
+			return "redirect: /board/freelist";
 		} else if (divide==2) {
-			return "/board/epillist";
+			return "redirect: /board/epillist";
 		} else if (divide==3) {
-			return "/board/photolist";
+			return "redirect: /board/photolist";
 		}
 		return "redirect: main";
 	}
@@ -292,8 +318,17 @@ public class BoardController {
 		
 		//	추천 여부 확인하여 반환
 		boolean result = boardService.checkReco(board_idx, session);
+		int writer = boardService.getmemidx(board_idx);
+		Board freeView = new Board();
+		freeView.setMember_idx(writer);
+		Boolean checkId = boardService.checkId(session, freeView);
+		
+		//	작성자인지 확인하여 전달.
+		model.addAttribute("checkId", checkId);
 		
 		model.addAttribute("result", result);
+		
+		model.addAttribute("board_idx", board_idx);
 		
 		return "board/recommend";
 	

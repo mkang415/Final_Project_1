@@ -277,4 +277,11 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	
+	@Override
+	public int getmemidx(int board_idx) {
+		
+		return boardDao.getmemidx(board_idx);
+	}
+
 }

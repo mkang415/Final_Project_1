@@ -82,7 +82,7 @@
 	 resultType="hashmap">
 		select * from (
 			select rownum rnum, B.* from (
-				select board_idx, title, member.nickname, hit, writtendate
+				select board_idx, title, member.nickname, hit, writtendate, content, mainimage
 				from board, member
 				where board.member_idx = member.member_idx and divide = 3
 				<if test="search != null and search != ''">
@@ -117,8 +117,8 @@
 	  	<selectKey keyProperty="board_idx" order="BEFORE" resultType="int">
 	  		SELECT board_seq.nextval FROM dual
 	  	</selectKey>
-	  	insert into board(board_idx, title, content, member_idx, divide) 
-	 	values (#{board_idx}, #{title}, #{content}, #{member_idx}, #{divide})
+	  	insert into board(board_idx, title, content, member_idx, divide, mainimage) 
+	 	values (#{board_idx}, #{title}, #{content}, #{member_idx}, #{divide}, #{mainimage})
 	</insert>
 
 	<!-- 수정할 게시글 DB에서 불러오기 -->
@@ -181,4 +181,11 @@
 		where member_idx = #{member_idx}
 		and board_idx is null
 	</delete>
+	
+	<select id="getmemidx"
+	 parameterType="int"
+	 resultType="int">
+		select member_idx from board
+		where board_idx = #{board_idx}
+	</select>
 </mapper>

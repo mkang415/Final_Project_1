@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DOCTYPE -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="report.dao.face.ReportDao">
+
+	<insert id="boardReport"
+	 parameterType="dto.Report">
+		insert into report(report_idx, content, member_idx, board_idx)
+		values (report_seq.nextval, #{content}, #{member_idx}, #{board_idx})
+	</insert>
+
+	<select id="getMemberidx"
+	 parameterType="dto.Report"
+	 resultType="int">
+		select member_idx from board
+		where board_idx = #{board_idx}
+	</select>
+
+</mapper>

@@ -12,12 +12,21 @@ public class Board {
 	private int hit;
 	private int divide;
 	private Date writtendate;
+	private String mainimage;
 	
 	@Override
 	public String toString() {
 		return "Board [board_idx=" + board_idx + ", title=" + title + ", content=" + content + ", member_idx="
 				+ member_idx + ", nickname=" + nickname + ", email=" + email + ", hit=" + hit + ", divide=" + divide
-				+ ", writtendate=" + writtendate + "]";
+				+ ", writtendate=" + writtendate + ", mainimage=" + mainimage + "]";
+	}
+	
+	public String getMainimage() {
+		return mainimage;
+	}
+
+	public void setMainimage(String mainimage) {
+		this.mainimage = mainimage;
 	}
 
 	public int getBoard_idx() {
