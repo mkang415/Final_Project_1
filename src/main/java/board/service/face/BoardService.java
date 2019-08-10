@@ -57,4 +57,6 @@ public interface BoardService {
 
 	void reco(Recommend recommend);
 
+	int getmemidx(int board_idx);
+
 }

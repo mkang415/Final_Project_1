@@ -112,7 +112,7 @@
 			${m.TITLE }
 			<button type="button" onclick="deleteMemo('${m.MEMO_IDX}')">삭제</button>
   		</div>
-  		<div class="card-body" data-toggle="modal" data-target="#impModal${m.MEMO_IDX}">
+  		<div class="card-body" data-toggle="modal" data-target="#modal${m.MEMO_IDX}">
     		<p class="card-text">${m.MEMO }</p>
   		</div>
 	</div>
@@ -127,7 +127,7 @@
 			${m.TITLE }
 			<button type="button" onclick="deleteMemo('${m.MEMO_IDX}')">삭제</button>
   		</div>
-  		<div class="card-body" data-toggle="modal" data-target="#impModal${m.MEMO_IDX}">
+  		<div class="card-body" style="height: 338px;" data-toggle="modal" data-target="#modal${m.MEMO_IDX}">
     		<p class="card-text">${m.MEMO }</p>
   		</div>
 	</div>
