@@ -15,6 +15,7 @@ import util.AdminBoardPaging;
 import util.AdminMemberBanPaging;
 import util.AdminMemberInfoPaging;
 import util.AdminMemberPaging;
+import util.AdminReportPaging;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -151,6 +152,32 @@ public class AdminServiceImpl implements AdminService{
 		
 		// 해당 회원 정보변경 memberclass 2-> 1 
 		
+	}
+
+	@Override
+	public AdminReportPaging getcurPage5(int curPage) {
+
+		int totalCount = adminDao.selectCntAll5();
+		
+		AdminReportPaging ARP = new AdminReportPaging(totalCount, curPage);
+		
+		return ARP;
+		
+		// 회원 게시글신고 페이지
+	}
+
+	@Override
+	public List<HashMap<String, Object>> select(AdminReportPaging ARP) {
+		
+		return adminDao.selectAll5(ARP);
+		
+		// 회원 게시글신고 리스트
+	}
+
+	@Override
+	public void viewcheck(int report_idx) {
+		
+		adminDao.viewcheck(report_idx);
 	}
 
 	

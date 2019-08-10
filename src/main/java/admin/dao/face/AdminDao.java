@@ -9,6 +9,7 @@ import dto.Member;
 import util.AdminBoardPaging;
 import util.AdminMemberBanPaging;
 import util.AdminMemberPaging;
+import util.AdminReportPaging;
 
 public interface AdminDao {
 
@@ -59,8 +60,16 @@ public interface AdminDao {
 	// 회원 벤 영구정지 리스트
 
 	void noban(int member_idx);
+
 	
+	int selectCntAll5();
+	// 회원 게시글신고 페이징
 	
+	List<HashMap<String, Object>> selectAll5(AdminReportPaging aRP);
+	// 회원 게시글신고 리스트
+
+	void viewcheck(int report_idx);
+	// 확인/미확인 변화
 	
 	
 

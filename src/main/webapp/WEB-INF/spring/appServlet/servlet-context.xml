@@ -38,6 +38,18 @@
          <exclude-mapping path="/interceptor/fail"/>
          <beans:bean class="interceptor.ProjectInterceptor" />
       </interceptor>
+      
+       <interceptor>
+         <mapping path="/admin/**" />
+         <exclude-mapping path="/interceptor/fail"/>
+         <beans:bean class="interceptor.ProjectInterceptor" />
+      </interceptor>
+      
+      <interceptor>
+      	<mapping path="/admin/**"/>
+      	<exclude-mapping path="interceptor/fail"/>
+      	<beans:bean class="interceptor.AdminInterceptor"/>
+      </interceptor>
    
    </interceptors>
 
