@@ -9,11 +9,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/WEB-INF/views/layout/header.jsp"/>     
 
-<script src="js/html2canvas.js"></script>
-
-<script type="text/javascript"
-src="http://code.jquery.com/jquery-2.2.4.min.js"></script>   
-    
 <style>
 #bt {
 text-aling : right;
@@ -23,9 +18,9 @@ margin-right : 10;
 
 #background {
 background-image : url('/resources/img/back5.jpg');
-position: absolute;
+position: relative;
 width:100%;
-height:120%;
+height:140%;
 background-size: cover;
 background-position: center center;
 
@@ -175,14 +170,16 @@ for(int i = 0;i < (7 - (dayOfWeek + lastDay - 1) % 7) % 7; i++){
 
 
 <br>
-<br>
+
 <div id="all" style="text-align:center">
 <a href="/schedule/list">
 <button type="button" class="btn btn-success" >
 모든일정보러가기</button></a>
+
 </div>
+<br>
 </div>
 
-<br>
+
 
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>
