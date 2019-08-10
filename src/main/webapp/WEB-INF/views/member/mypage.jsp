@@ -25,6 +25,7 @@ background-position: center center;
 
 #com {
 position: absolute;
+min-width : 1200px;
 }
 
 #cal {
@@ -36,16 +37,16 @@ left: 25.5%;
 #caltext{
 position: absolute;
 top: 8.8%;
-left: 25.8%;
+left: 25.6%;
 }
 
-#memo {
+#free {
 position: absolute;
 top: 17.3%;
 left: 26.2%;
 }
 
-#memotext {
+#freetext {
 position: absolute;
 top: 22%;
 left: 27%;
@@ -82,12 +83,12 @@ font-size: medium;
 
 #home {
 position: absolute;
-top: 48.8%;
-left: 25.9%;
+top: 73%;
+left: 5.7%;
 }
 
 
-#d, #h, #a, #di {
+#d, #h, #a, #di, #q, #m {
 text-decoration:none 
 }
 
@@ -102,7 +103,7 @@ left: 30%;
 position : absolute;
 top:11%;
 text-align: center;
-left: 37%;
+left: 35%;
 }
 
 div#incom {
@@ -118,7 +119,7 @@ table, th {
 font-size: large;	
 }
 
-#mm {
+#ff {
  font-size: medium;
 }
 
@@ -129,18 +130,128 @@ left: 70%;
 z-index: 1;
 }
 
+#qa {
+position: absolute;
+top: 70%;
+right: 8.3%
+}
+
+#qq {
+position: absolute;
+top: 83%;
+right: 8.8%
+}
+
+
+#memo {
+position: absolute;
+top: 48.8%;
+left: 25.9%;
+}
+
+#mm {
+position: absolute;
+top: 48.7%;
+left: 27%;
+
+}
+
+#member{
+position: absolute;
+top: 14.8%;
+left: 4.3%;
+z-index: 1;
+}
+
+
+#modal {
+  display: none;
+  position:absolute;
+  width:100%;
+  height:100%;
+  z-index:1;
+}
+
+#modal h2 {
+  margin:0;   
+}
+
+#modal button {
+  display:inline-block;
+  width:100px;
+  text-align: center;
+}
+
+#modal .modal_content {
+  width:600px;
+  margin:100px auto;
+  padding:20px 10px;
+  background: 	#FFDAB9;
+  border:2px solid #666;
+}
+
+#modal .modal_layer {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0, 0, 0, 0.5);
+  z-index:-1;
+}  
+
+#modal_table {
+	display:table;
+	position:relative;
+	width:100%;
+	height:200px;
+	border:2px solid #666;
+}
+#rrr {
+color: red;
+}
+
 </style>
+
 
 
 <div id="background">
 
 <div id="logout">
 <a href="/member/logout">
-<button type="button" class="btn btn-dark" >로그아웃</button></a>
+<button type="button" class="btn btn-dark">로그아웃</button></a>
+</div>
+
+<div id="member">
+<span><img src="/resources/img/modi.png" width="90px" height="90px"></span>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<span>
+<img id="modal_open_btn" src="/resources/img/drop.png" width="90px" height="90px">
+</span>
 </div>
 
 
-
+<div id="modal">
+   
+    <div class="modal_content" style="text-align: center">
+        <h2 id="rrr">
+        	정말로 탈퇴하시겠어요? </h2><br>
+        	<h2>모든 데이터가 날아갑니다! </h2>
+        
+       
+       <br><br>
+       <span style="text-align: cneter;"><a href="/member/delete">
+       <button type="button" class="btn btn-danger">확인</button></a></span>
+       &nbsp;&nbsp;&nbsp;&nbsp;
+	   <span><a href="/member/mypage">
+	   <button type="button" class="btn btn-primary">취소</button></a></span>
+	
+    </div>
+   
+ 	   <div class="modal_layer"></div>
+    
+</div>
 
 <div id="incom">
 
@@ -155,7 +266,7 @@ z-index: 1;
 <div id="caltext">
 <p id="ca">
 <a id="a" href="/schedule/calendar" style="color: #942894;">
-&nbsp;<%= cal.get(Calendar.YEAR) %>년
+&nbsp;&nbsp;<%= cal.get(Calendar.YEAR) %>년
 <br>
 &nbsp;<%= cal.get(Calendar.MONTH)+1 %>월
 <%= cal.get(Calendar.DATE) %>일
@@ -164,15 +275,19 @@ z-index: 1;
 
 
 
-<div id="memo">
+<div id="free">
+<a id="d" href="/board/freelist">
 <img src="/resources/img/folder.png"  width="70px" height="70px">
+</a>
 </div>
-<div id="memotext">
-<p id="mm"><a id="d" href="/memo/list" style="color:#8B5927;">게시판</a></p>
+<div id="freetext">
+<p id="ff"><a id="d" href="/board/freelist" style="color:#8B5927;">게시판</a></p>
 </div>
 
 <div id="vote"> 
+<a href="/ledger/ledger">
 <img src="/resources/img/wallet.png"  width="70px" height="70px">
+</a>
 </div>
 <div id="votetext">
 <p id="vv"><a id="d" href="/ledger/ledger" style="color: white;">가계부</a></p>
@@ -180,8 +295,20 @@ z-index: 1;
 
 
 <div id="home"><a href="/main">
-<img src="/resources/img/mainmain.png"  width="70px" height="70px"></a>
+<img src="/resources/img/mainmain.png"  width="100px" height="100px"></a>
 </div>
+
+
+<div id="memo">
+<a id="d" href="/memo/list">
+<img src="/resources/img/memo.png"  width="70px" height="70px">
+</a>
+</div>
+<div id="memotext">
+<p id="mm"><a id="m" href="/memo/list" style="color:white;">메모</a></p>
+</div>
+
+
 
 
 
@@ -198,8 +325,8 @@ z-index: 1;
 </div>
 
 
-<div id="diaryview" style="height:300px; overflow-y:scroll">
-<table>
+<div id="diaryview" style="height:310px; width:578px; overflow-y:scroll; overflow-x:scroll;">
+<table style="table-layout:fixed;">
 <tr >
 <td><h3><a href="/diary" id="di" style="color: #3e48ab">☞ 가장 최근에 작성하신 일기 입니다 ☜</a></h3></td>
 </tr>
@@ -216,14 +343,28 @@ z-index: 1;
 </tr>
 
 <tr>
-<td height="150px" width="500">${view.content }</td>
+<td height="150px" width="500px;">${view.content }</td>
 </tr>
 
 </table>
 </div> <!-- viewdiary -->
 
-
+<div id="qa"><a href="/freqna/list">
+<img src="/resources/img/qa.png"  width="90px" height="90px"></a>
+</div>
+<div id="qatext">
+<p id="qq"><a id="q" href="/freqna/list" style="color: #00008C;">질의응답</a></p>
+</div>
 
 </div> <!-- com end -->
 </div> <!-- incom end -->
 </div>
+<script>
+$("#modal_open_btn").click(function(){
+    $("#modal").attr("style", "display:block");
+});
+
+ $("#modal_close_btn").click(function(){
+    $("#modal").attr("style", "display:none");
+});     
+</script>

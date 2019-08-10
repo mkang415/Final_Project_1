@@ -84,7 +84,7 @@ public class CalendarUtil {
 				s += "<tr bgcolor='#FAC87D'>";
 				s += "<td>";
 				s += "<a href='caldetail?calendar_idx=" + dto.getCalendar_idx() + "'>";
-				s += "<font style='font-size:13; color:black'>";
+				s += "<font style='font-size:15px; color:black'>";
 				s += dot3(dto.getTitle());
 				s += "</font>";
 				s += "</a>";

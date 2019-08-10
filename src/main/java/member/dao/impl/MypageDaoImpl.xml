@@ -17,8 +17,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	group by member_idx)
     	order by diary_idx desc
     )<![CDATA[ where rownum <= 1 ]]>
-    
     </select>
+    
+    
+    <update id="delete"
+    	 parameterType="dto.Member">
+    	 update member set 
+    	 nickname = #{nickname},
+    	 email = #{email},
+    	 pw = #{pw}, 
+    	 memberClass=3
+    	 where member_idx=#{member_idx}
+    </update>
+    
+    
+    
+    <update id="upinfo"
+    parameterType="dto.Member">
+    	update member set
+    	nickname = #{nickname},
+    	pw = #{pw}
+    	where member_idx=#{member_idx}
+    </update>
+    
     
     
     

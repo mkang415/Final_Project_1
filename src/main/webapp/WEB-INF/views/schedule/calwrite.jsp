@@ -7,13 +7,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<!-- jquery -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<!-- bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<c:import url="/WEB-INF/views/layout/header.jsp"/> 
 
 <!-- summernote -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
@@ -70,10 +65,10 @@ $(document).ready(function() {
 
 #background {
 background-image : url('/resources/img/back4.jpg');
-position: absolute;
+position: relative;
 width:100%;
-height:100%;
-background-size: inherit;
+height:130%;
+background-size: cover;
 background-position: center center;
 
 }
@@ -105,8 +100,8 @@ background-position: center center;
 <col width="100"><col width="500">
 
 
-<tr >
-	<th style="text-align : center;"  class="table-Active"  >
+<tr  >
+	<th style="text-align : center;" class="table-active">
 	<label for="title">제목</label></th>
 	
 	<td style="text-align : center;">
@@ -115,7 +110,7 @@ background-position: center center;
 </tr>
 
 <tr>
-	<th style="text-align : center;"  class="table-Active" height="50"><label for="rdate">일정날짜</label></th>
+	<th style="text-align : center;"  class="table-active" height="50"><label for="rdate">일정날짜</label></th>
 	<td style="text-align : center;">
 <!-- 10년 전부터 5년 후 까지 보여주기 -->
 		<select name="year"> 
@@ -173,7 +168,7 @@ background-position: center center;
 		class="btn btn-danger" value="취소"/>
 		
 </form>
-
+<br><br>
 </div>
 </div>
 
@@ -217,3 +212,5 @@ var contents =  $('textarea[name="content"]').html($('#summernote').code());
 
 
 </script>
+
+<c:import url="/WEB-INF/views/layout/footer.jsp"/>
