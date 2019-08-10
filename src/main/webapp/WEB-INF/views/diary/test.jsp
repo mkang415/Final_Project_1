@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>diary page test</h1>
-<hr>
+
 </body>
 </html>

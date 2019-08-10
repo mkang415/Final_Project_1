@@ -4,9 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<!-- header -->
-<c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
-<!-- header -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 
 
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -167,7 +169,7 @@ function addMap() {
 #title {
 	margin-bottom: 10px;
 	border: white;
-	width: 100%;
+	width: 88%;
 	font-size: 2em;
 }
 
@@ -291,6 +293,85 @@ function addMap() {
 	position: relative;
 }
 
+
+div.note-editor.note-frame {
+	border: 0;
+}
+
+#submitbar {
+	width: 100%;
+	height: 70px;
+	background-color: rgb(245,245,245);
+	position: fixed;
+	bottom: 0;
+
+	
+}
+
+#butn {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #000000;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+	cursor: pointer;
+}
+
+#butn:hover {
+  background: #5e5e5e;
+  text-decoration: none;
+}
+
+#butnCancel {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #000000;
+  font-size: 15px;
+  background: #FFFFFF;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#butnCancel:hover {
+  background: #F0F0F0;
+  text-decoration: none;
+}
+
+#btnBox {
+	position: relative;
+	top: 15px;
+}
+
+#mapSaveBtn {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #000000;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+	cursor: pointer;
+}
+
+#mapSaveBtn:hover {
+  background: #5e5e5e;
+  text-decoration: none;
+}
+
+#mapBtnBox {
+	float: right;
+	margin-bottom: 10px;
+}
+
 </style>
 
 </head>
@@ -300,7 +381,7 @@ function addMap() {
 <div class="wrapper">
 
 
-<form action="/diary/modify" method="post">
+<form id="writeSubmit" action="/diary/modify" method="post">
 	<div id="write-field">
 	<div id="mapBtnDiv" onClick="mapBtnClick()">
 	Insert Map
@@ -311,13 +392,9 @@ function addMap() {
 			$("#modal_map").attr("style", "display:block");
 		}
 	</script>
-	<input type="text" id="title" name="title" placeholder="Title" value="${modifyDiary.title }"></input>
-	<textarea id="summernote" name="content" placeholder="Contents">${modifyDiary.content }</textarea>
+	<input type="text" id="title" name="title" placeholder="Insert Title" value="${modifyDiary.title }"></input>
+	<textarea id="summernote" name="content" placeholder="Content">${modifyDiary.content }</textarea>
 	<input type="hidden" name="diary_idx" value="${modifyDiary.diary_idx }"></input>
-	</div>
-
-	<div id="btnBox" align="center">
-	<button>작성</button> <button type="button" onClick="history.go(-1)">취소</button>
 	</div>
 	
 </form>
@@ -337,11 +414,11 @@ function addMap() {
 		<div id="map" style="width:400px;height:400px;"></div>
 		<div id="placeinfo"></div>
 	</div>
-	<div>
-		<button type="button" onClick="addMap()">저장</button>
-		
 
+	<div id="mapBtnBox">
+		<button id="mapSaveBtn" type="button" onClick="addMap()">Insert Map</button>
 	</div>
+	
 	</div>
 
 
@@ -349,6 +426,13 @@ function addMap() {
         
 </div>
 
+
+</div>
+
+<div id="submitbar">
+	<div id="btnBox" align="center">
+	<button id="butn" onClick="writeSubmit()">Submit</button> <button id="butnCancel" type="button" onClick="history.go(-1)">Go Back</button>
+	</div>
 </div>
 
 <script type="text/javascript">
@@ -358,9 +442,31 @@ function addMap() {
 </script>
 
 <script type="text/javascript">
+
+function writeSubmit() {
+
+	console.log($("#title").val);
+
+	console.log($("#summernote").val);
+	
+	if($("#title").val()!=null && $("#title").val()!=''
+			&& $("#summernote").val()!=null && $("#summernote").val()!='') {
+		
+		$("#writeSubmit").submit();
+		
+	} else {
+		
+		alert("제목 또는 내용을 입력해주세요.");
+	}
+	
+}
+
+</script>
+
+<script type="text/javascript">
 $(document).ready(function() {
 	$('#summernote').summernote({
-		height: 500,
+		height: 550,
 		minHeight: null,
 		maxHeight: null,
 		placeholder: "Content",
@@ -400,5 +506,5 @@ $(document).ready(function() {
 </script>
 
 
-<!-- footer -->
-<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
+</body>
+</html>

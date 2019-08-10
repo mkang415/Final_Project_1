@@ -10,7 +10,7 @@
 
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
-<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script> -->
 <script type="text/javascript">
 
 window.onload = function() {
@@ -82,15 +82,17 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
+
 }
 
 .wrapper {
 	margin: 0 auto;
 	padding: 0;
 	padding-top: 50px;
+	padding-bottom: 50px;
 	border: 0;
- 	background: #F1F1F1; 
-/*   	background-image: url('resources/diary/img/bggrey.jpg'); */
+/*  	background: #F1F1F1; */
+   	background-image: url('resources/diary/img/bg.jpg'); 
 	min-height: 100%;
 
 }
@@ -118,6 +120,7 @@ body, html {
 	min-height: 20em;
 	padding-left: 20px;
 	padding-right: 20px;
+	padding-top: 1em;
 	padding-bottom: 50px;
 	overflow: hidden;
 }
@@ -300,7 +303,7 @@ img {
 	<button type="button" id="deleteBtn" onClick="deleteModalOpen(${list.diary_idx})"></button> 
 </div>
 
-<div class="title"><h1>${list.title }</h1></div>
+<div class="title"><h2>${list.title }</h2></div>
 <div class="content">${list.content }</div>
 
 <div class="openDiv">
