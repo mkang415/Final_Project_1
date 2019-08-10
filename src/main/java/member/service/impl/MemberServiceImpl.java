@@ -26,17 +26,28 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public boolean login(Member member) {
-		//로그인 정보를 Count한 결과가 0보다 크면 로그인 성공
-		if( memberDao.selectCntLogin(member) > 0 && memberDao.selectAuth(member) > 0) 
+		// memberClass 가 0 이거나 1일 때 로그인
+		Member memberClass = new Member();
+		
+		
+		memberClass = memberDao.selectAuth(member);
+		
+		if(memberDao.selectCntLogin(member) > 0) {
+	
+		if(memberClass.getMemberClass()==0 || memberClass.getMemberClass()==1 ) 
 		{
 			return true;
 			
 		}
 		
+		}
+		
 		return false;
 
+		
+	
 	}
-
+	
 	@Override
 	public Member getMemberInfo(HttpSession session) {
 		String userid = (String)session.getAttribute("loginEmail");
@@ -121,6 +132,17 @@ public class MemberServiceImpl implements MemberService{
 		memberDao.pwUpdate(member);
 		
 	}
+
+	@Override
+	public boolean pwCheck(Member member) {
+		
+		if(memberDao.pwCheck(member) > 0) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 
 	
 

@@ -31,6 +31,12 @@ public class MemberController {
 	
 	}
 
+	@RequestMapping(value = "/member/nologin", method = RequestMethod.GET)
+	public void noLogin() {
+		logger.info("로그인실패");
+	
+	}
+
 
 
 	@RequestMapping(value = "/interceptor/noLogin", method = RequestMethod.GET)
@@ -63,7 +69,7 @@ public class MemberController {
 			logger.info("member_idx: "+loginMember.getMember_idx());
 
 			//리다이렉트 URL 지정
-			redirectUrl = "/main";
+			redirectUrl = "/member/mypage";
 			}
 
 			
@@ -202,6 +208,55 @@ public class MemberController {
 	}
 
 	
+	@RequestMapping(value = "/member/passcheck", method = RequestMethod.GET)
+	public void memberpassCheck()  
+	{
+		
+		logger.info("비밀번호 확인 페이지");
+		
+		
+		
+	}
+
+	
+	@RequestMapping(value = "/member/passcheck", method = RequestMethod.POST)
+	public String memberPassCheckProc(Member member)  {
+		
+		
+		logger.info("비밀번호확인 처리");
+		
+		memberService.pwCheck(member);
+
+		
+		
+		return "redirect: " + "/member/delete";
+		
+		
+	}
+	
+	@RequestMapping(value = "/member/delete", method = RequestMethod.GET)
+	public void memberDelete()  
+	{
+		
+		logger.info("회원탈퇴 페이지");
+		
+		
+		
+	}
+
+	
+	@RequestMapping(value = "/member/passcheck", method = RequestMethod.POST)
+	public String memberDeletekProc(Member member)  {
+		
+		
+		logger.info("비밀번호확인 처리");
+
+		memberService.update(member);
+		
+		return "redirect: " + "/member/delete";
+		
+		
+	}
 
 
 	

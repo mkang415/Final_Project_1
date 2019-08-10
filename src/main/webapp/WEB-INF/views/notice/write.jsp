@@ -53,8 +53,7 @@ $(document).ready(function(){
 
 </head>
 <body>
-<h1>글쓰기 폼</h1>
-<hr>
+
 
 <div class="container">
 <div>

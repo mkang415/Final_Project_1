@@ -23,6 +23,8 @@ public interface MemberService {
 
 	public void update(Member member);
 
+	public boolean pwCheck(Member member);
+
 	
 
 

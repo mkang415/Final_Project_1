@@ -16,7 +16,7 @@
     <title> 푸터 영역</title>   
 
     <!-- css -->
-    <link rel="stylesheet" href="/resources/assets/css/resetLayout.css">
+<!--     <link rel="stylesheet" href="/resources/assets/css/resetLayout.css"> -->
     <link rel="stylesheet" href="/resources/assets/css/headerCss.css">
     
     <!-- 파비콘 -->
@@ -44,6 +44,8 @@
     
     <!-- 제이쿼리 -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+   
+   
     
 	<!-- 부트스트랩4 -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -76,16 +78,15 @@ a:link{text-decoration: none;}
                         </a>    
                     </h1>
                     <nav id="mNav">
-                        <h2 class="ir_so">전체메뉴</h2>
-                        <a href="#" class="ham"><span></span></a>
+                    
                     </nav>
                     <nav class="nav" style="margin-top:10px; position:relative; left:505px;" >
                         <ul class="clearfix">
-                            <li><a href="/notice/list">공지사항</a></li>
-                            <li><a href="/member/mypage">마이페이지</a></li>
-                            <li><a href="/ledger/ledger">가계부</a></li>
-                            <li><a href="/diary">다이어리</a></li>
-                            <li><a href="/board/freeList">자유게시판</a></li>
+                            <li style=" list-style:none;"><a href="/notice/list">공지사항</a></li>
+                            <li style=" list-style:none;"><a href="/member/mypage">마이페이지</a></li>
+                            <li style=" list-style:none;"><a href="/ledger/ledger">가계부</a></li>
+                            <li style=" list-style:none;"><a href="/diary">다이어리</a></li>
+                            <li style=" list-style:none;"><a href="/board/freeList">자유게시판</a></li>
 
                             
                         </ul>

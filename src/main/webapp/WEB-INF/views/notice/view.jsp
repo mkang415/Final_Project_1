@@ -4,12 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     
 
-
+ 
 
 <!-- Bootstrap 3 -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+
+<c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 <script type="text/javascript">
 
@@ -225,8 +227,8 @@ margin-top: 50px;
 
 .filedown{
 	position:relative;
-	
-	left:830px;
+	font-size:12px;
+	left:870px;
 }
 #btnList {
 width: 80px;
@@ -258,7 +260,6 @@ border-radius: 1px;
 </style>
 
 
-<c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 
 
@@ -266,9 +267,9 @@ border-radius: 1px;
 
 
 <h1 class="pull-left">${notice.title }</h1><br><br><br><br>
-<h5 class="pull-left">작성일 : <fmt:formatDate value="${notice.writtendate }" pattern="yyyy-MM-dd" /></h5>
-<h5 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 작성자 : ${notice.writer}  </h5>
-<h5 class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 조회수 : ${notice.hit }  </h5>
+<h6 class="pull-left">작성일 : <fmt:formatDate value="${notice.writtendate }" pattern="yyyy-MM-dd" /></h6>
+<h6 class="pull-left"> 작성자 : ${notice.writer}  </h6>
+<h6 class="pull-left"> 조회수 : ${notice.hit }  </h6>
 <div class="text-right">	
 	<button id="btnList">목록</button>
 

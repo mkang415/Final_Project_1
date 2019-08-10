@@ -95,23 +95,30 @@ color: #fff;
 border: solid 2px;
 border-radius: 1px;
 } 
+
+#background{
+background-image: url("/resources/assets/img/carlist.jpg");
+height:800px;
+
+}
 </style>
 
 
 
 
+<div id="background">
 
 <c:if test="${login }">
 <div id="btnBox" >
-	<button style="position: absolute; float:right; left:1340px; top:230px;" id="btnWrite">글쓰기</button>
+	<button style="position: absolute; float:right; left:1500px; top:230px;" id="btnWrite">글쓰기</button>
 </div>
 </c:if>
 <div id="btnBox" >
-	<button style="position: absolute; float:right; left:1340px; top:290px;" id="chatting">1대1 채팅</button>
+	<button style="position: absolute; float:right; left:1500px; top:290px;" id="chatting">1대1 채팅</button>
 </div>
 
-<table class="table table-hover table-condensed" style="margin-top:300px; margin-left:240px;
- width:1200px;">
+<table class="table table-hover table-condensed" style= "margin-left:240px;
+ width:1200px; position:relative; top:120px; z-index: 1;" >
 
 <thead style="background: #337AB7; color: white;" >
 	<tr style="height: 50px;">
@@ -139,7 +146,7 @@ border-radius: 1px;
 
 <c:import url="/WEB-INF/views/layout/NoticePaging.jsp" />
 
-<div class="form-inline text-center" style="margin-bottom:200px; position:relative; left:630px;">
+<div class="form-inline text-center" style=" top:130px; position:relative; left:630px;">
 <select class="custom-select" name="select" id="select">
 	<option value="title" selected>제목</option>
 	<option value="content">내용</option>
@@ -153,7 +160,7 @@ border-radius: 1px;
 	
 </div> 
 
-<
+</div>
 
 
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>
