@@ -28,23 +28,26 @@ public class MemberServiceImpl implements MemberService{
 	public boolean login(Member member) {
 		// memberClass 가 0 이거나 1일 때 로그인
 		Member memberClass = new Member();
+		boolean possible = false;
 		
-		
-		memberClass = memberDao.selectAuth(member);
-		
-		member.setMemberClass(memberClass.getMemberClass());
-		
+				
 		if(memberDao.selectCntLogin(member) > 0) {
+
+			memberClass = memberDao.selectAuth(member);
+			member.setMemberClass(memberClass.getMemberClass());
 	
+			
 		if(memberClass.getMemberClass()==0 || memberClass.getMemberClass()==1 ) 
+
 		{
-			return true;
+			possible = true;
 			
 		}
 		
+		
 		}
 		
-		return false;
+		return possible;
 
 		
 	
