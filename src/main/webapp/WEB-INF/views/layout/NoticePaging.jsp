@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<nav aria-label="Page navigation example">
+<nav aria-label="Page navigation example" style="position:relative; top:120px;" >
 
 	<ul class="pagination justify-content-center">
 		<!-- 처음으로 가기 -->

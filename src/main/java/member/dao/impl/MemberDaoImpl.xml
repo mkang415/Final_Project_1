@@ -27,9 +27,9 @@
 
     	<select id="selectAuth"
   		parameterType="dto.Member"
-  		resultType="int">
+  		resultType="dto.Member">
   		
-  		SELECT auth_status FROM member
+  		SELECT auth_status, memberClass  FROM member
   		WHERE email = #{email } AND pw = #{pw }
   	
   		</select>
@@ -57,6 +57,11 @@
 			WHERE email = #{email }	  
     		
     	</select>
+    	
+<!--     	<select id="pwCheck"> -->
+<!--     	SELECT COUNT(*) FROM member -->
+<!--     	WHERE pw -->
+<!--     	</select> -->
     	
     	  	<insert id="insert" 
   		parameterType="dto.Member">

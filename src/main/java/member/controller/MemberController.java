@@ -31,6 +31,12 @@ public class MemberController {
 	
 	}
 
+	@RequestMapping(value = "/member/nologin", method = RequestMethod.GET)
+	public void noLogin() {
+		logger.info("로그인실패");
+	
+	}
+
 
 
 	@RequestMapping(value = "/interceptor/noLogin", method = RequestMethod.GET)
@@ -48,7 +54,12 @@ public class MemberController {
 		
 	
 		String redirectUrl = null;
+		String seperRedirect = null;
+		
+
 		if(memberService.login(member)) {
+
+		if(member.getMemberClass()==0) {
 			//로그인 성공
 			boolean success = memberService.login(member);
 			//세션 정보저장
@@ -61,13 +72,30 @@ public class MemberController {
 			logger.info(loginMember.getEmail());
 			logger.info(loginMember.getNickname());
 			logger.info("member_idx: "+loginMember.getMember_idx());
-
-			//리다이렉트 URL 지정
-			redirectUrl = "/main";
+			
+			seperRedirect= "/admin/list";
+		
+		}else if(member.getMemberClass()==1) {
+			//로그인 성공
+			boolean success = memberService.login(member);
+			//세션 정보저장
+			session.setAttribute("login", true);
+			session.setAttribute("loginEmail", member.getEmail());
+			Member loginMember = memberService.getMemberInfo(session);
+			session.setAttribute("nick", loginMember.getNickname());
+			session.setAttribute("member_idx", loginMember.getMember_idx());
+					
+			logger.info(loginMember.getEmail());
+			logger.info(loginMember.getNickname());
+			logger.info("member_idx: "+loginMember.getMember_idx());
+			
+			seperRedirect= "/member/mypage";
+			
+		}
+				
+			  redirectUrl = seperRedirect;
 			}
-
-			
-			
+		
 		 else {
 			//로그인 실패
 			//리다이렉트 URL 지정
@@ -202,7 +230,6 @@ public class MemberController {
 	}
 
 	
-
 
 	
 	

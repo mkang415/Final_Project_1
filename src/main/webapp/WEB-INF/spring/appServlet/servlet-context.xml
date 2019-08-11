@@ -34,6 +34,20 @@
       </interceptor>
 
        <interceptor>
+         <mapping path="/member/mypage/**" />
+         <exclude-mapping path="/interceptor/fail"/>
+         <beans:bean class="interceptor.ProjectInterceptor" />
+      </interceptor>
+
+
+       <interceptor>
+         <mapping path="/memo/list/**" />
+         <exclude-mapping path="/interceptor/fail"/>
+         <beans:bean class="interceptor.ProjectInterceptor" />
+      </interceptor>
+
+
+       <interceptor>
          <mapping path="/diary/**" />
          <exclude-mapping path="/interceptor/fail"/>
          <beans:bean class="interceptor.ProjectInterceptor" />
