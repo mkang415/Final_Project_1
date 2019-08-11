@@ -2,6 +2,7 @@ package notice.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -264,6 +265,12 @@ public class NoticeServiceImpl implements NoticeService{
 		return list;
 	}
 
-	
+
+
+	@Override
+	public List<HashMap<String, Object>> mainqnaList() {
+		return noticeDao.mainqnaList();
+
+	}
 	
 }
