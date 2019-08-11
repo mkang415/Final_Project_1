@@ -30,22 +30,36 @@ height: 30px;
 white-space: nowrap;
 }
 
+#background {
+/* background-image : url('/resources/admin/1.jpg'); */
+background: #f0f0f0;
+position: relative;
+width:100%;
+height:110%;
+background-size: cover;
+background-position: center center;
+
+}
+
+.table {
+	background : #ffffff;
+}
+
 </style>
-
-
-
+<div id="background">
+	<div>
 	<h1 style="text-align: center; "><a href="/admin/report">신고 게시글</a></h1>
 	<br>
 	<br>
 	<table class="table table-striped" border="1" style="text-align: center;
- 	width: 80%; table-layout:fixed; margin-left: auto; margin-right: auto;">
+ 	width: 60%; table-layout:fixed; margin-left: auto; margin-right: auto;">
 	<tr>
 	<th style="text-align: center; width: 10%;">확인</th>
-	<th style="text-align: center; width: 5%;">번호</th>
-	<th style="text-align: center; width: 25%">신고내용 (클릭 상세보기)</th>
+	<th style="text-align: center; width: 10%;">번호</th>
+	<th style="text-align: center; width: 20%">신고내용 (상세보기)</th>
 	<th style="text-align: center; width: 10%">닉네임</th>
-	<th style="text-align: center; width: 35%">게시글 제목</th>
-	<th style="text-align: center; width: 15%">작성일</th>	
+	<th style="text-align: center; width: 25%">게시글 제목</th>
+	<th style="text-align: center; width: 25%">작성일</th>	
 	</tr>
 	
 	<c:forEach items="${list }" var="i">
@@ -88,13 +102,12 @@ white-space: nowrap;
 	</div>
 	</c:forEach>
 	</table>
-
+	
 <br>
 
 
-
-
-
+</div>
 <c:import url="/WEB-INF/views/layout/adminreportpaging.jsp"></c:import>
 
+</div>
 <c:import url="/WEB-INF/views/layout/footer.jsp"/> 

@@ -20,11 +20,12 @@
 <style type="text/css">
 
 #btnBox {
-	position: absolute;
-	right: 400px;
-	height: 100px;
-	margin: auto;
-	text-align: center;
+	
+	position: relative;
+   right: -200px;
+/*    height: 100px; */
+/*    margin: auto; */
+   text-align: center;
 }
 
 #over {
@@ -101,10 +102,9 @@ white-space: nowrap;
 </table>
 
 
-<c:import url="/WEB-INF/views/layout/adminmemberinfopaging.jsp"></c:import>
-<div id="btnBox">
+<div id="btnBox" style="margin-left: 450px;">
 <a href="/admin/member"><button>목록</button></a>
-&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
 <a href="/admin/ban?member_idx=${member.member_idx} "><button style="color: red;">영구정지</button></a>
 <br>
 <br>
@@ -114,6 +114,7 @@ white-space: nowrap;
 
 
 
+<c:import url="/WEB-INF/views/layout/adminmemberinfopaging.jsp"></c:import>
 
 
 
