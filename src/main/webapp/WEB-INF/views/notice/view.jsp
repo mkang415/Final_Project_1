@@ -287,41 +287,67 @@ border-radius: 1px;
 ${notice.content }
 </div>
 
+<hr style="margin-bottom:300px;">
 
 <!-- 댓글 처리 -->
 <div>
 
-<hr>
 
 <!-- 댓글 리스트 -->
-<table class="table table-striped table-hover table-condensed">
-<thead>
+<table class="table">
+<thead class="thead-dark">
 <tr>
 
 	<th>작성자</th>
 	<th>댓글</th>
 	<th>작성일</th>
 	<th></th>
+	<th></th>
+
 </tr>
 </thead>
 <tbody>
 <c:forEach items="${commentList }" var="comment">
 <tr data-commentno="${comment.reply_idx }">
-	<td>${comment.writer }</td>
+	<c:if test="${comment.replyto eq 2 }">
+	<td style="padding-left:50px;">${comment.writer }</td>
+	</c:if>
+	
+	<c:if test="${comment.replyto eq 1 }">
+	<td style=>${comment.writer }</td>
+	</c:if>
+
+	<c:if test="${comment.replyto eq 2 }">
+	<td style="padding-left:50px;">${comment.reply }</td>
+	</c:if>
+
+	<c:if test="${comment.replyto eq 1 }">
 	<td>${comment.reply }</td>
+	</c:if>
+	
+	<c:if test="${comment.replyto eq 2 }">
+	<td style="padding-left:50px;">
+		<fmt:formatDate value="${comment.writtendate }"
+			pattern="yy-MM-dd hh:mm:ss" />
+	</td>
+	</c:if>
+	
+	<c:if test="${comment.replyto eq 1 }">
 	<td>
 		<fmt:formatDate value="${comment.writtendate }"
 			pattern="yy-MM-dd hh:mm:ss" />
 	</td>
-	<td>
+	</c:if>
+	
+	<td style="width:72px; padding-right:0;" >
 		<c:if test="${sessionScope.nick eq comment.writer }">
-		<button class="btn btn-default"
+		<button class="btn btn-outline-dark"
 			onclick="deleteComment(${comment.reply_idx });">삭제</button>
 		</c:if>
 	</td>
 	
-	<td>
-		<button class="btn btn-default" onclick="ReplyComment(${comment.step}, '${comment.writer }');">답글</button>
+	<td style="width:97px;">
+		<button class="btn btn-outline-dark" onclick="ReplyComment(${comment.step}, '${comment.writer }');">답글</button>
 	</td>
 	
 </tr>
@@ -335,13 +361,13 @@ ${notice.content }
 
 <!-- 댓글 입력 -->
 <c:if test="${login }" >
-<div class="form-inline text-center" style="margin-bottom: 30px;">
+<div class="form-inline text-center" style="margin-bottom: 30px; margin-top:100px; margin-left:230px;">
 	<input type="text" size="7" class="form-control"
 		id="commentWriter"
 		value="${sessionScope.nick }" readonly="readonly"/>
 	<textarea rows="2" cols="60"
-		class="form-control" id="commentContent"></textarea>
-	<button id="btnCommInsert" class="btn">입력</button>
+		class="form-control" aria-label="With textarea" id="commentContent"></textarea>
+	<button id="btnCommInsert" class="btn btn-outline-dark" style="margin-left:20px;">입력</button>
 </div>	<!-- 댓글 입력 end -->
 </c:if>
 

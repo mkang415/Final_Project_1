@@ -250,22 +250,7 @@ public class NoticeController {
 			
    }
 	
-//	@RequestMapping(value="/noticeReplyTo/insert", method=RequestMethod.POST)
-//	public String noticeReplyToInsert( Model model,
-//			NoticeReply noticeReply
-//			) 
-//		
-//		{
-//		
-//		logger.info("답글입력 처리");
-//		
-//		NoticeReply comment = noticeReply;
-//		
-//		noticeService.insertReplyComment(comment);
-//		
-//		
-//		return "redirect:"+"/notice/view?notice_idx="+comment.getNotice_idx();
-//		}
+
 
 	
 	

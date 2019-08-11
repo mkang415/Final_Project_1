@@ -83,7 +83,8 @@
 						notice_idx,
 						writtendate,
 						member.nickname,
-						step
+						step,
+						replyto
 						
 					FROM notice_reply, member
 					WHERE notice_reply.member_idx = member.member_idx 
@@ -152,8 +153,8 @@ VALUES(notice_reply_seq.nextval,#{notice_idx },#{member_idx }, #{reply },(SELECT
 		
 		
 		
-INSERT INTO notice_reply(reply_idx, notice_idx, member_idx, reply, step )
-VALUES(notice_reply_seq.nextval,#{notice_idx },#{member_idx }, #{reply },#{step } )
+INSERT INTO notice_reply(reply_idx, notice_idx, member_idx, reply, step, replyto )
+VALUES(notice_reply_seq.nextval,#{notice_idx },#{member_idx }, #{reply },#{step }, 2 )
 
 
 </insert>

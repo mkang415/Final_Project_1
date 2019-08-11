@@ -10,12 +10,26 @@ public class NoticeReply {
 	private Date writtendate;
 	private String writer;
 	private int step;
+	private int replyto;
 	
 	@Override
 	public String toString() {
 		return "NoticeReply [reply_idx=" + reply_idx + ", notice_idx=" + notice_idx + ", member_idx=" + member_idx
-				+ ", reply=" + reply + ", writtendate=" + writtendate + ", writer=" + writer + ", step=" + step + "]";
+				+ ", reply=" + reply + ", writtendate=" + writtendate + ", writer=" + writer + ", step=" + step
+				+ ", replyto=" + replyto + "]";
 	}
+	
+	
+	public int getReplyto() {
+		return replyto;
+	}
+
+
+	public void setReplyto(int replyto) {
+		this.replyto = replyto;
+	}
+
+
 	public int getReply_idx() {
 		return reply_idx;
 	}

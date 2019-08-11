@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div class="form-inline text-center" style="margin-bottom: 30px;">
+<div class="form-inline text-center" style="margin-bottom: 30px; margin-top:100px; margin-left:160px;">
 	<input type="hidden" name="step" id="step" value="${step }"/>
 	<span>${writer }&nbsp 님에 대한 답글입니다.</span>
 	
@@ -16,8 +16,8 @@
 		id="commentWriter"
 		value="${sessionScope.nick }" readonly="readonly"/> --%>
 	<textarea rows="2" cols="60"
-		class="form-control" id="commentContent">RE</textarea>
-	<button class="btn" onclick="insertReply()">입력</button>
+		class="form-control" id="commentContent">RE: &nbsp</textarea>
+	<button class="btn btn-outline-dark" style="margin-left:20px;" onclick="insertReply()">입력</button>
 </div>	<!-- 댓글 입력 end -->
 
 </body>

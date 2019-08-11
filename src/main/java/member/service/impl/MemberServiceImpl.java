@@ -32,6 +32,8 @@ public class MemberServiceImpl implements MemberService{
 		
 		memberClass = memberDao.selectAuth(member);
 		
+		member.setMemberClass(memberClass.getMemberClass());
+		
 		if(memberDao.selectCntLogin(member) > 0) {
 	
 		if(memberClass.getMemberClass()==0 || memberClass.getMemberClass()==1 ) 

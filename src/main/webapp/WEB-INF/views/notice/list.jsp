@@ -117,21 +117,22 @@ height:800px;
 	<button style="position: absolute; float:right; left:1500px; top:290px;" id="chatting">1대1 채팅</button>
 </div>
 
-<table class="table table-hover table-condensed" style= "margin-left:240px;
+<table class="table table-dark" style= "margin-left:240px;
  width:1200px; position:relative; top:120px; z-index: 1;" >
 
-<thead style="background: #337AB7; color: white;" >
+<thead>
 	<tr style="height: 50px;">
-		<th style="width: 10%; padding-bottom: 13px;"></th>
-		<th style="width: 45%; padding-bottom: 13px;">제목</th>
-		<th style="width: 15%; padding-bottom: 13px;">작성자</th>
-		<th style="width: 10%; padding-bottom: 13px;">조회수</th>
-		<th style="width: 20%; padding-bottom: 13px;">작성일</th>
+		<th scope="col" style="width: 10%; padding-bottom: 13px;"></th>
+		<th scope="col" style="width: 45%; padding-bottom: 13px;">제목</th>
+		<th scope="col" style="width: 15%; padding-bottom: 13px;">작성자</th>
+		<th scope="col" style="width: 10%; padding-bottom: 13px;">조회수</th>
+		<th scope="col" style="width: 20%; padding-bottom: 13px;">작성일</th>
 	</tr>
 </thead>
 <tbody>
 <c:forEach items="${list }" var="i">
 	<tr>
+	
 		<td>${i.notice_idx }</td>
 		<td><a href="/notice/view?notice_idx=${i.notice_idx }">${i.title }</a></td>
 		<td>${i.writer }</td>

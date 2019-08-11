@@ -72,12 +72,19 @@
                     </nav>
                     <nav class="nav">
                         <ul class="clearfix">
+                 	<c:if test="${sessionScope.nick ne 'admin' }">
                             <li><a href="/notice/list">공지사항</a></li>
-
                             <li><a href="/member/mypage">마이페이지</a></li>
                             <li><a href="/ledger/ledger">가계부</a></li>
                             <li><a href="/diary">다이어리</a></li>
-                            <li><a href="/board/freelist">자유게시판</a></li>
+                            <li><a href="/board/freeList">자유게시판</a></li>
+							</c:if>
+							<c:if test="${sessionScope.nick eq 'admin' }">
+						    <li><a href="/admin/list">게시글관리</a></li>
+                            <li><a href="/admin/member">회원관리</a></li>
+                            <li><a href="/admin/banlist">블랙리스트</a></li>
+                            <li><a href="/admin/report">신고관리</a></li>
+							</c:if>
                         </ul>
                     </nav>    
                 </div>
@@ -181,30 +188,30 @@
 
                                     </ul>
                                 </li>
-                                <li><a href="#">자유게시판</a>
+                                <li><a href="#">Q&A</a>
                                     <ul>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar">자유게시판</strong> <em>2019.07.22</em></dt>
-                                                <dd>자유게시판이다</dd>
+                                                <dt><strong class="bar">질문사항</strong> <em>2019.07.22</em></dt>
+                                                <dd>질문사항이다</dd>
                                             </dl>            
                                         </li>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar">자유게시판</strong> <em>2019.07.22</em></dt>
-                                                <dd>자유게시판이다</dd>
+                                                <dt><strong class="bar">질문사항</strong> <em>2019.07.22</em></dt>
+                                                <dd>질문사항이다</dd>
                                             </dl>
                                         </li>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar">자유게시판</strong> <em>2019.07.22</em></dt>
-                                                <dd>자유게시판이다 </dd>
+                                                <dt><strong class="bar">질문사항</strong> <em>2019.07.22</em></dt>
+                                                <dd>질문사항이다 </dd>
                                             </dl>
                                         </li>
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar">자유게시판</strong> <em>2019.07.22</em></dt>
-                                                <dd>자유게시판이다</dd>
+                                                <dt><strong class="bar">질문사항</strong> <em>2019.07.22</em></dt>
+                                                <dd>질문사항이다</dd>
                                             </dl>
                                         </li>
                                     </ul>
