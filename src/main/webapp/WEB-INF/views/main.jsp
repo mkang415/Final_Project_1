@@ -88,12 +88,13 @@
 							</c:if>
 							
 							
-							<c:if test="${sessionScope.nick eq 'admin' }">
+							<c:if test="${sessionScope.loginEmail eq 'admin' }">
 						    <li><a href="/admin/list">게시글관리</a></li>
                             <li><a href="/admin/member">회원관리</a></li>
                             <li><a href="/admin/banlist">블랙리스트</a></li>
                             <li><a href="/admin/report">신고관리</a></li>
                             <li style=" list-style:none;"><a href="/notice/list">공지사항</a></li>
+                            <li style=" list-style:none;"><a href="/freqna/list">Q&A</a></li>
 							</c:if>
                         </ul>
                     </nav>    
