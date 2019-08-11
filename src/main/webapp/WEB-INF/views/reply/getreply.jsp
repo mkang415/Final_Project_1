@@ -32,7 +32,7 @@
 				<div id="update${r.REPLY_IDX}"style="display: none">
 					<form id="updateForm" name="fupdateForm" method="post">
 					<input type="hidden" name="reply_idx" value="${r.REPLY_IDX}">
-					<textarea id="summernote" style="width: 800px" rows="3" cols="30" name="reply">${r.REPLY}</textarea>
+					<textarea id="summernote1" style="width: 800px" rows="3" cols="30" name="reply">${r.REPLY}</textarea>
 					</form>
 				</div>
 			</td>
@@ -44,7 +44,7 @@
 
 
 <script>
-	$('#summernote').summernote({
+	$('#summernote1').summernote({
 		height: 100,
 	  	minHeight: null,
 	  	maxHeight: null,
