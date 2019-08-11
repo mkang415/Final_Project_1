@@ -24,9 +24,7 @@ table {
 }
 </style>
 
-<h1>QNA 페이지</h1>
-<hr>
-<div>
+<div style="width: 1000px; margin: auto;">
 <table class="table table-striped table hover table-condensed">
 <tr>
 	<td colspan="3"><h3>${qna.getTitle()}</h3></td>
@@ -49,16 +47,21 @@ table {
 
 <c:import url="/WEB-INF/views/qna/answer.jsp"></c:import>
 
+<div style="width: 900px; margin: auto;">
+<div class="btn-group" role="group" aria-label="Basic example">
 <c:if test="${login }">
 	<c:if test = "${admin ne true }">
-		<button type="button" onclick="location.href='/qna/write'">문의하기</button>
-		<button onclick="location.href='/qna/newlist'">목록</button>
+		<button class="btn btn-outline-primary" onclick="location.href='/qna/write'">문의하기</button>
+		<button class="btn btn-outline-primary" onclick="location.href='/qna/newlist'">목록</button>
 	</c:if>
 	<c:if test="${checkId}">
-		<button type="button" onclick="location.href='/qna/update?qnaidx=${qna.getQna_idx()}'">질문 수정</button>
-		<button type="button" onclick="location.href='/qna/delete?qnaidx=${qna.getQna_idx()}'">질문 삭제</button>
+		<button class="btn btn-outline-primary" onclick="location.href='/qna/update?qnaidx=${qna.getQna_idx()}'">질문 수정</button>
+		<button class="btn btn-outline-primary" onclick="location.href='/qna/delete?qnaidx=${qna.getQna_idx()}'">질문 삭제</button>
 	</c:if>
 </c:if>	
+</div>
+</div>
+<br><br>
 	
 
 

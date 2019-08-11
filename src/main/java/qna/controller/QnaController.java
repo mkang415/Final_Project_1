@@ -155,12 +155,14 @@ public class QnaController {
 	
 	//	qna 답변 저장
 	@RequestMapping(value = "/qna/answer", method = RequestMethod.POST)
-	public void QnaAnswerProc(
+	public String QnaAnswerProc(
 			Qna qna
 			) {
 		
 		logger.info("답변 저장");
 		qnaService.setAnswer(qna);
+		
+		return "redirect: /qna/newlist";
 	}
 	
 }

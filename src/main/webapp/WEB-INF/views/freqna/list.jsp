@@ -13,7 +13,8 @@ $(document).ready(function(){
 });
 </script>
 
-<h1>자주 묻는 질문</h1>
+<div style="width: 1000px; margin: auto;">
+<h3>자주 묻는 질문</h3>
 <hr>
 <div class="accordion" id="accordionExample">
 <c:forEach items="${frelist}" var = "f" varStatus="st">
@@ -24,11 +25,12 @@ $(document).ready(function(){
          aria-expanded="true" aria-controls="collapse${st.index}">
           ${f.QUESTION }
         </button>
+        <c:if test="${admin }">
+			<button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='/freqna/update?index=${f.FREQNA_IDX}'">수정</button>
+			<button type="button" class="btn btn-outline-danger btn-sm" onclick="location.href='/freqna/delete?index=${f.FREQNA_IDX}'">삭제</button>
+	  	</c:if>
       </h2>
-      <c:if test="${admin }">
-			<button type="button" onclick="location.href='/freqna/update?index=${f.FREQNA_IDX}'">수정</button>
-			<button type="button" onclick="location.href='/freqna/delete?index=${f.FREQNA_IDX}'">삭제</button>
-	  </c:if>
+      
     </div>
 
     <div id="collapse${f.FREQNA_IDX}" class="collapse" aria-labelledby="heading${st.index}" 
@@ -40,13 +42,14 @@ $(document).ready(function(){
   </div>
 </c:forEach>
 </div>
-<br><br>
+<br>
 <div>
 <c:if test="${admin }">
-<button type="button" onclick="location.href='/freqna/write'">작성</button>
+<button type="button" class="btn btn-outline-primary" onclick="location.href='/freqna/write'">작성</button>
 </c:if>
-<button type="button" onclick="location.href='/qna/newlist'">Q&A</button>
-<button type="button" onclick="location.href='/main'">메인</button>
-</div>
+<button type="button" class="btn btn-outline-primary" onclick="location.href='/qna/newlist'">Q&A</button>
 
+</div>
+</div>
+<br><br>
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>

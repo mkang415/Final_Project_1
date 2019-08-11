@@ -11,24 +11,6 @@
 
 <script type="text/javascript">
 
-function fn_answer(code){
-	
-	$.ajax({
-		type:'POST',
-		url : "/qna/answer",
-		data:$("#insertAnswer").serialize(),
-		success : function(data){
-		if(data=="success")
-			{
-				getAnswer();
-				$("#summernote");
-			}
-		},
-		error:function(request,status,error){
-			//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
-}
 
 $(function(){
     
@@ -59,22 +41,23 @@ function getAnswer(){
 
 </head>
 <body>
-<div id="AnswerArea"></div>
+<div id="AnswerArea" style="width: 1000px; margin: auto;"></div>
 
-
-<form id="insertAnswer" name="insertAnswer" method=post>
+<div style="width: 1000px; margin: auto;">
+<form id="insertAnswer" name="insertAnswer" action = "/qna/answer" method=post>
 		<input type="hidden" name="qna_idx" value="${qna.qna_idx}">
 		<c:if test="${admin}">
 		<div>
 			<textarea id="summernote" name="answer">${qna.answer}</textarea>
 		</div>
+		<br>
 		<div>
-			<a href='#' onClick="fn_answer()" class="btn pull-right btn-success">작성</a>
-			<button type="button" onclick="location.href='/qna/newlist'">취소</button>
-			<button type="button" onclick="location.href='/qna/delete?qnaidx=${qna.getQna_idx()}'">질문 삭제</button>
+			<button type="submit" onClick="fn_answer()" class="btn btn-outline-success">작성</button>
+			<button type="button" class="btn btn-outline-danger" onclick="location.href='/qna/newlist'">취소</button>
+			<button type="button" class="btn btn-outline-dark" onclick="location.href='/qna/delete?qnaidx=${qna.getQna_idx()}'">질문 삭제</button>
 		</div>
 		</c:if>
 	</form>
-
+</div>
 </body>
 </html>

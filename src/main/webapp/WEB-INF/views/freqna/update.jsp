@@ -15,8 +15,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 
-<h1>자주묻는 질문 수정 페이지</h1>
-<hr>
+<div style="width: 800px; margin: auto;">
 <form action = "/freqna/update" method = "post">
 <!-- form 태그 영역 감싸기 -->
 <fieldset>
@@ -41,15 +40,16 @@
 <tr>
 	<td></td>
 	<td>
-		<input type="submit" value="수정"/>
-		<button type="button" onclick="location.href='/freqna/list'">취소</button>	
+		<input type="submit" class="btn btn-outline-success" value="수정"/>
+		<button type="button" class="btn btn-outline-danger" onclick="location.href='/freqna/list'">취소</button>	
 	</td>
 </tr>
 </table>
 
 </fieldset>
 </form>
-
+</div>
+<br><br>
 <script>
 	$('#summernote').summernote({
 		height: 300,

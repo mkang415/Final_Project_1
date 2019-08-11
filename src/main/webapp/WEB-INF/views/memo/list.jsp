@@ -25,14 +25,12 @@ $(document).ready(function(){
 </head>
 <body>
 
-<h1>메모 페이지</h1>
-<hr>
-
 <!-- Button trigger modal -->
+<div style="width: 1000px; margin: auto;">
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalWrite">
   	메모 작성
 </button>
-
+</div>
 <!-- Modal -->
 <div class="modal fade" id="ModalWrite" tabindex="-1" role="dialog" aria-labelledby="ModalWrite" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -56,7 +54,7 @@ $(document).ready(function(){
 </div>
 
 <br>
-<div id="memoList">
+<div id="memoList" style="width: 1000px; margin: auto;">
 
 </div>
 <script>

@@ -59,4 +59,6 @@ public interface BoardService {
 
 	int getmemidx(int board_idx);
 
+	List<HashMap<String, Object>> getimgList(int brdidx);
+
 }
