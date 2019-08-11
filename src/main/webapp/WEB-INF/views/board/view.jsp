@@ -24,16 +24,9 @@ table {
 	width: 80%
 }
 </style>
+<br>
 
-</head>
-<body>
-<c:choose>
-	<c:when test="${freeView.getDivide() eq 1}">자유 게시판</c:when>
-	<c:when test="${freeView.getDivide() eq 2}">후기 게시판</c:when>
-	<c:when test="${freeView.getDivide() eq 3}">사진 게시판</c:when>
-</c:choose>
-<hr>
-<div>
+<div style="width: 1000px; margin: auto;">
 <table class="table table-striped table hover table-condensed">
 <tr>
 	<td colspan="3"><h3>${freeView.getTitle()}</h3></td>
@@ -56,40 +49,45 @@ table {
 		<div class="col col-lg-2"></div>
 	</div>
 </div>
-</div>
+
 <br><br>
 <c:import url="/WEB-INF/views/board/reply.jsp"></c:import>
-
-<c:if test="${login }">
+</div>
+<div style="width: 900px; margin: auto;">
+<div class="btn-group" role="group" aria-label="Basic example">
+  <c:if test="${login }">
 	<c:choose>
 		<c:when test="${freeView.getDivide() eq 1}">
-			<button type="button" onclick="location.href='/board/write?divide=1'">글쓰기</button>
+			<button type="button" class="btn btn-outline-primary" onclick="location.href='/board/write?divide=1'">글쓰기</button>
 		</c:when>
 		<c:when test="${freeView.getDivide() eq 2}">
-			<button type="button" onclick="location.href='/board/write?divide=2'">글쓰기</button>
+			<button type="button" class="btn btn-outline-primary" onclick="location.href='/board/write?divide=2'">글쓰기</button>
 		</c:when>
 		<c:when test="${freeView.getDivide() eq 3}">
-			<button type="button" onclick="location.href='/board/write?divide=3'">글쓰기</button>
+			<button type="button" class="btn btn-outline-primary" onclick="location.href='/board/write?divide=3'">글쓰기</button>
 		</c:when>
 	</c:choose>
 
 	<c:if test="${checkId}">
-		<button type="button" onclick="location.href='/board/update?brdidx=${freeView.getBoard_idx()}'">글수정</button>
-		<button type="button" onclick="location.href='/board/delete?brdidx=${freeView.getBoard_idx()}&divide=${freeView.divide }'">글삭제</button>
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='/board/update?brdidx=${freeView.getBoard_idx()}'">글수정</button>
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='/board/delete?brdidx=${freeView.getBoard_idx()}&divide=${freeView.divide }'">글삭제</button>
 	</c:if>
 </c:if>
 
 <c:choose>
 	<c:when test="${freeView.getDivide() eq 1}">
-		<button onclick="location.href='/board/freelist'">목록</button>
+		<button class="btn btn-outline-primary" onclick="location.href='/board/freelist'">목록</button>
 	</c:when>
 	<c:when test="${freeView.getDivide() eq 2}">
-		<button onclick="location.href='/board/epillist'">목록</button>
+		<button class="btn btn-outline-primary" onclick="location.href='/board/epillist'">목록</button>
 	</c:when>
 	<c:when test="${freeView.getDivide() eq 3}">
-		<button onclick="location.href='/board/photolist'">목록</button>
+		<button class="btn btn-outline-primary" onclick="location.href='/board/photolist'">목록</button>
 	</c:when>
 </c:choose>
+</div>
+</div>
+<br><br>
 
 <script>
 

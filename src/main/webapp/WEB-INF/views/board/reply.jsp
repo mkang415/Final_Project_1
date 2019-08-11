@@ -76,26 +76,23 @@ function getCommentList(){
 	<div class="container">
         	<div id="commentList"></div>
 	</div>
+	
+	<c:if test="${login}">
     <form id="commentForm" name="commentForm" method="post">
     <input type="hidden" name="board_idx" value="${freeView.getBoard_idx()}">
     <br><br>
-    <div>
-        <span><strong>Comments</strong></span> <span id="cCnt"></span>
-        <div>
-        	<table class="table">                    
-            	<tr>
-                	<td>
-                    	<textarea id="summernote" style="width: 800px" rows="3" cols="30" name="reply"></textarea>
-                    	<br>
-                    	<div>
-                        	<a href='#' onClick="fn_comment()" class="btn pull-right btn-success">등록</a>
-                    	</div>
-                	</td>
-				</tr>
-			</table>
+    <div style="width : 900px; margin: auto;">
+        <span><strong>댓글 작성</strong></span>
+        <div id="writecmt" class="table">
+        	<textarea id="summernote" style="width: 800px" rows="3" cols="30" name="reply"></textarea>
+            <br>
+            <div style="float: right;">
+            	<a href='#' onClick="fn_comment()" class="btn pull-right btn-success">등록</a>
+           	</div>
 		</div>
 	</div>      
     </form>
+    </c:if>
 </div>
 <form id="comment" method="post">
 <input type="hidden" name="board_idx" value="${freeView.getBoard_idx()}">

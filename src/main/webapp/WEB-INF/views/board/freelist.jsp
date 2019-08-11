@@ -23,9 +23,8 @@ $(document).ready(function(){
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
 </script>
 
-<h1>게시판 리스트</h1>
-<hr>
-
+<br>
+<div style="width: 1000px; margin: auto;">
 <div class="btn-group" role="group" aria-label="Basic example">
   <button type="button" class="btn btn-primary">자유게시판</button>
   <button type="button" class="btn btn-outline-primary" onclick="location.href='/board/epillist'">후기게시판</button>
@@ -33,6 +32,7 @@ $(document).ready(function(){
 </div>
 
 <table class="table table-striped table hover table-condensed">
+
 	<tr>
 		<th style="width : 10%">추천</th>
 		<th style="width : 45%">제목</th>
@@ -69,9 +69,16 @@ $(document).ready(function(){
 	</tr>
 </c:forEach>
 </table>
-<c:import url="/WEB-INF/views/layout/freePaging.jsp"></c:import>
-
-<div class="form-row" style="margin: auto;">
+</div>
+<div style="width: 900px; margin: auto;">
+<div style="position: absolute;">
+	<c:if test="${login }">
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='/board/write?divide=1'">글쓰기</button>
+	</c:if>
+</div>
+	<c:import url="/WEB-INF/views/layout/freePaging.jsp"></c:import>
+</div>
+<div class="form-row" style="width: 1000px; margin: auto;">
 	<div class="col-5">
 	</div>
 	<div class="col-2">
@@ -82,12 +89,5 @@ $(document).ready(function(){
 	</div>
 </div>
 
-<div>
-<c:if test="${login }">
-${nick }<br>
-<button type="button" onclick="location.href='/board/write?divide=1'">글쓰기</button>
-</c:if>
-<button type="button" onclick="location.href='/main'">메인</button>
-</div>
-
+<br><br>
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>

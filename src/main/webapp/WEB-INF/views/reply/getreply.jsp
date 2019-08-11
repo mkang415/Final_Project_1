@@ -4,24 +4,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
-<div>
+<div style="width : 900px; margin: auto;">
 	<div>
+	<span><strong>댓글</strong></span>
 	<table class='table'>
 	<c:forEach items="${replylist}" var = "r" varStatus="st">
 		<tr>
-			<th>${r.NICKNAME}</th>
-			<th><fmt:formatDate value="${r.WRITTENDATE}" pattern="yyyy-MM-dd HH:mm:SS" /></th>
-			<th>
+			<th style="width: 30%">${r.NICKNAME}</th>
+			<th style="width: 45%"><fmt:formatDate value="${r.WRITTENDATE}" pattern="yyyy-MM-dd HH:mm:SS" /></th>
+			<th style="width: 25%">
 				
 				<c:if test="${r.MEMBER_IDX==member_idx }">
-				<div id="rebtn${r.REPLY_IDX}">
-				<button type="button" onclick="showUpdate('reply${r.REPLY_IDX}', 'update${r.REPLY_IDX}', 'rebtn${r.REPLY_IDX}', 'upbtn${r.REPLY_IDX}')">댓글수정</button>
-				<button type="button" onclick="location.href='/reply/delete?reidx=${r.REPLY_IDX}'">댓글삭제</button>
+				<div id="rebtn${r.REPLY_IDX}" style="float: right;">
+				<button type="button" class="btn btn-outline-primary" onclick="showUpdate('reply${r.REPLY_IDX}', 'update${r.REPLY_IDX}', 'rebtn${r.REPLY_IDX}', 'upbtn${r.REPLY_IDX}', 'writecmt')">수정</button>
+				<button type="button" class="btn btn-outline-danger" onclick="location.href='/reply/delete?reidx=${r.REPLY_IDX}'">삭제</button>
 				</div>
 				
-				<div id="upbtn${r.REPLY_IDX}" style="display: none">
-				<button type="button" onclick="up_comment()">수정</button>
-				<button type="button" onclick="showReply('reply${r.REPLY_IDX}', 'update${r.REPLY_IDX}', 'rebtn${r.REPLY_IDX}', 'upbtn${r.REPLY_IDX}')">취소</button>
+				<div id="upbtn${r.REPLY_IDX}" style="float: right; display: none;">
+				<button type="button" class="btn btn-outline-success" onclick="up_comment()">수정</button>
+				<button type="button" class="btn btn-outline-danger" onclick="showReply('reply${r.REPLY_IDX}', 'update${r.REPLY_IDX}', 'rebtn${r.REPLY_IDX}', 'upbtn${r.REPLY_IDX}', 'writecmt')">취소</button>
 				</div>
 				</c:if>
 			</th>
@@ -61,18 +62,20 @@
 	  	  ]
 	});
 	
-	function showUpdate(reply, update, replybtn, updatebtn) {
+	function showUpdate(reply, update, replybtn, updatebtn, writecmt) {
 		document.getElementById(reply).style.display="none";
 		document.getElementById(update).style.display="block";
 		document.getElementById(replybtn).style.display="none";
 		document.getElementById(updatebtn).style.display="block";
+		document.getElementById(writecmt).style.display="none";
 	}
 	
-	function showReply(reply, update, replybtn, updatebtn) {
+	function showReply(reply, update, replybtn, updatebtn, writecmt) {
 		document.getElementById(reply).style.display="block";
 		document.getElementById(update).style.display="none";
 		document.getElementById(replybtn).style.display="block";
 		document.getElementById(updatebtn).style.display="none";
+		document.getElementById(writecmt).style.display="block";
 	}
 	
 	function up_comment(){
