@@ -395,6 +395,27 @@ div.note-editor.note-frame {
 	margin-bottom: 10px;
 }
 
+.note-resizebar {
+	display: none;
+	border: 0;
+}
+
+#mapSearch {
+	height: 2em;
+	width: 30em;
+	margin-right: 0;
+}
+
+#mapSearchBtn {
+	height: 2.5em;
+	font-family: Arial;
+	background: black;
+	color: white;
+	border: none;
+	margin-left: 0;
+	cursor: pointer;
+}
+
 </style>
 
 </head>
@@ -430,7 +451,7 @@ div.note-editor.note-frame {
 	<hr>
 
 	<div>
-		<input type="text" id="mapSearch" placeholder="장소명을 입력하세요"> <button type="button" id="mapSearchBtn" onclick="mapSearchF()">검색</button>
+		<input type="text" id="mapSearch" placeholder="장소명을 입력하세요"><button type="button" id="mapSearchBtn" onclick="mapSearchF()">Search</button>
 	</div>
 	
 	<div id="dataDiv">
@@ -490,7 +511,7 @@ function writeSubmit() {
 <script type="text/javascript">
 $(document).ready(function() {
 	$('#summernote').summernote({
-		height: 550,
+		height: 600,
 		minHeight: null,
 		maxHeight: null,
 		placeholder: "Content",

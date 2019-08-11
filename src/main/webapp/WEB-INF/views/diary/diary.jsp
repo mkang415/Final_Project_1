@@ -268,11 +268,11 @@ img {
 
 #modal_delete .modal_content {
 	position: fixed;
-	top: 30%;
-	left: 35%;
+	top: 40%;
+	left: 40%;
 
-	width:30%;
-	height: 150px;
+	width:20%;
+	height: 200px;
 	padding:10px;
 	background:#fff;
 	border:2px solid #666;
@@ -286,6 +286,62 @@ img {
 	height:100%;
 	background:rgba(0, 0, 0, 0.5);
 	z-index:-1;
+}
+
+#modalTextBox {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	align: center;
+	text-align: center;
+	
+}
+
+#modalBtnBox {
+	align: center;
+	text-align: center;
+	margin-top:30px;
+	margin-bottom: 30px;
+}
+
+#butn {
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 28px;
+	border: none;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 15px;
+	background: rgb(32,95,232);
+	padding: 7px 25px 7px 25px;
+	text-decoration: none;
+	cursor: pointer;
+	margin-right: 5px;
+	
+}
+
+#butn:hover {
+	background: #F0F0F0;
+	text-decoration: none;
+}
+
+#butnCancel {
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 28px;
+	border: none;
+	font-family: Arial;
+	color: #FFFFFF;
+	font-size: 15px;
+	background: rgb(206,92,78);
+	padding: 7px 25px 7px 25px;
+	text-decoration: none;
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+#butnCancel:hover {
+	background: #F0F0F0;
+	text-decoration: none;
 }
 
 </style>
@@ -329,10 +385,11 @@ img {
 	<div id="modalTextBox">
 	<p>정말 삭제하시겠습니까?</p>
 	</div>
+	<hr>
 
 	<div id="modalBtnBox">
-	<button type="button" onClick="deleteDiary()">확인</button>
-	<button type="button" onClick="deleteModalClose()">취소</button>
+	<button id="butn" type="button" onClick="deleteDiary()">확인</button>
+	<button id="butnCancel" type="button" onClick="deleteModalClose()">취소</button>
 	</div>
 
 	</div>
