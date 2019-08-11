@@ -51,7 +51,7 @@
 <tr>
 	<td>이미지</td>
 	<td>
-	<div id="preveal" style="min-height: 250px">
+	<div id="preveal" class="btn-group btn-group-toggle" data-toggle="buttons" style="min-height: 250px">
 	</div>
 	</td>
 </tr>

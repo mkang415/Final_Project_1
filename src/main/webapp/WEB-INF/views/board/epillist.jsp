@@ -25,6 +25,11 @@ $(document).ready(function(){
 
 <h1>게시판 리스트</h1>
 <hr>
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-outline-primary" onclick="location.href='/board/freelist'">자유게시판</button>
+  <button type="button" class="btn btn-primary">후기게시판</button>
+  <button type="button" class="btn btn-outline-primary" onclick="location.href='/board/photolist'">사진게시판</button>
+</div>
 <table class="table table-striped table hover table-condensed">
 	<tr>
 		<th style="width : 10%">추천</th>
