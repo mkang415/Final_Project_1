@@ -81,7 +81,7 @@ $(document).ready(function(){
 
 <tr>
 <th class="table-warning"><label>비밀번호</label></th>
-<td class="table-active"><input type="text" id="pw" name="pw" value="${upinfo.pw }"/></td>
+<td class="table-active"><input type="password" id="pw" name="pw" value="${upinfo.pw }"/></td>
 </tr>
 
 <tr>
