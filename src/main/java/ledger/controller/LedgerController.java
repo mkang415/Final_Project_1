@@ -28,7 +28,7 @@ public class LedgerController {
 	@Autowired LedgerService ledgerService;
 	
 	@RequestMapping(value = "/ledger/ledger", method=RequestMethod.GET)
-	public void ledger(
+	public String ledger(
 			@RequestParam(defaultValue = "1") int curPage,
 			HttpSession session,
 			Ledger ledger,
@@ -53,6 +53,8 @@ public class LedgerController {
 		model.addAttribute("ledger", ledger);
 		logger.info(ledger.getDatepicker());
 		logger.info(ledger.getDatepicker2());
+		
+		return "/ledger/ledger";
 		
 	}
 	

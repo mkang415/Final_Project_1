@@ -9,7 +9,7 @@
 
 <ul class="list-group list-group-horizontal">
   <li class="list-group-item align-items-center">
-  	<c:if test="${login}">
+  	<c:if test="${login && checkId ne true}">
   	<c:if test="${result}">
 		<button class="btn btn-danger" onclick="unreco()">취소</button>
 	</c:if>
@@ -22,19 +22,18 @@
   	<h6>추천 : ${recocnt}</h6>
   </li>
   <li class="list-group-item">
-  	<c:if test="${login}">
-		<c:if test="${checkId ne true}">
+  	<c:if test="${login && checkId ne true}">
 			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalWrite">신고</button>
 		</c:if>
-	</c:if>
   </li>
 </ul>
-
 <!-- Modal -->
 <div class="modal fade" id="ModalWrite" tabindex="-1" role="dialog" aria-labelledby="ModalWrite" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-scrollable" role="document">
     	<div class="modal-content">
     		<form action="/report/boardreport" method = "post">
+    		<input type="hidden" name="board_idx" value="${board_idx}">
+    		
       		<div class="modal-header">
       			신고 내용을 입력해주세요.
         	<button type="button" class="close" data-dismiss="modal" aria-label="Close">

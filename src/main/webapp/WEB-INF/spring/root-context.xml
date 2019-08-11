@@ -63,13 +63,14 @@
 				<value>classpath:/schedule/dao/impl/**/*DaoImpl.xml</value>
 				<value>classpath:/vote/dao/impl/**/*DaoImpl.xml</value>
 				<value>classpath:/reply/dao/impl/**/*DaoImpl.xml</value>
+				<value>classpath:/report/dao/impl/**/*DaoImpl.xml</value>
 			</array>
 		</property>
 	</bean>
 	
 	<!-- 마이바티스 인터페이스 설정 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="admin.dao.face, board.dao.face, diary.dao.face, ledger.dao.face, member.dao.face, memo.dao.face, notice.dao.face, qna.dao.face, schedule.dao.face, vote.dao.face, reply.dao.face"/>
+		<property name="basePackage" value="admin.dao.face, board.dao.face, diary.dao.face, ledger.dao.face, member.dao.face, memo.dao.face, notice.dao.face, qna.dao.face, schedule.dao.face, vote.dao.face, reply.dao.face, report.dao.face"/>
 	</bean>
 		
 </beans>

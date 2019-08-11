@@ -231,7 +231,7 @@ public class CalendarController {
 		member = memberService.getMemberInfo(session);
 		CalendarService.caldel(dto);
 		
-		model.addAttribute("msg", "게시글 삭제 완료");
+		model.addAttribute("del", "게시글 삭제 완료");
 		model.addAttribute("url", "/schedule/calendar");
 		
 		return "redirect:/schedule/calendar";

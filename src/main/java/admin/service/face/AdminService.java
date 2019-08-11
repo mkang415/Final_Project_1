@@ -9,6 +9,7 @@ import util.AdminBoardPaging;
 import util.AdminMemberBanPaging;
 import util.AdminMemberInfoPaging;
 import util.AdminMemberPaging;
+import util.AdminReportPaging;
 
 public interface AdminService {
 
@@ -62,6 +63,17 @@ public interface AdminService {
 	void noban(int member_idx);
 	
 	
+
+	AdminReportPaging getcurPage5(int curPage);
+	// 회원 게시글 신고 페이지
+	
+	List<HashMap<String, Object>> select(AdminReportPaging ARP);
+	// 회원 신고게시글 리스트
+
+	
+	
+	void viewcheck(int report_idx);
+	// report_idx로 체크변화
 	
 	
 	
