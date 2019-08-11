@@ -80,10 +80,10 @@ function checkAll() {
 
 #btnBox {
    z-index: 1;
-   position: absolute;
-   right: 200px;
-   height: 100px;
-   margin: auto;
+   position: relative;
+   right: -200px;
+/*    height: 100px; */
+/*    margin: auto; */
    text-align: center;
 }
 
@@ -107,7 +107,7 @@ white-space: nowrap;
 	<br>
 	
 	<table class="table table-striped" border="1" style="text-align: center;
- 	width: 80%; table-layout:fixed; margin: auto;">
+ 	width: 60%; table-layout:fixed; margin: auto;">
 	<tr>	
 	<th style="text-align: center; width: 5%;"><input type="checkbox" id="checkAll" onclick="checkAll();"/></th>
 	<th style="text-align: center; width: 10%;">글번호</th>
@@ -128,11 +128,11 @@ white-space: nowrap;
 		</tr>
 	</c:forEach>
 	</table>
-<h4><span style="text-align: center; margin-left:1410px;">total : ${ABP.totalCount }</span></h4>
+
 
 
 <div id="btnBox" style="margin-left: 500px;">
-
+<h4><span style="text-align: center; ">total : ${ABP.totalCount }</span></h4>
 
 <button id="btnDelete" style = "color: red;">삭제</button>
 </div>

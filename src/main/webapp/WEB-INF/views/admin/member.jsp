@@ -28,7 +28,7 @@
 	<br>
 	<br>
 	<table class="table table-striped" border="1" style="text-align: center;
- 	width: 80%; margin-left: auto; margin-right: auto;">
+ 	width: 60%; margin-left: auto; margin-right: auto;">
 	<tr>
 	
 	<th style="text-align: center;">회원번호</th>
