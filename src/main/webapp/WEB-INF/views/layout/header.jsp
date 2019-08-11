@@ -95,6 +95,7 @@ a:link{text-decoration: none;}
                             <li style=" list-style:none;"><a href="/admin/banlist">블랙리스트</a></li>
                             <li style=" list-style:none;"><a href="/admin/report">신고관리</a></li>
                             <li style=" list-style:none;"><a href="/notice/list">공지사항</a></li>
+                            <li style=" list-style:none;"><a href="/freqna/list">Q&A</a></li>
 
 							</c:if>
                             
