@@ -117,8 +117,15 @@
 	  	<selectKey keyProperty="board_idx" order="BEFORE" resultType="int">
 	  		SELECT board_seq.nextval FROM dual
 	  	</selectKey>
-	  	insert into board(board_idx, title, content, member_idx, divide, mainimage) 
-	 	values (#{board_idx}, #{title}, #{content}, #{member_idx}, #{divide}, #{mainimage})
+	  	insert into board(board_idx, title, content, member_idx, divide
+	  	<if test="mainimage != null and mainimage != ''">
+	  	, mainimage	 	
+	 	</if>
+	 	) values (#{board_idx}, #{title}, #{content}, #{member_idx}, #{divide}
+	 	<if test="mainimage != null and mainimage != ''">
+	  	, #{mainimage} 	
+	 	</if>
+	 	)
 	</insert>
 
 	<!-- 수정할 게시글 DB에서 불러오기 -->

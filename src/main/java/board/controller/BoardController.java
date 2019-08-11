@@ -169,19 +169,21 @@ public class BoardController {
 			@RequestParam (value = "image", required=false) List<Integer> image,
 			HttpSession session
 			) {
+
+		logger.info("작성 글 저장");
+		logger.info(board.toString());
 		
 		boardService.write(session, board);
 		Image setImage = new Image();
 		setImage.setBoard_idx(board.getBoard_idx());
 		
 		
-		logger.info("작성 글 저장");
 		if(image != null) {
 			for(int i=0; i<image.size(); i++) {
 				logger.info("인덱스: "+image.get(i));
 				boardService.setBrdidx(setImage, image.get(i));
 			}
-		logger.info(board.toString());
+		
 		}
 		
 		return "redirect: /board/view?brdidx="+board.getBoard_idx();
