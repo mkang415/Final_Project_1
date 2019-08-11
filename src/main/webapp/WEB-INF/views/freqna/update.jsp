@@ -4,13 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<c:import url="/WEB-INF/views/layout/header.jsp"/> 
 
 <!-- summernote -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
@@ -20,8 +15,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 
-</head>
-<body>
 <h1>자주묻는 질문 수정 페이지</h1>
 <hr>
 <form action = "/freqna/update" method = "post">
@@ -77,5 +70,4 @@
 	});
 </script>
 
-</body>
-</html>
+<c:import url="/WEB-INF/views/layout/footer.jsp"/>

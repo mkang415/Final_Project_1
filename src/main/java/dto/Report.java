@@ -16,7 +16,7 @@ public class Report {
 	public String toString() {
 		return "Report [report_idx=" + report_idx + ", content=" + content + ", member_idx=" + member_idx
 				+ ", nickname=" + nickname + ", title=" + title + ", viewcheck=" + viewcheck + ", writtendate="
-				+ writtendate + ", board_idx=" + board_idx"]";
+				+ writtendate + ", board_idx=" + board_idx+"]";
 	}
 
 

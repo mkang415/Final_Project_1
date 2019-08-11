@@ -7,6 +7,9 @@
 <c:if test = "${admin ne true }">
 <c:if test= "${!empty answer.answer_date}">
 <tr>
+	<th colspan="3">Answer</th>
+</tr>
+<tr>
 	<td colspan="2">문의 사항에 대한 답변입니다.</td>
 	<td><fmt:formatDate value="${answer.answer_date}" pattern="yyyy-MM-dd HH:mm" /></td>
 </tr>
