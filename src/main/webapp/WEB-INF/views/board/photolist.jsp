@@ -25,7 +25,11 @@ $(document).ready(function(){
 
 <h1>게시판 리스트</h1>
 <hr>
-
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-outline-primary" onclick="location.href='/board/freelist'">자유게시판</button>
+  <button type="button" class="btn btn-outline-primary" onclick="location.href='/board/epillist'">후기게시판</button>
+  <button type="button" class="btn btn-primary">사진게시판</button>
+</div>
 <c:forEach items="${photoList}" var = "i">
 <fmt:formatDate value="${i.WRITTENDATE}" pattern="yyyy-MM-dd" var="write_dt"/>
 <div class="card mb-3">

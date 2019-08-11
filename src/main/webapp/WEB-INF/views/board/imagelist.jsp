@@ -4,21 +4,19 @@
 
 <c:choose>
 	<c:when test="${mainImage eq 'none' || mainImage eq image.storename}">
-		<input type="hidden" name="mainimage" value="${image.storename}"/>
-		<div class="card border-success mb-3" style="width: 200px; height: 250px; float: left;">
-		<img src="/resources/boardimg/${image.storename}" class="card-img-top">
-  			<div class="card-body">
-    			<h5 class="card-title">${image.originname}</h5>
-  			</div>
-		</div>
+		<label class="btn btn-outline-primary active" style="width: 200px; height: 240px;">
+			<img src="/resources/boardimg/${image.storename}" style="width: auto; max-width: 180px; height: auto; max-height: 180px;">
+			<br>
+    		<input type="radio" name="mainimage" id="${image.storename}" value="${image.storename}" autocomplete="off" checked>${image.originname}
+  		</label>
 	</c:when>
 	<c:when test="${mainImage ne 'none' && mainImage ne image.storename}">
-		<div class="card border-light mb3" style="width: 200px; height: 250px; float: left;")">
-  			<img src="/resources/boardimg/${image.storename}" class="card-img-top">
-  			<div class="card-body">
-    			<h5 class="card-title">${image.originname}</h5>
-  			</div>
-		</div>
+		
+		<label class="btn btn-outline-primary" style="width: 200px; height: 240px;">
+			<img src="/resources/boardimg/${image.storename}" style="width: auto; max-width: 180px; height: auto; max-height: 180px;">
+			<br>
+    		<input type="radio" name="mainimage" id="${image.storename}" value="${image.storename}" autocomplete="off">${image.originname}
+  		</label>
 	</c:when>
 
 </c:choose>
