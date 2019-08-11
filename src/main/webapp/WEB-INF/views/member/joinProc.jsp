@@ -121,7 +121,7 @@
 <header>
 
 <a href="/main">
-<img id="loginImg" src="/resources/assets/img/GoodDiary-logo.png"></img>
+<img id="loginImg" src="/resources/assets/img/Daily-logo.png"></img>
 </a>
 
 </header>

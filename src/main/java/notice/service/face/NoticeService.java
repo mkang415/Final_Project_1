@@ -1,5 +1,6 @@
 package notice.service.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -50,6 +51,8 @@ public interface NoticeService {
 	public NoticeReply selectStepByReply_idx(int reply_idx);
 
 	public List<Notice> mainNoticeList();
+
+	public List<HashMap<String, Object>> mainqnaList();
 
 
 

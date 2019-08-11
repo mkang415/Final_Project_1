@@ -108,7 +108,7 @@ height:800px;
 
 <div id="background">
 
-<c:if test="${login }">
+<c:if test="${sessionScope.loginEmail eq 'admin' }">
 <div id="btnBox" >
 	<button style="position: absolute; float:right; left:1500px; top:230px;" id="btnWrite">글쓰기</button>
 </div>

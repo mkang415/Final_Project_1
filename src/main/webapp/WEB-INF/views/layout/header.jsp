@@ -73,7 +73,7 @@ a:link{text-decoration: none;}
                 <div class="header clearfix">
                     <h1 style="margin-top:0;">
                         <a href="/main">
-                            <em><img src="/resources/assets/img/GoodDiary-logo.png" alt="MEGABOX" ></em>
+                            <em><img src="/resources/assets/img/Daily-logo.png" alt="MEGABOX" ></em>
 <!--                             <strong><img src="/resources/assets/img/GoodDiary-logo.png" alt="LIFE THEATER"></strong> -->
                         </a>    
                     </h1>
@@ -82,18 +82,20 @@ a:link{text-decoration: none;}
                     </nav>
                     <nav class="nav" style="margin-top:10px; position:relative; left:505px;" >
                         <ul class="clearfix">
-                        	<c:if test="${sessionScope.nick ne 'admin' }">
+                        	<c:if test="${sessionScope.loginEmail ne 'admin' }">
                             <li style=" list-style:none;"><a href="/notice/list">공지사항</a></li>
                             <li style=" list-style:none;"><a href="/member/mypage">마이페이지</a></li>
                             <li style=" list-style:none;"><a href="/ledger/ledger">가계부</a></li>
                             <li style=" list-style:none;"><a href="/diary">다이어리</a></li>
-                            <li style=" list-style:none;"><a href="/board/freeList">자유게시판</a></li>
+                            <li style=" list-style:none;"><a href="/board/freelist">자유게시판</a></li>
 							</c:if>
-							<c:if test="${sessionScope.nick eq 'admin' }">
+							<c:if test="${sessionScope.loginEmail eq 'admin' }">
 						    <li style=" list-style:none;"><a href="/admin/list">게시글관리</a></li>
                             <li style=" list-style:none;"><a href="/admin/member">회원관리</a></li>
                             <li style=" list-style:none;"><a href="/admin/banlist">블랙리스트</a></li>
                             <li style=" list-style:none;"><a href="/admin/report">신고관리</a></li>
+                            <li style=" list-style:none;"><a href="/notice/list">공지사항</a></li>
+
 							</c:if>
                             
                         </ul>

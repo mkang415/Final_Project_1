@@ -62,7 +62,7 @@
                 <div class="header clearfix">
                     <h1>
                         <a href="/main">
-                            <em><img src="/resources/assets/img/GoodDiary-logo.png" alt="MEGABOX" ></em>
+                            <em><img src="/resources/assets/img/Daily-logo.png" alt="MEGABOX" ></em>
 <!--                             <strong><img src="/resources/assets/img/GoodDiary-logo.png" alt="LIFE THEATER"></strong> -->
                         </a>    
                     </h1>
@@ -72,18 +72,28 @@
                     </nav>
                     <nav class="nav">
                         <ul class="clearfix">
-                 	<c:if test="${sessionScope.nick ne 'admin' }">
+               
+                 	<c:if test="${sessionScope.loginEmail ne 'admin' and login }">
                             <li><a href="/notice/list">공지사항</a></li>
                             <li><a href="/member/mypage">마이페이지</a></li>
                             <li><a href="/ledger/ledger">가계부</a></li>
                             <li><a href="/diary">다이어리</a></li>
-                            <li><a href="/board/freeList">자유게시판</a></li>
+                            <li><a href="/board/freelist">자유게시판</a></li>
 							</c:if>
+
+                 		  <c:if test="${empty login}">
+                            <li><a href="/notice/list">공지사항</a></li>
+                          
+                            <li><a href="/board/freelist">자유게시판</a></li>
+							</c:if>
+							
+							
 							<c:if test="${sessionScope.nick eq 'admin' }">
 						    <li><a href="/admin/list">게시글관리</a></li>
                             <li><a href="/admin/member">회원관리</a></li>
                             <li><a href="/admin/banlist">블랙리스트</a></li>
                             <li><a href="/admin/report">신고관리</a></li>
+                            <li style=" list-style:none;"><a href="/notice/list">공지사항</a></li>
 							</c:if>
                         </ul>
                     </nav>    
@@ -133,8 +143,8 @@
         		<div class="swiper-slide co1">
         			<div class="container">
                             <div class="row">
-                                <h3>메인</h3>
-                                <p>다이어리 </p>
+                                <h3>다이어리</h3>
+                                <p>지도 앱을 이용하여 다이어리 사용가능 </p>
                             </div>
                         </div>
         			</div>
@@ -142,8 +152,8 @@
         		<div class="swiper-slide co2">
         		      <div class="container">
                            <div class="row">
-                                <h3>가계부 기능</h3>
-                                <p>가계부 </p>
+                                <h3>가계부, 스케줄</h3>
+                                <p>캘린더를 이용한 스케줄관리, 수입, 지출 계산 </p>
                             </div>
                         </div>	
         			</div>
@@ -151,11 +161,14 @@
         		<div class="swiper-slide co3">
         		        		      <div class="container">
                            <div class="row">
-                                <h3>여행일정</h3>
-                                <p>여행일정공유</p>
+                                <h3>게시판</h3>
+                                <p>자유게시판, 후기게시판, 메모 </p>
                             </div>
                         </div>	
         			</div>	
+ 
+       	
+ 
     		</div>
     		
     		   	<div class="swiper-pagination"></div>
@@ -190,30 +203,18 @@
                                 </li>
                                 <li><a href="#">Q&A</a>
                                     <ul>
+                                    <c:forEach items="${qnaList }" var="i">
                                         <li>
                                             <dl>
-                                                <dt><strong class="bar">질문사항</strong> <em>2019.07.22</em></dt>
-                                                <dd>질문사항이다</dd>
+                                                <dt><strong class="bar">${i.TITLE }</strong> <em><fmt:formatDate value="${i.QUESTION_DATE }" pattern="yyyy-MM-dd" /></em></dt>
+                                                <dd style="text-overflow: ellipsis;">${i.QUESTION }</dd>
                                             </dl>            
                                         </li>
-                                        <li>
-                                            <dl>
-                                                <dt><strong class="bar">질문사항</strong> <em>2019.07.22</em></dt>
-                                                <dd>질문사항이다</dd>
-                                            </dl>
-                                        </li>
-                                        <li>
-                                            <dl>
-                                                <dt><strong class="bar">질문사항</strong> <em>2019.07.22</em></dt>
-                                                <dd>질문사항이다 </dd>
-                                            </dl>
-                                        </li>
-                                        <li>
-                                            <dl>
-                                                <dt><strong class="bar">질문사항</strong> <em>2019.07.22</em></dt>
-                                                <dd>질문사항이다</dd>
-                                            </dl>
-                                        </li>
+                                   </c:forEach>
+                                 
+                                 
+                                 
+                                 
                                     </ul>
                                 </li>
                             </ul>

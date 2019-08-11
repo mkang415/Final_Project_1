@@ -54,6 +54,22 @@
     
     </select>   
     
+        <select id="mainqnaList"
+    		resultType="hashmap">
+          		SELECT * FROM (
+                SELECT rownum rnum, B.* FROM (
+				SELECT qna_idx, title, question, answer, question_date 
+				FROM qna
+				ORDER BY qna_idx DESC
+		 	) B
+          ORDER BY rnum  
+		)
+       WHERE rnum BETWEEN 1 AND 4
+    		
+    		
+    
+    </select>   
+    
     <select id="selectCntAll"
     		resultType="int">
     		

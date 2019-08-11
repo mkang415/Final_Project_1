@@ -1,5 +1,6 @@
 package notice.dao.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import dto.Notice;
@@ -29,6 +30,8 @@ public interface NoticeDao {
 
 	public void delete(Notice notice);
 
-	public List<Notice> mainSelectAll(); 
+	public List<Notice> mainSelectAll();
+
+	public List<HashMap<String, Object>> mainqnaList(); 
 
 }
