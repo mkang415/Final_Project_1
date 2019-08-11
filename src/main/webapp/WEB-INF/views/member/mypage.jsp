@@ -211,6 +211,7 @@ z-index: 1;
 color: red;
 }
 
+
 </style>
 
 
@@ -223,7 +224,9 @@ color: red;
 </div>
 
 <div id="member">
-<span><img src="/resources/img/modi.png" width="90px" height="90px"></span>
+<a href="/member/upinfo">
+<span><img src="/resources/img/mmodi.png" width="90px" height="90px"></span>
+</a>
 &nbsp;&nbsp;&nbsp;&nbsp;
 
 <span>
