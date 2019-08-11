@@ -388,6 +388,11 @@ div.note-editor.note-frame {
 	cursor: pointer;
 }
 
+.note-resizebar {
+	display: none;
+	border: 0;
+}
+
 </style>
 
 </head>
