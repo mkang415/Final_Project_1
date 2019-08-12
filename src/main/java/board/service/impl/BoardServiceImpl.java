@@ -284,4 +284,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.getmemidx(board_idx);
 	}
 
+	@Override
+	public List<HashMap<String, Object>> getimgList(int board_idx) {
+		
+		return boardDao.getimgList(board_idx);
+	}
+
 }

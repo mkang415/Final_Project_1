@@ -18,12 +18,11 @@
 <% Board board = (Board) request.getAttribute("board"); %>
 <% int selBoard = board.getDivide(); %>
 
-<h1>게시글 작성 페이지</h1>
-<hr>
-<form id="boardForm" action = "/board/write" method = "post" style="width: 1200px">
+<div style="width: 1000px; margin: auto;">
+<form id="boardForm" action = "/board/write" method = "post">
 
 <!-- form 태그 영역 감싸기 -->
-<fieldset>
+<fieldset style="width: 1000px;">
 
 <!-- fieldset 설명 -->
 <legend>글 작성</legend>
@@ -31,8 +30,8 @@
 <table>
 <!-- 전달 파라미터, 전송할 데이터 -->
 <tr>
-	<td style="min-width: 50px">게시판</td>
-	<td style="min-width: 450px">
+	<td style="min-width: 80px">게시판</td>
+	<td style="min-width: 620px">
 		<select name="divide">
 			<option value="1"<% if(selBoard == 1){ %>selected<% } %>>자유게시판</option>
 			<option value="2"<% if(selBoard == 2){ %>selected<% } %>>후기게시판</option>
@@ -42,7 +41,7 @@
 </tr>
 <tr>
 	<td style="width: 10%"><label for="title">제목</label></td>
-	<td style="width: 90%"><input type="text" style="width: 94%" id="title" name = "title" placeholder="제목 입력"/></td>
+	<td style="width: 90%"><input type="text" style="width: 100%" id="title" name = "title" placeholder="제목 입력"/></td>
 </tr>
 <tr>
 	<td>내용</td>
@@ -60,20 +59,21 @@
 <tr>
 	<td></td>
 	<td>
-		<input type="submit" value="작성"/>
-		<button type="button" onclick="location.href='/board/delimg?divide=${board.getDivide()}'">취소</button>
+		<input type="submit" class="btn btn-success" value="작성"/>
+		<button type="button" class="btn btn-danger" onclick="location.href='/board/delimg?divide=${board.getDivide()}'">취소</button>
 	</td>
 </tr>
 </table>
 
 </fieldset>
 </form>
-
+</div>
+<br><br>
 <script>
 var mainImage = "none";
 	$('#summernote').summernote({
 		height: 300,
-	  	minHeight: null,
+	  	minHeight: 300,
 	  	maxHeight: null,
 	  	focus: true,
 	  	lang: 'ko-KR', // default: 'en-US'

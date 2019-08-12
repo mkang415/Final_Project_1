@@ -139,7 +139,7 @@
 	<!-- 수정한 게시글 DB 갱신 -->
 	<update id="setUpdate"
 	 parameterType="dto.Board">
-	  	update board set title = #{title}, content=#{content}
+	  	update board set title = #{title}, content=#{content}, mainimage=#{mainimage}
 	  	where board_idx = #{board_idx}
 	</update>
 	  
@@ -193,6 +193,13 @@
 	 parameterType="int"
 	 resultType="int">
 		select member_idx from board
+		where board_idx = #{board_idx}
+	</select>
+	
+	<select id="getimgList"
+	 parameterType="int"
+	 resultType="hashmap">
+		select * from image
 		where board_idx = #{board_idx}
 	</select>
 </mapper>

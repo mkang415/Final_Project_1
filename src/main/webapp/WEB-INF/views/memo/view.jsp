@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/resources/owlcarousel/owl.theme.default.min.css">
 
 <h3 style="margin: 10px">중요 메모</h3>
-<div style="width: 1100px;">
+<div style="width: 1000px;">
 
 <div id="owl-one" class="owl-carousel owl-theme">
 <c:if test="${fn:length(impMemoList) gt 0 and impMemoList ne null}">

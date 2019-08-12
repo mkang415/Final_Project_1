@@ -19,6 +19,7 @@ $(document).ready(function(){
 });
 </script>
 
+<div style="width: 1000px; margin: auto;">
 <h1>QNA 리스트</h1>
 <hr>
 <table class="table table-striped table hover table-condensed">
@@ -41,17 +42,17 @@ $(document).ready(function(){
 	</tr>
 </c:forEach>
 </table>
-<c:import url="/WEB-INF/views/layout/qnaPaging.jsp"></c:import>
-
-<div>
+</div>
+<div style="width: 900px; margin: auto;">
+<div style="position: absolute;">
 <c:if test="${login }">
-${nick }<br>
-<button type="button" onclick="location.href='/qna/write'">글쓰기</button>
+<button type="button" class="btn btn-outline-primary" onclick="location.href='/qna/write'">글쓰기</button>
 </c:if>
-<button type="button" onclick="location.href='/main'">메인</button>
+</div>
+<c:import url="/WEB-INF/views/layout/qnaPaging.jsp"></c:import>
 </div>
 
-<div class="form-row" style="margin: auto;">
+<div class="form-row" style="width: 1000px; margin: auto;">
 	<div class="col-5">
 	</div>
 	<div class="col-2">
@@ -61,5 +62,7 @@ ${nick }<br>
 	<input type="button" id="btnSearch" class="btn btn-primary" value="검색"/>
 	</div>
 </div>
+
+<br><br>
 
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>

@@ -46,4 +46,6 @@ public interface BoardDao {
 	void delnullimg(int member_idx);
 
 	int getmemidx(int board_idx);
+
+	List<HashMap<String, Object>> getimgList(int board_idx);
 }

@@ -4,6 +4,7 @@
 
 <c:choose>
 	<c:when test="${mainImage eq 'none' || mainImage eq image.storename}">
+		<input type="hidden" name="image" value="${image.image_idx}">
 		<label class="btn btn-outline-primary active" style="width: 200px; height: 240px;">
 			<img src="/resources/boardimg/${image.storename}" style="width: auto; max-width: 180px; height: auto; max-height: 180px;">
 			<br>
@@ -11,7 +12,7 @@
   		</label>
 	</c:when>
 	<c:when test="${mainImage ne 'none' && mainImage ne image.storename}">
-		
+		<input type="hidden" name="image" value="${image.image_idx}">
 		<label class="btn btn-outline-primary" style="width: 200px; height: 240px;">
 			<img src="/resources/boardimg/${image.storename}" style="width: auto; max-width: 180px; height: auto; max-height: 180px;">
 			<br>

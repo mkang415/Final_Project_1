@@ -216,7 +216,13 @@ public class BoardController {
 		logger.info("글 수정");
 		
 		Board board = boardService.getUpdate(brdidx);
+		
+		//	업로드한 이미지 리스트
+		List<HashMap<String, Object>> imageList = boardService.getimgList(brdidx);
+		
 		model.addAttribute("board", board);
+		
+		model.addAttribute("imglist", imageList);
 	}
 
 	//	수정한 내용 저장
