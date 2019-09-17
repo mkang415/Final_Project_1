@@ -12,10 +12,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 
-</head>
-<body>
-<h1>게시글 작성 페이지</h1>
-<hr>
 
 <div style="width: 1000px; margin: auto;">
 <form action = "/board/update" method = "post">
